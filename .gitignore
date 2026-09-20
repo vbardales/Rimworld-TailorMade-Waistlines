@@ -1,0 +1,25 @@
+# Build intermediates. Directory.Build.props sends them outside the published folder: Mod/ goes
+# to the Workshop as it stands, so an obj/ left there would ship the publicised Assembly-CSharp.dll.
+# The assembly itself is committed, because the mod is installed by junction and has to work
+# without a build step.
+.build/
+Source/**/obj/
+Source/**/bin/
+*.pdb
+
+# Development environments.
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Claude Code session worktrees and local settings.
+.claude/
+
+# Kept on the author's machine only, and never in a public repository: they are computed from,
+# or paint over, art that grants no licence (General Textures Collection, WDI's Realistic
+# Bodies). See ATTRIBUTION.md. The GIMP projects under _tools/ are painted over WDI's bodies.
+Parked/
+Art/
+_tools/*.xcf

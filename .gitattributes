@@ -1,0 +1,22 @@
+# Normalise line endings in this repository, while each machine keeps its own working copy in
+# the form it prefers. Types listed below are the ones actually tracked here.
+
+* text=auto
+
+# ---------- Text ----------
+
+*.xml    text
+*.cs     text diff=csharp
+*.md     text
+*.csproj text
+*.props  text
+*.js     text
+*.json   text
+*.ps1    text
+*.scm    text
+
+# ---------- Binaries: neither normalised nor diffed as text ----------
+
+*.png binary
+*.dll binary
+*.pdb binary

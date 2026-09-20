@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <!--
+      Build intermediates are sent outside the published folder. The Workshop uploader sends
+      Mod/ as it stands (SteamUGC.SetItemContent, no exclusion possible): an obj/ sitting there
+      would ship the publicised Assembly-CSharp.dll, ~6 MB, to every subscriber.
+      This must stay in a Directory.Build.props: NuGet restore reads the property before the
+      csproj.
+    -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.build\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+
+</Project>
