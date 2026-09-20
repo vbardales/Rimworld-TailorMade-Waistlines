@@ -6,53 +6,23 @@ those. `Mod/` is a companion mod, **TailorMade Waistlines - Pickle tests**, neve
 Everything provable outside the game is proved outside it, by the four sets in `Tests/`:
 115 checks in seconds, against tens of minutes of a machine nobody else can use. So the bands
 themselves, the clamping of a damaged config, the defaults and which garments the shirt option
-lifts appear in no scenario here. What is left divides in two.
+lifts appear in no scenario here.
 
-| file | what only a running game can say |
-| --- | --- |
-| `01-trousers-review.feature` | how a garment banded into a legless body actually reads. A judgement, not an assertion |
-| `02-patch-route.feature` | which of the two patch routes is live - Mono's inlining is a property of the process |
-| `03-settings-and-shortcut.feature` | whether the bar draws the shortcut, whether its worker opens our page, whether the keys resolve in the language actually loaded |
-| `04-sweep-and-repaint.feature` | that closing the window throws away every texture baked against the old band, and the pawns redraw |
-| `05-persistence.feature` | that the value reaches the file the game writes and comes back through the game's own Scribe |
+What is left is `01-trousers-review.feature`: how a garment banded into a body drawn without legs
+actually reads. A judgement, not an assertion.
 
-## One suite, two halves, and why one of them has no assembly
+## No step assembly
 
-`01` uses Pickle's vanilla steps only, verified one by one against the expressions in
-`RimWorks.Pickle.Vanilla.dll`: a step written is a step to maintain, and a capture needs none.
-`02` to `05` need four steps nothing vanilla can supply - reading `Bands.DirectPatchWorks`, a
-`MainButtonWorker`'s `Visible` and `Disabled`, `TexBake.Stats()`, and TailorMade's
-`PatternRegistry.Resolve` - so they come with `Source/`, built to
-`Mod/Pickle/Assemblies/TailorMadeWaistlines.PickleSteps.dll`.
+Every step is a Pickle vanilla step. A step written is a step to maintain, and a capture needs
+none. If a scenario ever does, `ArchitectStudio/Tests/Pickle/Source/` is the model, and the step
+text must carry this mod's name: Pickle loads every active suite's steps into one namespace, and
+two suites declaring the same text produce "Ambiguous step" on healthy scenarios.
 
-`01` then took one step from that assembly on purpose - `the fitting that claims {string} is
-recorded`, so a capture says on its own face which fitting produced it - and with it went the
-exemption this paragraph first claimed. **All five features are under the same rule**: Pickle reads
-step assemblies at startup, so a DLL built since the running game started is not the one loaded,
-and a rebuild means `-Launch` rather than driving the game already open.
-
-Every step text carries the mod's name, because Pickle loads every active suite's steps into one
-namespace and two suites declaring the same text produce "Ambiguous step" on healthy scenarios.
-`ArchitectStudio/Tests/Pickle/Source/` is the model this follows.
-
-## Build
-
-```powershell
-dotnet build Tests\Pickle\Source\TailorMadeWaistlines.PickleSteps.csproj -c Release
-```
-
-It binds by name to the shipped `Mod/Assemblies/TailorMadeWaistlines.dll` and to TailorMade's own
-assembly, neither of which it redistributes, so build the mod first. Feature files need no build.
-
-## What the assertions deliberately do not decide
-
-`02` accepts either patch route and says which one ran: the direct postfix on
-`ApparelClassifier.BandFor`, or the fallback prefix on `TexBake.BakeFitted` for when Mono inlined
-the first. What it refuses is a route reported from a flag nobody measured, so it also checks that
-the startup self-test logged at all.
-
-`04` records, before anything else, which fitting claims `Apparel_Pants` - see the next section.
-A run whose captures and assertions disagree about that is a run whose report explains itself.
+An earlier version of this suite came with four assertion features and the assembly they needed -
+the patch route, the shortcut read off `MainButtonWorker`, the cache sweep counted through
+`TexBake.Stats()`, the settings file round trip. They were removed on 2026-09-20 at her request,
+with the suite left to the session that owns the captures. They are in the history at `9988515` if
+any of it is ever wanted back; what they covered is, for now, covered by nothing.
 
 ## What the suite documents
 
@@ -84,16 +54,13 @@ one. `Mod/Defs/TailorPatternDefs/Pants_Native.xml` is read at startup and bypass
 suite, move the def file aside, run it again, compare the attachments. Copy both somewhere of your
 own first: a run overwrites the previous report, and the archive keeps only the last five.
 
-**Which of the two a report describes is in the report itself**, and it has to be: five runs later
-the archive is gone, and nothing else distinguishes one set of screenshots from the other. The
-step `the fitting that claims {string} is recorded` attaches what
+**And nothing in a report says which of the two it describes.** A step that attached what
 `PatternRegistry.Resolve` returned for the garment - no pattern, a pattern with `autoFit` true, or
-a pattern with `autoFit` false, which is the native-fit route and means the band was never
-consulted and every slider of this mod is inert on that garment. `04` goes further and asserts it:
-with the route-B def in place, `the band decides the fit of "Apparel_Pants"` fails on purpose,
-saying which def claimed the garment. **The suite documents the band.** Route B is an experiment;
-when it is present, these are the scenarios that do not apply, and the failure says so rather than
-photographing the wrong thing in silence.
+a pattern with `autoFit` false, which is the native-fit route - existed for an hour on
+2026-09-20 and went with the assembly when that was removed. Until something replaces it, the only
+thing telling two sets of captures apart is the memory of which run produced them, so **write it
+down beside the images when you copy them out**. The suite still documents the band: a run made
+with the route-B def in place is photographing something else, and now says so nowhere.
 
 ## Setup, once
 
@@ -121,24 +88,28 @@ monorepo stages the mod set into the Linux install, then RimWorld is started wit
 filter matching nothing exits 2 without playing anything. Add `-pickle-no-browser`; WSL has no
 `xdg-open`.
 
-Three things are needed before that works, and none is written yet:
+Three questions stood in the way of a first run on 2026-09-20. The session working on the headless
+route answered all three, and what is checkable here checks out:
 
-- The staging script's `packageId -> Workshop folder` table knows five mods and this is not one of
-  them. It needs `nelim.tailormade.waistlines`, and `astryl.tailormade`, `wdi.realistic.bodies`
-  and `ab.vplrf` with it. A dependency missing from that table stops the staging rather than
-  producing a set that loads without it, which is the behaviour to want here.
-- **Whether a headless run renders anything a screenshot can catch.** If it does not, the capture
-  half of this suite is worthless on the route AUDIT.md sends us to - and the failure mode is the
-  expensive one: a step that took an empty capture does not fail, so the report comes back green
-  with nothing in it. The guard, if the problem turns out to be real, is a step of our own that
-  reads the attachment back and refuses a file that is trivially small or a single flat colour,
-  rather than trusting the step that wrote it. Asked of the session working on the headless route;
-  not written, because a guard against a problem nobody has confirmed is a guard nobody maintains.
-- **How a map comes to exist in an autorun is unresolved for this suite.** The QuietNewFactions
-  scenarios run at the main menu and need none; `a colonist {string} exists` does. Pickle carries a
-  quickstart bridge, and the tag is `@quickstart:<name>`; which name it takes here, and whether it
-  makes `rimworks.quickstarts` a dependency of the companion mod and of the staged set, is the open
-  question.
+- **The extra mods are ours to declare, and are.** `wsl-deps.map` beside this file lists
+  `astryl.tailormade`, `wdi.realistic.bodies` and `ab.vplrf` with their Workshop ids;
+  `scripts/stage-pickle-wsl.sh` reads it at `$REPO/$MOD/Tests/Pickle/wsl-deps.map` - verified in
+  the script - so the shared table no longer has to grow for us.
+- **The map is a fixture, not a quickstart.** `the save {string} is loaded` is a Pickle step
+  reading `Pickle/Fixtures/` of any active mod, and Pickle ships `test-colony.rws` itself -
+  present on disk in the Workshop copy, checked. Nothing to stage, nothing to declare. A
+  `@quickstart:` tag exists and would rebuild the world every run, which three captures do not
+  need. (The cited `Docs/steps.md` and `Docs/authoring.md` are not in the installed copy here, so
+  that part is reported, not verified.)
+- **Headless captures are real**: 1920x1080 under Xvfb, full rendering, per that session. Which is
+  why no blank-capture guard was written. If a run ever does come back with an empty attachment,
+  the guard is a step that reads the file back and refuses one that is trivially small or a single
+  flat colour - a step that captured nothing does not fail on its own.
 
 Whichever route, the lock comes first: `%LOCALAPPDATA%\rimworld-pickle-run.lock`, and never a
-second RimWorld.
+second RimWorld on the Windows side - that install is hers. `pwsh -File scripts/Pickle-Status.ps1`
+names whoever holds the lock.
+
+Teardown on the Linux side is nothing to do: the staging wipes `~/rimworld/Mods` and rewrites its
+own `ModsConfig.xml` and `Prefs.xml` every time, and touches nothing on the Windows side. AUDIT.md's
+teardown rule is satisfied because nothing shared was changed, not because it stops applying.

@@ -19,6 +19,13 @@
 @review
 Feature: how trousers read on a body drawn without legs
 
+  # A fixture, not a quickstart: "the save {string} is loaded" is a Pickle step and reads from any
+  # active mod's Pickle/Fixtures/, and Pickle ships test-colony.rws itself, so nothing has to be
+  # staged or declared for it. A quickstart would regenerate the world every run; a fixture loads
+  # in seconds, and three captures do not need a world of their own.
+  Background:
+    Given the save "test-colony" is loaded
+
   Scenario: a male colonist wearing nothing but trousers
     Given a colonist "Waistline" exists
     And "Waistline" gender is male
@@ -31,6 +38,7 @@ Feature: how trousers read on a body drawn without legs
     And the fitting that claims "Apparel_Pants" is recorded
     Then I take a screenshot "trousers on a male body"
 
+  @same-world
   Scenario: a female colonist wearing nothing but trousers
     Given a colonist "Waistline-F" exists
     And "Waistline-F" gender is female
@@ -45,6 +53,7 @@ Feature: how trousers read on a body drawn without legs
 
   # Biotech children wear their own garment. It is a separate ThingDef with a wornGraphicPath of
   # its own, so it can be drawn bare however well the adult trousers came out.
+  @same-world
   Scenario: the child garment, which is a different def
     Given a colonist "Waistline-K" exists
     And "Waistline-K" is 8 years old
