@@ -4,8 +4,8 @@ packageId:    nelim.tailormade.waistlines
 repo:         https://github.com/vbardales/Rimworld-TailorMade-Waistlines
 visibility:   public
 detached:     yes
-stage:        port
-workflow_state: horsMonoRepo
+stage:        preTest
+workflow_state: preTest
 workflow_audited: 2026-09-20
 localization: complete
 translation_en: complete
@@ -16,13 +16,13 @@ licence:      original
 licence_at:   "MIT, chosen 2026-09-20 (LICENSE at the root and in Mod/), matching TailorMade, which is MIT. Nothing is copied from it: it is referenced at build time and patched through Harmony. Mod/ is publishable: one assembly of our own, patching TailorMade, which is MIT. Parked/ is not, and never ships - its textures are computed from General Textures Collection (3789119336) and WDI's Realistic Bodies (3527486510), neither of which grants a licence. Steam uploads Mod/ only, which is the safeguard, and Parked/, Art/ and the GIMP projects are kept out of the public repository by .gitignore. See ATTRIBUTION.md."
 dependencies: "brrainz.harmony and astryl.tailormade, both required. A mod that gives leg garments a worn graphic at all, since vanilla trousers carry none - tested with AB.VPLRF. A body retexture drawn without legs is the reason the mod exists, tested with wdi.realistic.bodies, but nothing in the code names it."
 original:     none
-showcase:     Art/waist_{Male,Female}.png, generated contact sheets (not a Preview.png yet)
+showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), all run 2026-09-20 on the rebuilt DLL, none starting the game; the two new ones were seen failing under a mutation. scripts/Check-DefInjected.ps1: 2 keys, 0 errors. No Pickle suite yet, no XML tests beyond the checks above (the only XML shipped is one MainButtonDef and the language files). Tests/Check-Logic.ps1, written by another session and not committed, fails at the ApparelLayerDefOf initialiser and is not counted."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. scripts/Check-DefInjected.ps1: 2 keys, 0 errors. No Pickle suite yet, no XML tests beyond the checks above (the only XML shipped is one MainButtonDef and the language files). Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 8 scenarios, none run"
 remaining:
-  - "defect (horsMonoRepo -> ModIcon générée, and the gates after): Mod/About/ModIcon.png (1254x1254, 1.58 MB) and Mod/About/preview.png (1402x1122, 1.76 MB, lowercase name) are untracked raw generated images, not the deliverables: the icon must be 128x128, the Preview 896x504 under 1 MB and named Preview.png with its title overlay, and the raw sources belong in Art/. They were left untouched and are not committed. the Art/waist_*.png contact sheets named in `showcase` are not a Preview. Development is not finished either: the compressed-shirt question is open and the options and l10n defects below stand."
+  - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
   - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
   - "unverified (done -> tested): the settings were verified from the sources and by automated checks, not in game. `settings_audit: complete` rests on that basis (the workflow states that in-game checks belong to done -> tested). Still to observe: defaults on a clean configuration, each slider's effect, persistence across a restart and a save, the ClearAndRepaint refresh, the Reset button, the hidden shortcut in RIMMSQOL, English and French display and clipping. Earlier note, kept: no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
   - "unverified (done -> tested): all 8 scenarios of TESTING.md, FR and EN display, RIMMSQOL shortcut."
@@ -137,7 +137,8 @@ later gates each have a concrete gap.
 | Dependencies | validated: Harmony (`brrainz.harmony`, 2009463077) and TailorMade (`astryl.tailormade`, 3756915448, checked against its own About.xml, 1.6) declared, `loadAfter` for both. No LoadFolders and no conditional patch, so nothing to reconcile. AB.VPLRF and WDI are not referenced by any code, correctly not declared |
 | Scenarios written | validated (TESTING.md, 8) |
 | Automated tests | Check-Mod.ps1 22/22 passing, re-run; scope limited to compatibility with TailorMade |
-| Pickle, XML tests | not written; XML is not applicable (no XML shipped), Pickle applicability not yet justified |
+| Pickle tests | **not written**: no `Pickle/` folder or .feature file in the mod or a companion mod, none naming TailorMade in the monorepo. Blocks preTest -> done |
+| XML tests | the shipped XML is one MainButtonDef and the language files; Check-Localization.ps1 and scripts/Check-DefInjected.ps1 test them (structure, keys, injection paths). No separate XML suite is needed |
 | In-game scenarios, logs | **unverified**; the game was not started by this audit |
 
 ### Advanced later the same day: `horsMonoRepo`
@@ -166,11 +167,37 @@ values are `complete` on the basis the workflow prescribes for the options and l
 automated tests, not in-game observation, which is recorded above as unverified. `workflow_state` stays `horsMonoRepo`:
 the steps between (ModIcon, Preview, preOptions) are not met.
 
+### Images, and the state reached: `preTest`
+
+At her request. The two raw generated images she had dropped in `Mod/About/` were moved, unchanged, to `Art/Preview.png` (1402x1122)
+and `Art/ModIcon-source.png` (1254x1254). `Art/` is not in the public repository.
+
+- **ModIcon.** The source had a title plate under the mascot, a glow, and a transparent background. It was cropped to the
+  mascot and its tape measure (810x810), flattened onto near-black `#0d0b09`, and scaled to 128x128 (28 kB). Seen at 32 px
+  (`Art/modicon-32-enlarged.png`): the head, the wink and the tape still read. No text is left; the tape's tick marks carry no
+  digits.
+- **Preview.** Cropped to 16:9 by `background-position: center 20%`, composed by `Art/render-preview.cjs` (Chrome headless, the
+  same method as the other mods) from `Art/preview.html` and `Art/preview-palette.json`. Title "TailorMade Waistlines" at 46 px,
+  no prefix, suffix or tag (original public mod), one-line summary, version badge 1.6 read from About.xml. Palette: slate veil
+  `#33383F` (sampled on the floor), ink `#F2ECE1` (veil luminance below 0.18), secondary ink a light slate blue taken from the
+  dominant family, accent the brick red of the trousers pushed to `#E5502B`; the two are plainly different. Fonts as measured:
+  Segoe UI Semibold for the title, Segoe UI elsewhere, no fallback. Contrast on the rendered background without text: title 8.5:1,
+  summary 5.6:1 (the first crop, at 27 %, gave 4.496 under the lamp glow and was refused by the script; moving the image down 7 % cleared
+  it), badge digits 4.9:1. 896x504, 667 kB. `scripts/Measure-Palette.sh` on the illustration: 4.0 % vivid pixels, 2 hue families. Read at
+  268 px: title, rule and badge are identifiable. No face is drawn. The Preview was inspected directly; no comparison with a captured
+  game frame was made, and no concrete camera doubt was found.
+- `PROMPT_TAILORMADEWAISTLINES.md` was deleted: it has no purpose once both images exist.
+
+### Where the chain stands
+
+Every transition up to `l10n -> preTest` is met on the evidence recorded here: standalone repository, build identical to the
+shipped DLL, ModIcon, Preview, English description and final source link, settings and shortcut (sources and automated checks),
+English and French coverage, dependencies. One assumption is mine: "developments finished" is read as *the features the README
+describes are all there*. The compressed-shirt cropping named in `remaining` is conditional on an in-game observation, not a
+promised feature; if she counts it as unfinished, the state drops back to `horsMonoRepo`.
+
 ### Next transition
 
-`horsMonoRepo -> ModIcon générée`: finish development (or record it as finished), then produce
-`Mod/About/ModIcon.png` (128x128) from the mascot prompt of STYLE_RIMWORLD.md. The image is not generated by this
-session: the two prompts (Preview and ModIcon, trousers with a chalk waistline and a tape measure) are written in
-`PROMPT_TAILORMADEWAISTLINES.md` at the monorepo root, ignored by git, for her to run in an image model. The Preview
-will then need its title overlay composed (STYLE_RIMWORLD.md), in `Mod/About/`, with the illustration kept as
-`Art/Preview.png`.
+`preTest -> done`: write the Pickle suite (a companion mod under `Tests/Pickle/Mod/`, steps prefixed with this mod's name, buttons
+addressed by translation key, waits in frames not ticks while the settings window pauses the game), then have it run and pass. The
+suite can be written without the game; running it needs her, since the game is not started by this session.
