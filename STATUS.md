@@ -1,19 +1,19 @@
 ---
 mod:          TailorMade Waistlines
 packageId:    nelim.tailormade.waistlines
-repo:
+repo:         https://github.com/vbardales/Rimworld-TailorMade-Waistlines
 visibility:   public
-detached:     no
+detached:     yes
 stage:        port
-workflow_state: dansMonoRepo
+workflow_state: horsMonoRepo
 workflow_audited: 2026-09-20
 localization: partial
 translation_en: partial
 translation_fr: partial
 settings_audit: partial
 dependencies_audit: complete
-licence:      undecided
-licence_at:   "Mod/ is publishable: one assembly of our own, patching TailorMade, which is MIT. Parked/ is not, and never ships - its textures are computed from General Textures Collection (3789119336) and WDI's Realistic Bodies (3527486510), neither of which grants a licence. Steam uploads Mod/ only, which is the safeguard. See ATTRIBUTION.md."
+licence:      original
+licence_at:   "MIT, chosen 2026-09-20 (LICENSE at the root and in Mod/), matching TailorMade, which is MIT. Nothing is copied from it: it is referenced at build time and patched through Harmony. Mod/ is publishable: one assembly of our own, patching TailorMade, which is MIT. Parked/ is not, and never ships - its textures are computed from General Textures Collection (3789119336) and WDI's Realistic Bodies (3527486510), neither of which grants a licence. Steam uploads Mod/ only, which is the safeguard, and Parked/, Art/ and the GIMP projects are kept out of the public repository by .gitignore. See ATTRIBUTION.md."
 dependencies: "brrainz.harmony and astryl.tailormade, both required. A mod that gives leg garments a worn graphic at all, since vanilla trousers carry none - tested with AB.VPLRF. A body retexture drawn without legs is the reason the mod exists, tested with wdi.realistic.bodies, but nothing in the code names it."
 original:     none
 showcase:     Art/waist_{Male,Female}.png, generated contact sheets (not a Preview.png yet)
@@ -22,10 +22,8 @@ workshop:
 automated_tests: "Tests/Check-Mod.ps1, 22 checks, re-run by the 2026-09-20 audit: all passing. They are reflection checks over TailorMade's assembly, not tests of this mod's settings logic. No Pickle suite, no XML tests (no XML shipped)."
 manual_scenarios: "TESTING.md, 8 scenarios, none run"
 remaining:
-  - "defect (audit 2026-09-20, dansMonoRepo -> horsMonoRepo): the folder is not a Git repository of its own and is untracked ('??') in the monorepo; no GitHub repository exists (gh repo list vbardales, 143 repositories, none named after this mod); `repo:` is empty; no first commit pushed."
-  - "defect (dansMonoRepo -> horsMonoRepo): licence is `undecided`, which is not one of open/alive/forbidden/silent/original; there is no LICENSE file at the root or in Mod/. Visibility says public while the working folder holds Parked/ and Art/Gimp/, which derive from unlicensed art: they cannot go into a public repository."
-  - "defect (dansMonoRepo -> horsMonoRepo): no .gitattributes; ATTRIBUTION.md claims AB's Visible Pants is 'named in loadAfter', which About.xml does not do."
-  - "defect (later gates, recorded so they are not lost): Mod/About/ModIcon.png and Mod/About/Preview.png do not exist; Art/Preview.png neither; the Art/waist_*.png contact sheets named in `showcase` are not a Preview. About.xml has no <url> and its description does not end with [url=...]Source code on GitHub[/url]."
+  - "defect (horsMonoRepo -> ModIcon générée, and the gates after): Mod/About/ModIcon.png and Mod/About/Preview.png do not exist; the Art/waist_*.png contact sheets named in `showcase` are not a Preview. Development is not finished either: the compressed-shirt question is open and the options and l10n defects below stand."
+  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
   - "defect (options / l10n): every player-facing string in the settings window is a hardcoded English literal in Source/TailorMadeWaistlines/TailorMadeWaistlinesMod.cs (SettingsCategory, intro label, three slider labels, checkbox label and tooltip, reset button, two status lines). Mod/Languages/ does not exist. `localization: none needed` was wrong."
   - "defect (options): the mod has useful settings but declares no MainButtonDef and no Defs at all, so the hidden MainButtons shortcut required by MOD_SETTINGS.md is absent. `settings_audit: complete` was not supported by the sources."
   - "unverified (options): no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
@@ -34,7 +32,7 @@ remaining:
   - "the plan, hers: two modules above TailorMade. This one is the engine and names no body mod. A second, TailorMade Waistlines for WDI Realistic Bodies, carries the values. For the split to be worth its cost the preset must be pure XML, so the engine has to define a def type - targetBodyMod plus a value per body type - and apply the preset whose target mod is loaded, with the sliders as the manual override."
   - "per body type is the missing piece, and it is measured: within WDI alone the navel runs from 0.46 on Fat to 0.58 on Thin, so one slider is already a compromise over nine bodies. BandFor only receives the apparel class. Graphic_TailorMade.Init calls PatternRegistry.ResolveFor(race, bodyType, layer, ...) before it calls BandFor, so a postfix on ResolveFor can hold the resolved body type for our BandFor postfix to read. TailorMade keys its texture cache on the body mask instance, so two body types cannot collide. Not written."
   - "dead end, measured 2026-09-20 by _tools/measure-waist-anchor.js: deriving the waistline from the body art at run time does not work. The geometric anchor - narrowest row of the lower silhouette - hits the search bounds on most bodies (WDI Male 0.22, Hulk 0.21, Fat 0.66) because those silhouettes never stop narrowing; and the navel detector returns nonsense on other mods (0.20 on ScrubDaddy Female). Neither repere survives a change of body mod. The values have to be authored, which is exactly what the preset module is for."
-  - "before a release: choose a licence (MIT would match what it patches), draw a Preview.png and a ModIcon.png, and decide whether the repository is public too - if it is, Parked/ cannot come with it."
+  - "before a release: draw a Preview.png and a ModIcon.png. Licence (MIT) and visibility (public, Parked/ and Art/ kept out) were settled on 2026-09-20."
   - "the brief, stated 2026-09-20: the fitting must be automatic, computed at render time for every garment of every mod. No textures drawn or generated in advance. Two earlier routes that shipped art are parked under Parked/ with a README saying what each answered and how to bring it back."
   - "the shirt option is restricted to on-skin garments, 2026-09-20. TailorMade only bands a torso garment whose alpha already starts at 0.4 of the texture height, and astryl states the reason in the tooltip of the setting it guards: long coats and capes must keep draping. Lifting it outright would have shortened dusters too. Vanilla separates them cleanly by layer - shirts and tribalwear OnSkin, dusters, parkas, jackets and robes Shell - so the postfix only lifts the test when apparel.LastLayer is OnSkin."
   - "unverified, and the question the next session turns on: does a compressed shirt read acceptably? The chest band SCALES the art into itself, it does not crop, so collar and buttons squeeze with the hem. If it reads badly the answer is to crop in our own bake - real work in the assembly, not yet written."
@@ -47,7 +45,6 @@ remaining:
   - "Female Apparel for Beautiful Bodies (2881748658) was tried as the art source and dropped the same afternoon. Of its 180 textures 26 hold 0 opaque pixels, and 24 of those are its pants and flak pants - only the Female body is drawn, and its patch fills wornGraphicPath unconditionally, so a pawn wearing trousers was rendered bare. Its other 60 garments are sound."
   - "measured on WDI, and what the parked generator is calibrated on: cloth median 251 and 5th percentile 179 on his underwear; centre seam 4px at tone 179 against cloth 253; groin arc 2-3px around 190; the crotch wedge on the naked body 5px wide at its top and 12px at the hem; his ink is 0, not 26; one intermediate alpha step at every edge. Navel heights, as a fraction of the body: Female 0.52, Male 0.48, Fat 0.46, Thin 0.58, Hulk 0.48."
   - "undecided: whether to cover boots and chest in anger. The sliders exist; nobody has looked at what they do."
-  - "later: the repository. The folder is not in git at all - her call on 2026-09-20 was to leave that until the mod has taken its shape."
 updated:      2026-09-20
 ---
 
@@ -145,8 +142,20 @@ later gates each have a concrete gap.
 | Pickle, XML tests | not written; XML is not applicable (no XML shipped), Pickle applicability not yet justified |
 | In-game scenarios, logs | **unverified**; the game was not started by this audit |
 
+### Advanced later the same day: `horsMonoRepo`
+
+At her request, after she chose public visibility and MIT: standalone repository created (`git init -b main`, one commit
+`Initialise the repository with the mod folder`, 42 files) and pushed to
+https://github.com/vbardales/Rimworld-TailorMade-Waistlines (public, `main`, local and remote at the same commit);
+LICENSE (MIT) at the root and in `Mod/`; `.gitattributes`; `Source/Directory.Build.props` sending build intermediates to
+`.build/`; `.gitignore` excluding `Parked/`, `Art/` and `_tools/*.xcf`; ATTRIBUTION.md, README.md and CHANGELOG.md
+adjusted, Mod/ATTRIBUTION.md re-copied byte-identical; `<url>` and the final `Source code on GitHub` link added to
+About.xml (XML parses). Rebuilt with the new props: 0 warnings, 0 errors, DLL byte-identical to the shipped one
+(`d96766dd…`). The monorepo `.gitignore` gained `/TailorMadeWaistlines/` (not committed there). Result: all criteria of
+`dansMonoRepo -> horsMonoRepo` met, so `workflow_state` is `horsMonoRepo`.
+
 ### Next transition
 
-`dansMonoRepo -> horsMonoRepo`: create the standalone repo and the GitHub repository, push a
-first commit, choose the licence and write LICENSE (root and Mod/), settle the visibility
-question with Parked/ and Art/Gimp/ kept out of any public repository, add `.gitattributes`.
+`horsMonoRepo -> ModIcon générée`: finish development (or record it as finished), then produce
+`Mod/About/ModIcon.png` (128x128) from the mascot prompt of STYLE_RIMWORLD.md. The image is not generated by this
+session.
