@@ -111,6 +111,22 @@ the pawns are drawn with them from the first frame rather than after a repaint.
 
 ### 9. The settings, in English and in French
 
+**Turn developer mode on first, and keep it on for this one.** Without it this
+scenario proves nothing about the keys: a key missing from the active language
+falls back to clean English, and clean English is exactly what a correct
+English run looks like. In developer mode the game marks that fallback instead,
+by accenting it letter by letter — a→à, c→ç, e→è, g→ğ, l→ſ, n→ƞ, k→к in
+Cyrillic. So, reading a French window:
+
+- accented gibberish — the key is missing from French. The braces survive the
+  transformation, so a `{0}` left raw or a parameter gone missing still reads
+  normally in the middle of it;
+- accented gibberish that spells out the key itself — the key is missing from
+  every language;
+- **clean English in the middle of the French** — the string never went through
+  `Translate` at all: a literal hardcoded in the C# or the XML. The mod's own
+  name in the category header is the one that is allowed to look like this.
+
 Open Mod options, then TailorMade Waistlines, in each language. Every line is
 text, never a raw key such as `TailorMadeWaistlines.Settings.Intro`; French
 shows a comma decimal (0,58); nothing is clipped, and the window scrolls to the
@@ -129,6 +145,33 @@ With the game closed, set `pantsTop` to `5` and `bootsTop` to `NaN` in
 `Config/Mod_TailorMadeWaistlines_TailorMadeWaistlinesMod.xml`. On load, the
 sliders show 0,90 and 0,20 (0.90 and 0.20 in English), and the log has no
 error.
+
+## What a Pickle suite would cover here, and what it must not
+
+Pickle does not replace the four test sets, it completes them, and it costs
+incomparably more: a run takes the machine — real clicks, real pointer, the
+screen occupied — for tens of minutes where the sets take seconds. So anything
+that can be proved outside the game is proved outside it, and a scenario that
+repeats what `Check-Logic.ps1` or `Check-Settings.ps1` already proves confiscates
+the machine at every run without adding anything. It is to be deleted, not kept
+in case.
+
+What is left is what only a running game can show, and it is the short list:
+
+- scenario 9, the window in both languages, in developer mode — layout,
+  clipping, and the accented fallback that no unit test can see;
+- scenario 10, the shortcut revealed in RIMMSQOL: a real click that has to
+  reach the right window through whatever another mod has laid over that point;
+- scenarios 3 and 7, a slider moved and the pawns already on the map repainting,
+  which is `ClearAndRepaint` doing its work rather than a value changing;
+- scenario 8, values that survive a save, a restart and a load;
+- scenario 6, the compressed shirt, as a `@review` scenario: it attaches
+  screenshots for a person to judge and asserts nothing. Its green says the
+  journey ran, never that the image is right.
+
+The bands themselves, the clamping of a damaged config, the defaults and which
+garments the shirt option lifts are all settled by the sets in `Tests/`, and
+belong in no scenario.
 
 ## What is not covered
 

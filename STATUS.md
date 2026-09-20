@@ -20,12 +20,12 @@ showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/Abo
 tested_on:
 workshop:
 automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). No Pickle suite yet. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
-manual_scenarios: "TESTING.md, 8 scenarios, none run"
+manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
   - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
   - "unverified (done -> tested): the settings were verified from the sources and by automated checks, not in game. `settings_audit: complete` rests on that basis (the workflow states that in-game checks belong to done -> tested). Still to observe: defaults on a clean configuration, each slider's effect, persistence across a restart and a save, the ClearAndRepaint refresh, the Reset button, the hidden shortcut in RIMMSQOL, English and French display and clipping. Earlier note, kept: no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
-  - "unverified (done -> tested): all 8 scenarios of TESTING.md, FR and EN display, RIMMSQOL shortcut."
+  - "unverified (done -> tested): all 11 scenarios of TESTING.md, FR and EN display, RIMMSQOL shortcut. The language pass counts only in developer mode: outside it a key missing from French falls back to clean English and the defect is invisible, so such a capture is no evidence for the l10n criterion. In developer mode the fallback is accented letter by letter, and clean English inside the French means a literal that never went through Translate."
   - "renamed on 2026-09-20, before anyone had it: TailorMade Waistlines, packageId nelim.tailormade.waistlines, folder TailorMadeWaistlines, assembly TailorMadeWaistlines.dll, namespace TailorMadeWaistlines, Harmony id nelim.tailormade.waistlines. The junction at RimWorld/Mods was repointed and her ModsConfig line was rewritten in place (backup: ModsConfig.xml.before-rename). Renaming a packageId costs nothing only while the mod has never been published - that window is now closed."
   - "the plan, hers: two modules above TailorMade. This one is the engine and names no body mod. A second, TailorMade Waistlines for WDI Realistic Bodies, carries the values. For the split to be worth its cost the preset must be pure XML, so the engine has to define a def type - targetBodyMod plus a value per body type - and apply the preset whose target mod is loaded, with the sliders as the manual override."
   - "per body type is the missing piece, and it is measured: within WDI alone the navel runs from 0.46 on Fat to 0.58 on Thin, so one slider is already a compromise over nine bodies. BandFor only receives the apparel class. Graphic_TailorMade.Init calls PatternRegistry.ResolveFor(race, bodyType, layer, ...) before it calls BandFor, so a postfix on ResolveFor can hold the resolved body type for our BandFor postfix to read. TailorMade keys its texture cache on the body mask instance, so two body types cannot collide. Not written."
@@ -242,7 +242,7 @@ earlier pass argued from the sources have now been run.
 | Dependencies | validated: Harmony and TailorMade declared with `loadAfter` for both, 1.6 only, no LoadFolders, no conditional patch. No visible-pants mod is declared, correctly: any of them will do, so none can be named |
 | Automated tests | validated: `Tests/Run-Tests.ps1`, 115 checks in four sets (22 + 40 + 17 + 36), all passing on the DLL above. A falsified expectation and a missing assembly path were both seen reported |
 | XML tests | validated, run today over `Mod/`: `Check-XmlFields` 3 files, every element maps to a 1.6 field; `Check-DefInjected` 2 keys, 0 errors; `Check-DefRefs` 2 defs, well-formed, all references resolved; `Check-TypeRefs` no unguarded third-party type |
-| Scenarios written | validated: `TESTING.md`, 8 scenarios with preconditions, actions and expected results |
+| Scenarios written | validated: `TESTING.md`, 11 scenarios with preconditions, actions and expected results |
 | Pickle tests | **not written**, and their applicability is not justified either. This is the one blocking criterion |
 | In-game scenarios, logs, FR/EN display | **unverified**; the game was not started |
 
@@ -262,3 +262,23 @@ earlier pass argued from the sources have now been run.
 `preTest -> done` needs the Pickle suite written, run and green — or a written justification that
 it does not apply here, which nothing on file has attempted. Everything else for that transition is
 in place. Writing the suite needs no game; running it does, and this session starts none.
+
+**Its scope is small, and AUDIT.md was revised on 2026-09-20 to say why.** Pickle completes the
+unit sets rather than replacing them, and costs incomparably more: a run takes the machine — real
+clicks, real pointer, the screen occupied — for tens of minutes where `Run-Tests.ps1` takes
+seconds. Only what a running game can show belongs in Gherkin; a scenario that repeats what
+`Check-Logic.ps1` or `Check-Settings.ps1` already proves is to be deleted, not kept in case. For
+this mod that leaves the window in both languages, the RIMMSQOL click, the repaint of pawns already
+on the map, persistence across a save and a restart, and the compressed shirt as a `@review`
+scenario whose green proves only that the journey ran. The list is in `TESTING.md`. Two operational
+notes from the same revision: a run overwrites the previous report, screenshots included, so
+anything worth citing is copied out first; and the run lock is taken before any launch.
+
+**And the in-game l10n check is only valid in developer mode.** Outside it, a key missing from the
+active language falls back to clean English — indistinguishable from a correct English run, so a
+screenshot taken without developer mode is no evidence for the l10n criterion. In developer mode
+the game accents that fallback letter by letter (a→à, l→ſ, k→к in Cyrillic); braces survive, so a
+raw `{0}` still reads. The complement is what makes it useful to an audit: clean English in the
+middle of the French is a string that never went through `Translate` — a hardcoded literal. The
+mod's own name in the category header is the one that is meant to look like that. Recorded in
+scenario 9 of `TESTING.md`.
