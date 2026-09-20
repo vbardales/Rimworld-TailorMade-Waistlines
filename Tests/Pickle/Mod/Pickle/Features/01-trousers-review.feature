@@ -6,12 +6,15 @@
 # What the suite buys is that the judgement is made on the same pawn, at the same zoom, after
 # every change - which is the only thing that makes two captures comparable.
 #
-# Every step below is a Pickle vanilla step. This suite ships no assembly of its own on purpose:
-# a step we would have written is a step to maintain, and nothing here needs one. The one exception
-# is "the fitting that claims ... is recorded", from the suite's own assembly: it attaches which
-# pattern actually resolved for the garment, so a capture says on its own face whether the band or
-# a TailorPatternDef produced it. Without it the only thing telling two runs apart is which run
-# produced them, and the report archive keeps only the last five.
+# Every step below is a Pickle vanilla step. This suite ships no assembly of its own: a step we
+# would have written is a step to maintain, and nothing here needs one.
+#
+# That has a cost, and it is the one thing to know before reading a report. Nothing in these images
+# says which fitting produced them. While Mod/Defs/TailorPatternDefs/Pants_Native.xml is in place it
+# sets autoFit false on both garments dressed below, so the band is never consulted and these are
+# captures of route B, not of the mod. With that file absent they are captures of the band. The two
+# are indistinguishable in the picture, so write down which run produced a report when you copy it
+# out - the archive keeps only the last five, and after that nothing can tell you.
 #
 # "a colonist {string} exists" generates the pawn seeded from the scenario, so a rerun spawns the
 # same one. "I strip" leaves the body bare, which is what isolates the trousers: anything else
@@ -35,7 +38,6 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline"
     And I zoom all the way in
     And I wait 60 ticks
-    And the fitting that claims "Apparel_Pants" is recorded
     Then I take a screenshot "trousers on a male body"
 
   @same-world
@@ -48,7 +50,6 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline-F"
     And I zoom all the way in
     And I wait 60 ticks
-    And the fitting that claims "Apparel_Pants" is recorded
     Then I take a screenshot "trousers on a female body"
 
   # Biotech children wear their own garment. It is a separate ThingDef with a wornGraphicPath of
@@ -63,5 +64,4 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline-K"
     And I zoom all the way in
     And I wait 60 ticks
-    And the fitting that claims "Apparel_KidPants" is recorded
     Then I take a screenshot "trousers on a child body"
