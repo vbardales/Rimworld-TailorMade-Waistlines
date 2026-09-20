@@ -19,7 +19,7 @@ original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. scripts/Check-DefInjected.ps1: 2 keys, 0 errors. No Pickle suite yet, no XML tests beyond the checks above (the only XML shipped is one MainButtonDef and the language files). Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). No Pickle suite yet. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 8 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
@@ -43,6 +43,9 @@ remaining:
   - "Female Apparel for Beautiful Bodies (2881748658) was tried as the art source and dropped the same afternoon. Of its 180 textures 26 hold 0 opaque pixels, and 24 of those are its pants and flak pants - only the Female body is drawn, and its patch fills wornGraphicPath unconditionally, so a pawn wearing trousers was rendered bare. Its other 60 garments are sound."
   - "measured on WDI, and what the parked generator is calibrated on: cloth median 251 and 5th percentile 179 on his underwear; centre seam 4px at tone 179 against cloth 253; groin arc 2-3px around 190; the crotch wedge on the naked body 5px wide at its top and 12px at the hem; his ink is 0, not 26; one intermediate alpha step at every edge. Navel heights, as a fraction of the body: Female 0.52, Male 0.48, Fat 0.46, Thin 0.58, Hulk 0.48."
   - "undecided: whether to cover boots and chest in anger. The sliders exist; nobody has looked at what they do."
+  - "local modification in progress, left untouched by the 2026-09-20 second audit: Mod/Defs/TailorPatternDefs/Pants_Native.xml is untracked and ships with Mod/ as it stands. It is route B - autoFit false on Apparel_Pants and Apparel_KidPants so the drawing keeps its native proportions instead of being stretched into the band - and its own comment says that while it is active the pants slider has no effect on those two garments. Structurally clean (Check-XmlFields, Check-DefRefs, Check-TypeRefs), no player-facing text, so localization is unaffected. It means the shipped folder no longer matches the committed tree, and that any in-game reading of the pants slider on vanilla trousers is a reading of this def, not of the band."
+  - "unpushed: commit c548d57 (the Check-Logic and Run-Tests sets, TESTING.md) is on the local main only; origin/main is at fe0baae. GitHub does not carry the test sets."
+  - "before publication, from PUBLISHING.md's Mentions and not a gate on any transition: the description and README carry no AI-generation notice although both images were generated, no thanks (Harmony, astryl, the tools), and no adoption clause. The description is UN SEUL COUP - it is sent only when the Workshop item is created - so this is the last moment it costs nothing."
 updated:      2026-09-20
 ---
 
@@ -201,3 +204,61 @@ promised feature; if she counts it as unfinished, the state drops back to `horsM
 `preTest -> done`: write the Pickle suite (a companion mod under `Tests/Pickle/Mod/`, steps prefixed with this mod's name, buttons
 addressed by translation key, waits in frames not ticks while the settings window pauses the game), then have it run and pass. The
 suite can be written without the game; running it needs her, since the game is not started by this session.
+
+## Workflow audit — 2026-09-20, second pass
+
+**Result: `preTest`, unchanged.** Previous declared stage: `preTest`. Nothing was
+advanced and nothing was rolled back: every transition up to `l10n -> preTest` is met,
+and `preTest -> done` is still blocked by the one criterion nobody has filled — the
+Pickle suite. What this pass adds is evidence rather than a verdict: the checks the
+earlier pass argued from the sources have now been run.
+
+### Audited revision
+
+- Local `main` at `c548d57`; `origin/main` at `fe0baae`, so the last commit is not pushed.
+- `Mod/Assemblies/TailorMadeWaistlines.dll`, SHA-256 `EA8644DA…F550`, 11 264 bytes, built
+  2026-09-20 19:26:26 — later than every source file, so the shipped assembly is the current one.
+- **Local modification, left untouched:** `Mod/Defs/TailorPatternDefs/Pants_Native.xml`, untracked,
+  written by another session. Route B: `autoFit false` on `Apparel_Pants` and `Apparel_KidPants`.
+  It ships with `Mod/` as it stands and, by its own comment, suspends the pants slider for those two
+  garments. Recorded under `remaining`; no judgement is passed on an experiment in progress.
+- RimWorld was not started, and `Get-Process RimWorldWin64` was empty before any check was run.
+  Nothing here needs the game.
+
+### Checks and results
+
+| Check | Result |
+| --- | --- |
+| Standalone repo, GitHub remote, first push | validated: `origin` → `vbardales/Rimworld-TailorMade-Waistlines`, `main` tracked, five commits pushed. `c548d57` is local only |
+| Visibility, licence, names | validated: public, MIT, `LICENSE` at the root and in `Mod/` byte-identical; `packageId`, folder, assembly, namespace and Harmony id all `nelim.tailormade.waistlines` |
+| English docs, `Mod/ATTRIBUTION.md` copy | validated, byte-identical to the root one |
+| `.gitignore`, `.gitattributes` | validated: `.build/`, `Source/**/obj`, `bin`, `.vs`, `.idea`, `*.user`; PNG and DLL marked binary |
+| Build up to date in the published folder | validated by timestamp and by the test sets loading that DLL |
+| `ModIcon.png` | validated by direct inspection: 128×128, 28 290 B. The mascot and the tape read at 32 px |
+| `Preview.png` | validated by direct inspection: 896×504, 667 338 B (< 1 MB). Title top-left over a calm area, accent rule plainly distinct from the secondary ink, version badge, near-orthographic overhead, one figure seen from behind, no engraved count |
+| Description in English, source link | validated: ends with `[url=https://github.com/vbardales/Rimworld-TailorMade-Waistlines]Source code on GitHub[/url]`, matching `<url>` and the remote |
+| Settings (MOD_SETTINGS.md) | validated from the sources and the automated sets: three useful sliders with tooltips, a checkbox, reset, scroll, stated scope and application time, primary access through Mod options, `MainButtonDef` hidden by default opening the same `Dialog_ModSettings`. In-game behaviour belongs to `done -> tested` and stays unverified |
+| Localization (TRANSLATIONS.md) | validated: 13 Keyed keys in English and French, DefInjected for the shortcut, no hardcoded sentence outside the mod's own name. The new `TailorPatternDef` carries no player-facing text |
+| Dependencies | validated: Harmony and TailorMade declared with `loadAfter` for both, 1.6 only, no LoadFolders, no conditional patch. No visible-pants mod is declared, correctly: any of them will do, so none can be named |
+| Automated tests | validated: `Tests/Run-Tests.ps1`, 115 checks in four sets (22 + 40 + 17 + 36), all passing on the DLL above. A falsified expectation and a missing assembly path were both seen reported |
+| XML tests | validated, run today over `Mod/`: `Check-XmlFields` 3 files, every element maps to a 1.6 field; `Check-DefInjected` 2 keys, 0 errors; `Check-DefRefs` 2 defs, well-formed, all references resolved; `Check-TypeRefs` no unguarded third-party type |
+| Scenarios written | validated: `TESTING.md`, 8 scenarios with preconditions, actions and expected results |
+| Pickle tests | **not written**, and their applicability is not justified either. This is the one blocking criterion |
+| In-game scenarios, logs, FR/EN display | **unverified**; the game was not started |
+
+### What this pass changes
+
+- The XML criterion of `preTest -> done` was previously argued from the shape of the shipped
+  files. It has now been run, on a tree that has since gained a second def — and that def is
+  clean.
+- `Tests/Check-Logic.ps1` covers what no set covered: the mod's own decisions. The automated-test
+  criterion no longer rests on compatibility checks alone.
+- Three items were added to `remaining`: the untracked route-B def, the unpushed commit, and the
+  publication mentions (AI generation, thanks, adoption clause) that `PUBLISHING.md` asks for in a
+  description which is sent once and never again.
+
+### Next transition
+
+`preTest -> done` needs the Pickle suite written, run and green — or a written justification that
+it does not apply here, which nothing on file has attempted. Everything else for that transition is
+in place. Writing the suite needs no game; running it does, and this session starts none.
