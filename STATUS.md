@@ -323,7 +323,14 @@ that attached which fitting had actually claimed the garment went with the assem
 thing telling a band run from a route-B run is the memory of which run produced it. Write it down
 beside the images when copying a report out; five runs later the archive is gone.
 
-**Left broken by the removal, and hers to settle:** `01-trousers-review.feature` still names
-`the fitting that claims {string} is recorded` in its three scenarios and describes it in its
-header. That step no longer exists, so the suite as committed would fail at startup on an
-undefined step. Told to the session that owns it at once; not edited here.
+**Briefly broken by the removal, fixed the same minute** (`e75e536`). `01` had taken
+`the fitting that claims {string} is recorded` from the deleted assembly, and would have failed at
+startup on an undefined step; the session that owns the feature took the three lines out and
+rewrote its header. Twelve steps remain, every one of them vanilla, so the suite needs no build
+and no DLL — which is what it was designed to be before the two halves briefly met.
+
+The header now carries the cost where a reader of the feature will meet it, not only here: nothing
+in the images says which fitting produced them, and with `Pants_Native.xml` in place both garments
+it dresses have `autoFit false`, so those are captures of route B rather than of the mod. If the
+labelling is ever wanted back it does not need the whole assembly — one step reading
+`PatternRegistry.Resolve` is enough, and `9988515` has it.
