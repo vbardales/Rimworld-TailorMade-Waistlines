@@ -19,7 +19,7 @@ original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). No Pickle suite yet. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). Pickle: the suite exists as of 2026-09-20, Tests/Pickle, five features over what only a running game shows - 01 the trousers captures (vanilla steps only), 02 which patch route is live, 03 the shortcut and the language actually loaded, 04 the cache sweep and the repaint, 05 the settings file round trip; the step assembly builds with 0 warnings. NEVER RUN: nothing is known about whether it passes, and preTest -> done needs it green. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
@@ -282,3 +282,42 @@ raw `{0}` still reads. The complement is what makes it useful to an audit: clean
 middle of the French is a string that never went through `Translate` — a hardcoded literal. The
 mod's own name in the category header is the one that is meant to look like that. Recorded in
 scenario 9 of `TESTING.md`.
+
+## The Pickle suite — written 2026-09-20, never run
+
+`Tests/Pickle`, a companion mod (`nelim.tailormade.waistlines.pickletests`) that is never
+published. Two sessions were writing it at the same time and split it by agreement: `01` keeps
+Pickle's vanilla steps and no assembly, `02` to `05` come with the step assembly the four
+behaviours below need. A scenario is only touched by the steps it names, so the DLL costs `01`
+nothing.
+
+| feature | what only a running game can say |
+| --- | --- |
+| `01-trousers-review` | how trousers read on a body drawn without legs. Three captures, no assertion |
+| `02-patch-route` | which of the two routes is live: Mono's inlining of `BandFor` is a property of the process |
+| `03-settings-and-shortcut` | the bar not drawing the shortcut and not greying it out (`Worker.Visible`, `Worker.Disabled`), the worker opening our own page, every key resolving in the language actually loaded |
+| `04-sweep-and-repaint` | the textures baked against the old band thrown away and the pawns redrawn, counted through `TexBake.Stats()` |
+| `05-persistence` | the value reaching the file the game writes and coming back through its Scribe |
+
+**It has never been run, and nothing is known about whether it passes.** `preTest -> done` needs it
+green, so that criterion is still open; what changed is that it is now written rather than absent.
+The step assembly builds with 0 warnings and 0 errors against the shipped DLL and TailorMade's own.
+
+Three things stand between it and a first run, none of them ours alone:
+
+- `scripts/stage-pickle-wsl.sh` has no entry for `astryl.tailormade` (3756915448),
+  `wdi.realistic.bodies` (3527486510) or `ab.vplrf` (2986402536) in its `packageId -> Workshop
+  folder` map, and a dependency missing from it stops the staging rather than producing a set that
+  loads without it. The headless route belongs to another session; asked, not edited.
+- How a map comes to exist in an autorun is unresolved: `a colonist {string} exists` needs one.
+  Pickle carries a quickstart bridge and the tag spelling has not been established here.
+- Whether a headless run can produce a real screenshot at all. If it renders to nothing, the
+  capture half of the suite is worthless where AUDIT.md says to run it — and an empty PNG that
+  still reports green is worse than a failure. Asked of the `Pickle headless mode` session.
+
+**Route B changes what the suite documents, and the suite now says so.** While
+`Mod/Defs/TailorPatternDefs/Pants_Native.xml` is in place, `autoFit false` bypasses the band for
+`Apparel_Pants` and `Apparel_KidPants` — exactly the defs the captures dress the pawn in. Every
+scenario that touches trousers therefore records what `PatternRegistry.Resolve` returned, and `04`
+asserts it: with that def present the scenario fails and names it, rather than photographing the
+native fit under a title that says band.
