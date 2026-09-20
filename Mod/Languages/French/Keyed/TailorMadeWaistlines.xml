@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <TailorMadeWaistlines.Settings.Intro>Là où s'arrête chaque catégorie de vêtement sur le corps. 0 est l'ourlet, 1 le sommet de la tête. Les valeurs de TailorMade sont 0,58, 0,20 et 0,45. Abaissez la première si les pantalons montent au-dessus du nombril sur un corps dessiné sans jambes.</TailorMadeWaistlines.Settings.Intro>
+  <TailorMadeWaistlines.Settings.Scope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.Scope>
+
+  <TailorMadeWaistlines.Settings.PantsTop>Le pantalon monte jusqu'à : {0}</TailorMadeWaistlines.Settings.PantsTop>
+  <TailorMadeWaistlines.Settings.PantsTopTip>La hauteur de la ceinture, en fraction du corps : 0 est l'ourlet, 1 le sommet de la tête. La valeur de TailorMade est 0,58.</TailorMadeWaistlines.Settings.PantsTopTip>
+  <TailorMadeWaistlines.Settings.BootsTop>Les bottes montent jusqu'à : {0}</TailorMadeWaistlines.Settings.BootsTop>
+  <TailorMadeWaistlines.Settings.BootsTopTip>Jusqu'où les chaussures sont dessinées sur le corps, en fraction de sa hauteur. La valeur de TailorMade est 0,20.</TailorMadeWaistlines.Settings.BootsTopTip>
+  <TailorMadeWaistlines.Settings.ChestBottom>Les hauts commencent à : {0}</TailorMadeWaistlines.Settings.ChestBottom>
+  <TailorMadeWaistlines.Settings.ChestBottomTip>Où tombe le bord inférieur d'un haut, en fraction de la hauteur du corps. La valeur de TailorMade est 0,45.</TailorMadeWaistlines.Settings.ChestBottomTip>
+
+  <TailorMadeWaistlines.Settings.ShortenShirts>Raccourcir les chemises intégrales</TailorMadeWaistlines.Settings.ShortenShirts>
+  <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade ne calibre un vêtement du torse que si son dessin commence déjà aux 40 % de la hauteur, ce qui laisse une chemise vanilla, dessinée sur tout le corps, à pleine longueur et cache entièrement le pantalon. Cette option lève ce test pour les vêtements portés sur la peau, et le curseur des hauts décide alors où ils s'arrêtent. Les manteaux, parkas et robes se portent sur la couche extérieure et tombent toujours jusqu'aux chevilles. La chemise est comprimée dans la bande, pas coupée, si bien que les cols et les boutons sont écrasés avec elle.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
+
+  <TailorMadeWaistlines.Settings.Reset>Rétablir les valeurs de TailorMade</TailorMadeWaistlines.Settings.Reset>
+
+  <TailorMadeWaistlines.Settings.PatchDirect>Correctif posé à la source : les changements se voient dès la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.PatchDirect>
+  <TailorMadeWaistlines.Settings.PatchFallback>Correctif de repli en service : fermez le jeu et relancez-le pour qu'un changement se voie, car les textures en cache de TailorMade ont été indexées sur l'ancienne valeur.</TailorMadeWaistlines.Settings.PatchFallback>
+</LanguageData>

@@ -34,7 +34,9 @@ constants, and its settings do not mention them.
 
 ## What this mod does
 
-Two Harmony patches and a settings window. No textures, no defs.
+Two Harmony patches and a settings window. No textures. The one def is a
+hidden shortcut to that window (below). English and French text, as `Keyed`
+files.
 
 **The bands become settings.** A postfix on `ApparelClassifier.BandFor`
 returns our values instead of the constants. That is the better of the two
@@ -67,6 +69,13 @@ being OnSkin while dusters, parkas, jackets and robes are Shell. Off by
 default, and note that the band **scales** the art into itself rather than
 cropping, so the shirt is compressed, collar and buttons included.
 
+**Where the settings are.** Mod options, then TailorMade Waistlines. The same
+window also has a `MainButtonDef`, hidden by default (`buttonVisible` false: not
+shown, not greyed out), which a customisation mod such as RIMMSQOL can reveal.
+It opens the same settings, with the same values. Values read back from the
+config file are clamped to the sliders' ranges, and NaN or infinity fall back to
+the default.
+
 Closing the settings window calls `TailorMade.TailorMadeCache.ClearAndRepaint()`,
 which sweeps every cached fit and repaints the pawns already on the map.
 
@@ -83,9 +92,14 @@ fills that field is still required. AB's Visible Pants does it, from its own
 Mod/                    everything that ships, and nothing else
   About/About.xml       nelim.tailormade.waistlines; needs Harmony and TailorMade
   Assemblies/TailorMadeWaistlines.dll
+  Defs/MainButtonDefs/  the hidden settings shortcut
+  Languages/            English and French Keyed text, French DefInjected
 Parked/                 earlier routes: art derived from other mods. Local only, not in this repository
-Source/TailorMadeWaistlines/      Bands.cs, ChestArt.cs, TailorMadeWaistlinesMod.cs
+Source/TailorMadeWaistlines/      Bands.cs, ChestArt.cs, TailorMadeWaistlinesMod.cs,
+                        MainButtonWorker_TailorMadeWaistlines.cs
 Tests/Check-Mod.ps1     reflection over TailorMade: 22 checks, no game started
+Tests/Check-Localization.ps1   keys, French coverage, placeholders, hidden shortcut
+Tests/Check-Settings.ps1       defaults, reset and clamping of the settings object
 _tools/*.js             measurement and generation, for the parked route
 Art/                    generated previews and contact sheets. Local only, not in this repository
 ```

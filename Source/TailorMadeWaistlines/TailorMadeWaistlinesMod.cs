@@ -10,84 +10,121 @@ namespace TailorMadeWaistlines
         // Defaults are TailorMade's own values, so installing this mod changes
         // nothing until a slider is moved. Where the garment should stop is a
         // matter of the body art and of taste, and neither is ours to guess.
-        public float pantsTop = 0.58f;
-        public float bootsTop = 0.20f;
-        public float chestBottom = 0.45f;
+        public const float DefaultPantsTop = 0.58f;
+        public const float DefaultBootsTop = 0.20f;
+        public const float DefaultChestBottom = 0.45f;
 
-        // Off by default: it changes how every torso garment is drawn, and the
-        // shirt is compressed into the band rather than cut off at it.
+        // The slider ranges. A value read back from the config file is brought
+        // into them too, so a hand-edited or damaged file cannot ask TailorMade
+        // for a band outside the body.
+        public const float PantsMin = 0.20f, PantsMax = 0.90f;
+        public const float BootsMin = 0.05f, BootsMax = 0.60f;
+        public const float ChestMin = 0.20f, ChestMax = 0.80f;
+
+        public float pantsTop = DefaultPantsTop;
+        public float bootsTop = DefaultBootsTop;
+        public float chestBottom = DefaultChestBottom;
+
+        // Off by default: it changes how every on-skin torso garment is drawn,
+        // and the shirt is compressed into the band rather than cut off at it.
         public bool shortenShirts = false;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref pantsTop, "pantsTop", 0.58f);
-            Scribe_Values.Look(ref bootsTop, "bootsTop", 0.20f);
-            Scribe_Values.Look(ref chestBottom, "chestBottom", 0.45f);
+            Scribe_Values.Look(ref pantsTop, "pantsTop", DefaultPantsTop);
+            Scribe_Values.Look(ref bootsTop, "bootsTop", DefaultBootsTop);
+            Scribe_Values.Look(ref chestBottom, "chestBottom", DefaultChestBottom);
             Scribe_Values.Look(ref shortenShirts, "shortenShirts", false);
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+                Sanitize();
+        }
+
+        /// <summary>Brings every value into its slider's range; NaN and infinity fall back to the default.</summary>
+        public void Sanitize()
+        {
+            pantsTop = Clean(pantsTop, PantsMin, PantsMax, DefaultPantsTop);
+            bootsTop = Clean(bootsTop, BootsMin, BootsMax, DefaultBootsTop);
+            chestBottom = Clean(chestBottom, ChestMin, ChestMax, DefaultChestBottom);
+        }
+
+        public void ResetToDefaults()
+        {
+            pantsTop = DefaultPantsTop;
+            bootsTop = DefaultBootsTop;
+            chestBottom = DefaultChestBottom;
+            shortenShirts = false;
+        }
+
+        private static float Clean(float value, float min, float max, float fallback)
+        {
+            if (float.IsNaN(value) || float.IsInfinity(value)) return fallback;
+            return Mathf.Clamp(value, min, max);
         }
     }
 
     public class TailorMadeWaistlinesMod : Mod
     {
+        public static TailorMadeWaistlinesMod Instance { get; private set; }
         public static TailorMadeWaistlinesSettings Settings;
+
+        private Vector2 scrollPosition;
+        private float viewHeight = 600f;
 
         public TailorMadeWaistlinesMod(ModContentPack content) : base(content)
         {
+            Instance = this;
             Settings = GetSettings<TailorMadeWaistlinesSettings>();
             new Harmony("nelim.tailormade.waistlines").PatchAll(Assembly.GetExecutingAssembly());
             LongEventHandler.ExecuteWhenFinished(Bands.SelfTest);
         }
 
+        // The mod's own name, a proper noun: the one player-facing string that is not a key.
         public override string SettingsCategory() => "TailorMade Waistlines";
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
+            var viewRect = new Rect(0f, 0f, inRect.width - 20f, viewHeight);
+            Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
+
             var list = new Listing_Standard();
-            list.Begin(inRect);
+            list.Begin(viewRect);
 
-            list.Label("Where each garment class stops on the body. 0 is the hem, "
-                + "1 is the top of the head. TailorMade's own values are 0.58, 0.20 and 0.45; "
-                + "lower the first if trousers ride above the navel on a body drawn without legs.");
+            list.Label("TailorMadeWaistlines.Settings.Intro".Translate());
+            list.Label("TailorMadeWaistlines.Settings.Scope".Translate());
             list.Gap();
 
-            Slider(list, "Pants reach up to", ref Settings.pantsTop, 0.20f, 0.90f);
-            Slider(list, "Boots reach up to", ref Settings.bootsTop, 0.05f, 0.60f);
-            Slider(list, "Chest pieces start at", ref Settings.chestBottom, 0.20f, 0.80f);
+            Slider(list, "TailorMadeWaistlines.Settings.PantsTop", "TailorMadeWaistlines.Settings.PantsTopTip",
+                ref Settings.pantsTop, TailorMadeWaistlinesSettings.PantsMin, TailorMadeWaistlinesSettings.PantsMax);
+            Slider(list, "TailorMadeWaistlines.Settings.BootsTop", "TailorMadeWaistlines.Settings.BootsTopTip",
+                ref Settings.bootsTop, TailorMadeWaistlinesSettings.BootsMin, TailorMadeWaistlinesSettings.BootsMax);
+            Slider(list, "TailorMadeWaistlines.Settings.ChestBottom", "TailorMadeWaistlines.Settings.ChestBottomTip",
+                ref Settings.chestBottom, TailorMadeWaistlinesSettings.ChestMin, TailorMadeWaistlinesSettings.ChestMax);
 
             list.Gap();
-            list.CheckboxLabeled("Shorten full-body shirts",
+            list.CheckboxLabeled("TailorMadeWaistlines.Settings.ShortenShirts".Translate(),
                 ref Settings.shortenShirts,
-                "TailorMade only bands a torso garment whose art already starts 40% of the way "
-                + "up, which leaves a vanilla shirt - drawn over the whole body - full length, "
-                + "hiding the trousers entirely. This lifts that test for on-skin garments, and "
-                + "the slider above then decides where they stop. Coats, parkas and robes are "
-                + "worn on the shell layer and still drape to the ankles. Note that the shirt is "
-                + "compressed into the band, not cut off at it, so collars and buttons are "
-                + "squeezed along with it.");
+                "TailorMadeWaistlines.Settings.ShortenShirtsTip".Translate());
 
             list.Gap();
-            if (list.ButtonText("Reset to TailorMade's values"))
-            {
-                Settings.pantsTop = 0.58f;
-                Settings.bootsTop = 0.20f;
-                Settings.chestBottom = 0.45f;
-                Settings.shortenShirts = false;
-            }
+            if (list.ButtonText("TailorMadeWaistlines.Settings.Reset".Translate()))
+                Settings.ResetToDefaults();
 
             list.Gap();
             list.Label(Bands.DirectPatchWorks
-                ? "Patched at the source: changes show as soon as this window closes."
-                : "Running on the fallback patch: close the game and start it again for a "
-                  + "change to show, because TailorMade's cached textures were keyed on the "
-                  + "old value.");
+                ? "TailorMadeWaistlines.Settings.PatchDirect".Translate()
+                : "TailorMadeWaistlines.Settings.PatchFallback".Translate());
 
+            viewHeight = list.CurHeight + 10f;
             list.End();
+            Widgets.EndScrollView();
         }
 
-        private static void Slider(Listing_Standard list, string label, ref float value, float min, float max)
+        private static void Slider(Listing_Standard list, string labelKey, string tipKey, ref float value, float min, float max)
         {
-            list.Label($"{label}: {value:0.00}");
+            Rect label = list.Label(labelKey.Translate(value.ToString("0.00")));
+            TooltipHandler.TipRegion(label, tipKey.Translate());
             value = Widgets.HorizontalSlider(list.GetRect(22f), value, min, max, false, null, null, null, 0.01f);
         }
 

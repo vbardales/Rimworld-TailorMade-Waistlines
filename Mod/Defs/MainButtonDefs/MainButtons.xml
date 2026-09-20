@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <MainButtonDef>
+    <defName>TailorMadeWaistlines_Settings</defName>
+    <label>TailorMade Waistlines</label>
+    <description>Open the TailorMade Waistlines mod settings.</description>
+    <workerClass>TailorMadeWaistlines.MainButtonWorker_TailorMadeWaistlines</workerClass>
+    <buttonVisible>false</buttonVisible>
+    <validWithoutMap>true</validWithoutMap>
+    <order>900</order>
+  </MainButtonDef>
+</Defs>

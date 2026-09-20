@@ -99,6 +99,27 @@ is the band nobody has looked at yet.
 Change all three sliders, save, quit, restart, load. The values survive, and
 the pawns are drawn with them from the first frame rather than after a repaint.
 
+### 9. The settings, in English and in French
+
+Open Mod options, then TailorMade Waistlines, in each language. Every line is
+text, never a raw key such as `TailorMadeWaistlines.Settings.Intro`; French
+shows a comma decimal (0,58); nothing is clipped, and the window scrolls to the
+last line. Hover each slider: a tooltip appears.
+
+### 10. The hidden shortcut
+
+On a clean configuration the main button bar shows nothing new, neither a
+button nor a greyed-out one. In RIMMSQOL, reveal *TailorMade Waistlines*: it
+opens the same window, edits show in Mod options, and hiding it again survives
+a restart. Record which customisation mods were actually tried.
+
+### 11. A damaged config file
+
+With the game closed, set `pantsTop` to `5` and `bootsTop` to `NaN` in
+`Config/Mod_TailorMadeWaistlines_TailorMadeWaistlinesMod.xml`. On load, the
+sliders show 0,90 and 0,20 (0.90 and 0.20 in English), and the log has no
+error.
+
 ## What is not covered
 
 - Alien races. TailorMade has its own HAR handling and this mod does not touch

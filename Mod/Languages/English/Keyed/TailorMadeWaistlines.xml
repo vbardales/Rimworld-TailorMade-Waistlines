@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <TailorMadeWaistlines.Settings.Intro>Where each garment class stops on the body. 0 is the hem, 1 is the top of the head. TailorMade's own values are 0.58, 0.20 and 0.45. Lower the first if trousers ride above the navel on a body drawn without legs.</TailorMadeWaistlines.Settings.Intro>
+  <TailorMadeWaistlines.Settings.Scope>Global settings, shared by every save. Changes apply when this window closes.</TailorMadeWaistlines.Settings.Scope>
+
+  <TailorMadeWaistlines.Settings.PantsTop>Pants reach up to: {0}</TailorMadeWaistlines.Settings.PantsTop>
+  <TailorMadeWaistlines.Settings.PantsTopTip>The height of the waistband, as a fraction of the body: 0 is the hem, 1 is the top of the head. TailorMade's value is 0.58.</TailorMadeWaistlines.Settings.PantsTopTip>
+  <TailorMadeWaistlines.Settings.BootsTop>Boots reach up to: {0}</TailorMadeWaistlines.Settings.BootsTop>
+  <TailorMadeWaistlines.Settings.BootsTopTip>How far up the body footwear is drawn, as a fraction of the body's height. TailorMade's value is 0.20.</TailorMadeWaistlines.Settings.BootsTopTip>
+  <TailorMadeWaistlines.Settings.ChestBottom>Chest pieces start at: {0}</TailorMadeWaistlines.Settings.ChestBottom>
+  <TailorMadeWaistlines.Settings.ChestBottomTip>Where the lower edge of a chest piece lands, as a fraction of the body's height. TailorMade's value is 0.45.</TailorMadeWaistlines.Settings.ChestBottomTip>
+
+  <TailorMadeWaistlines.Settings.ShortenShirts>Shorten full-body shirts</TailorMadeWaistlines.Settings.ShortenShirts>
+  <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade only bands a torso garment whose art already starts 40% of the way up, which leaves a vanilla shirt, drawn over the whole body, full length and hiding the trousers entirely. This lifts that test for on-skin garments, and the chest slider above then decides where they stop. Coats, parkas and robes are worn on the shell layer and still drape to the ankles. The shirt is compressed into the band, not cut off at it, so collars and buttons are squeezed along with it.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
+
+  <TailorMadeWaistlines.Settings.Reset>Reset to TailorMade's values</TailorMadeWaistlines.Settings.Reset>
+
+  <TailorMadeWaistlines.Settings.PatchDirect>Patched at the source: changes show as soon as this window closes.</TailorMadeWaistlines.Settings.PatchDirect>
+  <TailorMadeWaistlines.Settings.PatchFallback>Running on the fallback patch: close the game and start it again for a change to show, because TailorMade's cached textures were keyed on the old value.</TailorMadeWaistlines.Settings.PatchFallback>
+</LanguageData>

@@ -7,10 +7,10 @@ detached:     yes
 stage:        port
 workflow_state: horsMonoRepo
 workflow_audited: 2026-09-20
-localization: partial
-translation_en: partial
-translation_fr: partial
-settings_audit: partial
+localization: complete
+translation_en: complete
+translation_fr: complete
+settings_audit: complete
 dependencies_audit: complete
 licence:      original
 licence_at:   "MIT, chosen 2026-09-20 (LICENSE at the root and in Mod/), matching TailorMade, which is MIT. Nothing is copied from it: it is referenced at build time and patched through Harmony. Mod/ is publishable: one assembly of our own, patching TailorMade, which is MIT. Parked/ is not, and never ships - its textures are computed from General Textures Collection (3789119336) and WDI's Realistic Bodies (3527486510), neither of which grants a licence. Steam uploads Mod/ only, which is the safeguard, and Parked/, Art/ and the GIMP projects are kept out of the public repository by .gitignore. See ATTRIBUTION.md."
@@ -19,14 +19,12 @@ original:     none
 showcase:     Art/waist_{Male,Female}.png, generated contact sheets (not a Preview.png yet)
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1, 22 checks, re-run by the 2026-09-20 audit: all passing. They are reflection checks over TailorMade's assembly, not tests of this mod's settings logic. No Pickle suite, no XML tests (no XML shipped)."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), all run 2026-09-20 on the rebuilt DLL, none starting the game; the two new ones were seen failing under a mutation. scripts/Check-DefInjected.ps1: 2 keys, 0 errors. No Pickle suite yet, no XML tests beyond the checks above (the only XML shipped is one MainButtonDef and the language files). Tests/Check-Logic.ps1, written by another session and not committed, fails at the ApparelLayerDefOf initialiser and is not counted."
 manual_scenarios: "TESTING.md, 8 scenarios, none run"
 remaining:
-  - "defect (horsMonoRepo -> ModIcon générée, and the gates after): Mod/About/ModIcon.png and Mod/About/Preview.png do not exist; the Art/waist_*.png contact sheets named in `showcase` are not a Preview. Development is not finished either: the compressed-shirt question is open and the options and l10n defects below stand."
+  - "defect (horsMonoRepo -> ModIcon générée, and the gates after): Mod/About/ModIcon.png (1254x1254, 1.58 MB) and Mod/About/preview.png (1402x1122, 1.76 MB, lowercase name) are untracked raw generated images, not the deliverables: the icon must be 128x128, the Preview 896x504 under 1 MB and named Preview.png with its title overlay, and the raw sources belong in Art/. They were left untouched and are not committed. the Art/waist_*.png contact sheets named in `showcase` are not a Preview. Development is not finished either: the compressed-shirt question is open and the options and l10n defects below stand."
   - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
-  - "defect (options / l10n): every player-facing string in the settings window is a hardcoded English literal in Source/TailorMadeWaistlines/TailorMadeWaistlinesMod.cs (SettingsCategory, intro label, three slider labels, checkbox label and tooltip, reset button, two status lines). Mod/Languages/ does not exist. `localization: none needed` was wrong."
-  - "defect (options): the mod has useful settings but declares no MainButtonDef and no Defs at all, so the hidden MainButtons shortcut required by MOD_SETTINGS.md is absent. `settings_audit: complete` was not supported by the sources."
-  - "unverified (options): no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
+  - "unverified (done -> tested): the settings were verified from the sources and by automated checks, not in game. `settings_audit: complete` rests on that basis (the workflow states that in-game checks belong to done -> tested). Still to observe: defaults on a clean configuration, each slider's effect, persistence across a restart and a save, the ClearAndRepaint refresh, the Reset button, the hidden shortcut in RIMMSQOL, English and French display and clipping. Earlier note, kept: no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
   - "unverified (done -> tested): all 8 scenarios of TESTING.md, FR and EN display, RIMMSQOL shortcut."
   - "renamed on 2026-09-20, before anyone had it: TailorMade Waistlines, packageId nelim.tailormade.waistlines, folder TailorMadeWaistlines, assembly TailorMadeWaistlines.dll, namespace TailorMadeWaistlines, Harmony id nelim.tailormade.waistlines. The junction at RimWorld/Mods was repointed and her ModsConfig line was rewritten in place (backup: ModsConfig.xml.before-rename). Renaming a packageId costs nothing only while the mod has never been published - that window is now closed."
   - "the plan, hers: two modules above TailorMade. This one is the engine and names no body mod. A second, TailorMade Waistlines for WDI Realistic Bodies, carries the values. For the split to be worth its cost the preset must be pure XML, so the engine has to define a def type - targetBodyMod plus a value per body type - and apply the preset whose target mod is loaded, with the sliders as the manual override."
@@ -153,6 +151,20 @@ adjusted, Mod/ATTRIBUTION.md re-copied byte-identical; `<url>` and the final `So
 About.xml (XML parses). Rebuilt with the new props: 0 warnings, 0 errors, DLL byte-identical to the shipped one
 (`d96766dd…`). The monorepo `.gitignore` gained `/TailorMadeWaistlines/` (not committed there). Result: all criteria of
 `dansMonoRepo -> horsMonoRepo` met, so `workflow_state` is `horsMonoRepo`.
+
+### Settings and localization work, same day
+
+At her request. `TailorMadeWaistlinesMod.cs` now resolves every text through 13 `TailorMadeWaistlines.Settings.*` keys
+(`Languages/English/Keyed`, `Languages/French/Keyed`); the settings window scrolls and has slider tooltips and a scope line;
+values read from the config file are clamped (`Sanitize`, NaN/infinity to default). New `MainButtonDef`
+`TailorMadeWaistlines_Settings`, `buttonVisible` false, worker `MainButtonWorker_TailorMadeWaistlines` opening
+`Dialog_ModSettings` on the same mod instance; French `DefInjected/MainButtonDef`. The one remaining literal is the
+mod's own name in `SettingsCategory()`, a proper noun. Log messages stay English by rule. Rebuilt (the game was running and
+locked the DLL; the copy succeeded on retry, so **the running game still holds the old assembly and needs a restart**).
+Tests listed in `automated_tests`. The `settings_audit`, `localization`, `translation_en` and `translation_fr`
+values are `complete` on the basis the workflow prescribes for the options and l10n steps: sources, definitions and
+automated tests, not in-game observation, which is recorded above as unverified. `workflow_state` stays `horsMonoRepo`:
+the steps between (ModIcon, Preview, preOptions) are not met.
 
 ### Next transition
 
