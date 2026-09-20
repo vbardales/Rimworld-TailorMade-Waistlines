@@ -7,7 +7,11 @@
 # every change - which is the only thing that makes two captures comparable.
 #
 # Every step below is a Pickle vanilla step. This suite ships no assembly of its own on purpose:
-# a step we would have written is a step to maintain, and nothing here needs one.
+# a step we would have written is a step to maintain, and nothing here needs one. The one exception
+# is "the fitting that claims ... is recorded", from the suite's own assembly: it attaches which
+# pattern actually resolved for the garment, so a capture says on its own face whether the band or
+# a TailorPatternDef produced it. Without it the only thing telling two runs apart is which run
+# produced them, and the report archive keeps only the last five.
 #
 # "a colonist {string} exists" generates the pawn seeded from the scenario, so a rerun spawns the
 # same one. "I strip" leaves the body bare, which is what isolates the trousers: anything else
@@ -24,6 +28,7 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline"
     And I zoom all the way in
     And I wait 60 ticks
+    And the fitting that claims "Apparel_Pants" is recorded
     Then I take a screenshot "trousers on a male body"
 
   Scenario: a female colonist wearing nothing but trousers
@@ -35,6 +40,7 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline-F"
     And I zoom all the way in
     And I wait 60 ticks
+    And the fitting that claims "Apparel_Pants" is recorded
     Then I take a screenshot "trousers on a female body"
 
   # Biotech children wear their own garment. It is a separate ThingDef with a wornGraphicPath of
@@ -48,4 +54,5 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline-K"
     And I zoom all the way in
     And I wait 60 ticks
+    And the fitting that claims "Apparel_KidPants" is recorded
     Then I take a screenshot "trousers on a child body"

@@ -25,9 +25,11 @@ lifts appear in no scenario here. What is left divides in two.
 `PatternRegistry.Resolve` - so they come with `Source/`, built to
 `Mod/Pickle/Assemblies/TailorMadeWaistlines.PickleSteps.dll`.
 
-The presence of that DLL costs `01` nothing: a scenario is only touched by the steps it names.
-What it does cost is the `-Launch` rule - a step assembly built since the running game started is
-not the one loaded, because Pickle reads step assemblies at startup.
+`01` then took one step from that assembly on purpose - `the fitting that claims {string} is
+recorded`, so a capture says on its own face which fitting produced it - and with it went the
+exemption this paragraph first claimed. **All five features are under the same rule**: Pickle reads
+step assemblies at startup, so a DLL built since the running game started is not the one loaded,
+and a rebuild means `-Launch` rather than driving the game already open.
 
 Every step text carries the mod's name, because Pickle loads every active suite's steps into one
 namespace and two suites declaring the same text produce "Ambiguous step" on healthy scenarios.
@@ -119,10 +121,19 @@ monorepo stages the mod set into the Linux install, then RimWorld is started wit
 filter matching nothing exits 2 without playing anything. Add `-pickle-no-browser`; WSL has no
 `xdg-open`.
 
-Two things are needed before that works, and neither is written yet:
+Three things are needed before that works, and none is written yet:
 
 - The staging script's `packageId -> Workshop folder` table knows five mods and this is not one of
-  them. It needs `nelim.tailormade.waistlines`, and `wdi.realistic.bodies` and `ab.vplrf` with it.
+  them. It needs `nelim.tailormade.waistlines`, and `astryl.tailormade`, `wdi.realistic.bodies`
+  and `ab.vplrf` with it. A dependency missing from that table stops the staging rather than
+  producing a set that loads without it, which is the behaviour to want here.
+- **Whether a headless run renders anything a screenshot can catch.** If it does not, the capture
+  half of this suite is worthless on the route AUDIT.md sends us to - and the failure mode is the
+  expensive one: a step that took an empty capture does not fail, so the report comes back green
+  with nothing in it. The guard, if the problem turns out to be real, is a step of our own that
+  reads the attachment back and refuses a file that is trivially small or a single flat colour,
+  rather than trusting the step that wrote it. Asked of the session working on the headless route;
+  not written, because a guard against a problem nobody has confirmed is a guard nobody maintains.
 - **How a map comes to exist in an autorun is unresolved for this suite.** The QuietNewFactions
   scenarios run at the main menu and need none; `a colonist {string} exists` does. Pickle carries a
   quickstart bridge, and the tag is `@quickstart:<name>`; which name it takes here, and whether it
