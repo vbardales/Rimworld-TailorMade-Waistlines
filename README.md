@@ -97,7 +97,9 @@ Mod/                    everything that ships, and nothing else
 Parked/                 earlier routes: art derived from other mods. Local only, not in this repository
 Source/TailorMadeWaistlines/      Bands.cs, ChestArt.cs, TailorMadeWaistlinesMod.cs,
                         MainButtonWorker_TailorMadeWaistlines.cs
+Tests/Run-Tests.ps1     runs the four sets below: 115 checks, no game started
 Tests/Check-Mod.ps1     reflection over TailorMade: 22 checks, no game started
+Tests/Check-Logic.ps1   our own patch bodies: the band per slider, which garments are shortened
 Tests/Check-Localization.ps1   keys, French coverage, placeholders, hidden shortcut
 Tests/Check-Settings.ps1       defaults, reset and clamping of the settings object
 _tools/*.js             measurement and generation, for the parked route
