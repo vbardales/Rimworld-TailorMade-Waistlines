@@ -1,10 +1,20 @@
 # TailorMade Waistlines — in-game test scenarios
 
-`Tests/Check-Mod.ps1` runs beside this file and never starts the game. It
-checks that every method and constant this mod reaches into still exists and
-still means what the code assumes. None of that is a single tick of play. This
-file is the list of what has to be watched in a running colony, and what counts
-as a pass.
+`Tests/Run-Tests.ps1` runs beside this file and starts nothing:
+
+```
+powershell -ExecutionPolicy Bypass -File Tests\Run-Tests.ps1
+```
+
+It runs the four sets in turn — `Check-Mod.ps1`, that every method and constant
+this mod reaches into still exists and still means what the code assumes;
+`Check-Logic.ps1`, that our own patch bodies hand back the right band for each
+slider and shorten the right garments; `Check-Settings.ps1`, the defaults, the
+reset and the clamping; `Check-Localization.ps1`, the keys and both languages.
+
+None of that is a single tick of play: the bands are compared as numbers, never
+as pixels, and no texture is ever baked. This file is the list of what has to be
+watched in a running colony, and what counts as a pass.
 
 It is not shipped: it lives beside `Mod/`, never inside it.
 
