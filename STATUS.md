@@ -19,7 +19,7 @@ original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). Pickle: the suite exists as of 2026-09-20, Tests/Pickle, five features over what only a running game shows - 01 the trousers captures (vanilla steps only), 02 which patch route is live, 03 the shortcut and the language actually loaded, 04 the cache sweep and the repaint, 05 the settings file round trip; the step assembly builds with 0 warnings. NEVER RUN: nothing is known about whether it passes, and preTest -> done needs it green. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). Pickle: Tests/Pickle holds one feature, 01-trousers-review, three captures that assert nothing. The four assertion features and their step assembly were written on 2026-09-20 and removed the same evening at her request, the suite being left to the session that owns the captures; they are in the history at 9988515. NEVER RUN: nothing is known about whether any of it passes, and preTest -> done needs it green. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
@@ -283,41 +283,47 @@ middle of the French is a string that never went through `Translate` — a hardc
 mod's own name in the category header is the one that is meant to look like that. Recorded in
 scenario 9 of `TESTING.md`.
 
-## The Pickle suite — written 2026-09-20, never run
+## The Pickle suite — one feature, three captures, never run
 
 `Tests/Pickle`, a companion mod (`nelim.tailormade.waistlines.pickletests`) that is never
-published. Two sessions were writing it at the same time and split it by agreement: `01` keeps
-Pickle's vanilla steps and no assembly, `02` to `05` come with the step assembly the four
-behaviours below need. A scenario is only touched by the steps it names, so the DLL costs `01`
-nothing.
+published. It holds `01-trousers-review.feature`: a colonist stripped, dressed in `Apparel_Pants`
+or `Apparel_KidPants`, framed and photographed, three times. It asserts nothing — how a garment
+banded into a body drawn without legs reads is a judgement about an image.
 
-| feature | what only a running game can say |
-| --- | --- |
-| `01-trousers-review` | how trousers read on a body drawn without legs. Three captures, no assertion |
-| `02-patch-route` | which of the two routes is live: Mono's inlining of `BandFor` is a property of the process |
-| `03-settings-and-shortcut` | the bar not drawing the shortcut and not greying it out (`Worker.Visible`, `Worker.Disabled`), the worker opening our own page, every key resolving in the language actually loaded |
-| `04-sweep-and-repaint` | the textures baked against the old band thrown away and the pawns redrawn, counted through `TexBake.Stats()` |
-| `05-persistence` | the value reaching the file the game writes and coming back through its Scribe |
+**An assertion half existed for an hour on 2026-09-20 and was removed at her request**, the suite
+being left to the session that owns the captures. It covered what only a running game can say and
+what nothing now covers: which of the two patch routes is live (Mono's inlining of `BandFor` is a
+property of the process, so `Check-Logic.ps1` proves what the patch bodies decide and never
+whether Harmony got to apply them); the button bar neither drawing the shortcut nor greying it out,
+read off `MainButtonWorker`; every settings key resolving in the language actually loaded; the
+textures baked against the old band thrown away and the pawns redrawn, counted through
+`TexBake.Stats()`; and the settings file written and read back through the game's own Scribe. It is
+in the history at `9988515`, built and warning-free, if it is ever wanted back.
 
-**It has never been run, and nothing is known about whether it passes.** `preTest -> done` needs it
-green, so that criterion is still open; what changed is that it is now written rather than absent.
-The step assembly builds with 0 warnings and 0 errors against the shipped DLL and TailorMade's own.
+**Nothing in it has ever been run**, and `preTest -> done` needs it green, so that criterion is
+open exactly as it was.
 
-Three things stand between it and a first run, none of them ours alone:
+The three questions that blocked a first run were answered on 2026-09-20 by the session working on
+the headless route, and what is checkable from here was checked:
 
-- `scripts/stage-pickle-wsl.sh` has no entry for `astryl.tailormade` (3756915448),
-  `wdi.realistic.bodies` (3527486510) or `ab.vplrf` (2986402536) in its `packageId -> Workshop
-  folder` map, and a dependency missing from it stops the staging rather than producing a set that
-  loads without it. The headless route belongs to another session; asked, not edited.
-- How a map comes to exist in an autorun is unresolved: `a colonist {string} exists` needs one.
-  Pickle carries a quickstart bridge and the tag spelling has not been established here.
-- Whether a headless run can produce a real screenshot at all. If it renders to nothing, the
-  capture half of the suite is worthless where AUDIT.md says to run it — and an empty PNG that
-  still reports green is worse than a failure. Asked of the `Pickle headless mode` session.
+- The extra mods are declared in `Tests/Pickle/wsl-deps.map`, which `scripts/stage-pickle-wsl.sh`
+  reads at `$REPO/$MOD/Tests/Pickle/wsl-deps.map` — verified in the script. The shared table no
+  longer has to grow.
+- The map is a Pickle fixture, not a quickstart: `test-colony.rws` ships with Pickle and is on
+  disk in the Workshop copy — checked. Nothing to stage, nothing to declare.
+- Headless captures render for real, 1920x1080 under Xvfb, as reported by that session. Which is
+  why no blank-capture guard was written; if one is ever needed it reads the attachment back and
+  refuses a file that is trivially small or one flat colour, because a step that captured nothing
+  does not fail on its own.
 
-**Route B changes what the suite documents, and the suite now says so.** While
+**Route B still changes what a capture means, and nothing in the report says so any more.** While
 `Mod/Defs/TailorPatternDefs/Pants_Native.xml` is in place, `autoFit false` bypasses the band for
-`Apparel_Pants` and `Apparel_KidPants` — exactly the defs the captures dress the pawn in. Every
-scenario that touches trousers therefore records what `PatternRegistry.Resolve` returned, and `04`
-asserts it: with that def present the scenario fails and names it, rather than photographing the
-native fit under a title that says band.
+`Apparel_Pants` and `Apparel_KidPants` — exactly the defs the captures dress the pawn in. The step
+that attached which fitting had actually claimed the garment went with the assembly, so the only
+thing telling a band run from a route-B run is the memory of which run produced it. Write it down
+beside the images when copying a report out; five runs later the archive is gone.
+
+**Left broken by the removal, and hers to settle:** `01-trousers-review.feature` still names
+`the fitting that claims {string} is recorded` in its three scenarios and describes it in its
+header. That step no longer exists, so the suite as committed would fail at startup on an
+undefined step. Told to the session that owns it at once; not edited here.
