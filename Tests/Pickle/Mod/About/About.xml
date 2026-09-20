@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>TailorMade Waistlines - Pickle tests</name>
+  <author>Nelim</author>
+  <packageId>nelim.tailormade.waistlines.pickletests</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>In-game functional tests for TailorMade Waistlines, run by Pickle. Development only: never published.
+
+The scenarios move the mod's sliders, which writes its settings file. Each scenario backs that file up first and restores it afterwards; if the game stops in the middle of one, the next scenario restores it before doing anything else.
+
+Scenarios tagged @review assert nothing: they attach screenshots for a person to judge, because how a garment reads on a body drawn without legs is a judgement, not an assertion.
+
+WDI's Realistic Bodies and AB's Visible Pants are declared as dependencies rather than as loadAfter because the captures are worthless without them: with no body retexture drawn legless there is nothing to diagnose, and with nothing filling wornGraphicPath the pawn is drawn bare. A capture taken without either would look like a passing run and show nothing.</description>
+  <modDependencies>
+    <li>
+      <packageId>nelim.tailormade.waistlines</packageId>
+      <displayName>TailorMade Waistlines</displayName>
+    </li>
+    <li>
+      <packageId>astryl.tailormade</packageId>
+      <displayName>TailorMade: Unified Apparel &amp; Body Refitting</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3756915448</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>rimworks.pickle</packageId>
+      <displayName>Pickle</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>wdi.realistic.bodies</packageId>
+      <displayName>WDI's Realistic Bodies</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3527486510</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>ab.vplrf</packageId>
+      <displayName>AB's Visible Pants</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2986402536</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>nelim.tailormade.waistlines</li>
+    <li>astryl.tailormade</li>
+    <li>rimworks.pickle</li>
+    <li>wdi.realistic.bodies</li>
+    <li>ab.vplrf</li>
+  </loadAfter>
+</ModMetaData>
