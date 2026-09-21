@@ -3,7 +3,7 @@
     Runs every test set beside it and reports which of them failed.
 
 .DESCRIPTION
-    Four sets, each answering a different question, none of them starting the
+    Five sets, each answering a different question, none of them starting the
     game:
 
       - `Check-Mod.ps1`          - does TailorMade still look the way the
@@ -14,6 +14,10 @@
                                    garments? Our patch bodies are invoked.
       - `Check-Settings.ps1`     - defaults, reset, and the clamping applied to
                                    a config file that has been hand-edited.
+      - `Check-Trousers.ps1`     - does the code that draws trouser details
+                                   onto a plain shell keep to its rules, on
+                                   synthetic shells and on AB's real ones?
+                                   Pure bytes; no Unity, no game.
       - `Check-Localization.ps1` - every player-facing key resolves in English
                                    and French, and the hidden shortcut is
                                    declared as asked.
@@ -52,6 +56,7 @@ $sets = @(
     @{ Name = 'compatibility with TailorMade'; Script = 'Check-Mod.ps1' }
     @{ Name = 'bands and the shirt option';    Script = 'Check-Logic.ps1' }
     @{ Name = 'settings, reset and clamping';  Script = 'Check-Settings.ps1' }
+    @{ Name = 'trouser details';               Script = 'Check-Trousers.ps1' }
     @{ Name = 'English, French, shortcut';     Script = 'Check-Localization.ps1' }
 )
 

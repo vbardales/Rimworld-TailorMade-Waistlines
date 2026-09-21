@@ -53,11 +53,29 @@ minus the crotch line. No colour, no shading, no pixel of the original
 survives — but the **shape** is WDI's, which is the point. **WDI's Realistic
 Bodies** (3527486510) carries no licence either.
 
-## Named in the code but not used
+## What the assembly reads at run time, and on what terms
 
-- **AB's Visible Pants** (2986402536, `AB.VPLRF`), by aedbia. Its assembly was
-  decompiled to learn that it leaves an existing `wornGraphicPath` alone, and
-  that its categories vanish unless its Reset button has been pressed. Nothing
-  of it is reused; it is named in the docs only, not declared in `About.xml`.
+Neither of these is shipped, copied or written to disk. Both are read from the
+player's own installation into memory, and only while the game runs.
+
+**General Textures Collection** (3789119336, `Kas.GeneralCollection`) carries no
+licence. Its retexture of the trousers is not loaded when AB's Visible Pants is
+active, because its `LoadFolders` gates the folder on XeoNovaDan's. When AB is the
+mod supplying a trouser texture and General is installed and active, the
+assembly reads General's own `Pants_<body>_<facing>.png` from General's installed
+folder and registers the texture with the game, as the game would load it if
+General had loaded that folder itself. No file of General's is in `Mod/` or in
+this repository. That is the difference from `Parked/`, which holds textures
+computed from the same art.
+
+**AB's Visible Pants** (2986402536, `AB.VPLRF`), by aedbia. Its plain shell
+textures are read back from the game's memory and, where General has nothing, a
+waistband, a fly and seams are drawn onto them and the legs are parted. The
+result exists only in memory. Its assembly was also decompiled, to learn that its
+categories only exist once a settings file has been read or Reset has been
+pressed in its options window; nothing of its code is reused. It is declared in
+`loadAfter`, so that this mod's entry is the later one, and not as a dependency.
+
+## Named in the code but not used
 - **Female Apparel for Beautiful Bodies** (2881748658) and **Beautiful Bodies**
   (2068281501) were measured and dropped. Nothing of either is here.

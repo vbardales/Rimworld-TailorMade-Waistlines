@@ -13,6 +13,14 @@
   <TailorMadeWaistlines.Settings.ShortenShirts>Shorten full-body shirts</TailorMadeWaistlines.Settings.ShortenShirts>
   <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade only bands a torso garment whose art already starts 40% of the way up, which leaves a vanilla shirt, drawn over the whole body, full length and hiding the trousers entirely. This lifts that test for on-skin garments, and the chest slider above then decides where they stop. Coats, parkas and robes are worn on the shell layer and still drape to the ankles. The shirt is compressed into the band, not cut off at it, so collars and buttons are squeezed along with it.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
 
+  <TailorMadeWaistlines.Settings.UseGeneralArt>Use General Textures Collection's trousers</TailorMadeWaistlines.Settings.UseGeneralArt>
+  <TailorMadeWaistlines.Settings.UseGeneralArtTip>AB's Visible Pants draws its trousers as a plain shell. General Textures Collection carries a retexture of the same garment with a waistband, belt loops and a fly, but only loads it when XeoNovaDan's Visible Pants is active. With AB active instead, this reads those textures from General's installed folder. Nothing is copied. It needs General Textures Collection to be installed.</TailorMadeWaistlines.Settings.UseGeneralArtTip>
+  <TailorMadeWaistlines.Settings.DetailShells>Draw details on plain trouser shells</TailorMadeWaistlines.Settings.DetailShells>
+  <TailorMadeWaistlines.Settings.DetailShellsTip>Where there is no such retexture - a child, or a body type General does not cover - draws a waistband, a fly and seams onto AB's plain shell, and parts the legs at the bottom.</TailorMadeWaistlines.Settings.DetailShellsTip>
+  <TailorMadeWaistlines.Settings.TrouserDrop>Lower trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDrop>
+  <TailorMadeWaistlines.Settings.TrouserDropTip>Moves the trouser art down the body, as a fraction of its height. 0 leaves it where it was drawn. It only applies to the trousers this mod supplies, meaning General Textures Collection's art and the details drawn onto AB's shells.</TailorMadeWaistlines.Settings.TrouserDropTip>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These three trouser options take effect when the game starts, not when this window closes.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+
   <TailorMadeWaistlines.Settings.Reset>Reset to TailorMade's values</TailorMadeWaistlines.Settings.Reset>
 
   <TailorMadeWaistlines.Settings.PatchDirect>Patched at the source: changes show as soon as this window closes.</TailorMadeWaistlines.Settings.PatchDirect>

@@ -7,9 +7,12 @@ namespace TailorMadeWaistlines
 {
     public class TailorMadeWaistlinesSettings : ModSettings
     {
-        // Defaults are TailorMade's own values, so installing this mod changes
-        // nothing until a slider is moved. Where the garment should stop is a
-        // matter of the body art and of taste, and neither is ours to guess.
+        // The three bands default to TailorMade's own values, so installing this
+        // mod moves nothing until a slider is moved: where a garment should stop
+        // is a matter of the body art and of taste, and neither is ours to guess.
+        // The two art options below are different. They exist to fix trousers that
+        // read as a plain shell, so they are on: they only ever act where AB's
+        // Visible Pants is active, and they are read at startup.
         public const float DefaultPantsTop = 0.58f;
         public const float DefaultBootsTop = 0.20f;
         public const float DefaultChestBottom = 0.45f;
@@ -21,6 +24,12 @@ namespace TailorMadeWaistlines
         public const float BootsMin = 0.05f, BootsMax = 0.60f;
         public const float ChestMin = 0.20f, ChestMax = 0.80f;
 
+        // How far the trouser art this mod supplies is moved down the body, as a fraction of its own
+        // height. The default was chosen by eye, from a player finding the art a hair too high; it
+        // is a starting point, and the slider is there because it will not suit every body art.
+        public const float DefaultTrouserDrop = 0.02f;
+        public const float TrouserDropMin = 0f, TrouserDropMax = 0.08f;
+
         public float pantsTop = DefaultPantsTop;
         public float bootsTop = DefaultBootsTop;
         public float chestBottom = DefaultChestBottom;
@@ -29,6 +38,12 @@ namespace TailorMadeWaistlines
         // and the shirt is compressed into the band rather than cut off at it.
         public bool shortenShirts = false;
 
+        // Take General Textures Collection's trouser art where AB supplies a plain shell, and
+        // draw details onto the shells that have no such art. Both read at startup.
+        public bool useGeneralArt = true;
+        public bool detailPlainShells = true;
+        public float trouserDrop = DefaultTrouserDrop;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -36,6 +51,9 @@ namespace TailorMadeWaistlines
             Scribe_Values.Look(ref bootsTop, "bootsTop", DefaultBootsTop);
             Scribe_Values.Look(ref chestBottom, "chestBottom", DefaultChestBottom);
             Scribe_Values.Look(ref shortenShirts, "shortenShirts", false);
+            Scribe_Values.Look(ref useGeneralArt, "useGeneralArt", true);
+            Scribe_Values.Look(ref detailPlainShells, "detailPlainShells", true);
+            Scribe_Values.Look(ref trouserDrop, "trouserDrop", DefaultTrouserDrop);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 Sanitize();
@@ -47,6 +65,7 @@ namespace TailorMadeWaistlines
             pantsTop = Clean(pantsTop, PantsMin, PantsMax, DefaultPantsTop);
             bootsTop = Clean(bootsTop, BootsMin, BootsMax, DefaultBootsTop);
             chestBottom = Clean(chestBottom, ChestMin, ChestMax, DefaultChestBottom);
+            trouserDrop = Clean(trouserDrop, TrouserDropMin, TrouserDropMax, DefaultTrouserDrop);
         }
 
         public void ResetToDefaults()
@@ -55,6 +74,9 @@ namespace TailorMadeWaistlines
             bootsTop = DefaultBootsTop;
             chestBottom = DefaultChestBottom;
             shortenShirts = false;
+            useGeneralArt = true;
+            detailPlainShells = true;
+            trouserDrop = DefaultTrouserDrop;
         }
 
         private static float Clean(float value, float min, float max, float fallback)
@@ -78,6 +100,8 @@ namespace TailorMadeWaistlines
             Settings = GetSettings<TailorMadeWaistlinesSettings>();
             new Harmony("nelim.tailormade.waistlines").PatchAll(Assembly.GetExecutingAssembly());
             LongEventHandler.ExecuteWhenFinished(Bands.SelfTest);
+            // After the game has loaded every mod's textures, which is when there is something to replace.
+            LongEventHandler.ExecuteWhenFinished(TrouserArt.Apply);
         }
 
         // The mod's own name, a proper noun: the one player-facing string that is not a key.
@@ -106,6 +130,17 @@ namespace TailorMadeWaistlines
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.ShortenShirts".Translate(),
                 ref Settings.shortenShirts,
                 "TailorMadeWaistlines.Settings.ShortenShirtsTip".Translate());
+
+            list.Gap();
+            list.CheckboxLabeled("TailorMadeWaistlines.Settings.UseGeneralArt".Translate(),
+                ref Settings.useGeneralArt,
+                "TailorMadeWaistlines.Settings.UseGeneralArtTip".Translate());
+            list.CheckboxLabeled("TailorMadeWaistlines.Settings.DetailShells".Translate(),
+                ref Settings.detailPlainShells,
+                "TailorMadeWaistlines.Settings.DetailShellsTip".Translate());
+            Slider(list, "TailorMadeWaistlines.Settings.TrouserDrop", "TailorMadeWaistlines.Settings.TrouserDropTip",
+                ref Settings.trouserDrop, TailorMadeWaistlinesSettings.TrouserDropMin, TailorMadeWaistlinesSettings.TrouserDropMax);
+            list.Label("TailorMadeWaistlines.Settings.ArtNeedsRestart".Translate());
 
             list.Gap();
             if (list.ButtonText("TailorMadeWaistlines.Settings.Reset".Translate()))

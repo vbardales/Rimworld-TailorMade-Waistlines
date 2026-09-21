@@ -34,9 +34,11 @@ constants, and its settings do not mention them.
 
 ## What this mod does
 
-Two Harmony patches and a settings window. No textures. The one def is a
-hidden shortcut to that window (below). English and French text, as `Keyed`
-files.
+Two Harmony patches, a settings window, and a step at startup that gives AB's
+trousers better art than the plain shell they ship with. No texture is shipped:
+what that step uses is read at run time from what the player already has. The
+one def is a hidden shortcut to that window (below). English and French text,
+as `Keyed` files.
 
 **The bands become settings.** A postfix on `ApparelClassifier.BandFor`
 returns our values instead of the constants. That is the better of the two
@@ -69,7 +71,29 @@ being OnSkin while dusters, parkas, jackets and robes are Shell. Off by
 default, and note that the band **scales** the art into itself rather than
 cropping, so the shirt is compressed, collar and buttons included.
 
-**Where the settings are.** Mod options, then TailorMade Waistlines. The same
+**Trousers that read as trousers.** AB's Visible Pants draws its trousers as a
+bowl: an outline and an even fill, with no waistband, no fly, no seam. On a body
+drawn without legs that bowl is all there is, and it reads as a shell. Two
+options, both on by default and both applied at startup, act only where AB is
+the mod supplying a texture. First, General Textures Collection carries a
+retexture of the same garment with the details, at `Mods/VisiblePants/`, but
+its `LoadFolders` only loads it when XeoNovaDan's Visible Pants is active; with
+AB active instead it never reaches a pawn. `TrouserArt` reads those PNGs from
+General's installed folder and registers them in this mod's own content, which
+the game consults after AB's because this mod loads later (`ContentFinder` walks
+the running mods from the last back). It also registers General's `_Female` files
+(`Pants_Fat_Female`): Female Apparel Variants adds no body type, it asks for the
+same path with `_Female` on the end for a female pawn of a body type both genders
+share, when a texture exists there. Second, where General has nothing - it has
+no child, and no jeans, shorts, skirt or suit trousers - `TrouserDetail` draws a
+waistband, a fly and seams onto AB's own shell and parts the legs at the bottom.
+It is a pure function on RGBA bytes, so it is tested without the game. It draws
+only by multiplying the colour already there, because the game tints these
+textures with the garment's colour. A third setting, `trouserDrop`, moves whatever
+this step registers down the body by a fraction of the texture's height (default
+0.02, chosen by eye from a player finding the art a hair too high), never cutting
+the garment. All three are read at startup. Only `Pants` is covered; the other four
+garment folders AB ships are untouched. Mod options, then TailorMade Waistlines. The same
 window also has a `MainButtonDef`, hidden by default (`buttonVisible` false: not
 shown, not greyed out), which a customisation mod such as RIMMSQOL can reveal.
 It opens the same settings, with the same values. Values read back from the
@@ -81,10 +105,14 @@ which sweeps every cached fit and repaints the pawns already on the map.
 
 ## What it does not do
 
-It does not give any garment a texture. Vanilla trousers carry no
-`wornGraphicPath` at all — the game draws nothing on the pawn — so a mod that
-fills that field is still required. AB's Visible Pants does it, from its own
-90 textures, once its categories exist; see TESTING.md for the trap there.
+It ships no texture. Vanilla trousers carry no `wornGraphicPath` at all - the
+game draws nothing on the pawn - so a mod that fills that field is still
+required. AB's Visible Pants does it, from its own 90 textures, once its
+categories exist. They do not exist on a profile with no AB settings file: AB's
+category list starts empty and is only filled when that file is read or Reset is
+pressed in its options window, so a fresh install draws nothing until then.
+Everything the trouser step does is in memory and needs AB, and does nothing
+without it.
 
 ## Layout
 
@@ -96,12 +124,14 @@ Mod/                    everything that ships, and nothing else
   Languages/            English and French Keyed text, French DefInjected
 Parked/                 earlier routes: art derived from other mods. Local only, not in this repository
 Source/TailorMadeWaistlines/      Bands.cs, ChestArt.cs, TailorMadeWaistlinesMod.cs,
-                        MainButtonWorker_TailorMadeWaistlines.cs
-Tests/Run-Tests.ps1     runs the four sets below: 115 checks, no game started
+                        MainButtonWorker_TailorMadeWaistlines.cs,
+                        TrouserArt.cs (the step at startup), TrouserDetail.cs (pure)
+Tests/Run-Tests.ps1     runs the five sets below, no game started
 Tests/Check-Mod.ps1     reflection over TailorMade: 22 checks, no game started
 Tests/Check-Logic.ps1   our own patch bodies: the band per slider, which garments are shortened
 Tests/Check-Localization.ps1   keys, French coverage, placeholders, hidden shortcut
 Tests/Check-Settings.ps1       defaults, reset and clamping of the settings object
+Tests/Check-Trousers.ps1       the trouser detail generator: invariants, on synthetic shells and AB's own
 _tools/*.js             measurement and generation, for the parked route
 Art/                    generated previews and contact sheets. Local only, not in this repository
 ```

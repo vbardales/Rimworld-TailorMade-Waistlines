@@ -13,6 +13,14 @@
   <TailorMadeWaistlines.Settings.ShortenShirts>Raccourcir les chemises intégrales</TailorMadeWaistlines.Settings.ShortenShirts>
   <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade ne calibre un vêtement du torse que si son dessin commence déjà aux 40 % de la hauteur, ce qui laisse une chemise vanilla, dessinée sur tout le corps, à pleine longueur et cache entièrement le pantalon. Cette option lève ce test pour les vêtements portés sur la peau, et le curseur des hauts décide alors où ils s'arrêtent. Les manteaux, parkas et robes se portent sur la couche extérieure et tombent toujours jusqu'aux chevilles. La chemise est comprimée dans la bande, pas coupée, si bien que les cols et les boutons sont écrasés avec elle.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
 
+  <TailorMadeWaistlines.Settings.UseGeneralArt>Utiliser les pantalons de General Textures Collection</TailorMadeWaistlines.Settings.UseGeneralArt>
+  <TailorMadeWaistlines.Settings.UseGeneralArtTip>AB's Visible Pants dessine ses pantalons comme une simple coque. General Textures Collection contient une retexture du même vêtement, avec une ceinture, des passants et une braguette, mais ne la charge que si le Visible Pants de XeoNovaDan est actif. Quand c'est AB qui est actif, cette option lit ces textures dans le dossier installé de General. Rien n'est copié. Il faut que General Textures Collection soit installé.</TailorMadeWaistlines.Settings.UseGeneralArtTip>
+  <TailorMadeWaistlines.Settings.DetailShells>Dessiner des détails sur les coques de pantalon unies</TailorMadeWaistlines.Settings.DetailShells>
+  <TailorMadeWaistlines.Settings.DetailShellsTip>Là où cette retexture n'existe pas - un enfant, ou un type de corps que General ne couvre pas - dessine une ceinture, une braguette et des coutures sur la coque d'AB, et sépare les jambes en bas.</TailorMadeWaistlines.Settings.DetailShellsTip>
+  <TailorMadeWaistlines.Settings.TrouserDrop>Abaisser les pantalons de : {0}</TailorMadeWaistlines.Settings.TrouserDrop>
+  <TailorMadeWaistlines.Settings.TrouserDropTip>Descend le dessin du pantalon le long du corps, en fraction de sa hauteur. 0 le laisse là où il a été dessiné. Cela ne concerne que les pantalons que ce mod fournit, c'est-à-dire l'art de General Textures Collection et les détails dessinés sur les coques d'AB.</TailorMadeWaistlines.Settings.TrouserDropTip>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>Ces trois options de pantalon s'appliquent au démarrage du jeu, pas à la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+
   <TailorMadeWaistlines.Settings.Reset>Rétablir les valeurs de TailorMade</TailorMadeWaistlines.Settings.Reset>
 
   <TailorMadeWaistlines.Settings.PatchDirect>Correctif posé à la source : les changements se voient dès la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.PatchDirect>

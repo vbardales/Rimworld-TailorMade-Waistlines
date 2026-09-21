@@ -8,6 +8,17 @@ answered and how to bring it back.
 
 ### The mod as it stands
 
+- **Trousers that read as trousers, where AB's Visible Pants supplies them.** AB
+  draws a plain shell. Two options, on by default and read at startup: use
+  General Textures Collection's retexture of the same garment, read from
+  General's own folder because its LoadFolders never loads it with AB active, and
+  draw a waistband, a fly and seams onto the shells General has nothing for (the
+  child, mainly). Registered in this mod's own content; nothing shipped, nothing
+  copied. General's `_Female` files are registered too, for Female Apparel Variants.
+  A slider lowers what this supplies by a fraction of its height (default 0.02).
+  Only `Pants` is covered. `Tests/Check-Trousers.ps1` runs the generator
+  without the game, on synthetic shells and on all eighteen of AB's.
+
 - The settings window is fully translatable: 13 `Keyed` keys in English and
   French, no sentence left in the code. The mod's own name, in the settings
   category, is the one literal.
