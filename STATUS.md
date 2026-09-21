@@ -6,7 +6,7 @@ visibility:   public
 detached:     yes
 stage:        preTest
 workflow_state: preTest
-workflow_audited: 2026-09-20
+workflow_audited: 2026-09-21 (third pass; second on 2026-09-20)
 localization: complete
 translation_en: complete
 translation_fr: complete
