@@ -27,12 +27,15 @@ namespace TailorMadeWaistlines
         // How far the trouser art this mod supplies is moved down the body, as a fraction of its own
         // height. Two values, because a child is drawn smaller: the same fraction is fewer pixels on
         // screen. The defaults come from a player asking, at 1080p and the closest zoom, for the
-        // trousers to sit 2 pixels lower on an adult and 4 on a child than they did at 0.02. Measured
-        // on captures, an adult is about 73 pixels tall there and a child about 49, so 0.05 is about
-        // 3.7 pixels and 0.10 about 4.9. They are starting points: they will not suit every body art.
+        // trousers to sit 2 pixels lower on an adult and 4 on a child than they did at 0.02.
+        // Measured on captures at that zoom: an adult moves about 0.16 pixels per row of its 512-row
+        // texture, so 0.05 is about 3.9 pixels in all. A child moves about 0.18 pixels per row of
+        // its 128-row texture, less than a first guess from its size on screen suggested, which put
+        // the first attempt at 0.10 only 1.6 pixels below 0.02 instead of 4; 0.20 is about 4.6 in
+        // all. They are starting points, measured to within a pixel, and will not suit every body art.
         public const float DefaultTrouserDrop = 0.05f;
-        public const float DefaultChildTrouserDrop = 0.10f;
-        public const float TrouserDropMin = 0f, TrouserDropMax = 0.15f;
+        public const float DefaultChildTrouserDrop = 0.20f;
+        public const float TrouserDropMin = 0f, TrouserDropMax = 0.30f;
 
         public float pantsTop = DefaultPantsTop;
         public float bootsTop = DefaultBootsTop;

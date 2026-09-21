@@ -16,7 +16,7 @@ answered and how to bring it back.
   child, mainly). Registered in this mod's own content; nothing shipped, nothing
   copied. General's `_Female` files are registered too, for Female Apparel Variants.
   Two sliders lower what this supplies by a fraction of its height, one for adults (0.05) and one
-  for children (0.10), because a child is drawn smaller.
+  for children (0.20), because a child moves fewer pixels for the same fraction.
   For each body type it supplied art for, TailorMade is told to leave the trousers alone (a
   pattern def made in code, so the condition is that this mod really supplied the art); with
   both options off, or without AB, TailorMade fits them and follows the pants slider as before.

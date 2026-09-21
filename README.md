@@ -92,10 +92,10 @@ only by multiplying the colour already there, because the game tints these
 textures with the garment's colour. Two more settings, `trouserDrop` and
 `trouserDropChild`, move whatever this step registers down the body by a fraction of the
 texture's height, never cutting the garment. There are two because a child is drawn smaller,
-so the same fraction is fewer pixels on screen. The defaults, 0.05 and 0.10, come from a
-player asking for 2 and 4 screen pixels more than the first version gave; on captures at 1080p
-and the closest zoom an adult is about 73 pixels tall and a child about 49. All are read at
-startup. Only `Pants` is covered; the other four
+so the same fraction is fewer pixels on screen. The defaults, 0.05 and 0.20, come from a
+player asking for 2 and 4 screen pixels more than the first version gave, and were measured on
+captures at 1080p and the closest zoom: an adult moves about 0.16 pixels per row of its texture,
+a child about 0.18 per row of a much shorter one. All are read at startup. Only `Pants` is covered; the other four
 garment folders AB ships are untouched.
 
 That art is already drawn for the body, and TailorMade would stretch it into its band, which
