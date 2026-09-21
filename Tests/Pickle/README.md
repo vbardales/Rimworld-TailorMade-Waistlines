@@ -55,22 +55,28 @@ pattern def) fail when AB is inert or the step did not run, and one asserts the 
 warning. A pawn that the game reports as wearing trousers, checked just before each capture, is not
 a pawn that is drawn wearing them: the first runs showed a bare pawn under a green report.
 
-## The Gear tab file needs a Pickle that is not released yet
+## The Gear tab file takes its steps from a PickleTools package
 
-`02-gear-tab.feature` opens the pawn's own Gear and Bio tabs with
-`I open the {string} inspect tab`, a step from RimWorks/Rimworld-Pickle#31. The Workshop copy
-does not have it, so a run that stages that copy fails this one file on an undefined step. It is
-a file of its own so `01` keeps working against either Pickle.
+`02-gear-tab.feature` opens the pawn's own Gear and Bio tabs, which the stock Pickle cannot do:
+nothing in it reaches the tabs of the inspect pane. Those steps exist twice — as
+RimWorks/Rimworld-Pickle#31, waiting for a merge, and as `nelim.pickletools.inspecttabs`, a
+companion mod that carries them as steps and runs on the **stock** Pickle.
 
-Until the PR merges, stage a build of its branch:
+The package is the route, and `-PickleSrc` is not. A suite that stages a locally modified Pickle
+tests a Pickle nobody else has, and the clean-up the day the PR merges is a folder to delete rather
+than a build to remember. So every pass map here carries one line:
 
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod TailorMadeWaistlines -PickleSrc <folder>
+```
+nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
 ```
 
-The folder is a Pickle mod folder built from the `feat/inspect-tab-steps` branch. Copy it out of
-whatever scratchpad produced it before using it: a scratchpad belongs to a session that is still
-working and can change under a run.
+including `wsl-deps.map`, the default read by the bare pass — the Gear tab matters most there,
+where nothing is drawn and the game's own list is the only witness. The `path:` form is relative to
+the collection root, so `PickleTools` has to be cloned beside this mod.
+
+Its steps carry the prefix `Nelim's Pickle Tools: `, which is how that repository keeps every step
+text unique across Pickle and every suite. The day #31 merges, the package line goes and the prefix
+goes with it.
 
 The reason the file exists: `01` found a pawn that the game reports as wearing trousers
 (`apparel covers "Legs"` passes just before the shot) and that is drawn with nothing on. The Gear

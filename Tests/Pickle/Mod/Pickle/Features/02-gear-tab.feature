@@ -7,10 +7,12 @@
 # list of what a pawn has on, so a screenshot of it is a second witness that does not depend on how
 # anything is drawn.
 #
-# It needs a Pickle carrying the inspect-tab steps, RimWorks/Rimworld-Pickle#31. They are not in
-# the Workshop copy at the time of writing, so a run that stages the Workshop Pickle fails on an
-# undefined step. That is why this is a file of its own: 01 keeps working against either. Until
-# the PR merges, stage a build of its branch with `Run-PickleWsl.ps1 -PickleSrc <folder>`.
+# The inspect-tab steps are not in the stock Pickle. They exist twice: as
+# RimWorks/Rimworld-Pickle#31, waiting for a merge, and as the PickleTools package
+# `nelim.pickletools.inspecttabs`, which runs on the stock Pickle and is what the pass maps stage -
+# hence the `Nelim's Pickle Tools: ` prefix on those steps. The package is the route, not
+# `-PickleSrc`: a suite that took a modified Pickle would be testing a Pickle nobody else has, and
+# the day the PR merges the package goes and the prefix with it.
 #
 # The second shot of each scenario is the Bio tab, and it is named by its type,
 # ITab_Pawn_Character: the PR notes that "Bio" alone does not match. That tab draws the pawn as a
@@ -34,12 +36,12 @@ Feature: what the Gear tab says a pawn is wearing
     And "Waistline" is wearing "Apparel_Pants"
     And I draft "Waistline"
     And I select "Waistline"
-    And I open the "Gear" inspect tab
-    Then the "Gear" inspect tab is open
+    And Nelim's Pickle Tools: I open the "Gear" inspect tab
+    Then Nelim's Pickle Tools: the "Gear" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "gear tab, male colonist in trousers"
-    When I open the "ITab_Pawn_Character" inspect tab
-    Then the "ITab_Pawn_Character" inspect tab is open
+    When Nelim's Pickle Tools: I open the "ITab_Pawn_Character" inspect tab
+    Then Nelim's Pickle Tools: the "ITab_Pawn_Character" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "character tab, male colonist in trousers"
 
@@ -52,12 +54,12 @@ Feature: what the Gear tab says a pawn is wearing
     And "Waistline-F" is wearing "Apparel_Pants"
     And I draft "Waistline-F"
     And I select "Waistline-F"
-    And I open the "Gear" inspect tab
-    Then the "Gear" inspect tab is open
+    And Nelim's Pickle Tools: I open the "Gear" inspect tab
+    Then Nelim's Pickle Tools: the "Gear" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "gear tab, female colonist in trousers"
-    When I open the "ITab_Pawn_Character" inspect tab
-    Then the "ITab_Pawn_Character" inspect tab is open
+    When Nelim's Pickle Tools: I open the "ITab_Pawn_Character" inspect tab
+    Then Nelim's Pickle Tools: the "ITab_Pawn_Character" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "character tab, female colonist in trousers"
 
@@ -72,11 +74,11 @@ Feature: what the Gear tab says a pawn is wearing
     And "Waistline-K" is wearing "Apparel_KidPants"
     And I draft "Waistline-K"
     And I select "Waistline-K"
-    And I open the "Gear" inspect tab
-    Then the "Gear" inspect tab is open
+    And Nelim's Pickle Tools: I open the "Gear" inspect tab
+    Then Nelim's Pickle Tools: the "Gear" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "gear tab, child colonist in trousers"
-    When I open the "ITab_Pawn_Character" inspect tab
-    Then the "ITab_Pawn_Character" inspect tab is open
+    When Nelim's Pickle Tools: I open the "ITab_Pawn_Character" inspect tab
+    Then Nelim's Pickle Tools: the "ITab_Pawn_Character" inspect tab is open
     And I wait 30 ticks
     And I take a screenshot "character tab, child colonist in trousers"

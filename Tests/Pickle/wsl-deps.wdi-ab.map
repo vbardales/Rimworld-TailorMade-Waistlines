@@ -11,3 +11,7 @@ ab.vplrf               2986402536
 
 # astryl.tailormade is not listed here: it is a hard dependency of the mod, and its Workshop id
 # lives in wsl-ids.map, which every pass reads. Listing it here staged it twice.
+
+# The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle
+# rather than through -PickleSrc: see wsl-deps.map, which carries the same line for the bare pass.
+nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
