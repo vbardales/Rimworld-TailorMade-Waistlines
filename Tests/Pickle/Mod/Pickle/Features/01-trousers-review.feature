@@ -16,9 +16,10 @@
 # with nothing on it - not hidden behind the body, not badly fitted, simply not drawn. Every
 # capture taken that way says nothing about this mod. The last scenario of this file asserts the
 # precondition (the def field AB should have filled) so that the pass goes red instead of green and
-# empty. Nothing in an image says which fitting produced it either: while Mod/Defs/
-# TailorPatternDefs/Pants_Native.xml is in place TailorMade ignores both garments outright.
-# Write down which run produced a report when you copy it out: the archive keeps only five.
+# empty. Nothing in an image says which fitting produced it either: for every body type this mod
+# supplied art for, it makes TailorMade ignore both garments outright (TrouserArt), and a scenario
+# below asserts that. Write down which run produced a report when you copy it out: the archive
+# keeps only five.
 #
 # Three things the first run (2026-09-20, three green scenarios and three worthless images) taught,
 # each guarded below rather than described:
@@ -165,3 +166,13 @@ Feature: how trousers read on a body drawn without legs
   @requires:ab.vplrf
   Scenario: the trouser step at startup raised no warning
     Then no warning matching "[TailorMade Waistlines]" was logged
+
+  # Where this mod supplied trouser art it tells TailorMade to leave the trousers alone, one pattern
+  # def per body type, made in code at startup because a def in XML cannot know whether this mod
+  # actually supplied anything. Male is used because AB ships a texture for it in every pass that
+  # has AB, so the def must exist in all of them. Read as a field too: a def that exists with
+  # ignore false would be a def that does nothing.
+  @requires:ab.vplrf
+  Scenario: TailorMade is told to leave the trousers this mod supplied
+    Then def "TMW_Pants_Native_Male" of type "TailorPatternDef" exists
+    And def "TMW_Pants_Native_Male" field "ignore" is "True"

@@ -26,41 +26,34 @@ any of it is ever wanted back; what they covered is, for now, covered by nothing
 
 ## What the suite documents
 
-The band. That is the mod, and a capture only means something against it.
+The trousers as the mod leaves them. Where AB supplies the trousers, the mod registers better art
+for them at startup and, for each body type it supplied art for, creates a `TailorPatternDef` that
+tells TailorMade to leave those trousers alone (`TrouserArt`). TailorMade would otherwise stretch art
+that is already drawn for the body into its band. With both art options off, or without AB, nothing
+is registered, no def is made, and TailorMade fits the trousers and answers the pants slider as it
+always did. The captures here are of the first state.
 
-`Mod/Defs/TailorPatternDefs/Pants_Native.xml` - the route-B experiment - sets `autoFit false` on
-`Apparel_Pants` and `Apparel_KidPants`, which takes the `flag4` branch of `TexBake.BakeFitted` and
-never consults the band at all. With that file in place these three scenarios photograph route B
-and the pants slider is inert on the very garments they dress the pawn in. The baseline capture is
-therefore the one taken with that def **absent**; the route-B capture is a deliberate second run,
-not the default.
+The second state, the band, is a different game start and not a step of a scenario: the choice is
+made at startup. It would be a pass of its own whose seed is this mod's settings file with both art
+options off. That pass does not exist yet.
 
-Nothing in the image says which of the two it is. Until a step attaches the pattern that actually
-resolved for `Apparel_Pants`, the only thing telling the two sets apart is which run produced them
-- and five runs later the archive is gone.
+Nothing in an image says which state produced it. Two things do: the pass name the report carries
+(`-pickle-set-name`), and the scenario that asserts the def exists, which goes red in the band state.
+Write down which run produced a report when you copy it out: the archive keeps only the last five.
 
 ## What the captures are for, and what they are not
 
-The three scenarios are tagged `@review`. That is not a Pickle tag - its own table is `@wip`,
+The capture scenarios are tagged `@review`. That is not a Pickle tag - its own table is `@wip`,
 `@timeout:`, `@seed:`, `@retry:`, `@same-world`, `@allow-errors`, `@film`, `@watch` and
 `@quickstart:`. `@review` is this project's convention from AUDIT.md and changes no behaviour: the
-images come from the explicit screenshot step. They assert nothing: they dress a pawn in trousers and
-nothing else, frame it the same way every time, and attach the image. Green means the route ran,
-never that the trousers look right. That judgement is a person's.
+images come from the explicit screenshot step. They assert nothing about the image: they dress a pawn
+in trousers and nothing else, frame it the same way every time, and attach it. Green means the route
+ran, never that the trousers look right. That judgement is a person's.
 
-The comparison that matters - the band against the native fit - is **across two runs**, not inside
-one. `Mod/Defs/TailorPatternDefs/Pants_Native.xml` is read at startup and bypasses the band for
-`Apparel_Pants` and `Apparel_KidPants`, so the two states cannot coexist in one game. Run the
-suite, move the def file aside, run it again, compare the attachments. Copy both somewhere of your
-own first: a run overwrites the previous report, and the archive keeps only the last five.
-
-**And nothing in a report says which of the two it describes.** A step that attached what
-`PatternRegistry.Resolve` returned for the garment - no pattern, a pattern with `autoFit` true, or
-a pattern with `autoFit` false, which is the native-fit route - existed for an hour on
-2026-09-20 and went with the assembly when that was removed. Until something replaces it, the only
-thing telling two sets of captures apart is the memory of which run produced them, so **write it
-down beside the images when you copy them out**. The suite still documents the band: a run made
-with the route-B def in place is photographing something else, and now says so nowhere.
+Two things keep a green from being empty. The scenarios that read a def field (`wornGraphicPath`, the
+pattern def) fail when AB is inert or the step did not run, and one asserts the step logged no
+warning. A pawn that the game reports as wearing trousers, checked just before each capture, is not
+a pawn that is drawn wearing them: the first runs showed a bare pawn under a green report.
 
 ## The Gear tab file needs a Pickle that is not released yet
 
