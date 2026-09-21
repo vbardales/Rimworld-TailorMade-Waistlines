@@ -6,11 +6,13 @@
 powershell -ExecutionPolicy Bypass -File Tests\Run-Tests.ps1
 ```
 
-It runs the four sets in turn — `Check-Mod.ps1`, that every method and constant
+It runs the five sets in turn — `Check-Mod.ps1`, that every method and constant
 this mod reaches into still exists and still means what the code assumes;
 `Check-Logic.ps1`, that our own patch bodies hand back the right band for each
 slider and shorten the right garments; `Check-Settings.ps1`, the defaults, the
-reset and the clamping; `Check-Localization.ps1`, the keys and both languages.
+reset and the clamping; `Check-Trousers.ps1`, the trouser-detail drawing on
+synthetic shells and on AB's real ones, as bytes; `Check-Localization.ps1`, the
+keys and both languages. 233 checks, on the DLL in `Mod/Assemblies`.
 
 None of that is a single tick of play: the bands are compared as numbers, never
 as pixels, and no texture is ever baked. This file is the list of what has to be
