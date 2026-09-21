@@ -77,6 +77,23 @@ The reason the file exists: `01` found a pawn that the game reports as wearing t
 tab is the game's own list of what a pawn has on, so it is a witness that does not depend on how
 anything is drawn.
 
+## The silhouettes file needs a second unreleased Pickle change
+
+`03-silhouettes.feature` dresses ten pawns, a man, a woman, a boy and a girl, plus a thin, a fat
+and a hulking man and woman, each with the body type set on purpose. It needs
+`{string} body type is {word}` and `{string} apparel {string} is drawn from {string}`, from
+RimWorks/Rimworld-Pickle#32. Stage a build carrying that branch the same way as above; `01`
+and `02` do not need it.
+
+Each pawn gets two things. The capture is for a person. The path assertion is not: the game
+draws a garment from its texture path plus the body type, so reading what it actually draws
+catches a body type that got no trousers or the wrong ones without looking at an image. It says
+nothing about the art, which is the same path whoever supplies it.
+
+`gender is male` does not make a man: the body type is a separate fact, and the pawn `01` first
+captioned as male was a woman's body. That is why this file sets both, and sets them before the
+gear.
+
 ## The settings seed, and why the WDI+AB pass is not valid without it
 
 AB's Visible Pants is inert on a profile without its settings file. Its category list starts
