@@ -210,3 +210,30 @@ belong in no scenario.
   it; the bands apply to whatever it classifies.
 - The parked texture route under `Parked/`. It has its own conditions, and
   bringing it back means bringing back all three of its files together.
+
+## What the suite covers of the eleven, and what stays by hand
+
+Written 2026-09-21, before the first run of the three features, so that the next session can see
+at a glance what a green suite would and would not buy. Twenty-two scenarios over three files
+against eleven written here: the counts do not line up because the suite splits one of these into
+one scenario per body, and answers some of them only in part.
+
+| Scenario above | In the suite? |
+| --- | --- |
+| 1. The patch is live, and by the right route | **No.** The route is a static flag and the startup line; reading either needs a step of our own, and the one that did was removed. Log line by eye |
+| 2. Nothing changes until asked | **Partly.** `the mod is quiet on a body drawn the ordinary way` covers the bare pass. Defaults untouched on a legless body is not asserted anywhere |
+| 3. The waistband follows the slider | **No.** Moving a slider and watching the map repaint needs the settings window and a step that reads TailorMade's cache. By hand |
+| 4. Every body type | **Yes**, and better than by hand: `03-silhouettes` dresses ten pawns with the body type set on purpose and asserts the texture actually drawn, which catches a body that got no trousers without anyone looking |
+| 5. Four facings | **No.** Nothing rotates a pawn. By hand |
+| 6. Shirts, and the compression | **No.** The suite never puts a shirt on. This is the open question of the mod and it is still entirely by eye |
+| 7. Boots | **No.** Nothing wears boots |
+| 8. Save, load, and settings | **No.** By hand; the off-game sets cover the file round trip, not a real restart |
+| 9. The settings, in English and in French | **No**, and remember it only counts in developer mode |
+| 10. The hidden shortcut | **No.** RIMMSQOL is not in any pass |
+| 11. A damaged config file | **Covered off-game** by `Check-Settings.ps1`, and deliberately not repeated here |
+
+So a suite entirely green answers **4** outright, part of **2**, and adds three things the eleven
+never asked for: that AB is the supplier in that pass, that AB actually filled `wornGraphicPath`,
+and that the mod told TailorMade to leave its own art alone. Everything about the sliders, the
+shirt, the boots, the facings, the languages and the shortcut is still a person in front of the
+game.
