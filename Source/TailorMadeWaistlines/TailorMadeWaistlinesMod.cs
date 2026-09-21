@@ -26,15 +26,15 @@ namespace TailorMadeWaistlines
 
         // How far the trouser art this mod supplies is moved down the body, as a fraction of its own
         // height. Two values, because a child is drawn smaller: the same fraction is fewer pixels on
-        // screen. The defaults come from a player asking, at 1080p and the closest zoom, for the
-        // trousers to sit 2 pixels lower on an adult and 4 on a child than they did at 0.02.
-        // Measured on captures at that zoom: an adult moves about 0.16 pixels per row of its 512-row
-        // texture, so 0.05 is about 3.9 pixels in all. A child moves about 0.18 pixels per row of
-        // its 128-row texture, less than a first guess from its size on screen suggested, which put
-        // the first attempt at 0.10 only 1.6 pixels below 0.02 instead of 4; 0.20 is about 4.6 in
-        // all. They are starting points, measured to within a pixel, and will not suit every body art.
-        public const float DefaultTrouserDrop = 0.05f;
-        public const float DefaultChildTrouserDrop = 0.20f;
+        // screen. Both defaults are what a player chose by looking at captures at 1080p and the
+        // closest zoom: the first version moved the art 0.02, and the second, 0.05 and 0.10, was
+        // judged a little too low, for women and for a girl, so they are 0.03 and 0.09. That is
+        // what the eye said, and it is worth more than arithmetic: a measurement that tried to hit
+        // "2 and 4 pixels more" put the child at 0.20, which was wrong. Measured, an adult moves
+        // about 0.16 pixels per row of its 512-row texture and a child about 0.18 per row of its
+        // 128-row one. Nobody has yet looked at a man: until then his value is the women's.
+        public const float DefaultTrouserDrop = 0.03f;
+        public const float DefaultChildTrouserDrop = 0.09f;
         public const float TrouserDropMin = 0f, TrouserDropMax = 0.30f;
 
         public float pantsTop = DefaultPantsTop;

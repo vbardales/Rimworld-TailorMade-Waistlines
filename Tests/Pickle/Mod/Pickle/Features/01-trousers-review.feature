@@ -57,7 +57,11 @@ Feature: how trousers read on a body drawn without legs
     Given the save "test-colony" is loaded
 
   @requires:wdi.realistic.bodies @requires:ab.vplrf
-  Scenario: a male colonist wearing nothing but trousers
+  # Not a man. "gender is male" changes the pawn's gender and leaves its body type as it was
+  # generated, which is Female, so this draws a female body under a male name. It was captioned
+  # "male" for a day and a person looking at the image was the one who noticed. A man needs
+  # "body type is Male", a step Pickle does not have in its released version: 03-silhouettes.
+  Scenario: a colonist whose gender is male, with the body it was generated with
     Given a colonist "Waistline" exists
     And "Waistline" gender is male
     When I destroy the gear of "Waistline"
@@ -69,7 +73,7 @@ Feature: how trousers read on a body drawn without legs
     And I move the camera to "Waistline"
     And I wait 120 ticks
     And "Waistline" apparel covers "Legs"
-    Then I take a screenshot "trousers on a male body"
+    Then I take a screenshot "trousers, gender male, body as generated"
 
   @same-world @requires:wdi.realistic.bodies @requires:ab.vplrf
   Scenario: a female colonist wearing nothing but trousers
