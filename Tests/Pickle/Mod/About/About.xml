@@ -12,7 +12,7 @@ The scenarios move the mod's sliders, which writes its settings file. Each scena
 
 Scenarios tagged @review assert nothing: they attach screenshots for a person to judge, because how a garment reads on a body drawn without legs is a judgement, not an assertion.
 
-WDI's Realistic Bodies and AB's Visible Pants are declared as dependencies rather than as loadAfter because the captures are worthless without them: with no body retexture drawn legless there is nothing to diagnose, and with nothing filling wornGraphicPath the pawn is drawn bare. A capture taken without either would look like a passing run and show nothing.</description>
+WDI's Realistic Bodies and AB's Visible Pants are optional, and deliberately not dependencies. The mod under test works without either; it simply has nothing visible to do. The scenarios that photograph trousers on a body drawn without legs carry @requires tags and skip when those mods are absent, so the pass without optional mods stays bare and the pass that names them (Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab.map) is the one that produces the captures. They stay in loadAfter so the order is right whenever they are present.</description>
   <modDependencies>
     <li>
       <packageId>nelim.tailormade.waistlines</packageId>
@@ -27,16 +27,6 @@ WDI's Realistic Bodies and AB's Visible Pants are declared as dependencies rathe
       <packageId>rimworks.pickle</packageId>
       <displayName>Pickle</displayName>
       <steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl>
-    </li>
-    <li>
-      <packageId>wdi.realistic.bodies</packageId>
-      <displayName>WDI's Realistic Bodies</displayName>
-      <steamWorkshopUrl>steam://url/CommunityFilePage/3527486510</steamWorkshopUrl>
-    </li>
-    <li>
-      <packageId>ab.vplrf</packageId>
-      <displayName>AB's Visible Pants</displayName>
-      <steamWorkshopUrl>steam://url/CommunityFilePage/2986402536</steamWorkshopUrl>
     </li>
   </modDependencies>
   <loadAfter>

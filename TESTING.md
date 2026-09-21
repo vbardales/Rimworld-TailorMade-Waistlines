@@ -41,6 +41,37 @@ sequence is: press Reset, close, **restart**. Check
 `Config/Mod_2986402536_ABsVisiblePantsMod.xml` afterwards — if `<datas />` is
 still empty, it did not take.
 
+**The same trap, worse, on a fresh profile**, found 2026-09-21 by decompiling
+the installed 1.6 assembly. AB's category list is filled only when that config
+file is *read* or when Reset is pressed. A profile that has no such file at all —
+which is every headless run, and any clean install — therefore has AB present,
+enabled, and assigning no texture whatsoever. Every capture taken in that state
+shows a pawn drawn bare, and the run is green because nothing asserts.
+
+So a pass with AB is only valid if AB was seeded.
+`Tests/Pickle/config/wdi-ab/Mod_2986402536_ABsVisiblePantsMod.xml` holds AB's
+five default categories, copied unchanged from the working configuration on this
+machine, and the staging copies it into the profile for that pass only. The
+scenario *AB has actually given the trousers a worn graphic* reads
+`Apparel_Pants.apparel.wornGraphicPath` and is the net: **red there means the
+pass is invalid, not that this mod is broken.**
+
+## The three passes
+
+The scenarios below are played more than once, because what supplies the
+trousers changes what there is to look at. Each pass is a different mod set, and
+the Pickle suite selects one with `Run-PickleWsl.ps1 -DepMap <file>`.
+
+| pass | mod set | what it establishes |
+| --- | --- | --- |
+| bare | no optional mods | the mod does nothing wrong with nothing to do: no error, no exception, and pawns drawn exactly as vanilla draws them. The trousers scenarios skip, by their `@requires` tags, rather than photograph a bare pawn |
+| WDI + AB | `wsl-deps.wdi-ab.map`, seeded | the pass that produces the captures: a body drawn without legs, and AB's own trousers on it |
+| WDI + XeoNovaDan | not written yet | the same body with a different supplier's trousers. Two visible-pants mods draw different garments from the same band, so one of them looking right is not both |
+
+The third needs its own `wsl-deps.<name>.map` and does not exist. Until it does,
+nothing is known about how this mod's bands treat XND's art — which matters,
+because XND's pants are the ones drawn for the vanilla footprint.
+
 ## Scenarios
 
 ### 1. The patch is live, and by the right route

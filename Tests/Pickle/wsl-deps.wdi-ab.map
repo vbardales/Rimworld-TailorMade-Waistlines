@@ -1,0 +1,12 @@
+# The pass that names the optional mods: a body retexture drawn without legs, and something that
+# fills wornGraphicPath. Select it with `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab.map`.
+# One line per mod: packageId then its Workshop id.
+#
+# Both carry the captures rather than decorate them. Without a body retexture drawn without legs
+# there is no defect to photograph; with nothing filling wornGraphicPath the pawn renders bare,
+# because vanilla Apparel_Pants has no worn graphic of its own.
+#
+# astryl.tailormade is not here: it is a hard dependency of the mod itself, so it is staged in
+# every pass and listing it again only made the staging announce it twice.
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
