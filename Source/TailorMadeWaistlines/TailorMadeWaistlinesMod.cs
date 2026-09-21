@@ -25,10 +25,14 @@ namespace TailorMadeWaistlines
         public const float ChestMin = 0.20f, ChestMax = 0.80f;
 
         // How far the trouser art this mod supplies is moved down the body, as a fraction of its own
-        // height. The default was chosen by eye, from a player finding the art a hair too high; it
-        // is a starting point, and the slider is there because it will not suit every body art.
-        public const float DefaultTrouserDrop = 0.02f;
-        public const float TrouserDropMin = 0f, TrouserDropMax = 0.08f;
+        // height. Two values, because a child is drawn smaller: the same fraction is fewer pixels on
+        // screen. The defaults come from a player asking, at 1080p and the closest zoom, for the
+        // trousers to sit 2 pixels lower on an adult and 4 on a child than they did at 0.02. Measured
+        // on captures, an adult is about 73 pixels tall there and a child about 49, so 0.05 is about
+        // 3.7 pixels and 0.10 about 4.9. They are starting points: they will not suit every body art.
+        public const float DefaultTrouserDrop = 0.05f;
+        public const float DefaultChildTrouserDrop = 0.10f;
+        public const float TrouserDropMin = 0f, TrouserDropMax = 0.15f;
 
         public float pantsTop = DefaultPantsTop;
         public float bootsTop = DefaultBootsTop;
@@ -43,6 +47,7 @@ namespace TailorMadeWaistlines
         public bool useGeneralArt = true;
         public bool detailPlainShells = true;
         public float trouserDrop = DefaultTrouserDrop;
+        public float trouserDropChild = DefaultChildTrouserDrop;
 
         public override void ExposeData()
         {
@@ -54,6 +59,7 @@ namespace TailorMadeWaistlines
             Scribe_Values.Look(ref useGeneralArt, "useGeneralArt", true);
             Scribe_Values.Look(ref detailPlainShells, "detailPlainShells", true);
             Scribe_Values.Look(ref trouserDrop, "trouserDrop", DefaultTrouserDrop);
+            Scribe_Values.Look(ref trouserDropChild, "trouserDropChild", DefaultChildTrouserDrop);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 Sanitize();
@@ -66,6 +72,7 @@ namespace TailorMadeWaistlines
             bootsTop = Clean(bootsTop, BootsMin, BootsMax, DefaultBootsTop);
             chestBottom = Clean(chestBottom, ChestMin, ChestMax, DefaultChestBottom);
             trouserDrop = Clean(trouserDrop, TrouserDropMin, TrouserDropMax, DefaultTrouserDrop);
+            trouserDropChild = Clean(trouserDropChild, TrouserDropMin, TrouserDropMax, DefaultChildTrouserDrop);
         }
 
         public void ResetToDefaults()
@@ -77,6 +84,7 @@ namespace TailorMadeWaistlines
             useGeneralArt = true;
             detailPlainShells = true;
             trouserDrop = DefaultTrouserDrop;
+            trouserDropChild = DefaultChildTrouserDrop;
         }
 
         private static float Clean(float value, float min, float max, float fallback)
@@ -140,6 +148,8 @@ namespace TailorMadeWaistlines
                 "TailorMadeWaistlines.Settings.DetailShellsTip".Translate());
             Slider(list, "TailorMadeWaistlines.Settings.TrouserDrop", "TailorMadeWaistlines.Settings.TrouserDropTip",
                 ref Settings.trouserDrop, TailorMadeWaistlinesSettings.TrouserDropMin, TailorMadeWaistlinesSettings.TrouserDropMax);
+            Slider(list, "TailorMadeWaistlines.Settings.TrouserDropChild", "TailorMadeWaistlines.Settings.TrouserDropChildTip",
+                ref Settings.trouserDropChild, TailorMadeWaistlinesSettings.TrouserDropMin, TailorMadeWaistlinesSettings.TrouserDropMax);
             list.Label("TailorMadeWaistlines.Settings.ArtNeedsRestart".Translate());
 
             list.Gap();

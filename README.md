@@ -89,11 +89,25 @@ no child, and no jeans, shorts, skirt or suit trousers - `TrouserDetail` draws a
 waistband, a fly and seams onto AB's own shell and parts the legs at the bottom.
 It is a pure function on RGBA bytes, so it is tested without the game. It draws
 only by multiplying the colour already there, because the game tints these
-textures with the garment's colour. A third setting, `trouserDrop`, moves whatever
-this step registers down the body by a fraction of the texture's height (default
-0.02, chosen by eye from a player finding the art a hair too high), never cutting
-the garment. All three are read at startup. Only `Pants` is covered; the other four
-garment folders AB ships are untouched. Mod options, then TailorMade Waistlines. The same
+textures with the garment's colour. Two more settings, `trouserDrop` and
+`trouserDropChild`, move whatever this step registers down the body by a fraction of the
+texture's height, never cutting the garment. There are two because a child is drawn smaller,
+so the same fraction is fewer pixels on screen. The defaults, 0.05 and 0.10, come from a
+player asking for 2 and 4 screen pixels more than the first version gave; on captures at 1080p
+and the closest zoom an adult is about 73 pixels tall and a child about 49. All are read at
+startup. Only `Pants` is covered; the other four
+garment folders AB ships are untouched.
+
+That art is already drawn for the body, and TailorMade would stretch it into its band, which
+is how a plain shell became a bucket up to the chest. So for every body type this step
+supplied art for, `TrouserArt` creates a `TailorPatternDef` with `ignore` set, and TailorMade
+leaves those trousers alone. It is made in code and not shipped as XML because the condition
+that matters is that this mod actually supplied the art, which a def in a file cannot know.
+With both art options off, or without AB, no def is made, TailorMade fits the trousers as it
+always did, and the pants slider applies. The registry is read once, at the first pawn
+rendered, long after the def is added.
+
+**Where the settings are.** Mod options, then TailorMade Waistlines. The same
 window also has a `MainButtonDef`, hidden by default (`buttonVisible` false: not
 shown, not greyed out), which a customisation mod such as RIMMSQOL can reveal.
 It opens the same settings, with the same values. Values read back from the

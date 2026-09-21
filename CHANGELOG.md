@@ -15,7 +15,11 @@ answered and how to bring it back.
   draw a waistband, a fly and seams onto the shells General has nothing for (the
   child, mainly). Registered in this mod's own content; nothing shipped, nothing
   copied. General's `_Female` files are registered too, for Female Apparel Variants.
-  A slider lowers what this supplies by a fraction of its height (default 0.02).
+  Two sliders lower what this supplies by a fraction of its height, one for adults (0.05) and one
+  for children (0.10), because a child is drawn smaller.
+  For each body type it supplied art for, TailorMade is told to leave the trousers alone (a
+  pattern def made in code, so the condition is that this mod really supplied the art); with
+  both options off, or without AB, TailorMade fits them and follows the pants slider as before.
   Only `Pants` is covered. `Tests/Check-Trousers.ps1` runs the generator
   without the game, on synthetic shells and on all eighteen of AB's.
 

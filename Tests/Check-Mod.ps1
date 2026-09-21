@@ -108,6 +108,34 @@ try {
         }
     }
 
+    # --- what the trouser step reaches into ----------------------------------
+    # TrouserArt makes TailorPatternDefs in code. A rename or a removal here would not stop
+    # the game: the def would simply not be understood, and TailorMade would go on fitting
+    # the trousers as if this mod were not there.
+    Write-Host ""
+    Write-Host "what the trouser step reaches into"
+
+    $patternDef = $tm.GetType('TailorMade.TailorPatternDef', $false)
+    Assert-That 'type TailorMade.TailorPatternDef' ($null -ne $patternDef)
+    if ($patternDef) {
+        Assert-That '  it is a Def' ($patternDef.BaseType.Name -eq 'Def') $patternDef.BaseType.Name
+        $flags = [Reflection.BindingFlags]'Public,Instance'
+        $ignore = $patternDef.GetField('ignore', $flags)
+        Assert-That '  field ignore, a bool' (($null -ne $ignore) -and $ignore.FieldType -eq [bool])
+        $body = $patternDef.GetField('bodyType', $flags)
+        Assert-That '  field bodyType, a BodyTypeDef' (($null -ne $body) -and $body.FieldType.Name -eq 'BodyTypeDef')
+        $targets = $patternDef.GetField('targetApparelDefs', $flags)
+        Assert-That '  field targetApparelDefs, a list of strings' (($null -ne $targets) -and $targets.FieldType.IsGenericType -and ($targets.FieldType.GetGenericTypeDefinition().Name -eq 'List`1') -and ($targets.FieldType.GetGenericArguments()[0] -eq [string])) $(if ($targets) { $targets.FieldType.FullName })
+        Assert-That '  it can be built without arguments' ($null -ne $patternDef.GetConstructor([Type[]]@()))
+    }
+
+    $registry = $tm.GetType('TailorMade.PatternRegistry', $false)
+    Assert-That 'type TailorMade.PatternRegistry' ($null -ne $registry)
+    if ($registry) {
+        $defs = $registry.GetField('defs', [Reflection.BindingFlags]'NonPublic,Static')
+        Assert-That '  a private static field defs, the list it reads once' (($null -ne $defs) -and $defs.FieldType.Name -like 'List*') $(if ($defs) { $defs.FieldType.Name })
+    }
+
     # --- the methods we patch ------------------------------------------------
     Write-Host ""
     Write-Host "the methods we patch"

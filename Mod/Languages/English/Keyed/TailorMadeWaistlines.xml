@@ -19,7 +19,9 @@
   <TailorMadeWaistlines.Settings.DetailShellsTip>Where there is no such retexture - a child, or a body type General does not cover - draws a waistband, a fly and seams onto AB's plain shell, and parts the legs at the bottom.</TailorMadeWaistlines.Settings.DetailShellsTip>
   <TailorMadeWaistlines.Settings.TrouserDrop>Lower trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDrop>
   <TailorMadeWaistlines.Settings.TrouserDropTip>Moves the trouser art down the body, as a fraction of its height. 0 leaves it where it was drawn. It only applies to the trousers this mod supplies, meaning General Textures Collection's art and the details drawn onto AB's shells.</TailorMadeWaistlines.Settings.TrouserDropTip>
-  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These three trouser options take effect when the game starts, not when this window closes.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+  <TailorMadeWaistlines.Settings.TrouserDropChild>Lower children's trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDropChild>
+  <TailorMadeWaistlines.Settings.TrouserDropChildTip>The same, for a child. It is a separate value because a child is drawn smaller, so the same fraction of the picture is fewer pixels on screen.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These three trouser options take effect when the game starts, not when this window closes. For the trousers this mod supplies, TailorMade does not fit them into a band, so the pants slider above does not apply to them; with both options off it does.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
 
   <TailorMadeWaistlines.Settings.Reset>Reset to TailorMade's values</TailorMadeWaistlines.Settings.Reset>
 

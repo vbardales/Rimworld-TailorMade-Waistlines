@@ -19,7 +19,9 @@
   <TailorMadeWaistlines.Settings.DetailShellsTip>Là où cette retexture n'existe pas - un enfant, ou un type de corps que General ne couvre pas - dessine une ceinture, une braguette et des coutures sur la coque d'AB, et sépare les jambes en bas.</TailorMadeWaistlines.Settings.DetailShellsTip>
   <TailorMadeWaistlines.Settings.TrouserDrop>Abaisser les pantalons de : {0}</TailorMadeWaistlines.Settings.TrouserDrop>
   <TailorMadeWaistlines.Settings.TrouserDropTip>Descend le dessin du pantalon le long du corps, en fraction de sa hauteur. 0 le laisse là où il a été dessiné. Cela ne concerne que les pantalons que ce mod fournit, c'est-à-dire l'art de General Textures Collection et les détails dessinés sur les coques d'AB.</TailorMadeWaistlines.Settings.TrouserDropTip>
-  <TailorMadeWaistlines.Settings.ArtNeedsRestart>Ces trois options de pantalon s'appliquent au démarrage du jeu, pas à la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+  <TailorMadeWaistlines.Settings.TrouserDropChild>Abaisser les pantalons d'enfant de : {0}</TailorMadeWaistlines.Settings.TrouserDropChild>
+  <TailorMadeWaistlines.Settings.TrouserDropChildTip>La même chose pour un enfant. C'est une valeur à part parce qu'un enfant est dessiné plus petit : la même fraction de l'image représente moins de pixels à l'écran.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>Ces trois options de pantalon s'appliquent au démarrage du jeu, pas à la fermeture de cette fenêtre. Pour les pantalons que ce mod fournit, TailorMade ne les cale pas dans une bande : le curseur des pantalons ci-dessus ne s'y applique donc pas ; avec les deux options désactivées, il s'applique.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
 
   <TailorMadeWaistlines.Settings.Reset>Rétablir les valeurs de TailorMade</TailorMadeWaistlines.Settings.Reset>
 

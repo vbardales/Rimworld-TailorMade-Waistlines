@@ -40,7 +40,7 @@ Vanilla trousers carry no worn graphic at all, so a mod that fills that field is
 [*][b]Details on plain shells.[/b] Where there is no such retexture, a child or a body type General does not cover, it draws a waistband, a fly and seams onto AB's shell and parts the legs at the bottom.
 [/list]
 
-Both are registered in this mod's own content, never in AB's or General's, and removing the mod removes them. A slider, 'Lower trousers by', moves what they supply further down the body, as a fraction of its height, for a body art where they sit too high.
+Both are registered in this mod's own content, never in AB's or General's, and removing the mod removes them. For every body type this supplied art for, TailorMade is told to leave the trousers alone, because it would otherwise stretch art that is already drawn for the body into its band; so the pants slider does not apply to them. Turn both options off, or run without AB, and TailorMade fits the trousers and follows the slider as before. Two sliders, one for adults and one for children, move what they supply further down the body, as a fraction of its height, for a body art where they sit too high.
 
 [b]Thanks[/b] to astryl, whose TailorMade does all the work this one merely aims, and whose MIT licence is what makes an add-on like this possible; to brrainz for Harmony; to aedbia, whose AB's Visible Pants supplies the trousers vanilla never draws; to Kas, whose General Textures Collection carries the trouser art this reads; and to the author of WDI's Realistic Bodies, whose art is the reason the problem exists at all.
 

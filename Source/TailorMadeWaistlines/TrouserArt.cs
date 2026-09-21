@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -26,6 +28,14 @@ namespace TailorMadeWaistlines
     /// Either way the picture can then be moved down the body by a fraction of its height, because
     /// where a garment sits on a body is a matter of the body art and of taste.
     ///
+    /// TailorMade would then fit these trousers into a band, stretching art that is already drawn
+    /// for the body, which is how a plain shell became a bucket up to the chest. So for every body
+    /// type this step supplied art for, TailorMade is told to leave the trousers alone. That is
+    /// decided here, in code, and not by shipping a def: the condition that matters is that this
+    /// mod actually supplied the art, and a def in XML cannot know that. With both options off, or
+    /// without AB, nothing is registered, no def is made, and TailorMade fits the trousers, and
+    /// answers the pants slider, exactly as it did before.
+    ///
     /// Both are registered in this mod's own content, never in AB's or General's. The game asks
     /// for a texture path from the last loaded mod back, so this mod's entry wins over AB's as long
     /// as it loads after AB, which its About.xml asks for. Removing the mod removes the change.
@@ -46,6 +56,12 @@ namespace TailorMadeWaistlines
 
         private static readonly string[] FacingNames = { "south", "east", "north" };
 
+        // The two garments AB's Normal_Pants category gives this path to: the adult trousers and
+        // the Biotech child's. TailorMade reads these as regular expressions on the def name.
+        private static readonly string[] TrouserDefNames = { "^Apparel_Pants$", "^Apparel_KidPants$" };
+
+        private const string PatternDefPrefix = "TMW_Pants_Native_";
+
         /// <summary>What the last <see cref="Apply"/> did, for the log and for tests.</summary>
         public static int FromGeneral { get; private set; }
         public static int Drawn { get; private set; }
@@ -64,20 +80,26 @@ namespace TailorMadeWaistlines
 
             string generalDir = settings.useGeneralArt ? GeneralPantsDirectory() : null;
             var mine = TailorMadeWaistlinesMod.Instance.Content.GetContentHolder<Texture2D>();
-            float drop = settings.trouserDrop;
 
+            var supplied = new List<BodyTypeDef>();
             foreach (BodyTypeDef body in DefDatabase<BodyTypeDef>.AllDefsListForReading)
             {
+                // A child is drawn smaller, so the same fraction of the texture is fewer pixels on screen.
+                float drop = body.defName == "Child" ? settings.trouserDropChild : settings.trouserDrop;
+                bool any = false;
                 for (int f = 0; f < FacingNames.Length; f++)
                 {
                     // The body type itself, then its female variant. Female Apparel Variants does not
                     // add body types: for a female pawn of a body type both genders share, it asks for
                     // the same path with _Female on the end when a texture exists there, and General
                     // ships Pants_Fat_Female for exactly that. Only the first can be a shell to draw on.
-                    Register(body.defName, f, true, generalDir, drop, mine, settings);
-                    Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
+                    any |= Register(body.defName, f, true, generalDir, drop, mine, settings);
+                    any |= Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
                 }
+                if (any) supplied.Add(body);
             }
+
+            LeaveToTailorMade(supplied);
 
             // A silent failure here looks exactly like success from outside: the trousers are simply
             // drawn as the shell they always were. So the one case that can be recognised as wrong is
@@ -88,25 +110,25 @@ namespace TailorMadeWaistlines
 
             Log.Message("[TailorMade Waistlines] trousers: " + FromGeneral + " textures read from General Textures Collection, "
                 + Drawn + " drawn onto AB's plain shells, " + LeftAlone + " left to whichever mod supplies them, lowered by "
-                + drop.ToString("0.00") + " of their height.");
+                + settings.trouserDrop.ToString("0.00") + " of their height, children " + settings.trouserDropChild.ToString("0.00") + ".");
         }
 
         /// <summary>
         /// One texture path: leave it alone if somebody else draws it, otherwise give it General's art
         /// when General has that file, otherwise (for a real body type) draw details onto AB's shell.
         /// </summary>
-        private static void Register(string variant, int facing, bool mayDrawOnShell, string generalDir, float drop,
+        private static bool Register(string variant, int facing, bool mayDrawOnShell, string generalDir, float drop,
             ModContentHolder<Texture2D> mine, TailorMadeWaistlinesSettings settings)
         {
             string path = PantsPath + "_" + variant + "_" + FacingNames[facing];
-            if (mine.contentList.ContainsKey(path)) return;
+            if (mine.contentList.ContainsKey(path)) return false;
 
             ModContentPack supplier = SupplierOf(path);
             if (supplier != null && !IsPack(supplier, AbPackageId))
             {
                 // Somebody else draws it - General itself, when XeoNovaDan's is active. It is not ours to touch.
                 LeftAlone++;
-                return;
+                return false;
             }
 
             Texture2D texture = FromGeneralFolder(generalDir, variant, FacingNames[facing], drop);
@@ -114,15 +136,57 @@ namespace TailorMadeWaistlines
             {
                 mine.contentList[path] = texture;
                 FromGeneral++;
-                return;
+                return true;
             }
 
-            if (!mayDrawOnShell || !settings.detailPlainShells || supplier == null) return;
+            if (!mayDrawOnShell || !settings.detailPlainShells || supplier == null) return false;
             Texture2D shell = supplier.GetContentHolder<Texture2D>().Get(path);
             Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop);
-            if (detailed == null) return;
+            if (detailed == null) return false;
             mine.contentList[path] = detailed;
             Drawn++;
+            return true;
+        }
+
+        /// <summary>
+        /// Tells TailorMade to leave the trousers alone for each body type this step supplied art for.
+        /// One pattern def per body type, so a body type whose art belongs to somebody else keeps being
+        /// fitted as before. TailorMade reads its defs once, at the first pawn it renders, which is long
+        /// after this runs; if that ever stops being true the trousers are still fitted, and it says so.
+        /// </summary>
+        private static void LeaveToTailorMade(List<BodyTypeDef> bodies)
+        {
+            if (bodies.Count == 0) return;
+
+            if (TailorMadeHasReadItsDefs())
+                Log.Warning("[TailorMade Waistlines] TailorMade had already read its pattern defs before this ran, so it will keep"
+                    + " fitting the trousers this mod supplies until the game is restarted.");
+
+            foreach (BodyTypeDef body in bodies)
+            {
+                string name = PatternDefPrefix + body.defName;
+                if (DefDatabase<TailorMade.TailorPatternDef>.GetNamedSilentFail(name) != null) continue;
+                DefDatabase<TailorMade.TailorPatternDef>.Add(new TailorMade.TailorPatternDef
+                {
+                    defName = name,
+                    bodyType = body,
+                    ignore = true,
+                    targetApparelDefs = new List<string>(TrouserDefNames),
+                });
+            }
+        }
+
+        private static bool TailorMadeHasReadItsDefs()
+        {
+            try
+            {
+                FieldInfo defs = typeof(TailorMade.PatternRegistry).GetField("defs", BindingFlags.NonPublic | BindingFlags.Static);
+                return defs != null && defs.GetValue(null) != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         // ------------------------------------------------------------------ the sources
