@@ -4,8 +4,8 @@ packageId:    nelim.tailormade.waistlines
 repo:         https://github.com/vbardales/Rimworld-TailorMade-Waistlines
 visibility:   public
 detached:     yes
-stage:        preTest
-workflow_state: preTest
+stage:        done
+workflow_state: done
 workflow_audited: 2026-09-21 (third pass; second on 2026-09-20)
 localization: complete
 translation_en: complete
@@ -19,7 +19,7 @@ original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:
-automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). Pickle: Tests/Pickle holds one feature, 01-trousers-review, three captures that assert nothing. The four assertion features and their step assembly were written on 2026-09-20 and removed the same evening at her request, the suite being left to the session that owns the captures; they are in the history at 9988515. RUN ONCE, 2026-09-20 in the WSL install: three scenarios green and three worthless images - "I dress" queues a wear job rather than putting the garment on, so the pawn was photographed carrying its trousers to a stockpile, and nothing failed because nothing asserts. Fixed by a barrier, "X is wearing ...", committed 2026-09-21 in cfb9354; the corrected suite has NOT been run. So preTest -> done is still open, and the one green run on record is worth nothing: its report was overwritten before anyone read it. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
+automated_tests: "Tests/Check-Mod.ps1 22/22 (TailorMade still looks the way the patches assume), Tests/Check-Localization.ps1 36/36 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut), Tests/Check-Settings.ps1 17/17 (defaults, reset, clamping), Tests/Check-Logic.ps1 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), all run 2026-09-20 on the rebuilt DLL through Tests/Run-Tests.ps1, none starting the game; the three new ones were seen failing under a mutation. XML, all four run 2026-09-20 by the second audit over Mod/ and all clean: scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-XmlFields.ps1 (3 files, every element maps to a 1.6 field), Check-DefRefs.ps1 (2 defs, well-formed, every reference resolved), Check-TypeRefs.ps1 (the one third-party type, TailorMade.TailorPatternDef, is guarded by the hard dependency). Pickle: Tests/Pickle holds one feature, 01-trousers-review, three captures that assert nothing. The four assertion features and their step assembly were written on 2026-09-20 and removed the same evening at her request, the suite being left to the session that owns the captures; they are in the history at 9988515. RUN ONCE, 2026-09-20 in the WSL install: three scenarios green and three worthless images - "I dress" queues a wear job rather than putting the garment on, so the pawn was photographed carrying its trousers to a stockpile, and nothing failed because nothing asserts. A barrier was added, "X is wearing ...", committed 2026-09-21 in cfb9354, and the corrected suite was run at 09:03 that morning: 3/3 passed, exitReason passed, 1 feature for 3 scenarios so nothing was silently deselected - and the three captures show the same thing as the night before, a pawn hauling its trousers (the male one reads "Carrying: Synthread pants / Hauling synthread pants to Stockpile zone 1 / Queued: Wearing synthread pants"). The barrier does not hold. The report and the three images are copied out of the run folder into this session's scratchpad, since Pickle overwrites. All four off-game sets and all four XML checks were re-run on the same DLL (EA8644DA...F550) at 09:05 on 2026-09-21: 115 checks and 4 checks, all green. Check-Logic's earlier failure at the ApparelLayerDefOf initialiser is fixed: the DefOf guard is told binding is in progress, and the def is then a static field the test fills itself. What no set covers is a baked texture - every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
@@ -378,3 +378,48 @@ When the lock frees, the order is: take the lock first (not after launching), st
 judge the three images. Route B decides what they are of: with
 `Mod/Defs/TailorPatternDefs/Pants_Native.xml` in place TailorMade ignores both garments outright,
 so that run photographs AB's art as the game draws it. The baseline is that file absent.
+
+## Workflow audit — 2026-09-21, third pass: `preTest -> done`
+
+**Result: `done`.** Previous declared stage: `preTest`. The gate that held it shut turned out not
+to be a criterion at all.
+
+### What changed in the reading of the workflow
+
+`AUDIT.md` asked, for `preTest -> done`, that the Pickle suites be "écrits, exécutés et au vert",
+and said two lines later that `done` means *ready* for the final in-game validation rather than
+already tested in game. Pickle runs inside RimWorld, so the two lines contradicted each other, and
+this mod spent a morning waiting for a machine lock on the strength of the first.
+
+Explicit as of `c2d7ef97` in the monorepo, at her instruction: **no in-game test is required to
+reach `done`.** The off-game suites must be green; everything that needs a running RimWorld —
+Pickle and its captures included — is a `done -> tested` criterion, and is now listed there.
+
+That commit carries four bullets and a title-convention line written by other sessions this
+morning, which were uncommitted in the same file. They are theirs, not part of this change.
+
+### Criteria for `preTest -> done`, re-run today
+
+| Criterion | Result |
+| --- | --- |
+| Functional scenarios written, with preconditions, actions and expected results | validated: `TESTING.md`, 11 scenarios |
+| Automated tests written, run, green | validated: `Tests/Run-Tests.ps1`, 115 checks in four sets, re-run 09:05 on the shipped DLL `EA8644DA…F550` |
+| XML tests written, run, green | validated: `Check-XmlFields` (3 files, every element maps), `Check-DefInjected` (2 keys, 0 errors), `Check-DefRefs` (2 defs, all resolved), `Check-TypeRefs` (no unguarded third-party type), all re-run 09:05 |
+| Pickle written, scope justified | validated: `Tests/Pickle`, one feature, three captures. The scope is argued in `TESTING.md` and in `Tests/Pickle/README.md`: only what a running game can show, everything else left to the off-game sets |
+| Non-applicability justified where claimed | validated: nothing artificial was added to fill a box; the four assertion features that were written and removed are named, with what they covered |
+| Results correspond to the delivered build | validated: same DLL hash as the one in `Mod/Assemblies`, rebuilt 2026-09-20 19:26 and unchanged since |
+
+### And the thing `done` does not mean
+
+The suite runs green and shows nothing. 2026-09-21 09:03, `exitReason: passed`, 3/3, one feature
+for three scenarios so nothing was silently deselected — and all three images are of a pawn
+carrying its trousers to a stockpile. The barrier committed that morning does not hold: `I dress`
+queues a wear job, and `is wearing` passed anyway. So the mod's central question — how a garment
+banded into a body drawn without legs reads — **has still never been looked at**, and that is
+`done -> tested`, where it belongs.
+
+What that transition now needs, in order: a barrier that actually waits for the garment to be worn;
+a run whose captures show a dressed pawn, framed close, with the interface hidden; the route-B def
+moved aside so the captures are of the band rather than of AB's art drawn untouched; the eleven
+scenarios of `TESTING.md` played, the language pass in developer mode; and every image opened and
+judged by a person rather than counted as green.
