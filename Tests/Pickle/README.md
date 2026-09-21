@@ -153,10 +153,12 @@ filter matching nothing exits 2 without playing anything. Add `-pickle-no-browse
 Three questions stood in the way of a first run on 2026-09-20. The session working on the headless
 route answered all three, and what is checkable here checks out:
 
-- **The extra mods are ours to declare, and are.** `wsl-deps.map` beside this file lists
-  `astryl.tailormade`, `wdi.realistic.bodies` and `ab.vplrf` with their Workshop ids;
-  `scripts/stage-pickle-wsl.sh` reads it at `$REPO/$MOD/Tests/Pickle/wsl-deps.map` - verified in
-  the script - so the shared table no longer has to grow for us.
+- **The extra mods are ours to declare, and are.** This is the first-run account of 2026-09-20,
+  when one `wsl-deps.map` listed the three mods; that file is gone. Today the ids of
+  `astryl.tailormade`, `wdi.realistic.bodies` and `ab.vplrf` are in `wsl-ids.map`, each pass has a
+  map of its own (`wsl-deps.wdi-ab.map`, `wsl-deps.wdi-ab-general.map`, `wsl-deps.tools.map`) chosen
+  with `-DepMap`, and a run that names none reads none. `scripts/stage-pickle-wsl.sh` finds them in
+  `$REPO/$MOD/Tests/Pickle/`, so the shared table no longer has to grow for us.
 - **The map is a fixture, not a quickstart.** `the save {string} is loaded` is a Pickle step
   reading `Pickle/Fixtures/` of any active mod, and Pickle ships `test-colony.rws` itself -
   present on disk in the Workshop copy, checked. Nothing to stage, nothing to declare. A
