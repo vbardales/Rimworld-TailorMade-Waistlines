@@ -12,5 +12,5 @@ ab.vplrf               2986402536
 kas.generalcollection  3789119336
 
 # The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle
-# rather than through -PickleSrc: see wsl-deps.map, which carries the same line for the bare pass.
+# rather than through -PickleSrc: see wsl-deps.tools.map, which carries the same line for the bare pass.
 nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod

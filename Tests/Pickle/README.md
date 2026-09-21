@@ -70,7 +70,10 @@ than a build to remember. So every pass map here carries one line:
 nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
 ```
 
-including `wsl-deps.map`, the default read by the bare pass — the Gear tab matters most there,
+including `wsl-deps.tools.map`, which is the bare pass plus this one tool. Run the bare pass with
+`-DepMap wsl-deps.tools.map`. A run that names no map reads none at all, because the runner sets
+`PICKLE_DEPMAP=none`, so no default file can carry the line for it. That pass is named `tools` in
+its report, the map's file name without `wsl-deps.` and `.map`. The Gear tab matters most there,
 where nothing is drawn and the game's own list is the only witness. The `path:` form is relative to
 the collection root, so `PickleTools` has to be cloned beside this mod.
 
