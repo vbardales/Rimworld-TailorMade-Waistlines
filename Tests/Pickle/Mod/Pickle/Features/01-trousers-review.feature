@@ -154,3 +154,14 @@ Feature: how trousers read on a body drawn without legs
   @requires:ab.vplrf
   Scenario: AB has actually given the trousers a worn graphic
     Then def "Apparel_Pants" field "apparel.wornGraphicPath" is "Things/Pawn/Humanlike/Apparel/Pants/Pants"
+
+  # This mod's own step at startup - reading General Textures Collection's trousers and drawing
+  # details onto the shells General has nothing for - can fail without anything looking wrong: the
+  # trousers are then simply the plain shell they always were. Every warning it logs starts with
+  # "[TailorMade Waistlines]", and it logs one for the case that can be recognised as wrong, General
+  # being active with its textures in place and none of them used. Matching by text, because a
+  # warning from code the step led into is attributed to nobody and "no warnings from mod" would
+  # never see it.
+  @requires:ab.vplrf
+  Scenario: the trouser step at startup raised no warning
+    Then no warning matching "[TailorMade Waistlines]" was logged

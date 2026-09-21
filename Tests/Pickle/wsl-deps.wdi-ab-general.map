@@ -1,0 +1,12 @@
+# The pass that names General Textures Collection as well as the two mods of wdi-ab. It is the one
+# in which this mod's trouser step has art to read: General carries a retexture of the trousers with
+# a waistband, belt loops and a fly, but its LoadFolders only loads it when XeoNovaDan's Visible
+# Pants is active, so with AB active instead it never reaches a pawn unless this mod reads it.
+# Select it with `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab-general.map`.
+# One line per mod: packageId then its Workshop id.
+#
+# WDI and AB are here for the reasons given in wsl-deps.wdi-ab.map, and AB needs its settings file
+# to do anything at all: see config/wdi-ab-general/. astryl.tailormade is resolved by wsl-ids.map.
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+kas.generalcollection  3789119336

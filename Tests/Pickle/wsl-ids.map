@@ -1,0 +1,8 @@
+# Workshop ids of the mod's HARD dependencies that the staging script's built-in table does not
+# know. Read in every pass, the bare one included, and it resolves without activating anything:
+# what is staged is still what Mod/About/About.xml declares plus what a named pass adds.
+#
+# astryl.tailormade is a hard dependency of the mod. Without a line here the staging dies with
+# "no Workshop id known for astryl.tailormade" before it plays a scenario, in every pass.
+# It was once listed in wsl-deps.wdi-ab.map instead, which fixed only that pass and staged it twice.
+astryl.tailormade   3756915448

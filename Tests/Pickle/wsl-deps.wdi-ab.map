@@ -2,11 +2,12 @@
 # fills wornGraphicPath. Select it with `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab.map`.
 # One line per mod: packageId then its Workshop id.
 #
-# Both carry the captures rather than decorate them. Without a body retexture drawn without legs
-# there is no defect to photograph; with nothing filling wornGraphicPath the pawn renders bare,
-# because vanilla Apparel_Pants has no worn graphic of its own.
-#
-# astryl.tailormade is not here: it is a hard dependency of the mod itself, so it is staged in
-# every pass and listing it again only made the staging announce it twice.
+# WDI and AB carry the captures rather than decorate them. Without a body retexture drawn without
+# legs there is no defect to photograph; with nothing filling wornGraphicPath the pawn renders bare,
+# because vanilla Apparel_Pants has no worn graphic of its own. AB also needs its settings file to
+# do anything at all: see config/wdi-ab/.
 wdi.realistic.bodies   3527486510
 ab.vplrf               2986402536
+
+# astryl.tailormade is not listed here: it is a hard dependency of the mod, and its Workshop id
+# lives in wsl-ids.map, which every pass reads. Listing it here staged it twice.
