@@ -278,6 +278,45 @@ try {
     Write-Host "and with the option off, nothing is lifted"
     Assert-That 'an on-skin shirt stays full-body'             ((Invoke-Confirm $shirt  $false) -eq $false)
     Assert-That "TailorMade's own yes still stands"            ((Invoke-Confirm $shirt  $true)  -eq $true)
+
+    # --- which garments TailorMade is told to leave alone ---------------------
+    # AB matches a category by a plain substring of the def name and only writes a path where the
+    # def has none. The trouser art sits on that one shared path, so every def AB gave it to has to
+    # be left alone, not just the two vanilla ones - and no def carrying another mod's own art.
+    Write-Host ""
+    Write-Host "the garments TailorMade is told to leave alone"
+
+    $trouserArt = $ours.GetType('TailorMadeWaistlines.TrouserArt', $true)
+    $select = $trouserArt.GetMethod('SelectTrouserTargets')
+    $path = 'Things/Pawn/Humanlike/Apparel/Pants/Pants'
+    function New-Pair { param([string]$Name, [string]$Worn) [System.Collections.Generic.KeyValuePair[string, string]]::new($Name, $Worn) }
+    function Get-Targets {
+        param($Pairs)
+        $list = [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string, string]]]::new()
+        foreach ($p in $Pairs) { $list.Add($p) }
+        return @($select.Invoke($null, @(, $list)))
+    }
+
+    $none = @(Get-Targets @())
+    Assert-That 'with no defs at all, the two vanilla garments are still named' (($none -contains '^Apparel_Pants$') -and ($none -contains '^Apparel_KidPants$') -and $none.Count -eq 2)
+
+    $mixed = @(Get-Targets @(
+        (New-Pair 'Apparel_Pants' ''),
+        (New-Pair 'Apparel_FlakPants' ''),
+        (New-Pair 'Apparel_SuitPantsX' $null),
+        (New-Pair 'Apparel_ModdedPants' $path),
+        (New-Pair 'Apparel_OwnArtPants' 'Things/Pawn/Humanlike/Apparel/Other/Own'),
+        (New-Pair 'Apparel_Jeans' ''),
+        (New-Pair 'Apparel_Shirt' ''),
+        (New-Pair 'Apparel_pants_lower' '')))
+    Assert-That 'a modded ...Pants with no graphic of its own is left alone too'   ($mixed -contains '^Apparel_FlakPants$')
+    Assert-That 'a def already on the trouser path is left alone'                  ($mixed -contains '^Apparel_ModdedPants$')
+    Assert-That 'a def with art of its own is left to TailorMade'                  ($mixed -notcontains '^Apparel_OwnArtPants$')
+    Assert-That 'a def without the keyword is not swept in'                        (($mixed -notcontains '^Apparel_Jeans$') -and ($mixed -notcontains '^Apparel_Shirt$'))
+    Assert-That 'the keyword is matched as AB matches it: case-sensitively'       ($mixed -notcontains '^Apparel_pants_lower$')
+    Assert-That 'the two vanilla garments are never listed twice'                  (@($mixed | Where-Object { $_ -eq '^Apparel_Pants$' }).Count -eq 1)
+    $dots = @(Get-Targets @((New-Pair 'Apparel.Pants+X' '')))
+    Assert-That 'a def name is escaped, never read as a pattern'                   ($dots -contains '^Apparel\.Pants\+X$')
 }
 finally {
     [System.AppDomain]::CurrentDomain.remove_AssemblyResolve($script:resolver)

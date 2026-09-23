@@ -19,7 +19,7 @@ original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
 workshop:     "3806769245, prepublished 2026-09-23 by her. Private, as Steam creates every item and RimWorld never calls SetItemVisibility. Mod/About/PublishedFileId.txt is committed (18e2bf2); losing it would make the next upload a second item. The description was sent with the item and is not resent on an update - a correction now happens on the Steam page by hand."
-automated_tests: "Five sets through Tests/Run-Tests.ps1, all re-run 2026-09-21 at 22:00 on the delivered DLL (SHA-256 F624927E...5271, built 21:53) and all green: Check-Mod 30/30 (TailorMade still looks the way the patches assume), Check-Logic 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), Check-Settings 30/30 (defaults, reset, clamping), Check-Trousers 88/88 (the trouser-detail drawing, on synthetic shells and on AB's real ones, pure bytes), Check-Localization 45/45 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut) - 233 checks, none of them starting the game. The earlier figures were 115 checks on an older DLL; the build changed under the audit when the trouser art arrived, and everything was re-run rather than carried over. XML, all four re-run the same evening over Mod/ and all clean: Check-XmlFields (2 files, every element maps to a 1.6 field), scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-DefRefs (well formed, every reference resolved, every ParentName resolved), Check-TypeRefs (no unguarded third-party type). The shipped XML is now About.xml, one MainButtonDef and the three language files: the route-B TailorPatternDef is gone from Mod/Defs, the mod making its pattern defs in code instead. Pickle: Tests/Pickle, three features - 01 the trousers captures, 02 the Gear tab, 03 the ten silhouettes - never run since the trouser art landed. The last run of any of it was 2026-09-21 09:03, 3/3 green with three worthless images, which is what taught that AB is inert without its settings file and that a green capture proves nothing. What no set covers is a baked texture: every band is checked as a number, never as pixels."
+automated_tests: "Five sets through Tests/Run-Tests.ps1, all re-run 2026-09-23 at 21:25 on the rebuilt DLL (SHA-256 7FD0FEBF...59C5, built 21:21; the 2026-09-21 build was F624927E...5271) and all green: Check-Mod 30/30 (TailorMade still looks the way the patches assume), Check-Logic 48/48 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts, which garments TailorMade is told to leave alone), Check-Settings 30/30 (defaults, reset, clamping), Check-Trousers 88/88 (the trouser-detail drawing, on synthetic shells and on AB's real ones, pure bytes), Check-Localization 45/45 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut) - 241 checks, none of them starting the game. The earlier figures were 115 checks on an older DLL; the build changed under the audit when the trouser art arrived, and everything was re-run rather than carried over. XML, all four re-run the same evening over Mod/ and all clean: Check-XmlFields (2 files, every element maps to a 1.6 field), scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-DefRefs (well formed, every reference resolved, every ParentName resolved), Check-TypeRefs (no unguarded third-party type). The shipped XML is now About.xml, one MainButtonDef and the three language files: the route-B TailorPatternDef is gone from Mod/Defs, the mod making its pattern defs in code instead. Pickle: Tests/Pickle, three features - 01 the trousers captures, 02 the Gear tab, 03 the ten silhouettes - never run since the trouser art landed. The last run of any of it was 2026-09-21 09:03, 3/3 green with three worthless images, which is what taught that AB is inert without its settings file and that a green capture proves nothing. What no set covers is a baked texture: every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
@@ -489,3 +489,29 @@ Measured against the suite as it stands:
 
 So `done` stands and `tested` is three runs and a session in front of the game away. Nothing here
 is a defect: it is work not yet done, and the difference matters when reading this file.
+
+### 2026-09-23: the three code-review findings, fixed, and the build moved again
+
+A review of the trouser art (`TrouserArt.cs`) raised three points, all marked PLAUSIBLE because
+nothing had been run in game. She repeated the request after the question was put, so they were
+applied. Decompiling AB's own matching first settled what the right fix was: AB matches a category by
+`IndexOf` of its keyword in the def name, writes a path only where `wornGraphicPath` is empty, and
+takes the first category that matches.
+
+- **Only two garments were ignored, but the art sits on a path every `...Pants` shares.** TailorMade
+  is now told to leave alone every def whose name holds `Pants` and whose worn graphic is empty or
+  already that path, read from the defs at startup; the two vanilla names are always included. A
+  def with art of its own is left to TailorMade. The selection is a pure function, `SelectTrouserTargets`,
+  and eight new checks in `Check-Logic.ps1` cover it, seen failing under a mutation.
+- **One facing marked a whole body type as supplied.** TailorMade's ignore is per body type, so a body
+  now counts only when its plain variant was supplied in all three facings; a partial one logs a warning
+  naming it and keeps being fitted.
+- **General's art was registered where nobody supplies the path.** Kept on purpose, and the comment
+  that said the opposite corrected: AB still assigns that path to a body type it ships nothing for, so
+  without a texture there the pawn has nothing to draw, and supplying one fills the gap.
+
+**The build moved, so the evidence was re-taken** on the new DLL: `7FD0FEBF…59C5`, built 21:21. Five sets,
+241 checks, and the four XML checks, all green. Not verified in game, as before: none of the three
+behaviours has been observed on a pawn. The Workshop item was prepublished with the previous assembly,
+so what is on Steam is no longer what is in `Mod/Assemblies`; the next upload will be an update to
+item `3806769245`, not a new one.

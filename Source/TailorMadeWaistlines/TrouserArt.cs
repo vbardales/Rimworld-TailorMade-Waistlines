@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -18,9 +19,12 @@ namespace TailorMadeWaistlines
     /// General Textures Collection carries a retexture of the same garment, with a waistband, belt
     /// loops, a fly and pockets, at Mods/VisiblePants/. Its LoadFolders only loads that folder when
     /// XeoNovaDan's Visible Pants is active, so with AB active instead none of it ever reaches a
-    /// pawn. Where AB is the one supplying a texture and General has the matching file, the file is
-    /// read from General's installed folder and registered here. Nothing is copied and nothing is
-    /// shipped: what is read is what the player already owns.
+    /// pawn. Where General has the matching file and no other mod supplies that path, the file is
+    /// read from General's installed folder and registered here. That includes a body type AB ships
+    /// no texture for: AB still gives the garment that path, so without a texture there the pawn
+    /// would have nothing to draw, and supplying one fills the gap rather than adding a garment. A
+    /// path somebody else supplies, XeoNovaDan's Visible Pants or General itself, is never touched.
+    /// Nothing is copied and nothing is shipped: what is read is what the player already owns.
     ///
     /// Where General has nothing - it has no child, for one - <see cref="TrouserDetail"/> draws
     /// the marks onto AB's own shell.
@@ -56,9 +60,11 @@ namespace TailorMadeWaistlines
 
         private static readonly string[] FacingNames = { "south", "east", "north" };
 
-        // The two garments AB's Normal_Pants category gives this path to: the adult trousers and
-        // the Biotech child's. TailorMade reads these as regular expressions on the def name.
-        private static readonly string[] TrouserDefNames = { "^Apparel_Pants$", "^Apparel_KidPants$" };
+        // AB's Normal_Pants category matches on this keyword, as a plain substring of the def name.
+        private const string PantsKeyword = "Pants";
+
+        // The garments that are certain to be there: the adult trousers and the Biotech child's.
+        private static readonly string[] BaseTrouserDefNames = { "Apparel_Pants", "Apparel_KidPants" };
 
         private const string PatternDefPrefix = "TMW_Pants_Native_";
 
@@ -86,17 +92,25 @@ namespace TailorMadeWaistlines
             {
                 // A child is drawn smaller, so the same fraction of the texture is fewer pixels on screen.
                 float drop = body.defName == "Child" ? settings.trouserDropChild : settings.trouserDrop;
-                bool any = false;
+                int plain = 0;
                 for (int f = 0; f < FacingNames.Length; f++)
                 {
                     // The body type itself, then its female variant. Female Apparel Variants does not
                     // add body types: for a female pawn of a body type both genders share, it asks for
                     // the same path with _Female on the end when a texture exists there, and General
                     // ships Pants_Fat_Female for exactly that. Only the first can be a shell to draw on.
-                    any |= Register(body.defName, f, true, generalDir, drop, mine, settings);
-                    any |= Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
+                    if (Register(body.defName, f, true, generalDir, drop, mine, settings)) plain++;
+                    Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
                 }
-                if (any) supplied.Add(body);
+
+                // TailorMade's ignore is per body type, not per facing or gender: it would leave every
+                // facing of this body alone. So the body counts as supplied only when the plain variant
+                // was supplied in all three facings. A body with some facings only would otherwise be
+                // left with AB's raw shell in the facing that was not replaced, drawn unfitted.
+                if (plain == FacingNames.Length) supplied.Add(body);
+                else if (plain > 0)
+                    Log.Warning("[TailorMade Waistlines] " + body.defName + " trousers were supplied in " + plain + " of "
+                        + FacingNames.Length + " facings, so TailorMade keeps fitting them and the art this mod supplied is stretched into the band.");
             }
 
             LeaveToTailorMade(supplied);
@@ -162,6 +176,11 @@ namespace TailorMadeWaistlines
                 Log.Warning("[TailorMade Waistlines] TailorMade had already read its pattern defs before this ran, so it will keep"
                     + " fitting the trousers this mod supplies until the game is restarted.");
 
+            List<string> targets = SelectTrouserTargets(ApparelDefs());
+            if (targets.Count > BaseTrouserDefNames.Length)
+                Log.Message("[TailorMade Waistlines] " + (targets.Count - BaseTrouserDefNames.Length)
+                    + " more garment(s) share the trouser art and are left alone by TailorMade too.");
+
             foreach (BodyTypeDef body in bodies)
             {
                 string name = PatternDefPrefix + body.defName;
@@ -171,9 +190,45 @@ namespace TailorMadeWaistlines
                     defName = name,
                     bodyType = body,
                     ignore = true,
-                    targetApparelDefs = new List<string>(TrouserDefNames),
+                    targetApparelDefs = new List<string>(targets),
                 });
             }
+        }
+
+        /// <summary>
+        /// The def names TailorMade must leave alone: every garment AB's Normal_Pants category gives
+        /// this art to, and not only the two vanilla ones. AB matches a category by a plain substring of
+        /// the def name and only writes a path where the def has none, so a def is ours when its name
+        /// holds the keyword and its worn graphic is empty or already this path. Read from the defs
+        /// rather than assumed, because a modded <c>...Pants</c> shares the path with the vanilla ones
+        /// and would otherwise be fitted a second time into a band, on art that is already drawn for
+        /// the body. A def with a graphic of its own is another mod's art and is left to TailorMade.
+        ///
+        /// Pure over (defName, wornGraphicPath) pairs, so it is checked outside the game.
+        /// </summary>
+        public static List<string> SelectTrouserTargets(IEnumerable<KeyValuePair<string, string>> apparel)
+        {
+            var names = new List<string>(BaseTrouserDefNames);
+            if (apparel != null)
+            {
+                foreach (KeyValuePair<string, string> a in apparel)
+                {
+                    if (string.IsNullOrEmpty(a.Key) || names.Contains(a.Key)) continue;
+                    if (a.Key.IndexOf(PantsKeyword, StringComparison.Ordinal) < 0) continue;
+                    if (!string.IsNullOrEmpty(a.Value) && a.Value != PantsPath) continue;
+                    names.Add(a.Key);
+                }
+            }
+
+            // TailorMade reads these as regular expressions on the def name.
+            return names.ConvertAll(n => "^" + Regex.Escape(n) + "$");
+        }
+
+        private static IEnumerable<KeyValuePair<string, string>> ApparelDefs()
+        {
+            foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
+                if (def.apparel != null)
+                    yield return new KeyValuePair<string, string>(def.defName, def.apparel.wornGraphicPath);
         }
 
         private static bool TailorMadeHasReadItsDefs()
