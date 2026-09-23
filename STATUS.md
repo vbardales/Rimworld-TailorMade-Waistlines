@@ -18,7 +18,7 @@ dependencies: "brrainz.harmony and astryl.tailormade, both required. A mod that 
 original:     none
 showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
 tested_on:
-workshop:
+workshop:     "3806769245, prepublished 2026-09-23 by her. Private, as Steam creates every item and RimWorld never calls SetItemVisibility. Mod/About/PublishedFileId.txt is committed (18e2bf2); losing it would make the next upload a second item. The description was sent with the item and is not resent on an update - a correction now happens on the Steam page by hand."
 automated_tests: "Five sets through Tests/Run-Tests.ps1, all re-run 2026-09-21 at 22:00 on the delivered DLL (SHA-256 F624927E...5271, built 21:53) and all green: Check-Mod 30/30 (TailorMade still looks the way the patches assume), Check-Logic 40/40 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts), Check-Settings 30/30 (defaults, reset, clamping), Check-Trousers 88/88 (the trouser-detail drawing, on synthetic shells and on AB's real ones, pure bytes), Check-Localization 45/45 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut) - 233 checks, none of them starting the game. The earlier figures were 115 checks on an older DLL; the build changed under the audit when the trouser art arrived, and everything was re-run rather than carried over. XML, all four re-run the same evening over Mod/ and all clean: Check-XmlFields (2 files, every element maps to a 1.6 field), scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-DefRefs (well formed, every reference resolved, every ParentName resolved), Check-TypeRefs (no unguarded third-party type). The shipped XML is now About.xml, one MainButtonDef and the three language files: the route-B TailorPatternDef is gone from Mod/Defs, the mod making its pattern defs in code instead. Pickle: Tests/Pickle, three features - 01 the trousers captures, 02 the Gear tab, 03 the ten silhouettes - never run since the trouser art landed. The last run of any of it was 2026-09-21 09:03, 3/3 green with three worthless images, which is what taught that AB is inert without its settings file and that a green capture proves nothing. What no set covers is a baked texture: every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
@@ -466,3 +466,26 @@ continued through the evening on a mod recorded as `done`, which is allowed — 
 off-game gates are met and the in-game validation can begin — but it does mean the evidence has a
 date, and a build that moves invalidates it. Anyone reading `automated_tests` should compare its
 hash against `Mod/Assemblies` before trusting the figures.
+
+### `done -> tested` under the criteria added 2026-09-23
+
+Three were added to `AUDIT.md` this afternoon, and they are the ones this mod is furthest from.
+Measured against the suite as it stands:
+
+- **No scenario left `@wip`** — **met**, and it was met without anyone having to fix anything:
+  `grep` finds no `@wip` in the three features. The only `@requires:wdi` in the tree is a word
+  inside a comment, not a dangling tag on a scenario that would skip for ever.
+- **Every conditional scenario has run** — **not met, and nothing is close.** Thirty of the
+  thirty-one scenarios carry `@requires:ab.vplrf`, `@requires:wdi.realistic.bodies` or both, so
+  they run only in the `wdi-ab` pass; `02-gear-tab` also needs the `tools` pass for its step
+  package. **No pass has run since the trouser art landed on 2026-09-21.** Until each has had its
+  own pass, with its map, and the report read against `setName` and the scenario names, a skipped
+  scenario is not a passed one.
+- **No manual test left to validate** — **not met.** The coverage table in `TESTING.md` says which:
+  the patch route, the slider and the repaint, the four facings, the shirt and its compression,
+  the boots, a real restart, both languages in developer mode, and the shortcut through RIMMSQOL.
+  Each is either automated and green, or listed as not applicable with its reason, before this
+  criterion is met — and none is either today.
+
+So `done` stands and `tested` is three runs and a session in front of the game away. Nothing here
+is a defect: it is work not yet done, and the difference matters when reading this file.
