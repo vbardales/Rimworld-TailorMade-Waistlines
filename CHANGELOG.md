@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 — 2026-09-23
+
+Prepublished to the Workshop as item 3806769245 on 2026-09-23, private: Steam creates
+every new item private, and RimWorld never calls SetItemVisibility. `Mod/About/PublishedFileId.txt`
+carries that id and is committed - lost, the next upload would create a second item instead of
+updating this one, and that is not recoverable.
 
 The mod was rebuilt twice before it settled. Only the last shape is loaded; the
 two earlier ones are kept locally under `Parked/` (not in this repository) with a README saying what each
