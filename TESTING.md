@@ -239,3 +239,30 @@ never asked for: that AB is the supplier in that pass, that AB actually filled `
 and that the mod told TailorMade to leave its own art alone. Everything about the sliders, the
 shirt, the boots, the facings, the languages and the shortcut is still a person in front of the
 game.
+
+## Evidence: what to keep, and how small
+
+Reports and screenshots weigh megabytes each, a Pickle run overwrites its own folder, and the disk
+is finite. So evidence lives **on disk and never in git** (`.gitignore` covers `evidence/`,
+`Tests/Pickle/Evidence/`, `PickleReports*/` and `*.dds`), in `docs/runs/<date>_<hour>/evidence/`,
+and the history is **one text line per run** in `docs/runs/README.md`.
+
+What proves something, and is worth keeping while it is the latest for the shipped DLL:
+
+- **`summary.json`, and `exitReason` read first.** A few hundred bytes. It says whether the run
+  reached its end, how many scenarios played and how many features were discovered. Always keep.
+- **One capture per silhouette that a person actually judged**, cropped to the pawn and its
+  inspector, not the 1080p frame: `03-silhouettes` is ten, `01-trousers-review` is three. The
+  inspector line (`Carrying`, `Wearing`) is what shows the garment was worn, so the crop keeps it.
+- **The Gear-tab capture of `02`**, once, per body: it is the witness that does not depend on how
+  anything is drawn.
+- **The `Player.log` lines from this mod**, not the whole log: the trouser summary line and any
+  warning.
+
+Everything else goes: the full frames, `report.html` (tens of MB), `messages.ndjson`, `junit.xml`
+and captures of scenarios that only assert. A capture of a garment that was not worn, or of a bare
+pawn, proves nothing and is not kept as a curiosity: its finding goes into the text line.
+
+**A report of a superseded build is deleted when a newer one replaces it.** Compare the DLL hash on
+the line with the one in `Mod/Assemblies` before citing any of it, and never delete a report that a
+`STATUS.md` field still names - repoint the field first.

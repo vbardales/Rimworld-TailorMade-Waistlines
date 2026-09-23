@@ -33,3 +33,9 @@ _tools/*.xcf
 # later run overwrites them. What is kept in git is the text summary beside each evidence folder,
 # docs/runs/<date>_<hour>/README.md, which says what the run was and what it showed.
 docs/runs/*/evidence/
+
+# Any report folder a Pickle run leaves, wherever it is copied to.
+evidence/
+Evidence/
+PickleReports*/
+pickle-reports*/
