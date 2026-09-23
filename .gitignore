@@ -23,3 +23,13 @@ Source/**/bin/
 Parked/
 Art/
 _tools/*.xcf
+
+# Compiled textures: a .dds is a conversion product, heavy and not readable in a diff. General
+# Textures Collection ships them beside its PNGs and this mod reads the PNGs, so none belongs here.
+*.dds
+*.DDS
+
+# Run evidence stays on disk and out of git: reports, logs and screenshots weigh megabytes and a
+# later run overwrites them. What is kept in git is the text summary beside each evidence folder,
+# docs/runs/<date>_<hour>/README.md, which says what the run was and what it showed.
+docs/runs/*/evidence/
