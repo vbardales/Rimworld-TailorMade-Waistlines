@@ -562,3 +562,36 @@ XND captures share the AB pass's limit: a drafted stationary pawn about 45 pixel
 where a waistband is a few pixels. A closer look needs a larger virtual display (the staging script's
 Xvfb is 1920x1080 and is the headless route's to change, not this suite's), or a crop of a frame taken at a
 larger size. Asked as a question below, not guessed at.
+
+### 2026-09-24 evening: four of six passes read, and what they say together
+
+Through the TicketDispatcher, three more passes ran on DLL `7FD0FEBF…`, each read `exitReason` first,
+then `setName`, then 28 scenarios played against 28 declared. With the two from the morning, four of the
+six are done:
+
+| pass | exitReason | passed / failed / skipped |
+| --- | --- | --- |
+| `tools` (bare) | passed | 4 / 0 / 24 |
+| `wdi-ab` | failed | 11 / 10 / 7 |
+| `wdi-ab-general` | failed | 11 / 10 / 7 |
+| `wdi-xnd` | passed | 10 / 0 / 18 |
+| `wdi-xnd-general` | passed | 11 / 0 / 17 |
+| `wdi-ab-band` | still in the queue | |
+
+**Every failure is the same ten scenarios, `03-silhouettes`, on the same undefined step** (`{string} body type
+is {word}`, Pickle PR #32). Nothing that ran and could fail has failed. That is the honest summary, and it
+is not the same as "the mod is verified": the ten are the only scenarios that would check the texture
+actually drawn per body type.
+
+What the four together establish: the direct patch route is live in all of them; the mod does nothing
+where AB is absent (bare, XND, XND + General: its log holds only the patch line, no def, no warning); the
+two art options each work on their own (`wdi-ab`: 0 from General, 18 drawn onto AB's shells;
+`wdi-ab-general`: 18 from General, 3 drawn, the child); and the review's first fix fires in both AB passes
+("1 more garment shares the trouser art").
+
+**What is still not established:** how any of this reads. The pawn is about 45 px tall in a 1920x1080
+frame in every capture, in every pass. Six sets of images now exist and none can be judged.
+
+Evidence for each pass is trimmed to its `evidence/kept/` folder (0.06-0.13 MB of 40-180 MB), and the
+three launcher archives that held these runs, 4.7 GB, are deleted as AGENTS.md asks; the disk went from
+5.8 to 14.5 GB free. Nothing else in `pickle-reports-archive/` was touched.
