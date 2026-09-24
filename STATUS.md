@@ -547,3 +547,18 @@ panel and the inspector strip of each capture, `summary.json` and the mod's log 
 silhouette scenarios cannot run until a body-type step exists on a Pickle everyone has. Either
 PR #32 merges, or its steps become a PickleTools package like the inspect-tab ones, or `03` is
 rewritten around what stock steps can do. That is a decision, not something to guess at.
+
+### 2026-09-24, second pass: `wdi-xnd`, the mod stays out of the way
+
+11:21, `exitReason passed`, `setName wdi-xnd`, 28 of 28 scenarios played, 10 passed, 0 failed, 18 skipped
+by tag. This is the pass the whole third-supplier question was waiting on, and what it established is
+modest and exact: XeoNovaDan's Visible Pants is the supplier (its `Apparel_Pants` worn graphic is
+`Core/Things/Pawn/Humanlike/Apparel/Pants/Pants`, not AB's path), and **this mod did nothing**, as
+designed: its log holds the direct-patch line and no trouser line at all, no warning, no pattern def.
+The Gear tab lists the trousers as worn for the man, the woman and the child.
+
+**Still not looked at:** how TailorMade's band treats XND's art, which is the reason the pass exists. The
+XND captures share the AB pass's limit: a drafted stationary pawn about 45 pixels tall in a 1080p frame,
+where a waistband is a few pixels. A closer look needs a larger virtual display (the staging script's
+Xvfb is 1920x1080 and is the headless route's to change, not this suite's), or a crop of a frame taken at a
+larger size. Asked as a question below, not guessed at.
