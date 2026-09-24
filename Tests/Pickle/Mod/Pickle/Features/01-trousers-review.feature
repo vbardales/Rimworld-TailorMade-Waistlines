@@ -176,7 +176,7 @@ Feature: how trousers read on a body drawn without legs
   # actually supplied anything. Male is used because AB ships a texture for it in every pass that
   # has AB, so the def must exist in all of them. Read as a field too: a def that exists with
   # ignore false would be a def that does nothing.
-  @requires:ab.vplrf
+  @native-art @requires:ab.vplrf
   Scenario: TailorMade is told to leave the trousers this mod supplied
     Then def "TMW_Pants_Native_Male" of type "TailorPatternDef" exists
     And def "TMW_Pants_Native_Male" field "ignore" is "True"

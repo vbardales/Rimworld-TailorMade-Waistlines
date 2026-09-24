@@ -1,0 +1,13 @@
+# The band state: AB supplies the trousers, and this mod's own art options are both switched OFF by
+# a settings seed (config/wdi-ab-band/), so the mod registers no texture and makes no pattern def
+# and TailorMade fits AB's plain shell into the band and answers the pants slider as it always did.
+# It is the state a player gets who turns both options off, and the only one in which the band this
+# mod exists to adjust is what is drawn. Select it with
+# `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab-band.map -Filter 'TailorMade Waistlines - Pickle tests,!@native-art'`:
+# the scenarios tagged @native-art assert the opposite state and go red here by design.
+# One line per mod: packageId then its Workshop id.
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+
+# The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle.
+nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod

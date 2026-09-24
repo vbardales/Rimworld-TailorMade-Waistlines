@@ -58,21 +58,24 @@ scenario *AB has actually given the trousers a worn graphic* reads
 `Apparel_Pants.apparel.wornGraphicPath` and is the net: **red there means the
 pass is invalid, not that this mod is broken.**
 
-## The three passes
+## The passes
 
-The scenarios below are played more than once, because what supplies the
-trousers changes what there is to look at. Each pass is a different mod set, and
-the Pickle suite selects one with `Run-PickleWsl.ps1 -DepMap <file>`.
+The scenarios below are played more than once, because what supplies the trousers changes what
+there is to look at. Each pass is a different mod set, selected with
+`Run-PickleWsl.ps1 -DepMap <file>`, and its name (the map's file name without `wsl-deps.` and
+`.map`) is on the report and nowhere in an image.
 
-| pass | mod set | what it establishes |
+| pass | map | what it establishes |
 | --- | --- | --- |
-| bare | no optional mods | the mod does nothing wrong with nothing to do: no error, no exception, and pawns drawn exactly as vanilla draws them. The trousers scenarios skip, by their `@requires` tags, rather than photograph a bare pawn |
-| WDI + AB | `wsl-deps.wdi-ab.map`, seeded | the pass that produces the captures: a body drawn without legs, and AB's own trousers on it |
-| WDI + XeoNovaDan | not written yet | the same body with a different supplier's trousers. Two visible-pants mods draw different garments from the same band, so one of them looking right is not both |
+| bare | `wsl-deps.tools.map` | the mod does nothing wrong with nothing to do: no error, no exception, pawns drawn as vanilla draws them. The trousers scenarios skip, by their `@requires` tags, rather than photograph a bare pawn |
+| WDI + AB | `wsl-deps.wdi-ab.map`, seeded | AB supplies a plain shell and this mod draws a waistband, fly and seams onto it |
+| WDI + AB + General | `wsl-deps.wdi-ab-general.map`, seeded | the pass in which this mod reads General Textures Collection's retexture, which General's own LoadFolders never loads with AB active |
+| WDI + AB, band | `wsl-deps.wdi-ab-band.map`, seeded, **with `-Filter '<suite>,!@native-art'`** | both art options off: TailorMade fits AB's shell into the band and the pants slider applies. The only pass in which the band is what is drawn. The `@native-art` scenarios assert the opposite state and go red here by design |
+| WDI + XND | `wsl-deps.wdi-xnd.map` | XeoNovaDan's Visible Pants instead of AB's. This mod does nothing on purpose, so this shows what the band does to art drawn for the vanilla footprint |
+| WDI + XND + General | `wsl-deps.wdi-xnd-general.map` | with XND active General's retexture loads, so the art is General's, supplied by General; this mod's "leave it alone" branch runs |
 
-The third needs its own `wsl-deps.<name>.map` and does not exist. Until it does,
-nothing is known about how this mod's bands treat XND's art — which matters,
-because XND's pants are the ones drawn for the vanilla footprint.
+Written 2026-09-24. Before that only the first three existed. None of the six has been run since
+the trouser art landed.
 
 ## Scenarios
 

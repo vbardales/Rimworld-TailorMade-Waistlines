@@ -1,0 +1,13 @@
+# The pass with a second supplier of trousers: WDI's bodies and XeoNovaDan's Visible Pants instead of
+# AB's. Select it with `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-xnd.map`. Played by 04-other-supplier.
+#
+# XND's pants are drawn for the vanilla footprint, the opposite of the body this mod exists for, so
+# this is the pass that says how TailorMade's band treats art it was not drawn for. XND needs no
+# settings file: it writes wornGraphicPath from a def patch. This mod does nothing here on purpose,
+# because its trouser step only acts where AB supplies the trousers.
+# One line per mod: packageId then its Workshop id.
+wdi.realistic.bodies   3527486510
+XeoNovaDan.VisiblePants 2264108215
+
+# The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle.
+nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Seed for the "wdi-ab-band" pass: this mod's own settings with both trouser-art options OFF.
+
+  The staging copies it into the profile for that pass only and removes it at the next staging.
+  Named Mod_<folder>_<Class>.xml, the folder being the staged mod's own (TailorMadeWaistlines): a seed
+  that names no staged folder is refused by the staging rather than left to leave the mod at its
+  defaults, which would make this pass silently the same as wdi-ab.
+
+  Every other value is the default, written out so that a change of default cannot move this pass.
+-->
+<SettingsBlock>
+  <ModSettings Class="TailorMadeWaistlines.TailorMadeWaistlinesSettings">
+    <pantsTop>0.58</pantsTop>
+    <bootsTop>0.2</bootsTop>
+    <chestBottom>0.45</chestBottom>
+    <shortenShirts>False</shortenShirts>
+    <useGeneralArt>False</useGeneralArt>
+    <detailPlainShells>False</detailPlainShells>
+    <trouserDrop>0.03</trouserDrop>
+    <trouserDropChild>0.09</trouserDropChild>
+  </ModSettings>
+</SettingsBlock>

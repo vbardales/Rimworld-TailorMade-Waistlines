@@ -1,0 +1,12 @@
+# XND's pass with General Textures Collection added. General's LoadFolders loads its own retexture
+# of these garments only when XeoNovaDan's Visible Pants is active, so here the trousers are
+# General's art, supplied by General and not by this mod: the state in which this mod's "leave it
+# alone" branch is the one that runs. Select it with
+# `Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-xnd-general.map`. Played by 04-other-supplier.
+# One line per mod: packageId then its Workshop id.
+wdi.realistic.bodies    3527486510
+XeoNovaDan.VisiblePants 2264108215
+kas.generalcollection   3789119336
+
+# The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle.
+nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
