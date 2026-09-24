@@ -515,3 +515,35 @@ takes the first category that matches.
 behaviours has been observed on a pawn. The Workshop item was prepublished with the previous assembly,
 so what is on Steam is no longer what is in `Mod/Assemblies`; the next upload will be an update to
 item `3806769245`, not a new one.
+
+### 2026-09-24: the first pass since the trouser art ran, and what it did and did not show
+
+Pass `wdi-ab-general`, 11:03, on DLL `7FD0FEBF…`. Read in the order AUDIT.md asks: `exitReason failed`,
+`setName wdi-ab-general`, 28 scenarios against the 28 that four features declare, so nothing was
+silently deselected. 11 passed, 10 failed, 7 skipped, and the split is clean:
+
+- **Passed, all 11: `01` and `02`.** The wear barrier holds this time: the pawn is drafted and
+  stationary, the Gear tab lists `Cloth pants (normal)` under Apparel and the inventory is empty. AB
+  is the supplier and has given the trousers a worn graphic (the seed works), the trouser step logged
+  no warning, and TailorMade was told to leave the trousers alone.
+- **Failed, all 10: `03-silhouettes`, on an undefined step**, `{string} body type is {word}`. That
+  step is Pickle PR #32, not released and not packaged in PickleTools, so this is a missing step and
+  says nothing about the mod. `ColonistRace/` reads a body type back but does not set one.
+- **Skipped, all 7: `04`**, which needs XeoNovaDan and is meant to skip here.
+
+The mod's own log lines from that run, kept: the direct patch route is live (scenario 1's question,
+answered for the first time); `1 more garment(s) share the trouser art and are left alone`, which is
+the first review fix firing on a real def in a real game; and `18 textures read from General Textures
+Collection, 3 drawn onto AB's plain shells`, the three being the child, which General has no art for.
+
+**Nobody has yet judged how these trousers read.** In the map captures a pawn is about 45 pixels tall,
+so a waistband cannot be seen, and the central question of the mod is exactly where it was. What the
+run did buy is that the images are now of a dressed pawn, which the 2026-09-21 run could not say.
+
+Evidence is trimmed to `docs/runs/2026-09-24_wdi-ab-general/evidence/kept/`, 0.13 MB of 154: the Gear-tab
+panel and the inspector strip of each capture, `summary.json` and the mod's log lines.
+
+**`tested` is still not reachable**, and the reason is now concrete rather than general: the ten
+silhouette scenarios cannot run until a body-type step exists on a Pickle everyone has. Either
+PR #32 merges, or its steps become a PickleTools package like the inspect-tab ones, or `03` is
+rewritten around what stock steps can do. That is a decision, not something to guess at.
