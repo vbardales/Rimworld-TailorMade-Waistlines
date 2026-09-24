@@ -60,7 +60,8 @@ Feature: how trousers read on a body drawn without legs
   # Not a man. "gender is male" changes the pawn's gender and leaves its body type as it was
   # generated, which is Female, so this draws a female body under a male name. It was captioned
   # "male" for a day and a person looking at the image was the one who noticed. A man needs
-  # "body type is Male", a step Pickle does not have in its released version: 03-silhouettes.
+  # "body type is Male", a step Pickle does not have in its released version. No scenario of this
+  # suite has a Male body for that reason (03-silhouettes says what it can reach instead).
   Scenario: a colonist whose gender is male, with the body it was generated with
     Given a colonist "Waistline" exists
     And "Waistline" gender is male

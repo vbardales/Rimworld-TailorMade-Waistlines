@@ -596,6 +596,17 @@ Evidence for each pass is trimmed to its `evidence/kept/` folder (0.06-0.13 MB o
 three launcher archives that held these runs, 4.7 GB, are deleted as AGENTS.md asks; the disk went from
 5.8 to 14.5 GB free. Nothing else in `pickle-reports-archive/` was touched.
 
+### 2026-09-24, after the six passes: `03-silhouettes` rewritten with released steps
+
+Decision (Virginie): rewrite `03` with stock Pickle steps rather than wait for PR #32. The released
+Pickle sets gender, age and backstory and no body type, so the file now uses the fixture's own
+colonists: **three scenarios** (a woman with the Female body, a thin man, a thin woman), no AB tag (the
+XND passes run them too), and the log check `no warning matching "Could not load UnityEngine.Texture2D"`
+in place of the drawn-path assertion. **Lost coverage, stated rather than hidden: a Male body, Fat, Hulk
+and the child body are checked by nothing, and no scenario asserts a drawn texture path.** The ten
+scenarios are in git at `d9e8aa0`. The new file has passed the off-game checks (241) and has **not run
+in game**; the counts of every earlier run (28 scenarios) are for the old file.
+
 ### 2026-09-24 night: `wdi-ab-band`, the sixth pass read (six of six)
 
 `wdi-ab-band` (AB's trousers with both art options off, the band alone) ran last through the dispatcher on

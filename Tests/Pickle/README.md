@@ -86,22 +86,27 @@ The reason the file exists: `01` found a pawn that the game reports as wearing t
 tab is the game's own list of what a pawn has on, so it is a witness that does not depend on how
 anything is drawn.
 
-## The silhouettes file needs a second unreleased Pickle change
+## The silhouettes file uses the released Pickle, and covers three bodies
 
-`03-silhouettes.feature` dresses ten pawns, a man, a woman, a boy and a girl, plus a thin, a fat
-and a hulking man and woman, each with the body type set on purpose. It needs
-`{string} body type is {word}` and `{string} apparel {string} is drawn from {string}`, from
-RimWorks/Rimworld-Pickle#32. Stage a build carrying that branch the same way as above; `01`
-and `02` do not need it.
+`03-silhouettes.feature` was ten scenarios (a man, a woman, a boy and a girl, plus a thin, a fat and
+a hulking man and woman), each with the body type set on purpose and the drawn texture path
+asserted. That needed `{string} body type is {word}` and `{string} apparel {string} is drawn
+from {string}`, from RimWorks/Rimworld-Pickle#32, which is not released, so all ten failed on an
+undefined step in every pass. It was rewritten on 2026-09-24 with released steps only; the ten are in
+git at `d9e8aa0`.
 
-Each pawn gets two things. The capture is for a person. The path assertion is not: the game
-draws a garment from its texture path plus the body type, so reading what it actually draws
-catches a body type that got no trousers or the wrong ones without looking at an image. It says
-nothing about the art, which is the same path whoever supplies it.
+The released Pickle sets a gender, an age and a backstory, and none of them sets a body type
+(`gender is male` does not make a man: the pawn `01` first captioned as male was a woman's body). So
+the bodies the file can photograph are the ones Pickle's own `test-colony` fixture has: **Jet and
+Morrison, a Female body; Larson, a Thin body.** Three scenarios: a woman (Female), a thin man
+(Larson as he is), a thin woman (Larson with his gender set to female, which leaves the same body).
+**Not covered by anything: a Male body, Fat, Hulk and the child body.** The texture path is not
+asserted either; what is left is the log check `no warning matching "Could not load
+UnityEngine.Texture2D"`, which a body with no trouser texture would trip. No `@requires:ab.vplrf`
+any more: any pass with WDI and a supplier of trousers runs it, so the XND passes do too.
 
-`gender is male` does not make a man: the body type is a separate fact, and the pawn `01` first
-captioned as male was a woman's body. That is why this file sets both, and sets them before the
-gear.
+Getting the ten back means one of three things: PR #32 merging, its two steps packaged in PickleTools,
+or a hand-edited fixture with more pawns. None is done.
 
 ## The settings seed, and why the WDI+AB pass is not valid without it
 
