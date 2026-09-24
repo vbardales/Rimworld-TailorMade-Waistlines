@@ -576,7 +576,7 @@ six are done:
 | `wdi-ab-general` | failed | 11 / 10 / 7 |
 | `wdi-xnd` | passed | 10 / 0 / 18 |
 | `wdi-xnd-general` | passed | 11 / 0 / 17 |
-| `wdi-ab-band` | still in the queue | |
+| `wdi-ab-band` | failed | 10 / 10 / 7 |
 
 **Every failure is the same ten scenarios, `03-silhouettes`, on the same undefined step** (`{string} body type
 is {word}`, Pickle PR #32). Nothing that ran and could fail has failed. That is the honest summary, and it
@@ -595,3 +595,21 @@ frame in every capture, in every pass. Six sets of images now exist and none can
 Evidence for each pass is trimmed to its `evidence/kept/` folder (0.06-0.13 MB of 40-180 MB), and the
 three launcher archives that held these runs, 4.7 GB, are deleted as AGENTS.md asks; the disk went from
 5.8 to 14.5 GB free. Nothing else in `pickle-reports-archive/` was touched.
+
+### 2026-09-24 night: `wdi-ab-band`, the sixth pass read (six of six)
+
+`wdi-ab-band` (AB's trousers with both art options off, the band alone) ran last through the dispatcher on
+the same DLL: `exitReason failed`, `setName wdi-ab-band`, 27 scenarios played against 27 declared, **10
+passed, 10 failed, 7 skipped**. The ten failures are again `03-silhouettes` on the undefined step
+`{string} body type is {word}`; the seven skips are `04`, XND-only, by tag. The ten that passed: the male,
+female and child trousers scenarios, the quiet one, AB is the supplier, AB gave a worn graphic, no startup
+warning, and the three Gear tabs. The mod log holds the patch line and nothing about trousers, as it
+should with both art options off. So the band-only configuration does not break AB's own trousers; what
+the band does to their look is, once more, in the ten that could not run, and in a frame where the pawn is
+45 px tall.
+
+All six passes of `TESTING.md` have now run and been read, and none has failed on the mod: the only red
+scenarios are the ten that wait for a step. **The band, which is what this pass exists to show, has still
+not been judged**, for the two reasons above (the step, the 45 px pawn). No launcher archive of mine
+remained for this run (the two recent ones belong to other sessions and were left alone). Evidence trimmed
+to `evidence/kept/` (0.13 MB of 180).

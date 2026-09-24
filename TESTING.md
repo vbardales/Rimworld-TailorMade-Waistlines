@@ -74,8 +74,9 @@ there is to look at. Each pass is a different mod set, selected with
 | WDI + XND | `wsl-deps.wdi-xnd.map` | XeoNovaDan's Visible Pants instead of AB's. This mod does nothing on purpose, so this shows what the band does to art drawn for the vanilla footprint |
 | WDI + XND + General | `wsl-deps.wdi-xnd-general.map` | with XND active General's retexture loads, so the art is General's, supplied by General; this mod's "leave it alone" branch runs |
 
-Written 2026-09-24. Before that only the first three existed. None of the six has been run since
-the trouser art landed.
+Written 2026-09-24. Before that only the first three existed. All six ran that day on the DLL with
+the trouser art: no failure on the mod, and ten `03-silhouettes` scenarios red in every AB pass (and in
+the band pass) on a step Pickle does not have yet. Results and images kept: `STATUS.md`, `docs/runs/`.
 
 ## Scenarios
 
