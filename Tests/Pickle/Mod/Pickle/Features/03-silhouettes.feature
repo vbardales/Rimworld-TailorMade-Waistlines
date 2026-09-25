@@ -28,6 +28,12 @@
 # textures", the second being what a missing child texture logs), and the capture for a person.
 # No AB tag: any pass with a legless body retexture (WDI) and a supplier of trousers has something to
 # photograph, so the XND passes run these too. The bare pass skips them.
+#
+# The frame. The first run (2026-09-25) passed ten of ten and showed nothing about the trousers: the selection
+# bracket, the name label and the hover tooltip (the pointer rests at the centre of the screen, on the pawn) sit
+# exactly over the waist of a body drawn without legs. So the pawn is not selected, and the pointer is moved onto
+# the Architect button, which draws its own tooltip at the bottom of the screen. That button is found by its
+# English label, so this file is for the English pass.
 @review @watch @silhouettes @timeout:120
 Feature: the trousers on every silhouette
 
@@ -42,10 +48,10 @@ Feature: the trousers on every silhouette
     And I dress "S-Man" in "Apparel_Pants"
     And "S-Man" is wearing "Apparel_Pants"
     And I draft "S-Man"
-    And I select "S-Man"
     And I zoom all the way in
     And I move the camera to "S-Man"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Man" has body type Male
     And "S-Man" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -61,10 +67,10 @@ Feature: the trousers on every silhouette
     And I dress "S-Woman" in "Apparel_Pants"
     And "S-Woman" is wearing "Apparel_Pants"
     And I draft "S-Woman"
-    And I select "S-Woman"
     And I zoom all the way in
     And I move the camera to "S-Woman"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Woman" has body type Female
     And "S-Woman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -80,10 +86,10 @@ Feature: the trousers on every silhouette
     And I dress "S-ThinMan" in "Apparel_Pants"
     And "S-ThinMan" is wearing "Apparel_Pants"
     And I draft "S-ThinMan"
-    And I select "S-ThinMan"
     And I zoom all the way in
     And I move the camera to "S-ThinMan"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-ThinMan" has body type Thin
     And "S-ThinMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -99,10 +105,10 @@ Feature: the trousers on every silhouette
     And I dress "S-ThinWoman" in "Apparel_Pants"
     And "S-ThinWoman" is wearing "Apparel_Pants"
     And I draft "S-ThinWoman"
-    And I select "S-ThinWoman"
     And I zoom all the way in
     And I move the camera to "S-ThinWoman"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-ThinWoman" has body type Thin
     And "S-ThinWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -118,10 +124,10 @@ Feature: the trousers on every silhouette
     And I dress "S-FatMan" in "Apparel_Pants"
     And "S-FatMan" is wearing "Apparel_Pants"
     And I draft "S-FatMan"
-    And I select "S-FatMan"
     And I zoom all the way in
     And I move the camera to "S-FatMan"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-FatMan" has body type Fat
     And "S-FatMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -137,10 +143,10 @@ Feature: the trousers on every silhouette
     And I dress "S-FatWoman" in "Apparel_Pants"
     And "S-FatWoman" is wearing "Apparel_Pants"
     And I draft "S-FatWoman"
-    And I select "S-FatWoman"
     And I zoom all the way in
     And I move the camera to "S-FatWoman"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-FatWoman" has body type Fat
     And "S-FatWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -156,10 +162,10 @@ Feature: the trousers on every silhouette
     And I dress "S-HulkMan" in "Apparel_Pants"
     And "S-HulkMan" is wearing "Apparel_Pants"
     And I draft "S-HulkMan"
-    And I select "S-HulkMan"
     And I zoom all the way in
     And I move the camera to "S-HulkMan"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-HulkMan" has body type Hulk
     And "S-HulkMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -175,10 +181,10 @@ Feature: the trousers on every silhouette
     And I dress "S-HulkWoman" in "Apparel_Pants"
     And "S-HulkWoman" is wearing "Apparel_Pants"
     And I draft "S-HulkWoman"
-    And I select "S-HulkWoman"
     And I zoom all the way in
     And I move the camera to "S-HulkWoman"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-HulkWoman" has body type Hulk
     And "S-HulkWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
@@ -195,10 +201,10 @@ Feature: the trousers on every silhouette
     And I dress "S-Boy" in "Apparel_KidPants"
     And "S-Boy" is wearing "Apparel_KidPants"
     And I draft "S-Boy"
-    And I select "S-Boy"
     And I zoom all the way in
     And I move the camera to "S-Boy"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Boy" has body type Child
     And Nelim's Pickle Tools: "S-Boy" is at the Child stage of life
     And "S-Boy" apparel covers "Legs"
@@ -216,10 +222,10 @@ Feature: the trousers on every silhouette
     And I dress "S-Girl" in "Apparel_KidPants"
     And "S-Girl" is wearing "Apparel_KidPants"
     And I draft "S-Girl"
-    And I select "S-Girl"
     And I zoom all the way in
     And I move the camera to "S-Girl"
     And I wait 120 ticks
+    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Girl" has body type Child
     And Nelim's Pickle Tools: "S-Girl" is at the Child stage of life
     And "S-Girl" apparel covers "Legs"
