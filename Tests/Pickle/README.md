@@ -102,11 +102,7 @@ and adds the one asked for, so a xenotype with several cannot pick another, and
 `has body type <word>` reads it back after the wait. The gender is set before, the gear after. It needs
 Biotech for the genes and is Nelim's, not Pickle's: **when #32 merges, the package line and the prefix go.**
 
-A boy and a girl were the open point: Child is the body of an age, not a gene's, and the step refuses it,
-so their age is set and read back. **Setting the age alone does not change the body type** (2026-09-25,
-`::a boy`: `it has Male`), so those two are red until PickleTools gives a deterministic child body, and
-`01`'s child scenario, which only sets the age, has photographed an adult body. The Hulk woman passed (the
-gene route works).
+A boy and a girl were the open point: Child is the body of an age, not a gene's. **Setting the age alone does not change the body type** (2026-09-25, `::a boy`: `it has Male`), so PickleTools gained `Nelim's Pickle Tools: "<pawn>" body type is Child`, played by its own session on 2026-09-25 (1 of 1). The age is set first; the step asks the game for the body of the pawn's current life stage and **moves the clothes that stage may not wear into the pawn's inventory**, so the pawn is dressed after it, in child garments. `01`'s child scenario, which only sets the age, has photographed an adult body. Not played by anyone: `Baby`, French, a game without Biotech.
 
 Not asserted, because no released step reads it: the texture path actually drawn, which the PR #32 version
 asserted. What stays is the body type read back, `no warning matching "Could not load

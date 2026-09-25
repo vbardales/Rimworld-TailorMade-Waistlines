@@ -619,6 +619,7 @@ played nothing, my `-DepMap` was a relative path the launcher takes as is):**
   photographed an adult body in `Apparel_KidPants` since it was written, and its caption "trousers on a child
   body" is wrong. PickleTools has been asked for a deterministic child body; until then `a boy` and `a girl`
   are red by construction, and that is the truth of the suite, not a defect of the mod.
+- **Later the same day: the child body exists.** PickleTools' session built and played `body type is Child` (age first, then the step; it moves the clothes the stage may not wear into the inventory, so the pawn is dressed after). `a boy` and `a girl` are rewired on it and every scenario now also asserts no `Failed to find any textures` warning (what a missing child texture logs) and carries `@requires:nelim.pickletools.colonistrace`. **Not run yet in this form.** Baby, French and a game without Biotech were not played by anyone.
 - Still owed: a framing where the pawn is alone, the pointer is off it (no tooltip) and the legs are visible.
   The other eight silhouettes have not run.
 
