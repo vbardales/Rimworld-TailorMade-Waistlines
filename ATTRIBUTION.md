@@ -79,3 +79,7 @@ pressed in its options window; nothing of its code is reused. It is declared in
 ## Named in the code but not used
 - **Female Apparel for Beautiful Bodies** (2881748658) and **Beautiful Bodies**
   (2068281501) were measured and dropped. Nothing of either is here.
+
+## Thanks
+
+To Windonsi and Starkz, whose [WDI's Realistic Bodies](https://steamcommunity.com/sharedfiles/filedetails/?id=3527486510) draws bodies without legs, which is the reason this mod exists at all, and the bodies every test of it is played on. Their art carries no licence and nothing of it is in `Mod/` or read by the assembly: the mod is tested on it, and that is all it takes from it.
