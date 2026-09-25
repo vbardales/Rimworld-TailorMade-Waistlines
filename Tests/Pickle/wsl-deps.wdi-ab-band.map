@@ -11,3 +11,7 @@ ab.vplrf               2986402536
 
 # The inspect-tab steps 02-gear-tab.feature needs, as a PickleTools package on the stock Pickle.
 nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
+
+# The body-type step 03-silhouettes.feature needs ("Nelim's Pickle Tools: <pawn> body type is <word>"), as a PickleTools
+# package on the stock Pickle, the same route as the inspect tabs above. Needs Biotech for genes.
+nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod

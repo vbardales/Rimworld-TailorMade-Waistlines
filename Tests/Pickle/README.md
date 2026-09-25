@@ -86,28 +86,30 @@ The reason the file exists: `01` found a pawn that the game reports as wearing t
 tab is the game's own list of what a pawn has on, so it is a witness that does not depend on how
 anything is drawn.
 
-## The silhouettes file uses the released Pickle, and covers three bodies
+## The silhouettes file: ten scenarios, on a PickleTools step
 
-`03-silhouettes.feature` was ten scenarios (a man, a woman, a boy and a girl, plus a thin, a fat and
-a hulking man and woman), each with the body type set on purpose and the drawn texture path
-asserted. That needed `{string} body type is {word}` and `{string} apparel {string} is drawn
-from {string}`, from RimWorks/Rimworld-Pickle#32, which is not released, so all ten failed on an
-undefined step in every pass. It was rewritten on 2026-09-24 with released steps only; the ten are in
-git at `d9e8aa0`.
+`03-silhouettes.feature` dresses ten pawns, a man, a woman, a boy and a girl, plus a thin, a fat and a
+hulking man and woman. It was first written against `{string} body type is {word}` and `{string}
+apparel {string} is drawn from {string}` of RimWorks/Rimworld-Pickle#32, not released, so all ten failed
+on an undefined step in every pass (git `d9e8aa0`). The released Pickle sets a gender, an age and a
+backstory and no body type (`gender is male` does not make a man: the pawn `01` first captioned as male
+was a woman's body), so for a while it was three scenarios on the fixture's own colonists (git
+`a941b2c`).
 
-The released Pickle sets a gender, an age and a backstory, and none of them sets a body type
-(`gender is male` does not make a man: the pawn `01` first captioned as male was a woman's body). So
-the bodies the file can photograph are the ones Pickle's own `test-colony` fixture has: **Jet and
-Morrison, a Female body; Larson, a Thin body.** Three scenarios: a woman (Female), a thin man
-(Larson as he is), a thin woman (Larson with his gender set to female, which leaves the same body).
-**Not covered by anything: a Male body, Fat, Hulk and the child body.** The texture path is not
-asserted either; what is left is the log check `no warning matching "Could not load
-UnityEngine.Texture2D"`, which a body with no trouser texture would trip. No `@requires:ab.vplrf`
-any more: any pass with WDI and a supplier of trousers runs it, so the XND passes do too.
+It is ten again with `nelim.pickletools.colonistrace`, the PickleTools package every WDI pass map now
+names: `Nelim's Pickle Tools: "<pawn>" body type is <word>` removes every body-type gene the pawn has
+and adds the one asked for, so a xenotype with several cannot pick another, and
+`has body type <word>` reads it back after the wait. The gender is set before, the gear after. It needs
+Biotech for the genes and is Nelim's, not Pickle's: **when #32 merges, the package line and the prefix go.**
 
-Getting the ten back means one of three things: PR #32 merging, its two steps packaged in PickleTools,
-or a hand-edited fixture with more pawns. None is done.
+A boy and a girl are the open point: Child is the body of an age, not a gene's, and the step refuses it,
+so their age is set and read back. Whether setting the age alone changes the body type, without the
+game starting a life stage, is what those two find out.
 
+Not asserted, because no released step reads it: the texture path actually drawn, which the PR #32 version
+asserted. What stays is the body type read back, `no warning matching "Could not load
+UnityEngine.Texture2D"` and the capture for a person. No `@requires:ab.vplrf`: any pass with WDI and a
+supplier of trousers runs it, so the XND passes do too.
 ## The settings seed, and why the WDI+AB pass is not valid without it
 
 AB's Visible Pants is inert on a profile without its settings file. Its category list starts

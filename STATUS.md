@@ -596,7 +596,18 @@ Evidence for each pass is trimmed to its `evidence/kept/` folder (0.06-0.13 MB o
 three launcher archives that held these runs, 4.7 GB, are deleted as AGENTS.md asks; the disk went from
 5.8 to 14.5 GB free. Nothing else in `pickle-reports-archive/` was touched.
 
-### 2026-09-24, after the six passes: `03-silhouettes` rewritten with released steps
+### 2026-09-25: `03-silhouettes` back to ten scenarios, on PickleTools' body-type step
+
+Virginie asked why the body type was not set with PickleTools' ColonistRace and multiple genes handled.
+It should have been: I had read "steps de base" as "the released Pickle's steps". The PickleTools session
+built `Nelim's Pickle Tools: "<pawn>" body type is <word>` (removes every body-type gene, adds the one
+asked, reads back), still uncommitted in its repository when I wired it. `03` is ten scenarios again
+(a Male, Female, Thin, Fat and Hulk body of each gender, then a boy and a girl by age), the package
+line is in the five WDI pass maps, and each scenario reads the body type back. **Not run in game**;
+the two children are the open point (Child is an age, the step refuses it). The drawn texture path is
+still not asserted (needs PR #32). What follows describes the three-scenario interim (git `a941b2c`).
+
+### 2026-09-24, after the six passes: `03-silhouettes` rewritten with released steps (interim)
 
 Decision (Virginie): rewrite `03` with stock Pickle steps rather than wait for PR #32. The released
 Pickle sets gender, age and backstory and no body type, so the file now uses the fixture's own

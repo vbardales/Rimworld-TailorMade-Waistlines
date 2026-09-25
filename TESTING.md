@@ -76,8 +76,8 @@ there is to look at. Each pass is a different mod set, selected with
 
 Written 2026-09-24. Before that only the first three existed. All six ran that day on the DLL with
 the trouser art: no failure on the mod, and ten `03-silhouettes` scenarios red in every AB pass (and in
-the band pass) on a step Pickle does not have. `03` was then rewritten with released steps (three
-scenarios; see `Tests/Pickle/README.md`) and has not run yet in its new form. Results and images kept: `STATUS.md`, `docs/runs/`.
+the band pass) on a step Pickle does not have. `03` was then rewritten, first with three scenarios on the released
+Pickle, then with ten on a PickleTools step (`Tests/Pickle/README.md`), and has not run in either form. Results and images kept: `STATUS.md`, `docs/runs/`.
 
 ## Scenarios
 
@@ -230,7 +230,7 @@ one scenario per body, and answers some of them only in part.
 | 1. The patch is live, and by the right route | **No.** The route is a static flag and the startup line; reading either needs a step of our own, and the one that did was removed. Log line by eye |
 | 2. Nothing changes until asked | **Partly.** `the mod is quiet on a body drawn the ordinary way` covers the bare pass. Defaults untouched on a legless body is not asserted anywhere |
 | 3. The waistband follows the slider | **No.** Moving a slider and watching the map repaint needs the settings window and a step that reads TailorMade's cache. By hand |
-| 4. Every body type | **Partly, three of six.** `03-silhouettes` photographs a Female body and a Thin one (a woman, a thin man, a thin woman) with released Pickle steps and checks that no trouser texture failed to load. **A Male body, Fat, Hulk and the child body are not covered by anything**: the released Pickle sets no body type. The ten-pawn version, with the drawn path asserted, needs Pickle PR #32 and is in git at `d9e8aa0` |
+| 4. Every body type | **Yes, once it has run**: `03-silhouettes` dresses ten pawns with the body type set by PickleTools' step and read back, and checks that no trouser texture failed to load. The **drawn texture path is not asserted** (that needs Pickle PR #32); the capture is for a person. The two children are the open point (Child is an age, not a gene) |
 | 5. Four facings | **No.** Nothing rotates a pawn. By hand |
 | 6. Shirts, and the compression | **No.** The suite never puts a shirt on. This is the open question of the mod and it is still entirely by eye |
 | 7. Boots | **No.** Nothing wears boots |
@@ -239,7 +239,7 @@ one scenario per body, and answers some of them only in part.
 | 10. The hidden shortcut | **No.** RIMMSQOL is not in any pass |
 | 11. A damaged config file | **Covered off-game** by `Check-Settings.ps1`, and deliberately not repeated here |
 
-So a suite entirely green answers **4** in part (three body types), part of **2**, and adds three things the eleven
+So a suite entirely green answers **4** (without the drawn path), part of **2**, and adds three things the eleven
 never asked for: that AB is the supplier in that pass, that AB actually filled `wornGraphicPath`,
 and that the mod told TailorMade to leave its own art alone. Everything about the sliders, the
 shirt, the boots, the facings, the languages and the shortcut is still a person in front of the
@@ -257,7 +257,7 @@ What proves something, and is worth keeping while it is the latest for the shipp
 - **`summary.json`, and `exitReason` read first.** A few hundred bytes. It says whether the run
   reached its end, how many scenarios played and how many features were discovered. Always keep.
 - **One capture per silhouette that a person actually judged**, cropped to the pawn and its
-  inspector, not the 1080p frame: `03-silhouettes` is three, `01-trousers-review` is three. The
+  inspector, not the 1080p frame: `03-silhouettes` is ten, `01-trousers-review` is three. The
   inspector line (`Carrying`, `Wearing`) is what shows the garment was worn, so the crop keeps it.
 - **The Gear-tab capture of `02`**, once, per body: it is the witness that does not depend on how
   anything is drawn.
