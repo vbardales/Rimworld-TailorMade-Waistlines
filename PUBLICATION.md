@@ -19,6 +19,12 @@ The live description is the one sent when the item was created (`SetItemDescript
 - the thanks miss the development tools (Pickle, RimLogging, PickleTools, development only, never a
   dependency) and XeoNovaDan's Visible Pants, which has a pass of its own.
 
+**Coming standard, not adopted yet** (CI/CD setup, 2026-09-25, `Rimworld-Release-Admin` `f196148`, nothing forced): the
+description is written once, in Markdown, in a fenced block under `## Steam description` of this file; the CI
+converts it to BBCode and generates `About.xml`'s `<description>` from it, and every dry-run and publish stops if
+the two differ. To adopt at the next publication or when Virginie asks, through the CI/CD session (this repository
+has no publish workflow of its own to regenerate yet). Until then the text above is the working list.
+
 The thanks sentence for the authors of WDI's Realistic Bodies, approved by Virginie on 2026-09-25, to put in
 `THANKS`:
 
