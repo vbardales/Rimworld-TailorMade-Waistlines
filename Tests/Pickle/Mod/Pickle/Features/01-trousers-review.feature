@@ -91,6 +91,11 @@ Feature: how trousers read on a body drawn without legs
     And "Waistline-F" apparel covers "Legs"
     Then I take a screenshot "trousers on a female body"
 
+  # WARNING (2026-09-25, `03-silhouettes` "a boy"): setting the age to 8, as this scenario does, does
+  # NOT give the pawn a child body: it keeps its adult one (read back: "it has Male"). What this
+  # photographs is an adult body in the child garment, not a child. It stays as a check of the garment's
+  # own def; the child body is 03's, when PickleTools can give one.
+  #
   # Biotech children wear their own garment. It is a separate ThingDef with a wornGraphicPath of
   # its own, so it can be drawn bare however well the adult trousers came out - and AB's art for it
   # sits at v 0.27..0.43 of its texture where the adult one sits at 0.16..0.30, a different shape

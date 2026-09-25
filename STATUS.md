@@ -607,6 +607,21 @@ line is in the five WDI pass maps, and each scenario reads the body type back. *
 the two children are the open point (Child is an age, the step refuses it). The drawn texture path is
 still not asserted (needs PR #32). What follows describes the three-scenario interim (git `a941b2c`).
 
+**First runs of the new `03`, two small tickets on `wdi-ab` (tree `4d5dd53`; two earlier submissions
+played nothing, my `-DepMap` was a relative path the launcher takes as is):**
+
+- `::a hulking woman`: `exitReason passed`, 1 of 1. The step set Hulk on a woman and `has body type Hulk`
+  read it back: **the gene route works on the released Pickle.** The capture is not usable: the selection
+  bracket, the name label and the hover tooltip cover the legs, and Larson and Morrison stand beside the pawn.
+  The trousers on a Hulk body have not been seen.
+- `::a boy`: `exitReason failed`, 1 of 1: `pawn 'S-Boy' should have body type Child; it has Male`. **Setting
+  the age to 8 does not give a child body.** So `01-trousers-review`'s child scenario (`Waistline-K`) has
+  photographed an adult body in `Apparel_KidPants` since it was written, and its caption "trousers on a child
+  body" is wrong. PickleTools has been asked for a deterministic child body; until then `a boy` and `a girl`
+  are red by construction, and that is the truth of the suite, not a defect of the mod.
+- Still owed: a framing where the pawn is alone, the pointer is off it (no tooltip) and the legs are visible.
+  The other eight silhouettes have not run.
+
 ### 2026-09-24, after the six passes: `03-silhouettes` rewritten with released steps (interim)
 
 Decision (Virginie): rewrite `03` with stock Pickle steps rather than wait for PR #32. The released
