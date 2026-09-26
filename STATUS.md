@@ -652,3 +652,11 @@ scenarios are the ten that wait for a step. **The band, which is what this pass 
 not been judged**, for the two reasons above (the step, the 45 px pawn). No launcher archive of mine
 remained for this run (the two recent ones belong to other sessions and were left alone). Evidence trimmed
 to `evidence/kept/` (0.13 MB of 180).
+
+## 2026-09-26: the frame change does not run
+
+`03`'s new frame (`I hover "Architect"`, no selection) fails on both scenarios tried: Pickle's `I hover` only knows tagged
+UI elements, and the bottom bar's buttons are not tagged (`no tags recorded this frame`), although the button is on screen.
+Nothing about the trousers was learned; the capture still has the tooltip over the waist. The step must be replaced (candidates:
+PickleTools' `I hover over the tooltip containing {string}` on a far-away region, or a step that moves the pointer) before
+the remaining passes are run with `03`. The children's "sack" is still a suspicion. Evidence: `docs/runs/2026-09-25_wdi-ab-frame/evidence/kept/`.
