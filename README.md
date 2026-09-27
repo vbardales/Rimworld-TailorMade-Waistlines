@@ -141,11 +141,12 @@ Source/TailorMadeWaistlines/      Bands.cs, ChestArt.cs, TailorMadeWaistlinesMod
                         MainButtonWorker_TailorMadeWaistlines.cs,
                         TrouserArt.cs (the step at startup), TrouserDetail.cs (pure)
 Tests/Run-Tests.ps1     runs the five sets below, no game started
-Tests/Check-Mod.ps1     reflection over TailorMade: 22 checks, no game started
+Tests/Check-Mod.ps1     reflection over TailorMade: 30 checks, no game started
 Tests/Check-Logic.ps1   our own patch bodies: the band per slider, which garments are shortened
 Tests/Check-Localization.ps1   keys, French coverage, placeholders, hidden shortcut
 Tests/Check-Settings.ps1       defaults, reset and clamping of the settings object
 Tests/Check-Trousers.ps1       the trouser detail generator: invariants, on synthetic shells and AB's own
+Tests/Pickle/           in-game scenarios, run by Pickle — see Tests/Pickle/README.md
 _tools/*.js             measurement and generation, for the parked route
 Art/                    generated previews and contact sheets. Local only, not in this repository
 ```

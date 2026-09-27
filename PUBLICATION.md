@@ -48,10 +48,12 @@ nobody.
 | Workshop ID | Recipient | State here | Registry row |
 | --- | --- | --- | --- |
 | `3527486510` | Windonsi and Starkz, WDI's Realistic Bodies | **drafted** (approved 2026-09-25) | none yet: a `drafted` row is to add to the register, which is Virginie's file |
-| `3756915448` | astryl, TailorMade | not drafted | not looked up |
-| `2986402536` | aedbia, AB's Visible Pants | not drafted | not looked up |
-| `3789119336` | Kas, General Textures Collection | not drafted | not looked up |
-| `2264108215` | XeoNovaDan, Visible Pants (has a pass of its own) | not drafted | not looked up |
+| `3756915448` | astryl, TailorMade | **drafted** 2026-09-27 | none yet |
+| `2986402536` | aedbia, AB's Visible Pants | **drafted** 2026-09-27 | none yet |
+| `3789119336` | Kas, General Textures Collection | **drafted** 2026-09-27 | none yet |
+| `2264108215` | XeoNovaDan, Visible Pants (has a pass of its own) | **drafted** 2026-09-27 | none yet |
+
+None of the five drafts is approved by Virginie except the first (WDI, 2026-09-25). Nothing here is posted: `AGENTS.md` and this file's own rule are that nothing goes to Pickle or Steam upstream without her word, and a link to a private item opens for nobody besides.
 
 Draft for `3527486510`, 628 characters (limit 1000), BBCode-safe, the bare link at the end makes a thumbnail:
 
@@ -60,7 +62,33 @@ Hi Windonsi and Starkz! 😊 Thank you for WDI's Realistic Bodies. It is the rea
 https://steamcommunity.com/sharedfiles/filedetails/?id=3806769245
 ```
 
-The drafts for the others are to write, personalised, one each: the same text pasted four times shows.
+Draft for `3756915448` (astryl, TailorMade), not yet approved:
+
+```
+Hi astryl! 😊 Thank you for TailorMade, and for making it MIT. This mod is three of your own constants (the pants, boots and chest bands) turned into sliders, nothing more: your code does all the fitting work, mine only asks it for different numbers. Your licence is the only reason a mod like this can exist at all — without it I'd have had nothing to patch into. Thank you for the generous terms and the well-built mod behind them! 💛
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806769245
+```
+
+Draft for `2986402536` (aedbia, AB's Visible Pants), not yet approved:
+
+```
+Hi aedbia! 😊 Thank you for AB's Visible Pants — it's the mod that actually draws trousers on bodies vanilla leaves bare. Reading your assembly taught me how your settings file fills in the categories, and that knowledge is the only thing I took from it: nothing of your code or art is copied. My small mod, TailorMade Waistlines, gives your trousers a waistband and a fly where the body art has none, and moves them down a little on bodies drawn without legs. Thank you for supplying what nothing else does! 💛
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806769245
+```
+
+Draft for `3789119336` (Kas, General Textures Collection), not yet approved:
+
+```
+Hi Kas! 😊 Thank you for General Textures Collection. Your retexture of AB's trousers has the details — a waistband, a fly, a seam — that the base art doesn't, and my mod reads those PNGs straight from your installed folder at startup so a pawn wears your art instead of a plain shell, whenever General is active alongside AB. Nothing of yours is copied into mine: it's read at run time, exactly as the game would have loaded it itself. Thank you for the detail work! 💛
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806769245
+```
+
+Draft for `2264108215` (XeoNovaDan, Visible Pants), not yet approved:
+
+```
+Hi XeoNovaDan! 😊 Thank you for Visible Pants — the reason bodies without legs need trousers of their own at all is that yours drew the question first. TailorMade Waistlines gets its own capture pass against your mod, the same way it does against AB's, so your trousers get the same waistline correction on a legless body. Thank you for the original work this whole space is built on! 💛
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806769245
+```
 
 ## 4. Dependencies and DLC
 

@@ -83,3 +83,5 @@ pressed in its options window; nothing of its code is reused. It is declared in
 ## Thanks
 
 To Windonsi and Starkz, whose [WDI's Realistic Bodies](https://steamcommunity.com/sharedfiles/filedetails/?id=3527486510) draws bodies without legs, which is the reason this mod exists at all, and the bodies every test of it is played on. Their art carries no licence and nothing of it is in `Mod/` or read by the assembly: the mod is tested on it, and that is all it takes from it.
+
+**Development tools, never a dependency of `Mod/`.** RimWorks' [Pickle](https://github.com/RimWorks/Rimworld-Pickle) runs every in-game scenario in `Tests/Pickle/`. RimLogging attributes the log warnings those scenarios read, so a "Could not load" line is known to come from this mod rather than another. Nelim's own PickleTools supplies the steps Pickle does not have yet: the Gear-tab read (`InspectTabs`), the body-type set-and-read-back (`ColonistRace`), and the frame fix (`ClickDiagnostics`). None of the four ships in `Mod/` or is read by the assembly; they exist only in `Tests/Pickle/` and the pass maps that stage them.
