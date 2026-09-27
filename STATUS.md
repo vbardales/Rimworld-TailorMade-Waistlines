@@ -51,6 +51,18 @@ updated:      2026-09-20
 
 # TailorMade Waistlines — status
 
+## Note from the CI/CD session — 2026-09-27
+
+The manual publish workflow (`publish-tag.yml`) is now in place. **No description source
+configured**, matching what `PUBLICATION.md` §1 already says: the `## Steam description`
+Markdown-block standard is "coming standard, not adopted yet" here, and its content still needs
+the fixes that section lists (closing section headings, the `ATTRIBUTION.md` link, Workshop links
+on named mods, missing thanks) before it can be used. `update_description` stays unusable until
+that's written and the workflow regenerated with `--description-markdown`; `build`/`tag`/`publish`/
+`update_preview`/`update_title`/`update_tags` all work as-is. Separately, `PUBLICATION.md` §6
+("Steam change note") is "Not written" for `1.0.0` and `CHANGELOG.md` has no dated section past
+`0.1.0` — both need writing before a dry-run of a real version can pass its release-notes check.
+
 ## What exists — 2026-09-20
 
 One assembly and a settings window. No textures, no defs. It turns the three
