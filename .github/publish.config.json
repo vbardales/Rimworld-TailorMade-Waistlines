@@ -1,0 +1,14 @@
+{
+  "templateStamp": "a8ca11cdd9a3",
+  "workshopId": "3806769245",
+  "packageId": "nelim.tailormade.waistlines",
+  "releaseTitle": "TailorMade Waistlines {version}",
+  "requirePaths": [
+    "Assemblies/TailorMadeWaistlines.dll"
+  ],
+  "forbidPaths": [],
+  "previewFile": "About/Preview.png",
+  "build": {
+    "project": "Source/TailorMadeWaistlines/TailorMadeWaistlines.csproj"
+  }
+}
