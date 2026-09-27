@@ -31,15 +31,17 @@
 #
 # The frame. The first run (2026-09-25) passed ten of ten and showed nothing about the trousers: the selection
 # bracket, the name label and the hover tooltip (the pointer rests at the centre of the screen, on the pawn) sit
-# exactly over the waist of a body drawn without legs. So the pawn is not selected, and the pointer is moved onto
-# the Architect button, which draws its own tooltip at the bottom of the screen. That button is found by its
-# English label, so this file is for the English pass.
+# exactly over the waist of a body drawn without legs. So the pawn is not selected. The first fix tried, hovering
+# the Architect button by its English label, failed (2026-09-26: the main bar's buttons carry no Pickle tag,
+# "no tags recorded this frame"). PickleTools' ClickDiagnostics package gained a step that moves the OS pointer to
+# given coordinates directly, no tag and no tooltip needed (nelim.pickletools.clickdiagnostics, 2026-09-27); it
+# parks the pointer at the corner of the screen before the capture.
 @review @watch @silhouettes @timeout:120
 Feature: the trousers on every silhouette
 
   Background:
     Given the save "test-colony" is loaded
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a man, body type Male
     Given a colonist "S-Man" exists
     And "S-Man" gender is male
@@ -50,15 +52,15 @@ Feature: the trousers on every silhouette
     And I draft "S-Man"
     And I zoom all the way in
     And I move the camera to "S-Man"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Man" has body type Male
     And "S-Man" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, man, Male"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a woman, body type Female
     Given a colonist "S-Woman" exists
     And "S-Woman" gender is female
@@ -69,15 +71,15 @@ Feature: the trousers on every silhouette
     And I draft "S-Woman"
     And I zoom all the way in
     And I move the camera to "S-Woman"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Woman" has body type Female
     And "S-Woman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, woman, Female"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a thin man
     Given a colonist "S-ThinMan" exists
     And "S-ThinMan" gender is male
@@ -88,15 +90,15 @@ Feature: the trousers on every silhouette
     And I draft "S-ThinMan"
     And I zoom all the way in
     And I move the camera to "S-ThinMan"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-ThinMan" has body type Thin
     And "S-ThinMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, man, Thin"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a thin woman
     Given a colonist "S-ThinWoman" exists
     And "S-ThinWoman" gender is female
@@ -107,15 +109,15 @@ Feature: the trousers on every silhouette
     And I draft "S-ThinWoman"
     And I zoom all the way in
     And I move the camera to "S-ThinWoman"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-ThinWoman" has body type Thin
     And "S-ThinWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, woman, Thin"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a fat man
     Given a colonist "S-FatMan" exists
     And "S-FatMan" gender is male
@@ -126,15 +128,15 @@ Feature: the trousers on every silhouette
     And I draft "S-FatMan"
     And I zoom all the way in
     And I move the camera to "S-FatMan"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-FatMan" has body type Fat
     And "S-FatMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, man, Fat"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a fat woman
     Given a colonist "S-FatWoman" exists
     And "S-FatWoman" gender is female
@@ -145,15 +147,15 @@ Feature: the trousers on every silhouette
     And I draft "S-FatWoman"
     And I zoom all the way in
     And I move the camera to "S-FatWoman"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-FatWoman" has body type Fat
     And "S-FatWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, woman, Fat"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a hulking man
     Given a colonist "S-HulkMan" exists
     And "S-HulkMan" gender is male
@@ -164,15 +166,15 @@ Feature: the trousers on every silhouette
     And I draft "S-HulkMan"
     And I zoom all the way in
     And I move the camera to "S-HulkMan"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-HulkMan" has body type Hulk
     And "S-HulkMan" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, man, Hulk"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a hulking woman
     Given a colonist "S-HulkWoman" exists
     And "S-HulkWoman" gender is female
@@ -183,15 +185,15 @@ Feature: the trousers on every silhouette
     And I draft "S-HulkWoman"
     And I zoom all the way in
     And I move the camera to "S-HulkWoman"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-HulkWoman" has body type Hulk
     And "S-HulkWoman" apparel covers "Legs"
     And no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, woman, Hulk"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a boy
     Given a colonist "S-Boy" exists
     And "S-Boy" is 8 years old
@@ -203,8 +205,8 @@ Feature: the trousers on every silhouette
     And I draft "S-Boy"
     And I zoom all the way in
     And I move the camera to "S-Boy"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Boy" has body type Child
     And Nelim's Pickle Tools: "S-Boy" is at the Child stage of life
     And "S-Boy" apparel covers "Legs"
@@ -212,7 +214,7 @@ Feature: the trousers on every silhouette
     And no warning matching "Failed to find any textures" was logged
     And I take a screenshot "silhouette, boy, Child"
 
-  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace
+  @same-world @requires:wdi.realistic.bodies @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.clickdiagnostics
   Scenario: a girl
     Given a colonist "S-Girl" exists
     And "S-Girl" is 8 years old
@@ -224,8 +226,8 @@ Feature: the trousers on every silhouette
     And I draft "S-Girl"
     And I zoom all the way in
     And I move the camera to "S-Girl"
+    And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
-    And I hover "Architect"
     Then Nelim's Pickle Tools: "S-Girl" has body type Child
     And Nelim's Pickle Tools: "S-Girl" is at the Child stage of life
     And "S-Girl" apparel covers "Legs"

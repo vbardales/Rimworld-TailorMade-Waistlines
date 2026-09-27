@@ -15,3 +15,8 @@ nelim.pickletools.inspecttabs   path:PickleTools/InspectTabs/Mod
 # The body-type step 03-silhouettes.feature needs ("Nelim's Pickle Tools: <pawn> body type is <word>"), as a PickleTools
 # package on the stock Pickle, the same route as the inspect tabs above. Needs Biotech for genes.
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
+
+# The frame step 03-silhouettes.feature needs ("Nelim's Pickle Tools: I move the mouse to (x, y)"), added 2026-09-27
+# after "I hover" on an untagged main-bar button failed ("no tags recorded this frame"). It parks the OS pointer off
+# the pawn before the capture, without needing a tag or a tooltip.
+nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod

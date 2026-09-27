@@ -660,3 +660,21 @@ UI elements, and the bottom bar's buttons are not tagged (`no tags recorded this
 Nothing about the trousers was learned; the capture still has the tooltip over the waist. The step must be replaced (candidates:
 PickleTools' `I hover over the tooltip containing {string}` on a far-away region, or a step that moves the pointer) before
 the remaining passes are run with `03`. The children's "sack" is still a suspicion. Evidence: `docs/runs/2026-09-25_wdi-ab-frame/evidence/kept/`.
+
+## 2026-09-27: the frame fix works; the child "sack" is confirmed real
+
+PickleTools added `Nelim's Pickle Tools: I move the mouse to (x, y)` (ClickDiagnostics package) after
+`I hover "Architect"` failed on an untagged button. `03-silhouettes.feature` now parks the pointer at
+(10, 10) before the wait and the capture, on all ten scenarios; ticket 4355 ran the two that had failed
+before (`a hulking man`, `a boy`) and both passed, no bracket or tooltip over the pawn.
+
+Judged from the captures: on the Hulk man the name label still sits close to the waist and only a thin
+band of trouser shows above it — worth a closer frame later. **On the boy, the light-blue shape wrapping
+the whole visible body up to the hair, plus a second unworn pair of trousers lying on the ground beside
+the pawn, is confirmed: not a selection-overlay artifact, a real rendering defect on the child body.** The
+girl scenario has not been re-run to confirm it also affects her; the mechanism is presumably shared.
+
+Not yet done: re-running the other eight `03` scenarios and the four remaining passes (`wdi-ab-general`,
+`wdi-ab-band`, `wdi-xnd`, `wdi-xnd-general`) with the fixed frame, and deciding whether the child sack is
+a bug in this mod's own drawing step or in how AB/General supply child textures. Evidence:
+`docs/runs/2026-09-25_wdi-ab-frame/evidence-1/kept/`.

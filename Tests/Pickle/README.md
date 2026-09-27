@@ -108,6 +108,14 @@ Not asserted, because no released step reads it: the texture path actually drawn
 asserted. What stays is the body type read back, `no warning matching "Could not load
 UnityEngine.Texture2D"` and the capture for a person. No `@requires:ab.vplrf`: any pass with WDI and a
 supplier of trousers runs it, so the XND passes do too.
+
+The frame: selecting the pawn put the bracket, the name label and the hover tooltip over the waist of a
+body drawn without legs, so nothing of the first run's captures (2026-09-25) showed the trousers. Hovering
+the Architect button by its English label was tried next and failed (2026-09-26: the main bar's buttons
+carry no Pickle tag). What stays, added 2026-09-27: PickleTools' ClickDiagnostics package
+(`nelim.pickletools.clickdiagnostics`) gained `Nelim's Pickle Tools: I move the mouse to (x, y)`, which
+moves the OS pointer directly, no tag and no tooltip needed, and parks it at a screen corner before the
+wait and the capture.
 ## The settings seed, and why the WDI+AB pass is not valid without it
 
 AB's Visible Pants is inert on a profile without its settings file. Its category list starts
