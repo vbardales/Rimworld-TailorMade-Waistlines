@@ -74,10 +74,7 @@ namespace TailorMadeWaistlines
                 if (__result.cls != ApparelClass.Chest) return;
                 if (!TailorMadeWaistlinesMod.Settings.keepJacketsLong) return;
                 if (def?.apparel == null || def.apparel.LastLayer == ApparelLayerDefOf.OnSkin) return;
-                // Left alone altogether (not just unbanded): TailorMade then leaves the garment as its art is drawn, which is the
-                // length the jacket was made with.
                 __result.cls = ApparelClass.None;
-                __result.ignore = true;
             }
         }
     }
