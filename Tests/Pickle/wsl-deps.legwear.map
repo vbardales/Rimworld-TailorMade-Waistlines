@@ -1,0 +1,16 @@
+# The legwear pass: shorts and skirts from Vanilla Apparel Expanded (VAE_Apparel_Shorts, VAE_Apparel_Skirt: no worn graphic of their own,
+# so AB's Shorts and Skirt categories supply the art), on WDI's bodies, in the Sanctuaire. Not trousers: this mod draws details only for
+# Pants, so what is checked is that it stays out of the way (no black wedge on a short, no gap cut in a skirt).
+# config/legwear/ is a copy of config/gallery/ (AB seed, and this mod's settings with the shirt option on).
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+VanillaExpanded.VAPPE   1814987817
+OskarPotocki.VanillaFactionsExpanded.Core   2023507013
+nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
+nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor path:PickleTools/StageDecor/Mod
+nelim.pickletools.coatsteps path:PickleTools/CoatSteps/Mod
+nelim.pickletools.clearscreen path:PickleTools/ClearScreen/Mod
+nelim.pickletools   path:PickleTools/Tests/Pickle/StandaloneBase/Mod
