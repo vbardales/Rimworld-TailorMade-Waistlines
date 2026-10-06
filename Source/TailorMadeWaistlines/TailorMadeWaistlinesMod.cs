@@ -15,7 +15,7 @@ namespace TailorMadeWaistlines
         // Visible Pants is active, and they are read at startup.
         public const float DefaultPantsTop = 0.58f;
         public const float DefaultBootsTop = 0.20f;
-        public const float DefaultChestBottom = 0.40f;
+        public const float DefaultChestBottom = 0.25f;
 
         // The slider ranges. A value read back from the config file is brought
         // into them too, so a hand-edited or damaged file cannot ask TailorMade
