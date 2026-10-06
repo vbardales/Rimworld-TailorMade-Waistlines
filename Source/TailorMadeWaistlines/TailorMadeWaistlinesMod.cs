@@ -118,6 +118,8 @@ namespace TailorMadeWaistlines
             LongEventHandler.ExecuteWhenFinished(Bands.SelfTest);
             // After the game has loaded every mod's textures, which is when there is something to replace.
             LongEventHandler.ExecuteWhenFinished(TrouserArt.Apply);
+            // After the trousers: the jackets are measured on their shells.
+            LongEventHandler.ExecuteWhenFinished(JacketArt.Apply);
         }
 
         // The mod's own name, a proper noun: the one player-facing string that is not a key.

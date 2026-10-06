@@ -75,7 +75,7 @@ namespace TailorMadeWaistlines
 
         // Where the first row of skin below the navel sits on WDI's bodies, as a fraction of the picture counted from the top,
         // measured with scripts/measure-navel.js (the navel's darkest rows, plus a margin). The trousers start there.
-        private static readonly Dictionary<string, float> BelowNavel = new Dictionary<string, float>
+        internal static readonly Dictionary<string, float> BelowNavel = new Dictionary<string, float>
         {
             { "Female", 0.602f }, { "Male", 0.623f }, { "Thin", 0.563f }, { "Fat", 0.623f }, { "Hulk", 0.672f },
         };
@@ -346,6 +346,24 @@ namespace TailorMadeWaistlines
             int rows = (int)Math.Round(drop * height, MidpointRounding.AwayFromZero);
             return rows <= 0 ? rgba : TrouserDetail.ShiftDown(rgba, width, height, rows);
         }
+
+        // ----------------------------------------------------- what the jackets are measured on
+
+        internal static ModContentPack FindPackPublic(string packageId) => FindPack(packageId);
+
+        internal static string PantsTexturePath(string body, string facing) => PantsPath + "_" + body + "_" + facing;
+
+        /// <summary>This mod's own texture for the path if it has one, otherwise the one the game would use.</summary>
+        internal static Texture2D TextureAt(string path, ModContentHolder<Texture2D> mine)
+        {
+            if (mine.contentList.TryGetValue(path, out Texture2D own)) return own;
+            ModContentPack supplier = SupplierOf(path);
+            return supplier?.GetContentHolder<Texture2D>().Get(path);
+        }
+
+        internal static byte[] Read(Texture texture, out int width, out int height) => ReadTopDown(texture, out width, out height);
+
+        internal static Texture2D Build(byte[] rgba, int width, int height, string name) => FromTopDown(rgba, width, height, name);
 
         // ---------------------------------------------------------------- who supplies
 

@@ -363,6 +363,18 @@ $nAlphaBare = [TmwCheck]::AlphaChanged($gshell, $bareOut)
 Assert-That 'shorts: the gap between the legs is left open (alpha removed), not painted' ($nAlphaBare -gt 0) "$nAlphaBare alpha values changed"
 Assert-That 'trousers: the gap is painted, no alpha removed' ([TmwCheck]::AlphaChanged($gshell, $gout) -eq 0)
 
+$jb = $detail.GetMethod('StretchBottom')
+$jbot = [TmwCheck]::BottomRow($gshell, $gw, $gh); $jtop = [TmwCheck]::TopRow($gshell, $gw, $gh)
+$pivot = $jtop + [int](($jbot - $jtop) / 2)
+$jOut = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]($jbot + 10)))
+Assert-That 'a jacket stretched down lands its hem on the asked row' ([TmwCheck]::BottomRow($jOut, $gw, $gh) -eq ($jbot + 10)) "hem $([TmwCheck]::BottomRow($jOut, $gw, $gh)), asked $($jbot + 10)"
+Assert-That 'stretching down leaves the top where it was' ([TmwCheck]::TopRow($jOut, $gw, $gh) -eq $jtop)
+$sameAbove = $true
+for ($y = 0; $y -le $pivot; $y++) { for ($x = 0; $x -lt $gw; $x++) { $i = ($y * $gw + $x) * 4; if ($jOut[$i + 3] -ne $gshell[$i + 3]) { $sameAbove = $false } } }
+Assert-That 'everything above the pivot is untouched' $sameAbove
+$jNo = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]($jbot - 3)))
+Assert-That 'a garment already reaching the row is returned as it is' ([TmwCheck]::Same($gshell, $jNo))
+
 Write-Host ""
 Write-Host "AB's real textures"
 if (-not (Test-Path $AbPants)) {

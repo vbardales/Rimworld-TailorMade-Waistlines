@@ -156,6 +156,42 @@ namespace TailorMadeWaistlines
             return outPx;
         }
 
+        /// <summary>The lowest row with a solid pixel, or -1 when there is none.</summary>
+        public static int BottomRow(byte[] rgba, int width, int height)
+        {
+            for (int y = height - 1; y >= 0; y--)
+                for (int x = 0; x < width; x++)
+                    if (rgba[(y * width + x) * Channels + 3] >= Solid) return y;
+            return -1;
+        }
+
+        /// <summary>
+        /// Stretches the part of the picture below <paramref name="pivotRow"/> downwards, so that its lowest solid row lands on
+        /// <paramref name="newBottomRow"/>; everything above the pivot stays as it is. Returns the input itself when there is
+        /// nothing to do (the garment already reaches that row, or the pivot is not above its hem).
+        /// </summary>
+        public static byte[] StretchBottom(byte[] rgba, int width, int height, int pivotRow, int newBottomRow)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            int bottom = BottomRow(rgba, width, height);
+            if (bottom < 0 || pivotRow < 0 || pivotRow >= bottom || newBottomRow <= bottom || newBottomRow >= height) return rgba;
+
+            var outPx = new byte[rgba.Length];
+            int stride = width * Channels;
+            Buffer.BlockCopy(rgba, 0, outPx, 0, (pivotRow + 1) * stride);
+            int span = bottom - pivotRow;
+            int newSpan = newBottomRow - pivotRow;
+            for (int y = pivotRow + 1; y <= newBottomRow; y++)
+            {
+                int src = pivotRow + (int)Math.Round((y - pivotRow) * (double)span / newSpan, MidpointRounding.AwayFromZero);
+                src = Math.Max(pivotRow + 1, Math.Min(bottom, src));
+                Buffer.BlockCopy(rgba, src * stride, outPx, y * stride, stride);
+            }
+            return outPx;
+        }
+
         // ------------------------------------------------------------------- the shape
 
         /// <summary>What was measured off the shell, in pixels.</summary>
