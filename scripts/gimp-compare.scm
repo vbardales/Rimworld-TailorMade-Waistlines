@@ -3,7 +3,7 @@
 ;
 ; In GIMP: Filters > Script-Fu > Console, then
 ;
-;   (load "C:/Users/nelim/Documents/rimworld/TailoredPants/_tools/gimp-compare.scm")
+;   (load "C:/Users/nelim/Documents/rimworld/TailoredPants/scripts/gimp-compare.scm")
 ;   (tpc-open "south")     ; one facing, every body type in it
 ;   (tpc-open-all)         ; the three facings
 ;

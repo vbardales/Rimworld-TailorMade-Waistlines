@@ -1,1 +1,0 @@
-{"total":2,"passed":2,"failed":0,"skipped":0,"flaky":0,"exitReason":"passed","setName":"wdi-ab","scenarios":[{"name":"a hulking man","outcome":"Passed","durationMs":19444,"attempts":1},{"name":"a boy","outcome":"Passed","durationMs":7432,"attempts":1}]}

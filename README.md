@@ -147,7 +147,7 @@ Tests/Check-Localization.ps1   keys, French coverage, placeholders, hidden short
 Tests/Check-Settings.ps1       defaults, reset and clamping of the settings object
 Tests/Check-Trousers.ps1       the trouser detail generator: invariants, on synthetic shells and AB's own
 Tests/Pickle/           in-game scenarios, run by Pickle — see Tests/Pickle/README.md
-_tools/*.js             measurement and generation, for the parked route
+scripts/*.js             measurement and generation, for the parked route
 Art/                    generated previews and contact sheets. Local only, not in this repository
 ```
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — 2026-09-23
+## [0.1.0] — 2026-09-23
 
 Prepublished to the Workshop as item 3806769245 on 2026-09-23, private: Steam creates
 every new item private, and RimWorld never calls SetItemVisibility. `Mod/About/PublishedFileId.txt`

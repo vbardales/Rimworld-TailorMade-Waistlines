@@ -5,23 +5,92 @@ repo:         https://github.com/vbardales/Rimworld-TailorMade-Waistlines
 visibility:   public
 detached:     yes
 stage:        done
-workflow_state: done
-workflow_audited: 2026-09-21 (third pass; second on 2026-09-20)
+workflow_stage: done
+workflow_audited: 2026-10-06 (fourth pass; third on 2026-09-21, second and first on 2026-09-20)
 localization: complete
 translation_en: complete
-translation_fr: complete
+translation_fr: partial
 settings_audit: complete
 dependencies_audit: complete
 licence:      original
 licence_at:   "MIT, chosen 2026-09-20 (LICENSE at the root and in Mod/), matching TailorMade, which is MIT. Nothing is copied from it: it is referenced at build time and patched through Harmony. Mod/ is publishable: one assembly of our own, patching TailorMade, which is MIT. Parked/ is not, and never ships - its textures are computed from General Textures Collection (3789119336) and WDI's Realistic Bodies (3527486510), neither of which grants a licence. Steam uploads Mod/ only, which is the safeguard, and Parked/, Art/ and the GIMP projects are kept out of the public repository by .gitignore. See ATTRIBUTION.md."
+upstream_mod_remotes:
+  - N/A
 dependencies: "brrainz.harmony and astryl.tailormade, both required. A mod that gives leg garments a worn graphic at all, since vanilla trousers carry none - tested with AB.VPLRF. A body retexture drawn without legs is the reason the mod exists, tested with wdi.realistic.bodies, but nothing in the code names it."
 original:     none
-showcase:     Mod/About/Preview.png (896x504, 667 kB, title overlay) and Mod/About/ModIcon.png (128x128, 28 kB), both inspected 2026-09-20. Local sources in Art/ (ignored by git): Preview.png and ModIcon-source.png, the untouched illustrations; preview.html, preview-palette.json and render-preview.cjs compose the Preview; make-icon.cjs cuts the icon; preview-qa.json holds the measurements
+showcase:     Mod/About/Preview.png (896x504, 562977 B, title overlay, the ModIcon badge bottom-left) and Mod/About/ModIcon.png (128x128, 36332 B), both regenerated 2026-10-06 by scripts/Render-Preview.cjs from Art/ModIcon-source.png (config key modIconSource) and Art/Preview-source.png, and the Preview inspected. The renderer also wrote Art/Gallery/0-preview.png (byte for byte the Preview), Art/Preview.ico and Art/ModIcon.ico. Local sources in Art/ (ignored by git): Preview-source.png, ModIcon-source.png, echo.png, Preview.config.json; the checks live in Art/.render/
 tested_on:
 workshop:     "3806769245, prepublished 2026-09-23 by her. Private, as Steam creates every item and RimWorld never calls SetItemVisibility. Mod/About/PublishedFileId.txt is committed (18e2bf2); losing it would make the next upload a second item. The description was sent with the item and is not resent on an update - a correction now happens on the Steam page by hand."
 automated_tests: "Five sets through Tests/Run-Tests.ps1, all re-run 2026-09-23 at 21:25 on the rebuilt DLL (SHA-256 7FD0FEBF...59C5, built 21:21; the 2026-09-21 build was F624927E...5271) and all green: Check-Mod 30/30 (TailorMade still looks the way the patches assume), Check-Logic 48/48 (our own patch bodies: the band per slider, the classes left whole, the fallback's recognition tolerance, which garments the shirt option lifts, which garments TailorMade is told to leave alone), Check-Settings 30/30 (defaults, reset, clamping), Check-Trousers 88/88 (the trouser-detail drawing, on synthetic shells and on AB's real ones, pure bytes), Check-Localization 45/45 (keys, French coverage, placeholders, no hardcoded sentence, hidden shortcut) - 241 checks, none of them starting the game. The earlier figures were 115 checks on an older DLL; the build changed under the audit when the trouser art arrived, and everything was re-run rather than carried over. XML, all four re-run the same evening over Mod/ and all clean: Check-XmlFields (2 files, every element maps to a 1.6 field), scripts/Check-DefInjected.ps1 (2 keys, 0 errors), Check-DefRefs (well formed, every reference resolved, every ParentName resolved), Check-TypeRefs (no unguarded third-party type). The shipped XML is now About.xml, one MainButtonDef and the three language files: the route-B TailorPatternDef is gone from Mod/Defs, the mod making its pattern defs in code instead. Pickle: Tests/Pickle, three features - 01 the trousers captures, 02 the Gear tab, 03 the ten silhouettes. All six passes of TESTING.md (tools, wdi-ab, wdi-ab-band, wdi-ab-general, wdi-xnd, wdi-xnd-general) have now run since the trouser art landed and none has failed on the mod; the last full reads are 2026-09-24/25 (see docs/runs/README.md). 03 was rewritten twice (see Tests/Pickle/README.md) and ran 10/10 on 2026-09-25 with the selection-bracket frame, which showed nothing about the trousers; the frame fix is in progress 2026-09-26/27 and the six passes have not yet been re-run with it. The children's apparent 'sack' is a suspicion, not yet judged under a working frame. What no set covers is a baked texture: every band is checked as a number, never as pixels."
 manual_scenarios: "TESTING.md, 11 scenarios, none run"
 remaining:
+  - "unverified (done -> tested): the 11 manual scenarios of TESTING.md, none run. `tested` needs no manual test left to validate: each is either automated and green or listed as not applicable with its reason. Scenarios 3, 5, 6, 7, 8, 9 and 10 are by hand and still open."
+  - "unverified (done -> tested): the settings in game: defaults on a clean configuration, each slider, persistence over a restart and a save, the ClearAndRepaint refresh, Reset, the hidden shortcut in RIMMSQOL, English and French display and clipping in developer mode. settings_audit stays complete on sources and the 30 automated checks only."
+  - "defect: on a child body the trouser art is drawn oversized, behind the torso and head (read 2026-09-27 on the Pickle capture). docs/runs/README.md, 2026-09-27 exploration: Apparel_KidPants drawSize is (0.70, 0.70) against (1.00, 1.00) for Apparel_Pants. The cause is not located: how TrouserArt/TrouserDetail or AB size a child texture against that 0.70 has not been read."
+  - "unverified (done -> tested): 03-silhouettes was rewritten and its frame fixed 2026-09-27, and only two of its ten scenarios (a hulking man, a boy) have run with the fixed frame, in the wdi-ab pass. The other eight have no run with it, and none of the five other passes (tools, wdi-ab-band, wdi-ab-general, wdi-xnd, wdi-xnd-general) has been replayed since. Scenarios with a @requires tag count as having run only with their pass played on the current suite."
+  - "unverified (done -> tested): no @wip anywhere in Tests/Pickle (checked 2026-10-06). The throwaway Tests/Pickle/Mod/Pickle/Features/99-explore-childpants-scale.feature is untracked and has been read once; it is to be deleted, not kept."
+  - "unverified (done -> tested): the gallery. No gallery scenario written. Places chosen from the empty photographs of the Sanctuaire on 2026-10-06 (see PUBLICATION.md); questions about body type, dyeing and the overlays seen on the empty photographs sent to PickleTools (NPT) through the Ticket Manager session, which relays; no gallery ticket is submitted before the answer."
+  - "unverified (translation_fr): French review by Virginie. FRENCH_REVIEW.md generated 2026-10-06 at revision 130d841 by scripts/Make-FrenchReview.ps1; no text of the mod agrees with a pawn, so no gender switch is involved."
+  - "decision for the owner: Art/ModIcon-signature-candidate.png appeared 2026-10-06 13:51 beside Art/ModIcon-source.png (a variant with a thread spool in the ponytail). Art/ModIcon-source.png was used as it stands; nothing was adopted from the candidate."
+  - "feature/housekeeping: Art/.wip (garment, mask and measurement PNGs of the parked route, 3.4 MB, ignored by git) and the evidence listed in the 2026-10-06 audit section are left for her to delete; the deletion was refused to the session."
+  - "feature/housekeeping: the Steam description and the change note for 1.0.0 are not written (see PUBLICATION.md and the CI/CD note below); CHANGELOG.md has no [1.0.0] section yet. They belong to prepublished, not to tested."
+  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched."
+  - "the open design questions of 2026-09-20 (per-body-type values through a preset module, whether to cover boots and chest, whether the compressed shirt reads acceptably) are kept in the section Earlier remaining entries below."
+updated:      2026-10-06
+---
+
+# TailorMade Waistlines — status
+
+## Workflow audit — 2026-10-06, fourth pass: `done` holds, `tested` is not reached
+
+**Result: `done` -> `done`** (`stage: done`, `workflow_stage: done`). Audited revision: `ce8961d` (main, pushed) plus the local changes of this session, committed after the audit. The shipped assembly is unchanged (`Mod/Assemblies/TailorMadeWaistlines.dll`, SHA-256 `7FD0FEBF…`); `Mod/` changed only in the two images and `ATTRIBUTION.md` (see below).
+
+Criteria re-run against today's documents (AUDIT.md `90d51374`, MOD_SETTINGS.md `90d51374`, TRANSLATIONS.md `90d51374`, PUBLISHING.md `2771698f`, STYLE_RIMWORLD.md `c576e43a`):
+
+- `options -> l10n`: the mod displays no count (the sliders print a decimal), so the plural rule of 2026-09-25 has no key to ask for. No text agrees with a pawn, so the French gender rule of 2026-09-30 does not apply and no French-presentation setting is warranted. `Check-Localization.ps1` 45/45. New since the last audit: the French review rule of 2026-09-30, so `translation_fr` is `partial` and `FRENCH_REVIEW.md` is generated (revision `130d841`, 2 DefInjected rows and the Keyed rows, no doubts flagged).
+- `l10n -> preTest`: dependencies re-read in `About.xml` (`brrainz.harmony`, `astryl.tailormade`, both required, with their Workshop ids; `loadAfter` both). `Check-TypeRefs` clean. `upstream_mod_remotes: N/A`: TailorMade's Workshop page (3756915448) links no source repository; the Chinese fork `QianYI-Yan/RimworldMods:TailorMade-ZhCN` is a translation, not the upstream, so no pull request can be aimed at it.
+- `preTest -> done`: all five sets re-run today through `Tests/Run-Tests.ps1`, all passed (Check-Mod, Check-Logic, Check-Settings, Check-Trousers, Check-Localization). XML re-run over `Mod/`: `Check-XmlFields` (2 files, no unknown field), `Check-DefInjected` (2 keys, 0 errors), `Check-DefRefs` (clean), `Check-TypeRefs` (no unguarded third-party type). Pickle suites written (`Tests/Pickle`, four features: 01 trousers, 02 Gear tab, 03 silhouettes, 04 other supplier) and justified in `TESTING.md`.
+- Images: Preview 896x504, 562977 B (< 1 MB), inspected; ModIcon 128x128, 36332 B. Both regenerated today (see `showcase`).
+
+**`done -> tested` is not reached**, for these reasons (all pending work, none a defect of the shipped assembly except the first):
+
+1. `defect`: the child trouser art is oversized (2026-09-27), cause not located; KidPants `drawSize` is 0.70.
+2. The 11 manual scenarios of `TESTING.md` have not been run. `tested` needs no manual test left to validate.
+3. No `@wip` in `Tests/Pickle` (grep, 2026-10-06): that criterion holds.
+4. Conditional scenarios: every `@requires` tag had its pass on 2026-09-24/25 (AB, XND, General, WDI), but `03-silhouettes` changed since (frame fix) and has run on the fixed frame for two of its ten scenarios only.
+5. Settings, FR/EN display and the RIMMSQOL shortcut have never been observed in game.
+
+**Housekeeping done in this session:**
+
+- `_tools/` moved to `scripts/` (STYLE_RIMWORLD.md, "Dossiers à la racine d'un mod"; 28 files, history kept by `git mv`), references updated in `README.md`, `ATTRIBUTION.md` (root and `Mod/` copies, identical), `.gitignore` (`scripts/*.xcf`) and `Parked/README.md`; `CHANGELOG.md` is append-only and keeps its old mentions.
+- `CHANGELOG.md` heading `## 0.1.0 — 2026-09-23` became `## [0.1.0] — 2026-09-23`: `changelog-section.sh` matches `## [<version>]`, and the old form would have failed the release-notes check. Content untouched. `About/PublishedFileId.txt` holds `3806769245` (commit `18e2bf2`), so the `0.1.0` entry stands.
+- Evidence: `evidence-*/` added to `.gitignore`; the four tracked files of `docs/runs/2026-09-25_wdi-ab-frame/evidence-1/kept/` untracked and kept on disk (sole proof of the two frame-fix scenarios, cited above). No `.dds` is tracked (`git ls-files`: none), and `*.dds` is already ignored.
+- `Art/echo.png` put back from `Art/.wip/` (the renderer reads it there; its config names it).
+
+**Left for her** (a deletion was refused to the session; nothing was deleted):
+
+- `Art/.wip/` (3.4 MB: garment, mask and measurement PNGs of the parked route; ignored by git; scripts that made them are in `scripts/`).
+- Superseded or failed evidence, none cited by a field: `docs/runs/2026-09-25_wdi-ab-boy/`, `docs/runs/2026-09-25_wdi-ab-hulk/`, `docs/runs/2026-09-25_wdi-ab-frame/evidence/` (a failed run, 3.4 MB capture), and in `docs/runs/2026-09-27_childpants-drawsize/`: `evidence/`, and in `evidence-1/` and `evidence-2/` everything but `summary.json` (15 MB of reports, logs and a 3.3 MB capture).
+- `Tests/Pickle/Mod/Pickle/Features/99-explore-childpants-scale.feature` (throwaway, read once, untracked).
+- What stays: the six 2026-09-24 passes, `2026-09-25_wdi-ab-silhouettes` (sole proof of eight scenarios of `03`), `2026-09-25_wdi-ab-frame/evidence-1/` (the two frame-fix scenarios).
+
+## Note from the CI/CD session — 2026-09-27
+
+The manual publish workflow (`publish-tag.yml`) is now in place. **No description source
+configured**, matching what `PUBLICATION.md` §1 already says: the `## Steam description`
+Markdown-block standard is "coming standard, not adopted yet" here, and its content still needs
+the fixes that section lists (closing section headings, the `ATTRIBUTION.md` link, Workshop links
+on named mods, missing thanks) before it can be used. `update_description` stays unusable until
+that's written and the workflow regenerated with `--description-markdown`; `build`/`tag`/`publish`/
+`update_preview`/`update_title`/`update_tags` all work as-is. Separately, `PUBLICATION.md` §6
+("Steam change note") is "Not written" for `1.0.0` and `CHANGELOG.md` has no dated section past
+`0.1.0` — both need writing before a dry-run of a real version can pass its release-notes check.
+
+
+## Earlier `remaining` entries (front matter until 2026-10-06)
+
+Kept as written, replaced on 2026-10-06 by the shorter list above. Several are history (the 2026-09-20 rename, the parked routes, the body survey) and several are design notes that nothing else records.
+
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
   - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
   - "unverified (done -> tested): the settings were verified from the sources and by automated checks, not in game. `settings_audit: complete` rests on that basis (the workflow states that in-game checks belong to done -> tested). Still to observe: defaults on a clean configuration, each slider's effect, persistence across a restart and a save, the ClearAndRepaint refresh, the Reset button, the hidden shortcut in RIMMSQOL, English and French display and clipping. Earlier note, kept: no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
@@ -46,22 +115,6 @@ remaining:
   - "local modification in progress, left untouched by the 2026-09-20 second audit: Mod/Defs/TailorPatternDefs/Pants_Native.xml is untracked and ships with Mod/ as it stands. It is route B - autoFit false on Apparel_Pants and Apparel_KidPants so the drawing keeps its native proportions instead of being stretched into the band - and its own comment says that while it is active the pants slider has no effect on those two garments. Structurally clean (Check-XmlFields, Check-DefRefs, Check-TypeRefs), no player-facing text, so localization is unaffected. It means the shipped folder no longer matches the committed tree, and that any in-game reading of the pants slider on vanilla trousers is a reading of this def, not of the band."
   - "unpushed: commit c548d57 (the Check-Logic and Run-Tests sets, TESTING.md) is on the local main only; origin/main is at fe0baae. GitHub does not carry the test sets."
   - "done 2026-09-20, the Mentions of PUBLISHING.md: the About.xml description and README.md now carry thanks (astryl and TailorMade's MIT licence, brrainz for Harmony, aedbia for AB's Visible Pants, WDI's bodies as the reason the problem exists), an AI notice (the two images generated by an image model and recomposed; the assembly, tests and documentation written with Claude Code, recorded as a co-author in the history) and the adoption clause, in that order and before the source link, which is still the last thing the description says. The description is UN SEUL COUP - sent only when the Workshop item is created - so what ships is what is in About.xml at that moment."
-updated:      2026-09-20
----
-
-# TailorMade Waistlines — status
-
-## Note from the CI/CD session — 2026-09-27
-
-The manual publish workflow (`publish-tag.yml`) is now in place. **No description source
-configured**, matching what `PUBLICATION.md` §1 already says: the `## Steam description`
-Markdown-block standard is "coming standard, not adopted yet" here, and its content still needs
-the fixes that section lists (closing section headings, the `ATTRIBUTION.md` link, Workshop links
-on named mods, missing thanks) before it can be used. `update_description` stays unusable until
-that's written and the workflow regenerated with `--description-markdown`; `build`/`tag`/`publish`/
-`update_preview`/`update_title`/`update_tags` all work as-is. Separately, `PUBLICATION.md` §6
-("Steam change note") is "Not written" for `1.0.0` and `CHANGELOG.md` has no dated section past
-`0.1.0` — both need writing before a dry-run of a real version can pass its release-notes check.
 
 ## What exists — 2026-09-20
 
@@ -162,7 +215,7 @@ At her request, after she chose public visibility and MIT: standalone repository
 `Initialise the repository with the mod folder`, 42 files) and pushed to
 https://github.com/vbardales/Rimworld-TailorMade-Waistlines (public, `main`, local and remote at the same commit);
 LICENSE (MIT) at the root and in `Mod/`; `.gitattributes`; `Source/Directory.Build.props` sending build intermediates to
-`.build/`; `.gitignore` excluding `Parked/`, `Art/` and `_tools/*.xcf`; ATTRIBUTION.md, README.md and CHANGELOG.md
+`.build/`; `.gitignore` excluding `Parked/`, `Art/` and `scripts/*.xcf`; ATTRIBUTION.md, README.md and CHANGELOG.md
 adjusted, Mod/ATTRIBUTION.md re-copied byte-identical; `<url>` and the final `Source code on GitHub` link added to
 About.xml (XML parses). Rebuilt with the new props: 0 warnings, 0 errors, DLL byte-identical to the shipped one
 (`d96766dd…`). The monorepo `.gitignore` gained `/TailorMadeWaistlines/` (not committed there). Result: all criteria of

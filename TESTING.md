@@ -271,3 +271,26 @@ pawn, proves nothing and is not kept as a curiosity: its finding goes into the t
 **A report of a superseded build is deleted when a newer one replaces it.** Compare the DLL hash on
 the line with the one in `Mod/Assemblies` before citing any of it, and never delete a report that a
 `STATUS.md` field still names - repoint the field first.
+
+### What to keep, restated 2026-10-06
+
+- Evidence folders are `docs/runs/<date>_<pass>/evidence*/` (`evidence`, `evidence-1`, `evidence-2`, ...). All are ignored by
+  git; none is committed. What goes in git is the text line in `docs/runs/README.md`.
+- Per scenario, keep **the latest report for the DLL now in `Mod/`**, minimised to `summary.json` (read `exitReason` first), the mod's
+  log lines, and the one capture a person actually judged, cropped. Keep an older report only if it is the sole proof of a scenario the
+  latest run did not repeat; delete it once a newer one replaces it. `report.html`, `messages.ndjson`, `junit.xml`, the full
+  `Player.log` and uncropped 1080p frames are never kept.
+- A failed or superseded run keeps one line in `docs/runs/README.md` and no files.
+- Never delete a report a `STATUS.md` field still names; repoint the field first.
+- A throwaway exploration feature (`99-explore-*`) is deleted after it has been read once, with its reports.
+
+### Conditions of `tested` (AUDIT.md, `done -> tested`)
+
+1. No scenario tagged `@wip` (repair and replay, or delete with the reason).
+2. Every `@requires:<id>` scenario has run in the pass that mounts that mod, and its report was read (`setName`, suite and scenario
+   names, `exitReason`, played against discovered).
+3. No manual scenario left to validate: each of the 11 above is automated and green, or listed here as not applicable with its reason.
+4. `@review` captures opened and looked at, not only counted green.
+5. FR and EN display and the settings checked in game, in developer mode.
+6. Gallery photographs staged by a scenario (PUBLISHING.md), read one by one; an anomaly of the scene or of the shared tool goes to
+   PickleTools (NPT), through the Ticket Manager session when NPT cannot be reached.

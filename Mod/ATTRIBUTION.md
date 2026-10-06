@@ -12,14 +12,14 @@ is what makes a release possible at all.
 textures are computed from the art of two mods that grant no licence. They stay
 on the author's machine because they are one move from being used again, and
 they are kept out of this repository (`.gitignore` lists `Parked/`, `Art/` and
-the GIMP projects under `_tools/`) and out of every upload — Steam takes `Mod/`
+the GIMP projects under `scripts/`) and out of every upload — Steam takes `Mod/`
 and nothing else, so the split is the safeguard.
 
 | Item | Origin |
 | --- | --- |
-| `Mod/Assemblies/TailorMadeWaistlines.dll`, `Source/`, `Tests/`, `_tools/` | written here |
-| `Parked/Textures/Pants/*.png` | computed by `_tools/make-garment.js` from the pants of General Textures Collection (3789119336) and the bodies of WDI's Realistic Bodies (3527486510) |
-| `Parked/Textures/<Body>/Pants_mask_*.png` | stencils computed from WDI's body art by `_tools/make-masks.js` |
+| `Mod/Assemblies/TailorMadeWaistlines.dll`, `Source/`, `Tests/`, `scripts/` | written here |
+| `Parked/Textures/Pants/*.png` | computed by `scripts/make-garment.js` from the pants of General Textures Collection (3789119336) and the bodies of WDI's Realistic Bodies (3527486510) |
+| `Parked/Textures/<Body>/Pants_mask_*.png` | stencils computed from WDI's body art by `scripts/make-masks.js` |
 | `Parked/Textures/Female/Pants_paint_*.png` | her own painting, over WDI's body as a guide |
 
 Nothing under `Mod/` is derived from anyone else's art. That is what makes the mod publishable at all.

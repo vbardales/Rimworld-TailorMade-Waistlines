@@ -39,6 +39,32 @@ looked at yet: the pawn is about 45 px tall in a 1080p frame in every capture so
 the hover tooltip over the legs. Steam shows the first image large; it must be the most demonstrative, not the
 prettiest. To fill in once the framing is fixed and the images are opened.
 
+### Plan written 2026-10-06 (no scenario written, nothing run)
+
+Rule (PUBLISHING.md, 2026-10-02 and 2026-10-06): every capture is a staged photograph, except menus and windows; the place is chosen
+from the empty photographs of every place of the Sanctuaire (`PickleTools/docs/GALERIE.md`, `SANCTUAIRE-LIEUX.md`), not from its name;
+each played image is opened and read; an anomaly of the scene or of the shared tool goes to PickleTools (NPT), never worked around here.
+
+Story: *the fitting*. Nelim (Virginie, the only colonist of the fixture) tries one pair of trousers on five bodies, then one body in
+three waistlines. Subjects are dressed in plain strong colours so the waistband and the hem read, in a palette that suits the cream or
+bare ground.
+
+| # | Shot | Place | Why this place |
+|---|---|---|---|
+| 0 | the Preview, byte for byte (`Art/Gallery/0-preview.png`) | n/a | rule of 2026-09-29 |
+| 1 | five pawns in a row, one per WDI body type (Thin, Male, Female, Fat, Hulk), the same trousers, the same waistline | `calm-zone-close` (cream square, a row of nine cells) or `bare-clearing` | flat bare ground at midday, nothing to read but the garments; the choice between the two waits for NPT's answer on the overlays |
+| 2 | one body, three values of the pants slider (0.45, 0.58, 0.70) | same place, one pawn moved between takes | shows what the setting does, which is the whole mod |
+| 3 | a child beside an adult, same trousers | same place | the open child defect: not gallery material until it is fixed |
+| 4 | the settings window in Mod options | `exhibition-zone` (Virginie's advice for windows) | a window is a screenshot, not a staged photo |
+
+Rejected after reading the empty photographs: `terrace` (a mannequin and a piano, but stack counters and "no power" bolts over the
+furniture), `hut` (red X marks on the animals, a dark interior), `statue-garden` and `gravel-yard` (busy ground that swallows a pawn
+45 px tall), `exhibition-zone` for pawns (painted orange markers over the whole floor).
+
+Waiting on NPT, asked through the Ticket Manager session on 2026-10-06: the step that sets a created pawn's body type and keeps it
+through the capture, how to dye a worn garment, and the overlays seen on `exhibition-zone` and `calm-zone`. Needs `-DepMap` with the
+Sanctuaire mods (`wsl-deps.sanctuary.map` as a model), plus WDI, AB and General.
+
 ## 3. Thank-you comments
 
 One main comment per recipient page for the whole collection: `WORKSHOP_COMMENTS.md` (monorepo) decides

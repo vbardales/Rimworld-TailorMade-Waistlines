@@ -2,7 +2,7 @@
 ;
 ; In GIMP: Filters > Script-Fu > Console, then
 ;
-;   (load "C:/Users/nelim/Documents/rimworld/TailoredPants/_tools/gimp-project.scm")
+;   (load "C:/Users/nelim/Documents/rimworld/TailoredPants/scripts/gimp-project.scm")
 ;   (tp-open "Female" "south")      ; one body type, one facing
 ;   (tp-open-body "Female")         ; its three facings
 ;   (tp-open-all)                   ; all eighteen, if you have the patience
@@ -34,7 +34,7 @@
 (define tp-bodies '("Female" "Male" "Thin" "Fat" "Hulk" "Child"))
 (define tp-facings '("south" "north" "east"))
 
-(load (string-append tp-root "/_tools/waists.scm"))
+(load (string-append tp-root "/scripts/waists.scm"))
 
 (define (tp-one v) (if (pair? v) (car v) v))
 

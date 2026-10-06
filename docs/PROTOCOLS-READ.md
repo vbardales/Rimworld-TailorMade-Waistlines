@@ -66,3 +66,31 @@ Each is pending work, not a failure of the mod as shipped.
    without a green replay; a `-DepMap` is a bare file name; a request carries no SHA, so the tree stays frozen
    until `RUN_DONE`; the mod session titles itself `TailorMade Waistlines / <stage>` and only when `STATUS.md`
    changes.
+
+## Read on 2026-10-06 (fourth audit, at the owner's request)
+
+Monorepo `rimworld` at `2771698f`. Versions are the last commit touching the file; "clean" = nothing uncommitted. The sections above
+(2026-09-25) are history; this one replaces their "version read" column.
+
+| File | Version read | Working copy | Read | Useful to this mod? |
+| --- | --- | --- | --- | --- |
+| `AGENTS.md` | `90d51374` | clean | in the session context | **Yes.** Evidence rules, publish by CI |
+| `AUDIT.md` | `90d51374` | clean | in full (279 lines) | **Yes, keep.** New to me: `tested` needs no `@wip`, every `@requires` scenario run, no manual test left; step 12 replay; session title `<packageId sans nelim.> / <workflow_stage>`; `upstream_mod_remotes`; `0.1.0` CHANGELOG entry |
+| `MOD_SETTINGS.md` | `90d51374` | clean | in full | **Yes**, at any settings change. Nothing new for this mod |
+| `TRANSLATIONS.md` | `90d51374` | clean | in full | **Yes**, at any text change. New since 09-25: plurals (not applicable: no count shown), French gender (not applicable: no pawn text), **French review by Virginie and `FRENCH_REVIEW.md`** (generated, `translation_fr: partial`) |
+| `PUBLISHING.md` | `2771698f` (10-06 13:18) | clean | the Images, sources, Dépôt and gallery rules (lines 86-160, 342-414); not the CI section | **Yes.** Gallery: first image is a copy of the Preview, photos are staged, read each, anomalies to NPT then Ticket Manager. Re-read the CI section at publish |
+| `STYLE_RIMWORLD.md` | `c576e43a` (10-05) | clean | the ModIcon, `.ico` and "Dossiers à la racine d'un mod" sections only | **Partly.** `modIconSource` key makes `Render-Preview.cjs` write the ModIcon; no `_` folder at a mod root (`_tools/` moved to `scripts/`). Not needed otherwise |
+| `WORKSHOP_COMMENTS.md` | `650c33d9` (10-05) | clean | no | **At publish only** (thank-you comments); `PUBLICATION.md` §3 holds the drafts |
+| `scripts/SEARCHING.md` | `90d51374` | clean | no | **No**, unless the Workshop corpus has to be searched |
+| `PickleTools/README.md` | `bb732f7` (10-02) | clean | no, unchanged in use | **Yes** (table of tools); not re-read |
+| `PickleTools/Headless/README.md` | `ed4e73a` (09-26) | clean | no | **Partly**, as noted above |
+| `PickleTools/docs/steps.md` | `2f81230` (10-06 13:56) | clean | no | **Yes**, first stop for a step; re-read before writing the gallery scenario |
+| `PickleTools/docs/GALERIE.md` | `2f81230` | clean | in full | **Yes.** Shared Sanctuaire fixture, steps, `-DepMap`, how to reach NPT (Ticket Manager if unreachable), choosing a place |
+| `PickleTools/docs/SANCTUAIRE-LIEUX.md` | `2f81230` | clean | lines 1-135 and about ten empty photographs | **Yes** for the gallery |
+| `Rimworld-Release-Admin/docs/OPERATIONS.md` | `657951b` (10-05) | clean | no | **At publish only** |
+| `Rimworld-Ticket-Dispatcher/docs/WELCOME.md` | `ada1ab1` (10-04) | clean | no, unchanged in use | **Yes**, ticket sizing; not re-read |
+| `Rimworld-Ticket-Dispatcher/docs/SUBMIT.md` | `7d6c5b2` (10-04) | clean | no | **Yes** when a ticket is submitted |
+
+This mod's own files: `STATUS.md`, `README.md`, `CHANGELOG.md`, `ATTRIBUTION.md`, `LICENSE`, `PUBLICATION.md`, `TESTING.md`, `docs/runs/README.md` and `Tests/Pickle/README.md` all exist and were read or edited in this pass; `PUBLICATION.md` exists now (the 09-25 table said it did not). `BACKLOG.md`, `NOTES.md` and `BUGS.md` do not exist here.
+
+Not read, and why: `PickleTools/Upstream/PENDING.md` (nothing in this pass aims at Pickle itself).
