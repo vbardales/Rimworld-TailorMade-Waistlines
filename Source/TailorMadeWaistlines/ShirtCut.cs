@@ -28,6 +28,109 @@ namespace TailorMadeWaistlines
 
         [ThreadStatic] private static string bodyKey;
 
+        private static readonly System.Collections.Generic.Dictionary<string, float[]> profiles = new System.Collections.Generic.Dictionary<string, float[]>();
+
+        private const int FeatherRows = 3;
+
+        /// <summary>
+        /// Erases, column by column, everything from that column's cut row down, and fades the last rows above it so that the
+        /// edge is not a ruler line. <paramref name="cutRows"/> holds one row per column.
+        /// </summary>
+        public static byte[] CutBelowProfile(byte[] rgba, int width, int height, int[] cutRows)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (cutRows == null || cutRows.Length != width) throw new ArgumentException("one cut row per column.");
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * TrouserDetail.Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var px = (byte[])rgba.Clone();
+            for (int x = 0; x < width; x++)
+            {
+                int cut = Math.Max(0, Math.Min(height, cutRows[x]));
+                for (int y = cut; y < height; y++) px[(y * width + x) * TrouserDetail.Channels + 3] = 0;
+                for (int k = 1; k <= FeatherRows && cut - k >= 0; k++)
+                {
+                    int i = ((cut - k) * width + x) * TrouserDetail.Channels + 3;
+                    px[i] = (byte)(px[i] * (k / (float)(FeatherRows + 1)));
+                }
+            }
+            return px;
+        }
+
+        /// <summary>
+        /// The top edge of WDI's underwear for this body, facing and sex, as a fraction of the picture height for each of its
+        /// columns; columns the underwear does not reach take the nearest column's value. Null when the underwear is not there.
+        /// </summary>
+        internal static float[] ProfileFor(string key, string facing)
+        {
+            string cacheKey = key + "_" + facing;
+            if (profiles.TryGetValue(cacheKey, out float[] cached)) return cached;
+            float[] result = null;
+            try
+            {
+                string kind = key.StartsWith("Male") || key == "Thin" || key == "Fat" || key == "Hulk" ? "boxers" : "panties";
+                Texture2D tex = ContentFinder<Texture2D>.Get("UWUnderwear/" + kind + "/" + kind + "_" + key + "_" + facing, false);
+                if (tex != null)
+                {
+                    byte[] px = TrouserArt.Read(tex, out int w, out int h);
+                    var top = new float[w];
+                    for (int x = 0; x < w; x++)
+                    {
+                        top[x] = -1f;
+                        for (int y = 0; y < h; y++)
+                            if (px[(y * w + x) * TrouserDetail.Channels + 3] >= 128) { top[x] = y / (float)h; break; }
+                    }
+                    int first = Array.FindIndex(top, v => v >= 0f), last = Array.FindLastIndex(top, v => v >= 0f);
+                    if (first >= 0)
+                    {
+                        for (int x = 0; x < first; x++) top[x] = top[first];
+                        for (int x = last + 1; x < w; x++) top[x] = top[last];
+                        for (int x = first; x <= last; x++) if (top[x] < 0f) top[x] = top[x - 1];
+                        result = top;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.WarningOnce("[TailorMade Waistlines] could not read the underwear for " + cacheKey + ": " + e.Message, cacheKey.GetHashCode());
+            }
+            profiles[cacheKey] = result;
+            return result;
+        }
+
+        /// <summary>One cut row per column of a picture <paramref name="width"/> wide and <paramref name="height"/> high.</summary>
+        internal static int[] CutRows(string key, string facing, int width, int height)
+        {
+            float[] profile = ProfileFor(key, facing);
+            float pantsLine = PantsLine(key);
+            if (profile == null)
+            {
+                var flat = new int[width];
+                int row = (int)Math.Round(Math.Max(Line[key], pantsLine) * height, MidpointRounding.AwayFromZero);
+                for (int x = 0; x < width; x++) flat[x] = row;
+                return flat;
+            }
+            // The whole curve moves down together until its highest point is under the top of the trousers: the shape of the
+            // waistband is kept, only its height follows the trousers.
+            float min = float.MaxValue;
+            foreach (float v in profile) if (v < min) min = v;
+            float shift = Math.Max(0f, pantsLine - min);
+            var rows = new int[width];
+            for (int x = 0; x < width; x++)
+            {
+                float v = profile[Math.Min(profile.Length - 1, (int)(x * (long)profile.Length / width))] + shift;
+                rows[x] = (int)Math.Round(v * height, MidpointRounding.AwayFromZero);
+            }
+            return rows;
+        }
+
+        private static float PantsLine(string key)
+        {
+            string body = key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key;
+            return TrouserArt.BelowNavel.TryGetValue(body, out float pantsTop)
+                ? pantsTop + (TailorMadeWaistlinesMod.Settings.trouserDrop - TailorMadeWaistlinesSettings.DefaultTrouserDrop) + UnderTrousers
+                : 0f;
+        }
+
         // The shirt runs this far under the top of the trousers, so that no belly shows between them.
         private const float UnderTrousers = 0.03f;
 
@@ -80,14 +183,17 @@ namespace TailorMadeWaistlines
         [HarmonyPatch(typeof(TexBake), nameof(TexBake.BakeFitted))]
         public static class BakeFitted_Patch
         {
-            public static void Postfix(ref Texture2D __result)
+            public static void Postfix(ref Texture2D __result, Rot4 rot)
             {
                 if (bodyKey == null || __result == null) return;
                 try
                 {
                     byte[] px = TrouserArt.Read(__result, out int w, out int h);
-                    int row = (int)Math.Round(CutFraction(bodyKey) * h, MidpointRounding.AwayFromZero);
-                    byte[] cut = CutBelow(px, w, h, row);
+                    // The sides have no front waistband to follow: a straight cut at the same height.
+                    string facing = rot == Rot4.North ? "north" : rot == Rot4.South ? "south" : null;
+                    byte[] cut = facing != null
+                        ? CutBelowProfile(px, w, h, CutRows(bodyKey, facing, w, h))
+                        : CutBelow(px, w, h, (int)Math.Round(CutFraction(bodyKey) * h, MidpointRounding.AwayFromZero));
                     if (ReferenceEquals(cut, px)) return;
                     __result = TrouserArt.Build(cut, w, h, "TMW_ShirtCut_" + bodyKey);
                 }

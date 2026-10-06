@@ -385,6 +385,15 @@ Assert-That 'a shirt cut at a row keeps its top' ([TmwCheck]::TopRow($cOut, $gw,
 $cNo = $cut.Invoke($null, @($gshell, $gw, $gh, [int]$gh))
 Assert-That 'a cut row past the picture changes nothing' ([TmwCheck]::Same($gshell, $cNo))
 
+$cutP = $cutT.GetMethod('CutBelowProfile')
+$rowsP = [int[]](New-Object int[] $gw)
+for ($x = 0; $x -lt $gw; $x++) { $rowsP[$x] = $jtop + 10 + [int]([Math]::Abs($x - 64) / 8) }
+$pOut = $cutP.Invoke($null, @($gshell, $gw, $gh, $rowsP))
+$pOk = $true
+for ($x = 0; $x -lt $gw; $x++) { for ($y = $rowsP[$x]; $y -lt $gh; $y++) { if ($pOut[($y * $gw + $x) * 4 + 3] -ne 0) { $pOk = $false } } }
+Assert-That 'a shirt cut along a curve has nothing left below the curve in any column' $pOk
+Assert-That 'a shirt cut along a curve keeps its top' ([TmwCheck]::TopRow($pOut, $gw, $gh) -eq $jtop)
+
 Write-Host ""
 Write-Host "AB's real textures"
 if (-not (Test-Path $AbPants)) {
