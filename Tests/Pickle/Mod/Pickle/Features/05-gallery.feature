@@ -45,6 +45,26 @@ Feature: the fitting, for the gallery
     And "F-Kid" is 8 years old
     And "F-Kid" gender is female
     And Nelim's Pickle Tools: "F-Kid" body type is Child
+    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
+    And I draft "M-Thin"
+    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
+    And I draft "M-Avg"
+    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
+    And I draft "M-Fat"
+    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
+    And I draft "M-Hulk"
+    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
+    And I draft "M-Kid"
+    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
+    And I draft "F-Thin"
+    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
+    And I draft "F-Avg"
+    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
+    And I draft "F-Fat"
+    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
+    And I draft "F-Hulk"
+    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
+    And I draft "F-Kid"
     When I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And I destroy the gear of "M-Avg"
@@ -65,16 +85,6 @@ Feature: the fitting, for the gallery
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
-    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
-    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
-    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
-    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
-    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
-    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
-    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
-    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
-    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
-    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
@@ -99,16 +109,6 @@ Feature: the fitting, for the gallery
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
-    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
-    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
-    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
-    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
-    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
-    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
-    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
-    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
-    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 2 bare torso, trousers"
@@ -142,16 +142,6 @@ Feature: the fitting, for the gallery
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
-    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
-    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
-    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
-    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
-    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
-    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
-    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
-    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
-    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 3 t-shirt, trousers"
@@ -185,16 +175,6 @@ Feature: the fitting, for the gallery
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidParka" dyed rgb (150, 70, 40)
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
-    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
-    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
-    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
-    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
-    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
-    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
-    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
-    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
-    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 4 jacket on a bare torso, trousers"

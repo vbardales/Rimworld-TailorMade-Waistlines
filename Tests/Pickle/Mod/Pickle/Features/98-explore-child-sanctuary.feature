@@ -18,6 +18,7 @@ Feature: child on cleared ground
     And I dress "S-Boy" in "Apparel_KidPants"
     And "S-Boy" is wearing "Apparel_KidPants"
     And Nelim's Pickle Tools: "S-Boy" stands at (200, 185) facing South
+    And I draft "S-Boy"
     And Nelim's Pickle Tools: the area from (197, 182) to (203, 188) is cleared
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And I move the camera to "S-Boy"
