@@ -1,7 +1,8 @@
 # Legwear that is not trousers (not a gallery feature): shorts and a skirt from Vanilla Apparel Expanded, on the four adult body types, both sexes,
 # a dyed t-shirt on top. What is read in the captures: with shorts the legs below the hem are the bare body, with no black wedge
 # painted by this mod (it only draws for Pants); with a skirt the fabric is one solid shape, no gap between two legs.
-# Pass: wsl-deps.legwear.map. Every image is opened and read.
+# Pass: wsl-deps.legwear.map. Every image is opened and read. No "no warning" assertion: 200 vanilla think-node warnings per spawn overflow Pickle's buffer
+# (run 4b00), so an absent warning cannot be told from a dropped one. The first photograph waits long enough for TailorMade to bake the garments (4b00 caught them unbaked).
 @review @legwear @timeout:300
 Feature: shorts and skirts
 
@@ -78,7 +79,7 @@ Feature: shorts and skirts
     And Nelim's Pickle Tools: "F-Hulk" wears "VAE_Apparel_Shorts" dyed rgb (46, 74, 120)
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
-    And I wait 90 ticks
+    And I wait 300 ticks
     And "M-Thin" apparel covers "Legs"
     And "M-Avg" apparel covers "Legs"
     And "M-Fat" apparel covers "Legs"
@@ -113,7 +114,7 @@ Feature: shorts and skirts
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And Nelim's Pickle Tools: "F-Hulk" wears "VAE_Apparel_Skirt" dyed rgb (46, 74, 120)
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
-    And I wait 90 ticks
+    And I wait 240 ticks
     And "M-Thin" apparel covers "Legs"
     And "M-Avg" apparel covers "Legs"
     And "M-Fat" apparel covers "Legs"
@@ -123,5 +124,4 @@ Feature: shorts and skirts
     And "F-Fat" apparel covers "Legs"
     And "F-Hulk" apparel covers "Legs"
     And I take a screenshot "legwear, skirt, eight bodies"
-    Then no warning matching "Could not load UnityEngine.Texture2D" was logged
-    And no warning matching "Failed to find any textures" was logged
+    Then "F-Hulk" apparel covers "Legs"
