@@ -15,7 +15,7 @@ const { decode } = require('./png');
 const WDI = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/294100/3527486510/Textures/Things/Pawn/Humanlike/Bodies';
 const BODIES = [
     ['Female', 'Naked_Female'], ['Male', 'Naked_Male'], ['Thin', 'Naked_Thin'],
-    ['Fat', 'Naked_Fat'], ['Fat_Female', 'Naked_Fat_Female'], ['Hulk', 'Naked_Hulk'],
+    ['Fat', 'Naked_Fat'], ['Fat_Female', 'Naked_Fat_Female'], ['Hulk', 'Naked_Hulk'], ['Thin_Female', 'Naked_Thin_Female'], ['Hulk_Female', 'Naked_Hulk_Female'],
 ];
 
 const arg = (n, d) => { const i = process.argv.indexOf('--' + n); return i >= 0 ? process.argv[i + 1] : d; };
