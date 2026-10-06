@@ -7,7 +7,7 @@ tiagocc0.FemaleApparelVariants 3799726535
 wdi.realistic.bodies   3527486510
 ab.vplrf               2986402536
 # TailorMade after the body mods (it declares loadAfter on Female Body Variants and reads the body textures it finds when the game starts).
-astryl.tailormade      3756915448
+last:astryl.tailormade
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
 nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
 nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
