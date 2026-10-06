@@ -33,7 +33,7 @@ remaining:
   - "unverified (done -> tested): the gallery. No gallery scenario written. Places chosen from the empty photographs of the Sanctuaire on 2026-10-06 (see PUBLICATION.md); questions about body type, dyeing and the overlays seen on the empty photographs sent to PickleTools (NPT) through the Ticket Manager session, which relays; no gallery ticket is submitted before the answer."
   - "unverified (translation_fr): French review by Virginie. FRENCH_REVIEW.md generated 2026-10-06 at revision 130d841 by scripts/Make-FrenchReview.ps1; no text of the mod agrees with a pawn, so no gender switch is involved."
   - "decision for the owner: Art/ModIcon-signature-candidate.png appeared 2026-10-06 13:51 beside Art/ModIcon-source.png (a variant with a thread spool in the ponytail). Art/ModIcon-source.png was used as it stands; nothing was adopted from the candidate."
-  - "feature/housekeeping: Art/.wip (garment, mask and measurement PNGs of the parked route, 3.4 MB, ignored by git) and the evidence listed in the 2026-10-06 audit section are left for her to delete; the deletion was refused to the session."
+  - "feature/housekeeping: the evidence listed in the 2026-10-06 audit section is left for her to delete (Art/.wip was deleted by her on 2026-10-06); the deletion was refused to the session."
   - "feature/housekeeping: the Steam description and the change note for 1.0.0 are not written (see PUBLICATION.md and the CI/CD note below); CHANGELOG.md has no [1.0.0] section yet. They belong to prepublished, not to tested."
   - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched."
   - "the open design questions of 2026-09-20 (per-body-type values through a preset module, whether to cover boots and chest, whether the compressed shirt reads acceptably) are kept in the section Earlier remaining entries below."
@@ -70,7 +70,7 @@ Criteria re-run against today's documents (AUDIT.md `90d51374`, MOD_SETTINGS.md 
 
 **Left for her** (a deletion was refused to the session; nothing was deleted):
 
-- `Art/.wip/` (3.4 MB: garment, mask and measurement PNGs of the parked route; ignored by git; scripts that made them are in `scripts/`).
+- ~~`Art/.wip/`~~ deleted by her, 2026-10-06.
 - Superseded or failed evidence, none cited by a field: `docs/runs/2026-09-25_wdi-ab-boy/`, `docs/runs/2026-09-25_wdi-ab-hulk/`, `docs/runs/2026-09-25_wdi-ab-frame/evidence/` (a failed run, 3.4 MB capture), and in `docs/runs/2026-09-27_childpants-drawsize/`: `evidence/`, and in `evidence-1/` and `evidence-2/` everything but `summary.json` (15 MB of reports, logs and a 3.3 MB capture).
 - `Tests/Pickle/Mod/Pickle/Features/99-explore-childpants-scale.feature` (throwaway, read once, untracked).
 - What stays: the six 2026-09-24 passes, `2026-09-25_wdi-ab-silhouettes` (sole proof of eight scenarios of `03`), `2026-09-25_wdi-ab-frame/evidence-1/` (the two frame-fix scenarios).
