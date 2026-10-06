@@ -1,10 +1,11 @@
 # The gallery pass: the Sanctuaire de Nelim fixture (PickleTools/docs/GALERIE.md) plus the legless body retexture and AB's trousers.
 # AB needs its seeded settings: config/gallery/ is a copy of config/wdi-ab/.
 #   Submit-PickleRun.ps1 -Mod TailorMadeWaistlines -DepMap wsl-deps.gallery.map -Filter "@gallery" ...
-wdi.realistic.bodies   3527486510
-ab.vplrf               2986402536
+# Female Body Variants and Female Apparel Variants load BEFORE WDI (WDI declares loadAfter on both): after it, their own Naked_*_Female textures shadow WDI's.
 tiagocc0.FemaleBodyVariants    3798082132
 tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
 nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
 nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
