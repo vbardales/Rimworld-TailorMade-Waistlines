@@ -77,7 +77,7 @@ namespace TailorMadeWaistlines
         // measured with scripts/measure-navel.js (the navel's darkest rows, plus a margin). The trousers start there.
         internal static readonly Dictionary<string, float> BelowNavel = new Dictionary<string, float>
         {
-            { "Female", 0.602f }, { "Male", 0.623f }, { "Thin", 0.563f }, { "Fat", 0.623f }, { "Hulk", 0.672f },
+            { "Female", 0.637f }, { "Male", 0.658f }, { "Thin", 0.598f }, { "Fat", 0.658f }, { "Hulk", 0.707f },
         };
 
         private const string PatternDefPrefix = "TMW_Pants_Native_";
