@@ -66,6 +66,9 @@ namespace TailorMadeWaistlines
         // The garments that are certain to be there: the adult trousers and the Biotech child's.
         private static readonly string[] BaseTrouserDefNames = { "Apparel_Pants", "Apparel_KidPants" };
 
+        // How much narrower AB's Fat shell is drawn (1 = as it is).
+        private const float FatNarrowing = 0.90f;
+
         private const string PatternDefPrefix = "TMW_Pants_Native_";
 
         /// <summary>What the last <see cref="Apply"/> did, for the log and for tests.</summary>
@@ -293,6 +296,8 @@ namespace TailorMadeWaistlines
             try
             {
                 byte[] rgba = ReadTopDown(shell, out int width, out int height);
+                // AB's fat shell is wider than the trousers should be on that body.
+                if (path.IndexOf("_Fat", StringComparison.Ordinal) >= 0) rgba = TrouserDetail.Narrow(rgba, width, height, FatNarrowing);
                 byte[] detailed = TrouserDetail.Apply(rgba, width, height, facing);
                 detailed = Lower(detailed, width, height, drop);
                 return FromTopDown(detailed, width, height, "TMW_Detail_" + path.Replace('/', '_'));

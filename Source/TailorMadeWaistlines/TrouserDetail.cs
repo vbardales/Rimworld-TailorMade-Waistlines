@@ -22,8 +22,8 @@ namespace TailorMadeWaistlines
     /// Pure on purpose: it works on 8-bit RGBA pixels, top row first, and touches no game or Unity
     /// type, so it can be run and looked at outside the game. Every mark is a multiplication of the
     /// colour that is already there and never a colour of its own, because the game tints these
-    /// textures with the garment's colour. Alpha is only ever removed, and only for the gap
-    /// between the legs.
+    /// textures with the garment's colour. Alpha is never touched: the gap between the legs is
+    /// painted black, so that it reads as the inside of the garment and never shows the ground.
     ///
     /// The shells are not one shape. A female or fat body gets a wide crescent whose top edge dips
     /// in the middle, a thin one a small cup, so nothing here is placed by a fixed row: the
@@ -100,6 +100,31 @@ namespace TailorMadeWaistlines
             int stride = width * Channels;
             Buffer.BlockCopy(rgba, 0, shifted, rows * stride, (height - rows) * stride);
             return shifted;
+        }
+
+        /// <summary>
+        /// Squeezes the picture towards its own centre column by <paramref name="factor"/> (below 1 narrows). Used for a
+        /// body whose shell is wider than its trousers should be; alpha is only ever lost at the edges.
+        /// </summary>
+        public static byte[] Narrow(byte[] rgba, int width, int height, float factor)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var copy = (byte[])rgba.Clone();
+            if (factor <= 0f || factor >= 1f) return copy;
+            var s = Measure(rgba, width, height);
+            if (s == null) return copy;
+
+            var outPx = new byte[rgba.Length];
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                {
+                    int sx = Round(s.Cx + (x - s.Cx) / factor);
+                    if (sx < 0 || sx >= width) continue;
+                    Buffer.BlockCopy(rgba, (y * width + sx) * Channels, outPx, (y * width + x) * Channels, Channels);
+                }
+            return outPx;
         }
 
         // ------------------------------------------------------------------- the shape
@@ -239,8 +264,10 @@ namespace TailorMadeWaistlines
         // -------------------------------------------------------------------- the gap
 
         /// <summary>
-        /// Removes a wedge from the bottom edge so the shell reads as two legs, then darkens the
-        /// pixels that now border it so the gap has an edge like every other side of the shape.
+        /// Paints a black wedge on the bottom edge so the shell reads as two legs, then darkens the
+        /// pixels that now border it so the gap has an edge like every other side of the shape. The
+        /// wedge keeps its alpha: what shows through it is the garment's own dark, not the body or the
+        /// ground, which only shows where the legs are bare.
         /// </summary>
         private static void CutBetweenTheLegs(byte[] px, int width, int height, Shape s)
         {
@@ -258,7 +285,7 @@ namespace TailorMadeWaistlines
                     if (x < 0 || x >= width) continue;
                     int i = (y * width + x) * Channels;
                     if (px[i + 3] < Solid) continue;
-                    px[i + 3] = 0;
+                    px[i] = px[i + 1] = px[i + 2] = 0;
                     cut[y * width + x] = true;
                 }
             }

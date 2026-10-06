@@ -18,7 +18,7 @@
         multiplication of the colour already there and the game tints these
         textures with the garment's own colour;
       - a pixel that was transparent stays exactly as it was;
-      - alpha is never raised, and is only lowered for the gap between the legs:
+      - alpha is never touched (the gap between the legs is painted black, not cut):
         at the bottom, in the middle, and never in the side view;
       - something is actually drawn, and the waistband follows the top edge of
         a crescent as well as of a bowl;
@@ -113,7 +113,7 @@ public static class TmwCheck
 
     /// [0] pixels of the garment that got brighter        (must be 0)
     /// [1] pixels whose alpha was raised                   (must be 0)
-    /// [2] pixels whose alpha was lowered
+    /// [2] pixels of the gap: alpha lowered, or colour painted to pure black on a pixel that was not
     /// [3] pixels that were transparent and changed        (must be 0)
     /// [4] pixels of the garment that got darker
     /// [5..8] bounding box of the lowered alpha: minX, maxX, minY, maxY (-1 when none)
@@ -127,7 +127,10 @@ public static class TmwCheck
                 int i = (y * w + x) * 4;
                 bool wasSolid = before[i + 3] >= Solid;
                 if (after[i + 3] > before[i + 3]) r[1]++;
-                if (after[i + 3] < before[i + 3])
+                bool blackened = before[i + 3] >= Solid && after[i + 3] == before[i + 3]
+                    && after[i] == 0 && after[i + 1] == 0 && after[i + 2] == 0
+                    && (before[i] != 0 || before[i + 1] != 0 || before[i + 2] != 0);
+                if (after[i + 3] < before[i + 3] || blackened)
                 {
                     r[2]++;
                     if (x < r[5]) r[5] = x; if (x > r[6]) r[6] = x;
@@ -138,7 +141,7 @@ public static class TmwCheck
                     for (int c = 0; c < 4; c++) if (after[i + c] != before[i + c]) { r[3]++; break; }
                     continue;
                 }
-                if (after[i + 3] < Solid) continue;   // removed for the gap; judged by [2]
+                if (after[i + 3] < Solid || blackened) continue;   // the gap; judged by [2]
                 bool brighter = false, darker = false;
                 for (int c = 0; c < 3; c++)
                 {
@@ -150,6 +153,22 @@ public static class TmwCheck
             }
         if (r[6] < 0) { r[5] = -1; r[7] = -1; }
         return r;
+    }
+
+    public static int SolidWidth(byte[] px, int w, int h)
+    {
+        int lo = w, hi = -1;
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                if (px[(y * w + x) * 4 + 3] >= Solid) { if (x < lo) lo = x; if (x > hi) hi = x; }
+        return hi < 0 ? 0 : hi - lo + 1;
+    }
+
+    public static int AlphaChanged(byte[] a, byte[] b)
+    {
+        int n = 0;
+        for (int i = 3; i < a.Length; i += 4) if (a[i] != b[i]) n++;
+        return n;
     }
 
     public static bool Same(byte[] a, byte[] b)
@@ -301,6 +320,19 @@ $refused = $false
 try { $shift.Invoke($null, @([byte[]](New-Object byte[] 10), $w, $h, 3)) | Out-Null }
 catch { $refused = ($_.Exception.InnerException -is [ArgumentException]) -and ($_.Exception.InnerException.Message -like '*must hold*') }
 Assert-That 'a buffer of the wrong length is refused' $refused
+
+Write-Host ""
+Write-Host "the gap is painted, not cut; a fat shell can be narrowed"
+$gw = 128; $gh = 128
+$gshell = [TmwCheck]::Shell($gw, $gh, 0)
+$gout = (Invoke-Apply $gshell $gw $gh $facings[0].Value)
+Assert-That 'painting the gap leaves every alpha as it was' ([TmwCheck]::AlphaChanged($gshell, $gout) -eq 0) "$([TmwCheck]::AlphaChanged($gshell, $gout)) alpha values changed"
+$narrow = $detail.GetMethod('Narrow')
+$n09 = $narrow.Invoke($null, @($gshell, $gw, $gh, [single]0.9))
+$w0 = [TmwCheck]::SolidWidth($gshell, $gw, $gh); $w9 = [TmwCheck]::SolidWidth($n09, $gw, $gh)
+Assert-That 'narrowing by 0.9 makes the shell narrower' ($w9 -lt $w0 -and $w9 -ge [int]($w0 * 0.85)) "$w0 -> $w9"
+$n10 = $narrow.Invoke($null, @($gshell, $gw, $gh, [single]1.0))
+Assert-That 'narrowing by 1 changes nothing' ([TmwCheck]::Same($gshell, $n10))
 
 Write-Host ""
 Write-Host "AB's real textures"
