@@ -18,6 +18,6 @@
     <useGeneralArt>False</useGeneralArt>
     <detailPlainShells>False</detailPlainShells>
     <trouserDrop>0.03</trouserDrop>
-    <trouserDropChild>0.09</trouserDropChild>
+    <trouserDropChild>0.075</trouserDropChild>
   </ModSettings>
 </SettingsBlock>

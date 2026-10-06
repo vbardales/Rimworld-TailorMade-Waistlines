@@ -68,7 +68,7 @@ try {
     Assert-That 'useGeneralArt starts on: it only acts where AB is active' ((Get-F $s 'useGeneralArt') -eq $true)
     Assert-That 'detailPlainShells starts on' ((Get-F $s 'detailPlainShells') -eq $true)
     Assert-That 'trouserDrop starts at 0.03' (Near (Get-F $s 'trouserDrop') 0.03)
-    Assert-That 'trouserDropChild starts at 0.09, more than an adult because a child is drawn smaller' (Near (Get-F $s 'trouserDropChild') 0.09)
+    Assert-That 'trouserDropChild starts at 0.075, more than an adult because a child is drawn smaller' (Near (Get-F $s 'trouserDropChild') 0.075)
 
     Write-Host ""
     Write-Host "Sanitize: what a damaged config file can hold"
@@ -89,7 +89,7 @@ try {
         @{ n = 'trouserDrop'; v = [float]::NaN;             want = 0.03; why = 'NaN falls back to the default' },
         @{ n = 'trouserDropChild'; v = 9.0;                 want = 0.30; why = 'above the slider' },
         @{ n = 'trouserDropChild'; v = -2.0;                want = 0.0;  why = 'below the slider' },
-        @{ n = 'trouserDropChild'; v = [float]::NaN;        want = 0.09; why = 'NaN falls back to the default' },
+        @{ n = 'trouserDropChild'; v = [float]::NaN;        want = 0.075; why = 'NaN falls back to the default' },
         @{ n = 'trouserDrop'; v = 0.05;                     want = 0.05; why = 'a value inside the range is left alone' }
     )
     foreach ($c in $cases) {
@@ -109,7 +109,7 @@ try {
     Assert-That 'the three bands return to TailorMade''s values' ((Near (Get-F $s 'pantsTop') 0.58) -and (Near (Get-F $s 'bootsTop') 0.20) -and (Near (Get-F $s 'chestBottom') 0.45))
     Assert-That 'the shirt option returns to off' ((Get-F $s 'shortenShirts') -eq $false)
     Assert-That 'both trouser art options return to on' (((Get-F $s 'useGeneralArt') -eq $true) -and ((Get-F $s 'detailPlainShells') -eq $true))
-    Assert-That 'both trouser drops return to their defaults' ((Near (Get-F $s 'trouserDrop') 0.03) -and (Near (Get-F $s 'trouserDropChild') 0.09))
+    Assert-That 'both trouser drops return to their defaults' ((Near (Get-F $s 'trouserDrop') 0.03) -and (Near (Get-F $s 'trouserDropChild') 0.075))
 }
 finally {
     [System.AppDomain]::CurrentDomain.remove_AssemblyResolve($resolver)
