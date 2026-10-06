@@ -30,16 +30,34 @@ namespace TailorMadeWaistlines
     /// </summary>
     public static class ChestArt
     {
+        private static bool LiftsTest(ThingDef def) =>
+            TailorMadeWaistlinesMod.Settings.shortenShirts
+            && def?.apparel != null
+            && def.apparel.LastLayer == ApparelLayerDefOf.OnSkin;
+
         [HarmonyPatch(typeof(ApparelClassifier), nameof(ApparelClassifier.ConfirmChestArt))]
         public static class ConfirmChestArt_Patch
         {
             public static void Postfix(ThingDef def, ref bool __result)
             {
                 if (__result) return;
-                if (!TailorMadeWaistlinesMod.Settings.shortenShirts) return;
-                if (def?.apparel == null) return;
-                if (def.apparel.LastLayer != ApparelLayerDefOf.OnSkin) return;
-                __result = true;
+                if (LiftsTest(def)) __result = true;
+            }
+        }
+
+        /// <summary>
+        /// <c>ConfirmChestArt</c> stores its answer, and TailorMade asks <c>ChestArtCached</c> first: once a garment has
+        /// been measured, the stored "no" is read back and <c>ConfirmChestArt</c> is never called again. The patch above
+        /// therefore lifts the test for the first pawn only; this one lifts it for every later one.
+        /// </summary>
+        [HarmonyPatch(typeof(ApparelClassifier), nameof(ApparelClassifier.ChestArtCached))]
+        public static class ChestArtCached_Patch
+        {
+            public static void Postfix(ThingDef def, ref bool confirmed, ref bool __result)
+            {
+                if (!__result || confirmed) return;
+                if (!LiftsTest(def)) return;
+                confirmed = true;
             }
         }
 
