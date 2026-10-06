@@ -188,11 +188,16 @@ namespace TailorMadeWaistlines
             TailorMadeWaistlinesSettings settings, string basePath, bool bareLegs)
         {
             string key = body + "_Female";
-            if (ShirtCut.ProfileFor(key, FacingNames[facing]) == null || !settings.detailPlainShells) return;
             string femalePath = basePath + "_" + key + "_" + FacingNames[facing];
-            if (mine.contentList.ContainsKey(femalePath) || SupplierOf(femalePath) != null) return;
             string path = basePath + "_" + body + "_" + FacingNames[facing];
+            bool noCurve = ShirtCut.ProfileFor(key, FacingNames[facing]) == null;
             ModContentPack supplier = SupplierOf(path);
+            ModContentPack taken = SupplierOf(femalePath);
+            if (facing == 0 && basePath == PantsPath)
+                Log.Message("[TailorMade Waistlines] female shell " + femalePath + ": curve " + (noCurve ? "missing" : "found") + ", already supplied by "
+                    + (taken?.PackageId ?? "nobody") + ", shell from " + (supplier?.PackageId ?? "nobody") + ".");
+            if (noCurve || !settings.detailPlainShells) return;
+            if (mine.contentList.ContainsKey(femalePath) || taken != null) return;
             if (supplier == null || !IsPack(supplier, AbPackageId)) return;
             Texture2D shell = supplier.GetContentHolder<Texture2D>().Get(path);
             Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop, bareLegs, key);
