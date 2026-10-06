@@ -358,7 +358,9 @@ namespace TailorMadeWaistlines
         {
             if (mine.contentList.TryGetValue(path, out Texture2D own)) return own;
             ModContentPack supplier = SupplierOf(path);
-            return supplier?.GetContentHolder<Texture2D>().Get(path);
+            if (supplier != null) return supplier.GetContentHolder<Texture2D>().Get(path);
+            // The game's own textures are not in any mod's content: ContentFinder reaches them.
+            return ContentFinder<Texture2D>.Get(path, false);
         }
 
         internal static byte[] Read(Texture texture, out int width, out int height) => ReadTopDown(texture, out width, out height);
