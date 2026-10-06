@@ -52,7 +52,75 @@ namespace TailorMadeWaistlines
                 }
             }
 
-            Log.Message("[TailorMade Waistlines] jackets and shirts: " + Stretched + " textures redrawn to the trousers.");
+            if (settings.shortenShirts) NativeShirts(mine);
+
+            Log.Message("[TailorMade Waistlines] jackets and shirts: " + Stretched + " textures redrawn to the trousers, "
+                + NativeCut + " shirt textures cut on the underwear without TailorMade's resizing.");
+        }
+
+        // The bodies whose shirts are not resized by TailorMade: the art drawn for the body is cut instead, as THIGAPPE does.
+        private static readonly string[] NativeBodies = { "Fat", "Hulk" };
+
+        public static int NativeCut { get; private set; }
+
+        /// <summary>
+        /// A body retexture such as WDI's ships a shirt drawn for each body (<c>ShirtBasic_Fat_Female_south</c>). TailorMade
+        /// resizes it again to the body, which is wrong on the widest and the broadest ones. Here the shirt art is cut on the
+        /// underwear's top edge as it is, and TailorMade is told to leave those garments on those bodies alone.
+        /// </summary>
+        private static void NativeShirts(ModContentHolder<Texture2D> mine)
+        {
+            NativeCut = 0;
+            foreach (string bodyName in NativeBodies)
+            {
+                BodyTypeDef body = DefDatabase<BodyTypeDef>.GetNamedSilentFail(bodyName);
+                if (body == null) continue;
+                var targets = new List<string>();
+                var done = new HashSet<string>();
+                foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
+                {
+                    if (Kind(def) != 2) continue;
+                    string worn = def.apparel.wornGraphicPath;
+                    if (string.IsNullOrEmpty(worn)) continue;
+                    int cut = 0;
+                    foreach (string sex in new[] { "", "_Female" })
+                        for (int f = 0; f < FacingNames.Length; f++)
+                            if (CutNative(worn + "_" + bodyName + sex + "_" + FacingNames[f], bodyName + sex, FacingNames[f], mine)) cut++;
+                    // Only a garment the body retexture draws for this body is left alone; any other is still resized.
+                    if (cut > 0 || mine.contentList.ContainsKey(worn + "_" + bodyName + "_south"))
+                        targets.Add("^" + System.Text.RegularExpressions.Regex.Escape(def.defName) + "$");
+                }
+                if (targets.Count == 0) continue;
+                string name = "TMW_NativeShirt_" + bodyName;
+                if (DefDatabase<TailorMade.TailorPatternDef>.GetNamedSilentFail(name) != null) continue;
+                DefDatabase<TailorMade.TailorPatternDef>.Add(new TailorMade.TailorPatternDef
+                {
+                    defName = name, bodyType = body, ignore = true, targetApparelDefs = targets,
+                });
+            }
+        }
+
+        private static bool CutNative(string path, string key, string facing, ModContentHolder<Texture2D> mine)
+        {
+            if (mine.contentList.ContainsKey(path)) return false;
+            Texture2D tex = TrouserArt.TextureAt(path, mine);
+            if (tex == null) return false;
+            try
+            {
+                byte[] px = TrouserArt.Read(tex, out int w, out int h);
+                byte[] cut = facing == "east"
+                    ? ShirtCut.CutBelow(px, w, h, (int)Math.Round(ShirtCut.CutFraction(key) * h, MidpointRounding.AwayFromZero))
+                    : ShirtCut.CutBelowProfile(px, w, h, ShirtCut.CutRows(key, facing, w, h));
+                if (ReferenceEquals(cut, px)) return false;
+                mine.contentList[path] = TrouserArt.Build(cut, w, h, "TMW_NativeShirt_" + path.Replace('/', '_'));
+                NativeCut++;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Warning("[TailorMade Waistlines] could not cut " + path + ": " + e.Message);
+                return false;
+            }
         }
 
         /// <summary>Zero for anything else; 1 for a coat or a jacket (shell layer, torso and not the legs); 2 for a shirt (on-skin, same).</summary>
