@@ -116,6 +116,8 @@ namespace TailorMadeWaistlines
                     if (Register(body.defName, f, true, generalDir, drop, mine, settings)) plain++;
                     Register(body.defName, f, true, null, drop, mine, settings, ShortsPath, true);
                     Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
+                    RegisterFemaleShell(body.defName, f, drop, mine, settings, PantsPath, false);
+                    RegisterFemaleShell(body.defName, f, drop, mine, settings, ShortsPath, true);
                 }
 
                 // TailorMade's ignore is per body type, not per facing or gender: it would leave every
@@ -175,6 +177,28 @@ namespace TailorMadeWaistlines
             mine.contentList[path] = detailed;
             Drawn++;
             return true;
+        }
+
+        /// <summary>
+        /// AB has one shell per body type for both sexes. WDI draws a separate female body for Thin, Fat and Hulk, with its
+        /// own underwear, so a female pawn of those body types gets her own copy of the shell, cut on her own underwear.
+        /// Female Apparel Variants asks for the path with _Female on the end when a texture exists there.
+        /// </summary>
+        private static void RegisterFemaleShell(string body, int facing, float drop, ModContentHolder<Texture2D> mine,
+            TailorMadeWaistlinesSettings settings, string basePath, bool bareLegs)
+        {
+            string key = body + "_Female";
+            if (ShirtCut.ProfileFor(key, FacingNames[facing]) == null || !settings.detailPlainShells) return;
+            string femalePath = basePath + "_" + key + "_" + FacingNames[facing];
+            if (mine.contentList.ContainsKey(femalePath) || SupplierOf(femalePath) != null) return;
+            string path = basePath + "_" + body + "_" + FacingNames[facing];
+            ModContentPack supplier = SupplierOf(path);
+            if (supplier == null || !IsPack(supplier, AbPackageId)) return;
+            Texture2D shell = supplier.GetContentHolder<Texture2D>().Get(path);
+            Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop, bareLegs, key);
+            if (detailed == null) return;
+            mine.contentList[femalePath] = detailed;
+            Drawn++;
         }
 
         /// <summary>
@@ -304,7 +328,7 @@ namespace TailorMadeWaistlines
             }
         }
 
-        private static Texture2D Detail(Texture2D shell, Facing facing, string path, float drop, bool bareLegs)
+        private static Texture2D Detail(Texture2D shell, Facing facing, string path, float drop, bool bareLegs, string curveBody = null)
         {
             try
             {
@@ -312,7 +336,7 @@ namespace TailorMadeWaistlines
                 // AB's fat shell is wider than the trousers should be on that body.
                 if (path.IndexOf("_Fat", StringComparison.Ordinal) >= 0) rgba = TrouserDetail.Narrow(rgba, width, height, FatNarrowing);
                 byte[] detailed;
-                float[] curve = UnderwearCurve(path, out string facingName);
+                float[] curve = UnderwearCurve(path, curveBody, out string facingName);
                 if (curve != null)
                 {
                     // The underwear is the mask: the trousers start on its top edge, column by column. A shell that begins lower
@@ -350,13 +374,13 @@ namespace TailorMadeWaistlines
 
         /// <summary>Moves the picture down by a fraction of the texture's height, without cutting it.</summary>
         /// <summary>The top edge of WDI's underwear for the body and facing of a trouser path, or null (no WDI, a body without underwear).</summary>
-        private static float[] UnderwearCurve(string path, out string facing)
+        private static float[] UnderwearCurve(string path, string curveBody, out string facing)
         {
             facing = null;
             Match m = Regex.Match(path, @"(?:Pants|Shorts)_([A-Za-z]+)_(south|east|north)$");
             if (!m.Success) return null;
             facing = m.Groups[2].Value;
-            return ShirtCut.ProfileFor(m.Groups[1].Value, facing);
+            return ShirtCut.ProfileFor(curveBody ?? m.Groups[1].Value, facing);
         }
 
         private static bool TryBelowNavel(string path, out float target)

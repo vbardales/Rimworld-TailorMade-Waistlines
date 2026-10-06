@@ -105,8 +105,8 @@ namespace TailorMadeWaistlines
         internal static int[] CutRows(string key, string facing, int width, int height)
         {
             float[] own = ProfileFor(key, facing);
-            string body = key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key;
-            float[] pants = ProfileFor(body, facing);
+            // The trousers of a female Thin, Fat or Hulk are cut on her own underwear too: the same curve.
+            float[] pants = own ?? ProfileFor(key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key, facing);
             var rows = new int[width];
             if (own == null && pants == null)
             {
