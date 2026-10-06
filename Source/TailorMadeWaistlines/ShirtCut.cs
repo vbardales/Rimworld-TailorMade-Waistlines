@@ -161,7 +161,7 @@ namespace TailorMadeWaistlines
         }
 
         // The shirt runs this far under the top of the trousers, so that no belly shows between them.
-        private const float UnderTrousers = 0.012f;
+        private const float UnderTrousers = 0.03f;
 
         /// <summary>
         /// Where the cut falls: the top of the underwear, or just under the top of the trousers when that is lower, so a
