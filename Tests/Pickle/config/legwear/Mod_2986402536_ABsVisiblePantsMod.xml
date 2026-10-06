@@ -12,6 +12,9 @@
   or Reset is pressed in its options window. Without this file the headless game has AB installed
   and inert, and no garment gets a wornGraphicPath. The scenario "AB has actually given the
   trousers a worn graphic" in 01-trousers-review.feature goes red the day this file is stale.
+
+  Legwear pass only: VAE_Apparel_Shorts is added to AB's Shorts_Pants category as TargetApparel (what a player does in AB's
+  options), because its defName matches none of AB's keywords and AB gives it no art otherwise (run 409c).
 -->
 <SettingsBlock>
 	<ModSettings Class="ABsVisiblePants.AVPSettings">
@@ -63,7 +66,9 @@
 					<li>Shorts_Pants</li>
 					<li>shortsPants</li>
 				</keyWord>
-				<TargetApparel IsNull="True" />
+				<TargetApparel>
+					<li>VAE_Apparel_Shorts</li>
+				</TargetApparel>
 				<ingoreApparel IsNull="True" />
 				<path>Things/Pawn/Humanlike/Apparel/Shorts/Shorts</path>
 			</li>
