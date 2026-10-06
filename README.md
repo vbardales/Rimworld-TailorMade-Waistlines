@@ -92,7 +92,7 @@ only by multiplying the colour already there, because the game tints these
 textures with the garment's colour. Two more settings, `trouserDrop` and
 `trouserDropChild`, move whatever this step registers down the body by a fraction of the
 texture's height, never cutting the garment. There are two because a child is drawn smaller,
-so the same fraction is fewer pixels on screen. The defaults, 0.03 and 0.075, are what a
+so the same fraction is fewer pixels on screen. The defaults, 0.03 and 0.067, are what a
 player chose by looking at captures at 1080p and the closest zoom, women and a girl; nobody has
 yet looked at a man. A measurement that tried to hit a number of pixels put the child at 0.20,
 which the eye rejected. All are read at startup. Only `Pants` is covered; the other four

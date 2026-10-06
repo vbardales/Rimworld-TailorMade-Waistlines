@@ -3,6 +3,8 @@
 #   Submit-PickleRun.ps1 -Mod TailorMadeWaistlines -DepMap wsl-deps.gallery.map -Filter "@gallery" ...
 wdi.realistic.bodies   3527486510
 ab.vplrf               2986402536
+tiagocc0.FemaleBodyVariants    3798082132
+tiagocc0.FemaleApparelVariants 3799726535
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
 nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
 nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod

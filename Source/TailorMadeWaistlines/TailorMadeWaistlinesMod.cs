@@ -28,13 +28,13 @@ namespace TailorMadeWaistlines
         // height. Two values, because a child is drawn smaller: the same fraction is fewer pixels on
         // screen. Both defaults are what a player chose by looking at captures at 1080p and the
         // closest zoom: the first version moved the art 0.02, and the second, 0.05 and 0.10, was
-        // judged a little too low, for women and for a girl, so they were 0.03 and 0.09; the girl was then raised 2 px (0.075). That is
+        // judged a little too low, for women and for a girl, so they were 0.03 and 0.09; the girl was then raised 3 px (0.067). That is
         // what the eye said, and it is worth more than arithmetic: a measurement that tried to hit
         // "2 and 4 pixels more" put the child at 0.20, which was wrong. Measured, an adult moves
         // about 0.16 pixels per row of its 512-row texture and a child about 0.18 per row of its
         // 128-row one. Nobody has yet looked at a man: until then his value is the women's.
         public const float DefaultTrouserDrop = 0.03f;
-        public const float DefaultChildTrouserDrop = 0.075f;
+        public const float DefaultChildTrouserDrop = 0.067f;
         public const float TrouserDropMin = 0f, TrouserDropMax = 0.30f;
 
         public float pantsTop = DefaultPantsTop;
