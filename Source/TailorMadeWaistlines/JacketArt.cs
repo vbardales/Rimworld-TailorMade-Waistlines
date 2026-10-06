@@ -38,8 +38,9 @@ namespace TailorMadeWaistlines
             var done = new HashSet<string>();
             foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
             {
-                int kind = Kind(def);
-                if (kind == 0) continue;
+                // Shirts (kind 2) are cut by ShirtCut after TailorMade has resized them; only jackets are redrawn here.
+                if (Kind(def) != 1) continue;
+                int kind = 1;
                 string worn = def.apparel.wornGraphicPath;
                 if (string.IsNullOrEmpty(worn) || !done.Add(worn)) continue;
 

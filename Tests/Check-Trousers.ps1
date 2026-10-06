@@ -377,6 +377,14 @@ Assert-That 'a garment already reaching the row is returned as it is' ([TmwCheck
 $jUp = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]($jbot - 6)))
 Assert-That 'compressing brings the hem up to the asked row' ([TmwCheck]::BottomRow($jUp, $gw, $gh) -eq ($jbot - 6)) "hem $([TmwCheck]::BottomRow($jUp, $gw, $gh))"
 
+$cutT = $asm.GetType('TailorMadeWaistlines.ShirtCut')
+$cut = $cutT.GetMethod('CutBelow')
+$cOut = $cut.Invoke($null, @($gshell, $gw, $gh, [int]($jtop + 8)))
+Assert-That 'a shirt cut at a row has nothing solid from that row down' ([TmwCheck]::BottomRow($cOut, $gw, $gh) -lt ($jtop + 8)) "bottom $([TmwCheck]::BottomRow($cOut, $gw, $gh))"
+Assert-That 'a shirt cut at a row keeps its top' ([TmwCheck]::TopRow($cOut, $gw, $gh) -eq $jtop)
+$cNo = $cut.Invoke($null, @($gshell, $gw, $gh, [int]$gh))
+Assert-That 'a cut row past the picture changes nothing' ([TmwCheck]::Same($gshell, $cNo))
+
 Write-Host ""
 Write-Host "AB's real textures"
 if (-not (Test-Path $AbPants)) {
