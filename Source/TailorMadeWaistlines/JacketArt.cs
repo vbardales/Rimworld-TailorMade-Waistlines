@@ -21,19 +21,25 @@ namespace TailorMadeWaistlines
 
         public static int Stretched { get; private set; }
 
+        /// <summary>True once the art has been redrawn, so TailorMade must leave these garments unbanded.</summary>
+        public static bool Active { get; private set; }
+
         public static void Apply()
         {
             Stretched = 0;
+            Active = false;
             var settings = TailorMadeWaistlinesMod.Settings;
-            if (settings == null || !settings.keepJacketsLong) return;
+            if (settings == null || !(settings.keepJacketsLong || settings.shortenShirts)) return;
             // The trousers' shells are what the hem is measured on: without AB there are none.
             if (TrouserArt.FindPackPublic("AB.VPLRF") == null) return;
+            Active = true;
 
             var mine = TailorMadeWaistlinesMod.Instance.Content.GetContentHolder<Texture2D>();
             var done = new HashSet<string>();
             foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
             {
-                if (!IsLongGarment(def)) continue;
+                int kind = Kind(def);
+                if (kind == 0) continue;
                 string worn = def.apparel.wornGraphicPath;
                 if (string.IsNullOrEmpty(worn) || !done.Add(worn)) continue;
 
@@ -41,40 +47,57 @@ namespace TailorMadeWaistlines
                 {
                     if (!TrouserArt.BelowNavel.TryGetValue(body.defName, out float navel)) continue;
                     for (int f = 0; f < FacingNames.Length; f++)
-                        Register(worn + "_" + body.defName + "_" + FacingNames[f], body.defName, FacingNames[f], navel, mine);
+                        Register(worn + "_" + body.defName + "_" + FacingNames[f], body.defName, FacingNames[f], navel, mine, kind == 2);
                 }
             }
 
-            Log.Message("[TailorMade Waistlines] jackets: " + Stretched + " textures stretched down to the hem of the trousers.");
+            Log.Message("[TailorMade Waistlines] jackets and shirts: " + Stretched + " textures redrawn to the trousers.");
         }
 
-        /// <summary>A coat or a jacket: worn over the shirt, covers the torso and not the legs.</summary>
-        public static bool IsLongGarment(ThingDef def)
+        /// <summary>Zero for anything else; 1 for a coat or a jacket (shell layer, torso and not the legs); 2 for a shirt (on-skin, same).</summary>
+        public static int Kind(ThingDef def)
         {
             ApparelProperties a = def?.apparel;
-            if (a == null || a.LastLayer != ApparelLayerDefOf.Shell) return false;
+            if (a == null) return 0;
+            var settings = TailorMadeWaistlinesMod.Settings;
+            int kind = a.LastLayer == ApparelLayerDefOf.Shell && settings.keepJacketsLong ? 1
+                     : a.LastLayer == ApparelLayerDefOf.OnSkin && settings.shortenShirts ? 2 : 0;
+            if (kind == 0) return 0;
             bool torso = false;
             foreach (BodyPartGroupDef g in a.bodyPartGroups ?? new List<BodyPartGroupDef>())
             {
-                if (g.defName == "Legs" || g.defName == "Feet") return false;
+                if (g.defName == "Legs" || g.defName == "Feet") return 0;
                 if (g.defName == "Torso") torso = true;
             }
-            return torso;
+            return torso ? kind : 0;
         }
 
-        private static void Register(string path, string body, string facing, float navel, ModContentHolder<Texture2D> mine)
+        private static void Register(string path, string body, string facing, float navel, ModContentHolder<Texture2D> mine, bool shirt)
         {
             if (mine.contentList.ContainsKey(path)) return;
             Texture2D jacket = TrouserArt.TextureAt(path, mine);
-            Texture2D pants = TrouserArt.TextureAt(TrouserArt.PantsTexturePath(body, facing), mine);
-            if (jacket == null || pants == null) return;
+            Texture2D pants = shirt ? null : TrouserArt.TextureAt(TrouserArt.PantsTexturePath(body, facing), mine);
+            if (jacket == null || (!shirt && pants == null)) return;
             try
             {
-                byte[] pantsPx = TrouserArt.Read(pants, out int pw, out int ph);
-                int hem = TrouserDetail.BottomRow(pantsPx, pw, ph);
                 byte[] px = TrouserArt.Read(jacket, out int w, out int h);
-                if (hem < 0 || h != ph) return;
-                int pivot = (int)Math.Round(navel * h, MidpointRounding.AwayFromZero);
+                int hem, pivot;
+                if (shirt)
+                {
+                    // A shirt keeps its top (collar, shoulders, chest) and only its lower half is brought up, until its hem
+                    // runs just under the top of the trousers.
+                    int top = TrouserDetail.TopRow(px, w, h), bottom = TrouserDetail.BottomRow(px, w, h);
+                    if (top < 0) return;
+                    pivot = (top + bottom) / 2;
+                    hem = (int)Math.Round((navel + 0.03f) * h, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    byte[] pantsPx = TrouserArt.Read(pants, out int pw, out int ph);
+                    hem = TrouserDetail.BottomRow(pantsPx, pw, ph);
+                    if (hem < 0 || h != ph) return;
+                    pivot = (int)Math.Round(navel * h, MidpointRounding.AwayFromZero);
+                }
                 byte[] stretched = TrouserDetail.StretchBottom(px, w, h, pivot, hem);
                 if (ReferenceEquals(stretched, px)) return;
                 mine.contentList[path] = TrouserArt.Build(stretched, w, h, "TMW_Jacket_" + path.Replace('/', '_'));

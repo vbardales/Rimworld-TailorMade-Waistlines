@@ -156,6 +156,15 @@ namespace TailorMadeWaistlines
             return outPx;
         }
 
+        /// <summary>The highest row with a solid pixel, or -1 when there is none.</summary>
+        public static int TopRow(byte[] rgba, int width, int height)
+        {
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                    if (rgba[(y * width + x) * Channels + 3] >= Solid) return y;
+            return -1;
+        }
+
         /// <summary>The lowest row with a solid pixel, or -1 when there is none.</summary>
         public static int BottomRow(byte[] rgba, int width, int height)
         {
@@ -166,7 +175,7 @@ namespace TailorMadeWaistlines
         }
 
         /// <summary>
-        /// Stretches the part of the picture below <paramref name="pivotRow"/> downwards, so that its lowest solid row lands on
+        /// Stretches (or compresses) the part of the picture below <paramref name="pivotRow"/>, so that its lowest solid row lands on
         /// <paramref name="newBottomRow"/>; everything above the pivot stays as it is. Returns the input itself when there is
         /// nothing to do (the garment already reaches that row, or the pivot is not above its hem).
         /// </summary>
@@ -176,7 +185,7 @@ namespace TailorMadeWaistlines
             if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
                 throw new ArgumentException("rgba must hold width * height * 4 bytes.");
             int bottom = BottomRow(rgba, width, height);
-            if (bottom < 0 || pivotRow < 0 || pivotRow >= bottom || newBottomRow <= bottom || newBottomRow >= height) return rgba;
+            if (bottom < 0 || pivotRow < 0 || pivotRow >= bottom || newBottomRow == bottom || newBottomRow <= pivotRow || newBottomRow >= height) return rgba;
 
             var outPx = new byte[rgba.Length];
             int stride = width * Channels;

@@ -69,11 +69,14 @@ namespace TailorMadeWaistlines
         [HarmonyPatch(typeof(ApparelClassifier), nameof(ApparelClassifier.Info))]
         public static class Info_Patch
         {
+            /// <summary>
+            /// Jackets and shirts are redrawn by <see cref="JacketArt"/> to the trousers, so TailorMade must not band them as
+            /// well: its band squeezes the whole garment, shoulders included, instead of moving only the lower half.
+            /// </summary>
             public static void Postfix(ThingDef def, ref ApparelClassInfo __result)
             {
-                if (__result.cls != ApparelClass.Chest) return;
-                if (!TailorMadeWaistlinesMod.Settings.keepJacketsLong) return;
-                if (def?.apparel == null || def.apparel.LastLayer == ApparelLayerDefOf.OnSkin) return;
+                if (__result.cls != ApparelClass.Chest || !JacketArt.Active) return;
+                if (JacketArt.Kind(def) == 0) return;
                 __result.cls = ApparelClass.None;
             }
         }

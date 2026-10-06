@@ -372,8 +372,10 @@ Assert-That 'stretching down leaves the top where it was' ([TmwCheck]::TopRow($j
 $sameAbove = $true
 for ($y = 0; $y -le $pivot; $y++) { for ($x = 0; $x -lt $gw; $x++) { $i = ($y * $gw + $x) * 4; if ($jOut[$i + 3] -ne $gshell[$i + 3]) { $sameAbove = $false } } }
 Assert-That 'everything above the pivot is untouched' $sameAbove
-$jNo = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]($jbot - 3)))
+$jNo = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]$jbot))
 Assert-That 'a garment already reaching the row is returned as it is' ([TmwCheck]::Same($gshell, $jNo))
+$jUp = $jb.Invoke($null, @($gshell, $gw, $gh, $pivot, [int]($jbot - 6)))
+Assert-That 'compressing brings the hem up to the asked row' ([TmwCheck]::BottomRow($jUp, $gw, $gh) -eq ($jbot - 6)) "hem $([TmwCheck]::BottomRow($jUp, $gw, $gh))"
 
 Write-Host ""
 Write-Host "AB's real textures"
