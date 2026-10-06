@@ -36,8 +36,8 @@ Licence: none stated. Take the idea (cut with a generated mask), not the code, a
 | Mod | Id | Relevance |
 |---|---|---|
 | TailorMade Unlock Fix | 3769650943 | HAR race apparel restriction toggle only. None. |
-| Smaller Shirt Textures | 3169180308 | Redraws vanilla shirts smaller (123 textures). The only one that touches shirt art. Where its hem ends on WDI bodies is not read. |
-| Simple Pants and Shirts | 3795174803 | Adds a V-neck tee, a croptop, a logo shirt; better pants art. The croptop is a short top: a test case for any "bring every shirt down to the trousers" rule. |
+| Smaller Shirt Textures | 3169180308 | Redraws vanilla shirts smaller (123 textures). The only one that touches shirt art. Hem measured 2026-10-06 (fraction of the picture from the top, south, against the top of AB's raw trouser shell): Male 0.73 vs 0.70, Female 0.66 vs 0.69, Thin 0.68 vs 0.69, Fat 0.82 vs 0.71, Hulk 0.85 vs 0.80. So it already reaches about the trousers on Male, Thin and Hulk, stops 0.03 short on Female and runs 0.11 below on Fat. The best base for a cut: a cut at the trouser line is then small. |
+| Simple Pants and Shirts | 3795174803 | Adds a V-neck tee, a croptop, a logo shirt; better pants art. The croptop is a short top (hem 0.58 to 0.67 of the picture, well above the trousers at 0.69 to 0.80): a test case for any "bring every shirt down to the trousers" rule, which must not lengthen it. |
 | Simple Skirt | 3029003553 | A skirt with its own art: a second skirt test case. Defs not read. |
 | AB's Visible Pants | 2986402536 | The shell source. Picks art by a keyword in the def name (Pants, Skirt, Trousers, Jeans, Shorts_Pants). `VAE_Apparel_Shorts` matches none: no art unless added by hand as TargetApparel. |
 | [XND] Visible Pants | 2264108215 | The other pants supplier; this mod leaves its textures alone. |
@@ -72,3 +72,10 @@ Thin and Hulk have a separate female body; AB has one pants shell for each, shar
 ## Proposed next step (not done)
 
 Replace the lower-half compression of shirts and jackets with an AbsCon-style cut: a mask generated per body and facing from the top edge of AB's trouser shell for that body, white above it, transparent below. Hem ends under the trousers, top untouched, no resampling, so no blur. Needs the per-sex heights above to be right for Thin and Hulk.
+
+## Update 2026-10-06 (second pass)
+
+- All the mods listed as missing were downloaded later and read: none fits a shirt to a legless body; AbsCon's mask cut stays the only model.
+- Smaller Shirt Textures draws shirts nearly to the trouser line already (hems above). With it active, a cut mask would remove little; without it, vanilla shirts run the whole body.
+- Not read in detail: Useless clothes (2683996253, 146 textures), Xeva Body Pants (3503852086).
+- Open decision: which shirt source the gallery uses (vanilla, or Smaller Shirt Textures).
