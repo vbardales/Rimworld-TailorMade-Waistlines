@@ -28,6 +28,22 @@ namespace TailorMadeWaistlines
 
         [ThreadStatic] private static string bodyKey;
 
+        // The shirt runs this far under the top of the trousers, so that no belly shows between them.
+        private const float UnderTrousers = 0.03f;
+
+        /// <summary>
+        /// Where the cut falls: the top of the underwear, or just under the top of the trousers when that is lower, so a
+        /// shirt always reaches the trousers (AB's Fat shell starts well below WDI's boxers).
+        /// </summary>
+        internal static float CutFraction(string key)
+        {
+            float line = Line[key];
+            string body = key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key;
+            if (TrouserArt.BelowNavel.TryGetValue(body, out float pantsTop))
+                line = Math.Max(line, pantsTop + (TailorMadeWaistlinesMod.Settings.trouserDrop - TailorMadeWaistlinesSettings.DefaultTrouserDrop) + UnderTrousers);
+            return line;
+        }
+
         /// <summary>Erases every row from <paramref name="cutRow"/> down. Returns the input itself when there is nothing to erase.</summary>
         public static byte[] CutBelow(byte[] rgba, int width, int height, int cutRow)
         {
@@ -70,7 +86,7 @@ namespace TailorMadeWaistlines
                 try
                 {
                     byte[] px = TrouserArt.Read(__result, out int w, out int h);
-                    int row = (int)Math.Round(Line[bodyKey] * h, MidpointRounding.AwayFromZero);
+                    int row = (int)Math.Round(CutFraction(bodyKey) * h, MidpointRounding.AwayFromZero);
                     byte[] cut = CutBelow(px, w, h, row);
                     if (ReferenceEquals(cut, px)) return;
                     __result = TrouserArt.Build(cut, w, h, "TMW_ShirtCut_" + bodyKey);
