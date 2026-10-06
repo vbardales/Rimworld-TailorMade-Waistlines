@@ -8,7 +8,7 @@
   <ModSettings Class="TailorMadeWaistlines.TailorMadeWaistlinesSettings">
     <pantsTop>0.58</pantsTop>
     <bootsTop>0.2</bootsTop>
-    <chestBottom>0.45</chestBottom>
+    <chestBottom>0.40</chestBottom>
     <shortenShirts>True</shortenShirts>
     <useGeneralArt>True</useGeneralArt>
     <detailPlainShells>True</detailPlainShells>

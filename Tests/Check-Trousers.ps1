@@ -219,8 +219,8 @@ $facings = @(
     @{ Name = 'north'; Value = [Enum]::ToObject($facingType, 2) }
 )
 
-function Invoke-Apply([byte[]]$px, [int]$w, [int]$h, $facing) {
-    return , $apply.Invoke($null, @($px, $w, $h, $facing))
+function Invoke-Apply([byte[]]$px, [int]$w, [int]$h, $facing, [bool]$bare = $false) {
+    return , $apply.Invoke($null, @($px, $w, $h, $facing, $bare))
 }
 
 function Assert-Invariants([string]$label, [byte[]]$before, [byte[]]$after, [int]$w, [int]$h, [string]$facingName, [int]$cx, [int]$shellTop, [int]$shellBottom) {
@@ -291,12 +291,12 @@ $out = (Invoke-Apply $tiny 6 4 $facings[0].Value)
 Assert-That 'a shell too small to hold the marks comes back unchanged' ([TmwCheck]::Same($tiny, $out))
 
 $refused = $false
-try { $apply.Invoke($null, @([byte[]](New-Object byte[] 10), 128, 128, $facings[0].Value)) | Out-Null }
+try { $apply.Invoke($null, @([byte[]](New-Object byte[] 10), 128, 128, $facings[0].Value, $false)) | Out-Null }
 catch { $refused = ($_.Exception.InnerException -is [ArgumentException]) -and ($_.Exception.InnerException.Message -like '*must hold*') }
 Assert-That 'a buffer of the wrong length is refused' $refused
 
 $refused = $false
-try { $apply.Invoke($null, @($null, 128, 128, $facings[0].Value)) | Out-Null }
+try { $apply.Invoke($null, @($null, 128, 128, $facings[0].Value, $false)) | Out-Null }
 catch { $refused = $_.Exception.InnerException -is [ArgumentNullException] }
 Assert-That 'no buffer at all is refused' $refused
 
@@ -357,6 +357,11 @@ Assert-That 'stretching up lands the top on the asked row' ([TmwCheck]::TopRow($
 Assert-That 'stretching up leaves the bottom where it was' ([TmwCheck]::BottomRow($stOut, $gw, $gh) -eq $sb0) "bottom $([TmwCheck]::BottomRow($stOut, $gw, $gh)), was $sb0"
 $stDown = $stretch.Invoke($null, @($gshell, $gw, $gh, [int]($st0 + 5)))
 Assert-That 'a row below the top changes nothing' ([TmwCheck]::Same($gshell, $stDown))
+
+$bareOut = (Invoke-Apply $gshell $gw $gh $facings[0].Value $true)
+$nAlphaBare = [TmwCheck]::AlphaChanged($gshell, $bareOut)
+Assert-That 'shorts: the gap between the legs is left open (alpha removed), not painted' ($nAlphaBare -gt 0) "$nAlphaBare alpha values changed"
+Assert-That 'trousers: the gap is painted, no alpha removed' ([TmwCheck]::AlphaChanged($gshell, $gout) -eq 0)
 
 Write-Host ""
 Write-Host "AB's real textures"

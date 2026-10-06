@@ -48,7 +48,7 @@ namespace TailorMadeWaistlines
         /// Returns a copy of <paramref name="rgba"/> with the marks drawn on. A texture with
         /// nothing solid in it, or too small to hold the marks, comes back unchanged.
         /// </summary>
-        public static byte[] Apply(byte[] rgba, int width, int height, Facing facing)
+        public static byte[] Apply(byte[] rgba, int width, int height, Facing facing, bool bareLegs = false)
         {
             if (rgba == null) throw new ArgumentNullException(nameof(rgba));
             if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
@@ -68,7 +68,7 @@ namespace TailorMadeWaistlines
             }
 
             if (facing != Facing.East)
-                CutBetweenTheLegs(px, width, height, s);
+                CutBetweenTheLegs(px, width, height, s, bareLegs);
 
             return px;
         }
@@ -298,7 +298,7 @@ namespace TailorMadeWaistlines
         /// wedge keeps its alpha: what shows through it is the garment's own dark, not the body or the
         /// ground, which only shows where the legs are bare.
         /// </summary>
-        private static void CutBetweenTheLegs(byte[] px, int width, int height, Shape s)
+        private static void CutBetweenTheLegs(byte[] px, int width, int height, Shape s, bool bareLegs)
         {
             int depth = s.Bottom - s.Crotch;
             float halfBase = Math.Max(1f, s.W * 0.09f);
@@ -314,7 +314,10 @@ namespace TailorMadeWaistlines
                     if (x < 0 || x >= width) continue;
                     int i = (y * width + x) * Channels;
                     if (px[i + 3] < Solid) continue;
-                    px[i] = px[i + 1] = px[i + 2] = 0;
+                    // Trousers cover the legs, so the gap is the inside of the garment: black. Shorts leave the legs bare, so
+                    // the gap is open and shows whatever is behind it.
+                    if (bareLegs) px[i + 3] = 0;
+                    else px[i] = px[i + 1] = px[i + 2] = 0;
                     cut[y * width + x] = true;
                 }
             }

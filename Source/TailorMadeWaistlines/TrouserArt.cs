@@ -58,6 +58,10 @@ namespace TailorMadeWaistlines
         private static readonly string[] GeneralPantsFolder =
             { "Mods", "VisiblePants", "Textures", "Core", "Things", "Pawn", "Humanlike", "Apparel", "Pants" };
 
+        // AB's Shorts category. Its shell is the trousers' shell, drawn the same way except that the gap between the legs is
+        // left open, because shorts leave the legs bare.
+        private const string ShortsPath = "Things/Pawn/Humanlike/Apparel/Shorts/Shorts";
+
         private static readonly string[] FacingNames = { "south", "east", "north" };
 
         // AB's Normal_Pants category matches on this keyword, as a plain substring of the def name.
@@ -110,6 +114,7 @@ namespace TailorMadeWaistlines
                     // the same path with _Female on the end when a texture exists there, and General
                     // ships Pants_Fat_Female for exactly that. Only the first can be a shell to draw on.
                     if (Register(body.defName, f, true, generalDir, drop, mine, settings)) plain++;
+                    Register(body.defName, f, true, null, drop, mine, settings, ShortsPath, true);
                     Register(body.defName + "_Female", f, false, generalDir, drop, mine, settings);
                 }
 
@@ -142,9 +147,9 @@ namespace TailorMadeWaistlines
         /// when General has that file, otherwise (for a real body type) draw details onto AB's shell.
         /// </summary>
         private static bool Register(string variant, int facing, bool mayDrawOnShell, string generalDir, float drop,
-            ModContentHolder<Texture2D> mine, TailorMadeWaistlinesSettings settings)
+            ModContentHolder<Texture2D> mine, TailorMadeWaistlinesSettings settings, string basePath = PantsPath, bool bareLegs = false)
         {
-            string path = PantsPath + "_" + variant + "_" + FacingNames[facing];
+            string path = basePath + "_" + variant + "_" + FacingNames[facing];
             if (mine.contentList.ContainsKey(path)) return false;
 
             ModContentPack supplier = SupplierOf(path);
@@ -165,7 +170,7 @@ namespace TailorMadeWaistlines
 
             if (!mayDrawOnShell || !settings.detailPlainShells || supplier == null) return false;
             Texture2D shell = supplier.GetContentHolder<Texture2D>().Get(path);
-            Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop);
+            Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop, bareLegs);
             if (detailed == null) return false;
             mine.contentList[path] = detailed;
             Drawn++;
@@ -224,6 +229,7 @@ namespace TailorMadeWaistlines
                 foreach (KeyValuePair<string, string> a in apparel)
                 {
                     if (string.IsNullOrEmpty(a.Key) || names.Contains(a.Key)) continue;
+                    if (a.Value == ShortsPath) { names.Add(a.Key); continue; }
                     if (a.Key.IndexOf(PantsKeyword, StringComparison.Ordinal) < 0) continue;
                     if (!string.IsNullOrEmpty(a.Value) && a.Value != PantsPath) continue;
                     names.Add(a.Key);
@@ -298,7 +304,7 @@ namespace TailorMadeWaistlines
             }
         }
 
-        private static Texture2D Detail(Texture2D shell, Facing facing, string path, float drop)
+        private static Texture2D Detail(Texture2D shell, Facing facing, string path, float drop, bool bareLegs)
         {
             try
             {
@@ -311,11 +317,11 @@ namespace TailorMadeWaistlines
                     // The slider is an offset from the navel: its default puts the top right under it.
                     float top = target + (drop - TailorMadeWaistlinesSettings.DefaultTrouserDrop);
                     rgba = TrouserDetail.StretchTop(rgba, width, height, (int)Math.Round(top * height, MidpointRounding.AwayFromZero));
-                    detailed = TrouserDetail.Apply(rgba, width, height, facing);
+                    detailed = TrouserDetail.Apply(rgba, width, height, facing, bareLegs);
                 }
                 else
                 {
-                    detailed = TrouserDetail.Apply(rgba, width, height, facing);
+                    detailed = TrouserDetail.Apply(rgba, width, height, facing, bareLegs);
                     detailed = Lower(detailed, width, height, drop);
                 }
                 return FromTopDown(detailed, width, height, "TMW_Detail_" + path.Replace('/', '_'));
@@ -331,7 +337,7 @@ namespace TailorMadeWaistlines
         private static bool TryBelowNavel(string path, out float target)
         {
             target = 0f;
-            Match m = Regex.Match(path, @"Pants_([A-Za-z]+)_(south|east|north)$");
+            Match m = Regex.Match(path, @"(?:Pants|Shorts)_([A-Za-z]+)_(south|east|north)$");
             return m.Success && BelowNavel.TryGetValue(m.Groups[1].Value, out target);
         }
 
