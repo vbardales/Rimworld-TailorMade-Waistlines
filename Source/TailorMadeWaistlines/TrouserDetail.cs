@@ -156,6 +156,30 @@ namespace TailorMadeWaistlines
             return outPx;
         }
 
+        /// <summary>
+        /// Erases, column by column, everything above that column's row, and fades the first rows under it so that the edge
+        /// is not a ruler line. The mask is the top edge of the underwear, which the trousers must start on.
+        /// </summary>
+        public static byte[] CutAbove(byte[] rgba, int width, int height, int[] topRows)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (topRows == null || topRows.Length != width) throw new ArgumentException("one row per column.");
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var px = (byte[])rgba.Clone();
+            for (int x = 0; x < width; x++)
+            {
+                int top = Math.Max(0, Math.Min(height, topRows[x]));
+                for (int y = 0; y < top; y++) px[(y * width + x) * Channels + 3] = 0;
+                for (int k = 0; k < 2 && top + k < height; k++)
+                {
+                    int i = ((top + k) * width + x) * Channels + 3;
+                    px[i] = (byte)(px[i] * ((k + 1) / 3f));
+                }
+            }
+            return px;
+        }
+
         /// <summary>The highest row with a solid pixel, or -1 when there is none.</summary>
         public static int TopRow(byte[] rgba, int width, int height)
         {

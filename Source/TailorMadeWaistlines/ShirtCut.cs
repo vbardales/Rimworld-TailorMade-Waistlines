@@ -97,28 +97,29 @@ namespace TailorMadeWaistlines
             return result;
         }
 
-        /// <summary>One cut row per column of a picture <paramref name="width"/> wide and <paramref name="height"/> high.</summary>
+        /// <summary>
+        /// One cut row per column of a picture <paramref name="width"/> wide and <paramref name="height"/> high: the top edge of
+        /// this pawn's underwear, or the top edge of the underwear the trousers of its body start on when that is lower, plus a
+        /// hand under the trousers. The trousers are cut on the same curve, so the shirt always runs under them.
+        /// </summary>
         internal static int[] CutRows(string key, string facing, int width, int height)
         {
-            float[] profile = ProfileFor(key, facing);
-            float pantsLine = PantsLine(key);
-            if (profile == null)
-            {
-                var flat = new int[width];
-                int row = (int)Math.Round(Math.Max(Line[key], pantsLine) * height, MidpointRounding.AwayFromZero);
-                for (int x = 0; x < width; x++) flat[x] = row;
-                return flat;
-            }
-            // The whole curve moves down together until its highest point is under the top of the trousers: the shape of the
-            // waistband is kept, only its height follows the trousers.
-            float min = float.MaxValue;
-            foreach (float v in profile) if (v < min) min = v;
-            float shift = Math.Max(0f, pantsLine - min);
+            float[] own = ProfileFor(key, facing);
+            string body = key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key;
+            float[] pants = ProfileFor(body, facing);
             var rows = new int[width];
+            if (own == null && pants == null)
+            {
+                int row = (int)Math.Round((Line[key] + UnderTrousers) * height, MidpointRounding.AwayFromZero);
+                for (int x = 0; x < width; x++) rows[x] = row;
+                return rows;
+            }
+            float drop = TailorMadeWaistlinesMod.Settings.trouserDrop - TailorMadeWaistlinesSettings.DefaultTrouserDrop;
             for (int x = 0; x < width; x++)
             {
-                float v = profile[Math.Min(profile.Length - 1, (int)(x * (long)profile.Length / width))] + shift;
-                rows[x] = (int)Math.Round(v * height, MidpointRounding.AwayFromZero);
+                float a = own == null ? 0f : own[Math.Min(own.Length - 1, (int)(x * (long)own.Length / width))];
+                float p = pants == null ? 0f : pants[Math.Min(pants.Length - 1, (int)(x * (long)pants.Length / width))] + drop;
+                rows[x] = (int)Math.Round((Math.Max(a, p) + UnderTrousers) * height, MidpointRounding.AwayFromZero);
             }
             return rows;
         }
@@ -132,7 +133,7 @@ namespace TailorMadeWaistlines
         }
 
         // The shirt runs this far under the top of the trousers, so that no belly shows between them.
-        private const float UnderTrousers = 0.03f;
+        private const float UnderTrousers = 0.012f;
 
         /// <summary>
         /// Where the cut falls: the top of the underwear, or just under the top of the trousers when that is lower, so a

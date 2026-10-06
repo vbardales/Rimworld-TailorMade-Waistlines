@@ -312,7 +312,22 @@ namespace TailorMadeWaistlines
                 // AB's fat shell is wider than the trousers should be on that body.
                 if (path.IndexOf("_Fat", StringComparison.Ordinal) >= 0) rgba = TrouserDetail.Narrow(rgba, width, height, FatNarrowing);
                 byte[] detailed;
-                if (TryBelowNavel(path, out float target))
+                float[] curve = UnderwearCurve(path, out string facingName);
+                if (curve != null)
+                {
+                    // The underwear is the mask: the trousers start on its top edge, column by column. A shell that begins lower
+                    // is first stretched up to the curve's highest point, one that begins higher is cut down to the curve.
+                    float shift = drop - TailorMadeWaistlinesSettings.DefaultTrouserDrop;
+                    float highest = float.MaxValue;
+                    foreach (float v in curve) if (v < highest) highest = v;
+                    rgba = TrouserDetail.StretchTop(rgba, width, height, (int)Math.Round((highest + shift) * height, MidpointRounding.AwayFromZero));
+                    var rows = new int[width];
+                    for (int x = 0; x < width; x++)
+                        rows[x] = (int)Math.Round((curve[Math.Min(curve.Length - 1, (int)(x * (long)curve.Length / width))] + shift) * height, MidpointRounding.AwayFromZero);
+                    rgba = TrouserDetail.CutAbove(rgba, width, height, rows);
+                    detailed = TrouserDetail.Apply(rgba, width, height, facing, bareLegs);
+                }
+                else if (TryBelowNavel(path, out float target))
                 {
                     // The slider is an offset from the navel: its default puts the top right under it.
                     float top = target + (drop - TailorMadeWaistlinesSettings.DefaultTrouserDrop);
@@ -334,6 +349,16 @@ namespace TailorMadeWaistlines
         }
 
         /// <summary>Moves the picture down by a fraction of the texture's height, without cutting it.</summary>
+        /// <summary>The top edge of WDI's underwear for the body and facing of a trouser path, or null (no WDI, a body without underwear).</summary>
+        private static float[] UnderwearCurve(string path, out string facing)
+        {
+            facing = null;
+            Match m = Regex.Match(path, @"(?:Pants|Shorts)_([A-Za-z]+)_(south|east|north)$");
+            if (!m.Success) return null;
+            facing = m.Groups[2].Value;
+            return ShirtCut.ProfileFor(m.Groups[1].Value, facing);
+        }
+
         private static bool TryBelowNavel(string path, out float target)
         {
             target = 0f;

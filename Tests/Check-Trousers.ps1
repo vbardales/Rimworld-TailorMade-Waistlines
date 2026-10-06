@@ -394,6 +394,15 @@ for ($x = 0; $x -lt $gw; $x++) { for ($y = $rowsP[$x]; $y -lt $gh; $y++) { if ($
 Assert-That 'a shirt cut along a curve has nothing left below the curve in any column' $pOk
 Assert-That 'a shirt cut along a curve keeps its top' ([TmwCheck]::TopRow($pOut, $gw, $gh) -eq $jtop)
 
+$cutA = $detail.GetMethod('CutAbove')
+$rowsA = [int[]](New-Object int[] $gw)
+for ($x = 0; $x -lt $gw; $x++) { $rowsA[$x] = $gtop2 = ($jtop + 6 + [int]([Math]::Abs($x - 64) / 10)) }
+$aOut = $cutA.Invoke($null, @($gshell, $gw, $gh, $rowsA))
+$aOk = $true
+for ($x = 0; $x -lt $gw; $x++) { for ($y = 0; $y -lt $rowsA[$x]; $y++) { if ($aOut[($y * $gw + $x) * 4 + 3] -ne 0) { $aOk = $false } } }
+Assert-That 'trousers cut along a curve have nothing left above the curve in any column' $aOk
+Assert-That 'trousers cut along a curve keep their bottom' ([TmwCheck]::BottomRow($aOut, $gw, $gh) -eq $jbot)
+
 Write-Host ""
 Write-Host "AB's real textures"
 if (-not (Test-Path $AbPants)) {
