@@ -110,7 +110,7 @@ namespace TailorMadeWaistlines
             var rows = new int[width];
             if (own == null && pants == null)
             {
-                int row = (int)Math.Round((Line[key] + UnderTrousers) * height, MidpointRounding.AwayFromZero);
+                int row = (int)Math.Round((LineFor(key) + UnderTrousers) * height, MidpointRounding.AwayFromZero);
                 for (int x = 0; x < width; x++) rows[x] = row;
                 return rows;
             }
@@ -122,6 +122,34 @@ namespace TailorMadeWaistlines
                 rows[x] = (int)Math.Round((Math.Max(a, p) + UnderTrousers) * height, MidpointRounding.AwayFromZero);
             }
             return rows;
+        }
+
+        private static float childLine = -1f;
+
+        /// <summary>
+        /// The line a body's shirt is cut on when it has no underwear curve. WDI draws no underwear for children, so the line
+        /// is the one the child's trousers were given: the top of their finished texture, already lowered by the slider.
+        /// </summary>
+        internal static float LineFor(string key)
+        {
+            if (key != "Child") return Line[key];
+            if (childLine >= 0f) return childLine;
+            try
+            {
+                var mine = TailorMadeWaistlinesMod.Instance.Content.GetContentHolder<Texture2D>();
+                Texture2D pants = TrouserArt.TextureAt(TrouserArt.PantsTexturePath("Child", "south"), mine);
+                if (pants != null)
+                {
+                    byte[] px = TrouserArt.Read(pants, out int w, out int h);
+                    int top = TrouserDetail.TopRow(px, w, h);
+                    if (top >= 0) return childLine = top / (float)h;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.WarningOnce("[TailorMade Waistlines] could not find the child's trouser line: " + e.Message, 9482114);
+            }
+            return 0.7f;
         }
 
         private static float PantsLine(string key)
@@ -141,7 +169,7 @@ namespace TailorMadeWaistlines
         /// </summary>
         internal static float CutFraction(string key)
         {
-            float line = Line[key];
+            float line = LineFor(key);
             string body = key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key;
             if (TrouserArt.BelowNavel.TryGetValue(body, out float pantsTop))
                 line = Math.Max(line, pantsTop + (TailorMadeWaistlinesMod.Settings.trouserDrop - TailorMadeWaistlinesSettings.DefaultTrouserDrop) + UnderTrousers);
@@ -175,7 +203,7 @@ namespace TailorMadeWaistlines
                 ResolvedPattern pattern = PatternRegistry.Get(parts[1]);
                 if (pattern?.BodyType == null) return;
                 string key = pattern.BodyType.defName + (pattern.FemaleBody && pattern.BodyType.defName != "Female" ? "_Female" : "");
-                if (Line.ContainsKey(key)) bodyKey = key;
+                if (Line.ContainsKey(key) || key == "Child") bodyKey = key;
             }
 
             public static void Finalizer() => bodyKey = null;
