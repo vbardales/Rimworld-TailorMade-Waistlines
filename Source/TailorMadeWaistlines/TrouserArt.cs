@@ -114,6 +114,7 @@ namespace TailorMadeWaistlines
             }
 
             LeaveToTailorMade(supplied);
+            if (supplied.Exists(b => b.defName == "Child")) MatchKidPantsDrawSize();
 
             // A silent failure here looks exactly like success from outside: the trousers are simply
             // drawn as the shell they always were. So the one case that can be recognised as wrong is
@@ -193,6 +194,22 @@ namespace TailorMadeWaistlines
                     targetApparelDefs = new List<string>(targets),
                 });
             }
+        }
+
+        /// <summary>
+        /// Biotech gives Apparel_KidPants a drawSize of 0.70 against 1.00 for Apparel_Pants, because its own art is drawn
+        /// small. The Child texture supplied here is drawn on the child body canvas, so scaling it again by 0.70 leaves it
+        /// out of proportion with the body it was cut for. Where the Child art was supplied, the child pair draws at the
+        /// adult pair's size.
+        /// </summary>
+        private static void MatchKidPantsDrawSize()
+        {
+            ThingDef kid = DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_KidPants");
+            ThingDef adult = DefDatabase<ThingDef>.GetNamedSilentFail("Apparel_Pants");
+            if (kid?.graphicData == null || adult?.graphicData == null) return;
+            if (kid.graphicData.drawSize == adult.graphicData.drawSize) return;
+            Log.Message("[TailorMade Waistlines] Apparel_KidPants drawSize " + kid.graphicData.drawSize + " set to " + adult.graphicData.drawSize + " to match the child trousers supplied.");
+            kid.graphicData.drawSize = adult.graphicData.drawSize;
         }
 
         /// <summary>
