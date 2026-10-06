@@ -20,7 +20,8 @@ Feature: child on cleared ground
     And Nelim's Pickle Tools: "S-Boy" stands at (200, 185) facing South
     And Nelim's Pickle Tools: the area from (197, 182) to (203, 188) is cleared
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
-    And Nelim's Pickle Tools: I frame the cell (200, 185) at zoom 3
+    And I move the camera to "S-Boy"
+    And Nelim's Pickle Tools: the camera root size is set to 6
     And Nelim's Pickle Tools: I move the mouse to (10, 10)
     And I wait 120 ticks
     Then Nelim's Pickle Tools: "S-Boy" has body type Child
