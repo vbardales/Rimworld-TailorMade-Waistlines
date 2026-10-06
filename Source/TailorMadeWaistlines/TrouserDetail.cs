@@ -127,6 +127,35 @@ namespace TailorMadeWaistlines
             return outPx;
         }
 
+        /// <summary>
+        /// Stretches the garment upwards so that its top edge lands on <paramref name="newTopRow"/> and its bottom stays where
+        /// it is: the shell gets taller, it is neither moved nor cut. Does nothing when the row is not above the current top.
+        /// </summary>
+        public static byte[] StretchTop(byte[] rgba, int width, int height, int newTopRow)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var copy = (byte[])rgba.Clone();
+            var s = Measure(rgba, width, height);
+            if (s == null || newTopRow < 0 || newTopRow >= s.Top) return copy;
+
+            var outPx = new byte[rgba.Length];
+            int span = s.Bottom - s.Top;
+            int newSpan = s.Bottom - newTopRow;
+            int stride = width * Channels;
+            for (int y = newTopRow; y <= s.Bottom; y++)
+            {
+                int src = s.Top + (int)Math.Round((y - newTopRow) * (double)span / newSpan, MidpointRounding.AwayFromZero);
+                src = Math.Max(s.Top, Math.Min(s.Bottom, src));
+                Buffer.BlockCopy(rgba, src * stride, outPx, y * stride, stride);
+            }
+            // Below the old bottom nothing changes.
+            for (int y = s.Bottom + 1; y < height; y++)
+                Buffer.BlockCopy(rgba, y * stride, outPx, y * stride, stride);
+            return outPx;
+        }
+
         // ------------------------------------------------------------------- the shape
 
         /// <summary>What was measured off the shell, in pixels.</summary>

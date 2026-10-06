@@ -171,6 +171,22 @@ public static class TmwCheck
         return n;
     }
 
+    public static int TopRow(byte[] px, int w, int h)
+    {
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                if (px[(y * w + x) * 4 + 3] >= Solid) return y;
+        return -1;
+    }
+
+    public static int BottomRow(byte[] px, int w, int h)
+    {
+        for (int y = h - 1; y >= 0; y--)
+            for (int x = 0; x < w; x++)
+                if (px[(y * w + x) * 4 + 3] >= Solid) return y;
+        return -1;
+    }
+
     public static bool Same(byte[] a, byte[] b)
     {
         if (a.Length != b.Length) return false;
@@ -333,6 +349,14 @@ $w0 = [TmwCheck]::SolidWidth($gshell, $gw, $gh); $w9 = [TmwCheck]::SolidWidth($n
 Assert-That 'narrowing by 0.9 makes the shell narrower' ($w9 -lt $w0 -and $w9 -ge [int]($w0 * 0.85)) "$w0 -> $w9"
 $n10 = $narrow.Invoke($null, @($gshell, $gw, $gh, [single]1.0))
 Assert-That 'narrowing by 1 changes nothing' ([TmwCheck]::Same($gshell, $n10))
+
+$stretch = $detail.GetMethod('StretchTop')
+$st0 = [TmwCheck]::TopRow($gshell, $gw, $gh); $sb0 = [TmwCheck]::BottomRow($gshell, $gw, $gh)
+$stOut = $stretch.Invoke($null, @($gshell, $gw, $gh, [int]($st0 - 12)))
+Assert-That 'stretching up lands the top on the asked row' ([TmwCheck]::TopRow($stOut, $gw, $gh) -eq ($st0 - 12)) "top $([TmwCheck]::TopRow($stOut, $gw, $gh)), asked $($st0 - 12)"
+Assert-That 'stretching up leaves the bottom where it was' ([TmwCheck]::BottomRow($stOut, $gw, $gh) -eq $sb0) "bottom $([TmwCheck]::BottomRow($stOut, $gw, $gh)), was $sb0"
+$stDown = $stretch.Invoke($null, @($gshell, $gw, $gh, [int]($st0 + 5)))
+Assert-That 'a row below the top changes nothing' ([TmwCheck]::Same($gshell, $stDown))
 
 Write-Host ""
 Write-Host "AB's real textures"

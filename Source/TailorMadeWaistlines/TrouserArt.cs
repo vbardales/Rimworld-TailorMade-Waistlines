@@ -69,6 +69,13 @@ namespace TailorMadeWaistlines
         // How much narrower AB's Fat shell is drawn (1 = as it is).
         private const float FatNarrowing = 0.90f;
 
+        // Where the first row of skin below the navel sits on WDI's bodies, as a fraction of the picture counted from the top,
+        // measured with scripts/measure-navel.js (the navel's darkest rows, plus a margin). The trousers start there.
+        private static readonly Dictionary<string, float> BelowNavel = new Dictionary<string, float>
+        {
+            { "Female", 0.602f }, { "Male", 0.623f }, { "Thin", 0.563f }, { "Fat", 0.623f }, { "Hulk", 0.672f },
+        };
+
         private const string PatternDefPrefix = "TMW_Pants_Native_";
 
         /// <summary>What the last <see cref="Apply"/> did, for the log and for tests.</summary>
@@ -298,8 +305,19 @@ namespace TailorMadeWaistlines
                 byte[] rgba = ReadTopDown(shell, out int width, out int height);
                 // AB's fat shell is wider than the trousers should be on that body.
                 if (path.IndexOf("_Fat", StringComparison.Ordinal) >= 0) rgba = TrouserDetail.Narrow(rgba, width, height, FatNarrowing);
-                byte[] detailed = TrouserDetail.Apply(rgba, width, height, facing);
-                detailed = Lower(detailed, width, height, drop);
+                byte[] detailed;
+                if (TryBelowNavel(path, out float target))
+                {
+                    // The slider is an offset from the navel: its default puts the top right under it.
+                    float top = target + (drop - TailorMadeWaistlinesSettings.DefaultTrouserDrop);
+                    rgba = TrouserDetail.StretchTop(rgba, width, height, (int)Math.Round(top * height, MidpointRounding.AwayFromZero));
+                    detailed = TrouserDetail.Apply(rgba, width, height, facing);
+                }
+                else
+                {
+                    detailed = TrouserDetail.Apply(rgba, width, height, facing);
+                    detailed = Lower(detailed, width, height, drop);
+                }
                 return FromTopDown(detailed, width, height, "TMW_Detail_" + path.Replace('/', '_'));
             }
             catch (Exception e)
@@ -310,6 +328,13 @@ namespace TailorMadeWaistlines
         }
 
         /// <summary>Moves the picture down by a fraction of the texture's height, without cutting it.</summary>
+        private static bool TryBelowNavel(string path, out float target)
+        {
+            target = 0f;
+            Match m = Regex.Match(path, @"Pants_([A-Za-z]+)_(south|east|north)$");
+            return m.Success && BelowNavel.TryGetValue(m.Groups[1].Value, out target);
+        }
+
         private static byte[] Lower(byte[] rgba, int width, int height, float drop)
         {
             int rows = (int)Math.Round(drop * height, MidpointRounding.AwayFromZero);
