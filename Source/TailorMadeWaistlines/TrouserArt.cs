@@ -70,9 +70,6 @@ namespace TailorMadeWaistlines
         // The garments that are certain to be there: the adult trousers and the Biotech child's.
         private static readonly string[] BaseTrouserDefNames = { "Apparel_Pants", "Apparel_KidPants" };
 
-        // How much narrower AB's Fat shell is drawn (1 = as it is).
-        private const float FatNarrowing = 0.90f;
-
         // Where the first row of skin below the navel sits on WDI's bodies, as a fraction of the picture counted from the top,
         // measured with scripts/measure-navel.js (the navel's darkest rows, plus a margin). The trousers start there.
         internal static readonly Dictionary<string, float> BelowNavel = new Dictionary<string, float>
@@ -334,8 +331,6 @@ namespace TailorMadeWaistlines
             try
             {
                 byte[] rgba = ReadTopDown(shell, out int width, out int height);
-                // AB's fat shell is wider than the trousers should be on that body.
-                if (path.IndexOf("_Fat", StringComparison.Ordinal) >= 0) rgba = TrouserDetail.Narrow(rgba, width, height, FatNarrowing);
                 byte[] detailed;
                 float[] curve = UnderwearCurve(path, curveBody, out string facingName);
                 if (curve != null)
