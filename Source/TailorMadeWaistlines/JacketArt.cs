@@ -59,7 +59,7 @@ namespace TailorMadeWaistlines
         }
 
         // The bodies whose shirts are not resized by TailorMade: the art drawn for the body is cut instead, as THIGAPPE does.
-        private static readonly string[] NativeBodies = { "Fat", "Hulk" };
+        private static readonly string[] NativeBodies = { "Male", "Female", "Thin", "Fat", "Hulk" };
 
         public static int NativeCut { get; private set; }
 
@@ -83,7 +83,8 @@ namespace TailorMadeWaistlines
                     string worn = def.apparel.wornGraphicPath;
                     if (string.IsNullOrEmpty(worn)) continue;
                     int cut = 0;
-                    foreach (string sex in new[] { "", "_Female" })
+                    // Thin, Fat and Hulk have a separate female body; Male and Female are one body each.
+                    foreach (string sex in bodyName == "Male" || bodyName == "Female" ? new[] { "" } : new[] { "", "_Female" })
                         for (int f = 0; f < FacingNames.Length; f++)
                             if (CutNative(worn + "_" + bodyName + sex + "_" + FacingNames[f], bodyName + sex, FacingNames[f], mine)) cut++;
                     // Only a garment the body retexture draws for this body is left alone; any other is still resized.
