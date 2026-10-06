@@ -50,7 +50,7 @@ Licence: none stated. Take the idea (cut with a generated mask), not the code, a
 | StylistMade, FaceMade | 3744238014, 3744805284 | Hair and faces for HAR races. None. |
 | Dubs Apparel Tweaks, AB's Head Apparel Tweaker | 2296697286, 2990606008 | Hats. None. |
 
-Not installed when checked (twice): 3503852086, 3367585685, 3794730286, 2683996253, 3644533685. Page not readable (Steam 429): 2660249018, none of it known.
+Installed on the second check, all read: Xeva Body Pants (3503852086, pants for the Xeva body, 587 textures), Better Button-down Shirt And Pants (3367585685, stats only), VFE Light Tribalwear is pants (3794730286, moves a garment from the torso slot to the legs slot, so TailorMade classes it as pants), Useless clothes (2683996253, apparel with art, 146 textures, not read in detail), PawnRenderExport (3644533685, a render export tool, no art), [IMO] Default Apparel Retexture (2660249018, apparel drawn for one custom body only: male, female and thin, does not fit vanilla or other bodies). None of them fits a shirt to a legless body. Page not readable then (Steam 429) and now installed: 2660249018.
 
 ## Navel and body findings (scripts/measure-navel.js, extended to the female variants)
 
