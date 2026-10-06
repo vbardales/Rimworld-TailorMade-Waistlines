@@ -42,5 +42,22 @@ namespace TailorMadeWaistlines
                 __result = true;
             }
         }
+
+        /// <summary>
+        /// Keeps a jacket the length its art has. TailorMade bands any torso-only garment into the chest band, so a
+        /// jacket whose art starts high enough is cut off at the waist; the same garment on a body drawn with trousers
+        /// reaches the hips. Taking the Shell layer out of the chest class leaves it full band, as drawn.
+        /// </summary>
+        [HarmonyPatch(typeof(ApparelClassifier), nameof(ApparelClassifier.Info))]
+        public static class Info_Patch
+        {
+            public static void Postfix(ThingDef def, ref ApparelClassInfo __result)
+            {
+                if (__result.cls != ApparelClass.Chest) return;
+                if (!TailorMadeWaistlinesMod.Settings.keepJacketsLong) return;
+                if (def?.apparel == null || def.apparel.LastLayer == ApparelLayerDefOf.OnSkin) return;
+                __result.cls = ApparelClass.None;
+            }
+        }
     }
 }

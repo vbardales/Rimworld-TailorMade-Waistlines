@@ -45,6 +45,9 @@ namespace TailorMadeWaistlines
         // and the shirt is compressed into the band rather than cut off at it.
         public bool shortenShirts = false;
 
+        // On by default: a jacket is drawn to its own length instead of being banded to the waist.
+        public bool keepJacketsLong = true;
+
         // Take General Textures Collection's trouser art where AB supplies a plain shell, and
         // draw details onto the shells that have no such art. Both read at startup.
         public bool useGeneralArt = true;
@@ -59,6 +62,7 @@ namespace TailorMadeWaistlines
             Scribe_Values.Look(ref bootsTop, "bootsTop", DefaultBootsTop);
             Scribe_Values.Look(ref chestBottom, "chestBottom", DefaultChestBottom);
             Scribe_Values.Look(ref shortenShirts, "shortenShirts", false);
+            Scribe_Values.Look(ref keepJacketsLong, "keepJacketsLong", true);
             Scribe_Values.Look(ref useGeneralArt, "useGeneralArt", true);
             Scribe_Values.Look(ref detailPlainShells, "detailPlainShells", true);
             Scribe_Values.Look(ref trouserDrop, "trouserDrop", DefaultTrouserDrop);
@@ -84,6 +88,7 @@ namespace TailorMadeWaistlines
             bootsTop = DefaultBootsTop;
             chestBottom = DefaultChestBottom;
             shortenShirts = false;
+            keepJacketsLong = true;
             useGeneralArt = true;
             detailPlainShells = true;
             trouserDrop = DefaultTrouserDrop;
@@ -141,6 +146,9 @@ namespace TailorMadeWaistlines
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.ShortenShirts".Translate(),
                 ref Settings.shortenShirts,
                 "TailorMadeWaistlines.Settings.ShortenShirtsTip".Translate());
+            list.CheckboxLabeled("TailorMadeWaistlines.Settings.KeepJacketsLong".Translate(),
+                ref Settings.keepJacketsLong,
+                "TailorMadeWaistlines.Settings.KeepJacketsLongTip".Translate());
 
             list.Gap();
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.UseGeneralArt".Translate(),

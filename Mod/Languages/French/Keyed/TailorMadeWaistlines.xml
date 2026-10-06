@@ -11,6 +11,8 @@
   <TailorMadeWaistlines.Settings.ChestBottomTip>Où tombe le bord inférieur d'un haut, en fraction de la hauteur du corps. La valeur de TailorMade est 0,45.</TailorMadeWaistlines.Settings.ChestBottomTip>
 
   <TailorMadeWaistlines.Settings.ShortenShirts>Raccourcir les chemises intégrales</TailorMadeWaistlines.Settings.ShortenShirts>
+  <TailorMadeWaistlines.Settings.KeepJacketsLong>Garder les vestes à pleine longueur</TailorMadeWaistlines.Settings.KeepJacketsLong>
+  <TailorMadeWaistlines.Settings.KeepJacketsLongTip>TailorMade cale tout vêtement du torse dans la bande des hauts, ce qui coupe une veste à la taille. Avec cette option, les vêtements portés sur la couche extérieure (vestes, manteaux, parkas) gardent la longueur de leur propre dessin et descendent aussi bas que lui. Les chemises portées sur la peau ne sont pas concernées.</TailorMadeWaistlines.Settings.KeepJacketsLongTip>
   <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade ne calibre un vêtement du torse que si son dessin commence déjà aux 40 % de la hauteur, ce qui laisse une chemise vanilla, dessinée sur tout le corps, à pleine longueur et cache entièrement le pantalon. Cette option lève ce test pour les vêtements portés sur la peau, et le curseur des hauts décide alors où ils s'arrêtent. Les manteaux, parkas et robes se portent sur la couche extérieure et tombent toujours jusqu'aux chevilles. La chemise est comprimée dans la bande, pas coupée, si bien que les cols et les boutons sont écrasés avec elle.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
 
   <TailorMadeWaistlines.Settings.UseGeneralArt>Utiliser les pantalons de General Textures Collection</TailorMadeWaistlines.Settings.UseGeneralArt>
