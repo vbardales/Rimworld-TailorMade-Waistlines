@@ -1,46 +1,202 @@
-# Gallery photographs (PUBLISHING.md: staged, not default settings; PUBLICATION.md has the plan and the reasons).
-# Story: the fitting. One pair of trousers, five bodies, on the bare ground of the Sanctuaire's calm-zone at midday.
-# Place chosen from the empty photographs of every place; the images of the run are read one by one before any goes to Art/Gallery.
-# Pass: wsl-deps.gallery.map. Not part of the regression passes: it is skipped anywhere the Sanctuaire is not mounted.
-@review @gallery @timeout:180
+# Gallery: the fitting. Ten bodies (Thin, Male/Female, Fat, Hulk, Kid; both sexes) in four outfits, one photograph per outfit.
+# 1 t-shirt, no trousers; 2 bare torso, trousers; 3 t-shirt, trousers; 4 jacket over a bare torso, trousers.
+# Ground: the bare cream square of the Sanctuaire's calm-zone-close, midday (PickleTools docs/GALERIE.md). Men at the back (z 186),
+# women in front (z 184), in the order Thin, Average, Fat, Hulk, Kid.
+# Every image is opened and read before it goes to Art/Gallery. Pass: wsl-deps.gallery.map.
+@review @gallery @timeout:300
 Feature: the fitting, for the gallery
 
   Background:
     Given the save "Nelims-tribe" is loaded
 
   @requires:wdi.realistic.bodies @requires:ab.vplrf @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace
-  Scenario: five bodies, one pair of trousers
+  Scenario: ten bodies, four outfits
     Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
-    And a colonist "Thin" exists
-    And Nelim's Pickle Tools: "Thin" body type is Thin
-    And a colonist "Male" exists
-    And Nelim's Pickle Tools: "Male" body type is Male
-    And a colonist "Female" exists
-    And Nelim's Pickle Tools: "Female" body type is Female
-    And a colonist "Fat" exists
-    And Nelim's Pickle Tools: "Fat" body type is Fat
-    And a colonist "Hulk" exists
-    And Nelim's Pickle Tools: "Hulk" body type is Hulk
-    When I destroy the gear of "Thin"
-    And I destroy the gear of "Male"
-    And I destroy the gear of "Female"
-    And I destroy the gear of "Fat"
-    And I destroy the gear of "Hulk"
-    And Nelim's Pickle Tools: "Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "Male" wears "Apparel_Pants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "Female" wears "Apparel_Pants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: "Thin" stands at (196, 185) facing South
-    And Nelim's Pickle Tools: "Male" stands at (198, 185) facing South
-    And Nelim's Pickle Tools: "Female" stands at (200, 185) facing South
-    And Nelim's Pickle Tools: "Fat" stands at (202, 185) facing South
-    And Nelim's Pickle Tools: "Hulk" stands at (204, 185) facing South
+    And a colonist "M-Thin" exists
+    And "M-Thin" gender is male
+    And Nelim's Pickle Tools: "M-Thin" body type is Thin
+    And a colonist "M-Avg" exists
+    And "M-Avg" gender is male
+    And Nelim's Pickle Tools: "M-Avg" body type is Male
+    And a colonist "M-Fat" exists
+    And "M-Fat" gender is male
+    And Nelim's Pickle Tools: "M-Fat" body type is Fat
+    And a colonist "M-Hulk" exists
+    And "M-Hulk" gender is male
+    And Nelim's Pickle Tools: "M-Hulk" body type is Hulk
+    And a colonist "M-Kid" exists
+    And "M-Kid" is 8 years old
+    And "M-Kid" gender is male
+    And Nelim's Pickle Tools: "M-Kid" body type is Child
+    And a colonist "F-Thin" exists
+    And "F-Thin" gender is female
+    And Nelim's Pickle Tools: "F-Thin" body type is Thin
+    And a colonist "F-Avg" exists
+    And "F-Avg" gender is female
+    And Nelim's Pickle Tools: "F-Avg" body type is Female
+    And a colonist "F-Fat" exists
+    And "F-Fat" gender is female
+    And Nelim's Pickle Tools: "F-Fat" body type is Fat
+    And a colonist "F-Hulk" exists
+    And "F-Hulk" gender is female
+    And Nelim's Pickle Tools: "F-Hulk" body type is Hulk
+    And a colonist "F-Kid" exists
+    And "F-Kid" is 8 years old
+    And "F-Kid" gender is female
+    And Nelim's Pickle Tools: "F-Kid" body type is Child
+    When I destroy the gear of "M-Thin"
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "M-Avg"
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "M-Fat"
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "M-Hulk"
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "F-Thin"
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "F-Avg"
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "F-Fat"
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "F-Hulk"
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
+    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
+    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
+    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
+    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
+    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
+    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
+    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
+    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
+    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
     And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
-    And I wait 120 ticks
-    Then "Thin" apparel covers "Legs"
-    And "Hulk" apparel covers "Legs"
-    And no warning matching "Could not load UnityEngine.Texture2D" was logged
-    And I take a screenshot "gallery, the fitting, five bodies"
+    And I wait 90 ticks
+    And I take a screenshot "gallery, the fitting, outfit 1 t-shirt, no trousers"
+    And I destroy the gear of "M-Thin"
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Avg"
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Fat"
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Hulk"
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Thin"
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Avg"
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Fat"
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Hulk"
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
+    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
+    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
+    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
+    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
+    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
+    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
+    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
+    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
+    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
+    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And I wait 90 ticks
+    And I take a screenshot "gallery, the fitting, outfit 2 bare torso, trousers"
+    And I destroy the gear of "M-Thin"
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Avg"
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Fat"
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Hulk"
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Thin"
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Avg"
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Fat"
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Hulk"
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
+    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
+    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
+    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
+    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
+    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
+    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
+    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
+    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
+    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
+    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And I wait 90 ticks
+    And I take a screenshot "gallery, the fitting, outfit 3 t-shirt, trousers"
+    And I destroy the gear of "M-Thin"
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Avg"
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "M-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Fat"
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "M-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Hulk"
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidParka" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Thin"
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Avg"
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "F-Avg" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Fat"
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "F-Fat" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Hulk"
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
+    And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidParka" dyed rgb (150, 70, 40)
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
+    And Nelim's Pickle Tools: "M-Thin" stands at (196, 186) facing South
+    And Nelim's Pickle Tools: "M-Avg" stands at (198, 186) facing South
+    And Nelim's Pickle Tools: "M-Fat" stands at (200, 186) facing South
+    And Nelim's Pickle Tools: "M-Hulk" stands at (202, 186) facing South
+    And Nelim's Pickle Tools: "M-Kid" stands at (204, 186) facing South
+    And Nelim's Pickle Tools: "F-Thin" stands at (196, 184) facing South
+    And Nelim's Pickle Tools: "F-Avg" stands at (198, 184) facing South
+    And Nelim's Pickle Tools: "F-Fat" stands at (200, 184) facing South
+    And Nelim's Pickle Tools: "F-Hulk" stands at (202, 184) facing South
+    And Nelim's Pickle Tools: "F-Kid" stands at (204, 184) facing South
+    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And I wait 90 ticks
+    And I take a screenshot "gallery, the fitting, outfit 4 jacket on a bare torso, trousers"
+    Then no warning matching "Could not load UnityEngine.Texture2D" was logged
+    And no warning matching "Failed to find any textures" was logged
