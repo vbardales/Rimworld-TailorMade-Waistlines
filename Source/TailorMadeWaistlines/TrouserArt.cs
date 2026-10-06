@@ -191,15 +191,11 @@ namespace TailorMadeWaistlines
             string femalePath = basePath + "_" + key + "_" + FacingNames[facing];
             string path = basePath + "_" + body + "_" + FacingNames[facing];
             bool noCurve = ShirtCut.ProfileFor(key, FacingNames[facing]) == null;
-            ModContentPack supplier = SupplierOf(path);
-            ModContentPack taken = SupplierOf(femalePath);
-            if (facing == 0 && basePath == PantsPath)
-                Log.Message("[TailorMade Waistlines] female shell " + femalePath + ": curve " + (noCurve ? "missing" : "found") + ", already supplied by "
-                    + (taken?.PackageId ?? "nobody") + ", shell from " + (supplier?.PackageId ?? "nobody") + ".");
             if (noCurve || !settings.detailPlainShells) return;
-            if (mine.contentList.ContainsKey(femalePath) || taken != null) return;
-            if (supplier == null || !IsPack(supplier, AbPackageId)) return;
-            Texture2D shell = supplier.GetContentHolder<Texture2D>().Get(path);
+            if (mine.contentList.ContainsKey(femalePath) || SupplierOf(femalePath) != null) return;
+            // AB's own shell: by now this mod's content already holds the detailed copy of the male one under the same path.
+            ModContentPack ab = FindPack(AbPackageId);
+            Texture2D shell = ab?.GetContentHolder<Texture2D>().Get(path);
             Texture2D detailed = shell == null ? null : Detail(shell, (Facing)facing, path, drop, bareLegs, key);
             if (detailed == null) return;
             mine.contentList[femalePath] = detailed;
