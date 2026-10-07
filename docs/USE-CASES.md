@@ -80,3 +80,8 @@ The THIGAPPE passes (6d97, a107) stay as a diagnostic only. What Venus does toda
 draws for each body. What it leaves to TailorMade (lost without it): garments that have no art drawn for WDI's bodies, which
 must be resized to the silhouette. That generic refit is the gap to close, and the retextures (ATH, IMO) and the plain vanilla
 garments are the first cases to test it on.
+- **Keep APP, drop THIGAPPE** (Virginie, 2026-10-08). `nalsnoir.ApparelPaperPattern` is the engine; THIGAPPE is a content pack for it
+  (per-body mask textures, e.g. `Textures/Things/ApparelPaperPattern/Human/Female/Armor/Female_cmask_bottom_cover_south.png`, in its
+  `1.6/Mods/RealisticBody/` for [NL]'s bodies, and pattern defs patched in by XML). Venus would be the same kind of pack for WDI's bodies:
+  masks drawn from WDI's underwear curves (what `ShirtCut` already computes) and the pattern defs, so APP refits every garment of any
+  mod, and Venus keeps only AB's trousers. Not started; read first: how APP reads a mask, and what a pattern def needs for a body.
