@@ -72,3 +72,11 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
   `Tests/Pickle/wsl-deps.thigappe.map`, same gallery feature. Declared incompatibility of THIGAPPE: `nalsnoir.APPCompatibleBody2` only.
   Question: who cuts the shirt, and does the same garment get cut twice. Also with the ABC Body 2 patch (3611523059) and
   APPBodyTypeOverrider, not prepared.
+
+## Direction (Virginie, 2026-10-08)
+
+The aim is not to load THIGAPPE but to do for WDI's bodies what THIGAPPE does for its own: fit every garment to the body automatically.
+The THIGAPPE passes (6d97, a107) stay as a diagnostic only. What Venus does today: draws AB's trousers per sex, cuts the shirts WDI
+draws for each body. What it leaves to TailorMade (lost without it): garments that have no art drawn for WDI's bodies, which
+must be resized to the silhouette. That generic refit is the gap to close, and the retextures (ATH, IMO) and the plain vanilla
+garments are the first cases to test it on.
