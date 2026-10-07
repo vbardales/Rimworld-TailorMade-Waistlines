@@ -59,3 +59,7 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
   and Apparel APP Extension 3379688555 (`InternSeraph.UNAAPPExt`, by another author: it reads as a patch for the APP/THIGAPPE pattern
   system, to check). **"Unagi coat" 3253300748, given by Virginie, is not installed here: not read.** Coats are the cases where the
   cut must leave the garment long; each needs a capture.
+- **ATH's Retexture Female Apparel** (Anthitei), Workshop 3145326932, `Anthitei.ATHsRetextureFemalApparel.Retexture`: retextures women's
+  versions of vanilla apparel (Apron, Blouse, Cape, CasualTShirt, Hoodie, Overalls, PeltCoat, SheriffShirt, ShirtFleece, ShirtandTie,
+  TankTop, TribalKilt, TribalPoncho, Tunic; 116 images). Given by Virginie for "compatible" bodies. To capture on the female bodies,
+  with and without the cut.
