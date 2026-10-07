@@ -207,9 +207,9 @@ namespace TailorMadeWaistlines
         /// </summary>
         private static void LeaveToTailorMade(List<BodyTypeDef> bodies)
         {
-            if (bodies.Count == 0) return;
+            if (bodies.Count == 0 || !TailorMadeLink.Loaded) return;
 
-            if (TailorMadeHasReadItsDefs())
+            if (TailorMadeLink.HasReadItsDefs())
                 Log.Warning("[TailorMade Waistlines] TailorMade had already read its pattern defs before this ran, so it will keep"
                     + " fitting the trousers this mod supplies until the game is restarted.");
 
@@ -220,15 +220,7 @@ namespace TailorMadeWaistlines
 
             foreach (BodyTypeDef body in bodies)
             {
-                string name = PatternDefPrefix + body.defName;
-                if (DefDatabase<TailorMade.TailorPatternDef>.GetNamedSilentFail(name) != null) continue;
-                DefDatabase<TailorMade.TailorPatternDef>.Add(new TailorMade.TailorPatternDef
-                {
-                    defName = name,
-                    bodyType = body,
-                    ignore = true,
-                    targetApparelDefs = new List<string>(targets),
-                });
+                TailorMadeLink.LeaveAlone(PatternDefPrefix + body.defName, body, targets);
             }
         }
 
@@ -267,19 +259,6 @@ namespace TailorMadeWaistlines
             foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
                 if (def.apparel != null)
                     yield return new KeyValuePair<string, string>(def.defName, def.apparel.wornGraphicPath);
-        }
-
-        private static bool TailorMadeHasReadItsDefs()
-        {
-            try
-            {
-                FieldInfo defs = typeof(TailorMade.PatternRegistry).GetField("defs", BindingFlags.NonPublic | BindingFlags.Static);
-                return defs != null && defs.GetValue(null) != null;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
 
         // ------------------------------------------------------------------ the sources

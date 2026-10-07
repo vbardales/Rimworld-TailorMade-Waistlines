@@ -29,4 +29,5 @@
 
   <TailorMadeWaistlines.Settings.PatchDirect>Patched at the source: changes show as soon as this window closes.</TailorMadeWaistlines.Settings.PatchDirect>
   <TailorMadeWaistlines.Settings.PatchFallback>Running on the fallback patch: close the game and start it again for a change to show, because TailorMade's cached textures were keyed on the old value.</TailorMadeWaistlines.Settings.PatchFallback>
+  <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade is not loaded: its three bands and its resizing are not there to adjust. The trousers and the shirts cut for each body below still work.</TailorMadeWaistlines.Settings.NoTailorMade>
 </LanguageData>

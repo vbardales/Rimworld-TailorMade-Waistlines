@@ -29,4 +29,5 @@
 
   <TailorMadeWaistlines.Settings.PatchDirect>Correctif posé à la source : les changements se voient dès la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.PatchDirect>
   <TailorMadeWaistlines.Settings.PatchFallback>Correctif de repli en service : fermez le jeu et relancez-le pour qu'un changement se voie, car les textures en cache de TailorMade ont été indexées sur l'ancienne valeur.</TailorMadeWaistlines.Settings.PatchFallback>
+  <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade n'est pas chargé : ses trois bandes et son redimensionnement ne sont pas là à régler. Les pantalons et les hauts coupés pour chaque corps, plus bas, fonctionnent quand même.</TailorMadeWaistlines.Settings.NoTailorMade>
 </LanguageData>

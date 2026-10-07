@@ -133,7 +133,7 @@ try {
 
     Assert-That 'settings default pantsTop 0.58'   ([Math]::Abs((Get-Field $settingsType 'pantsTop' $settings) - 0.58) -lt 0.0005)
     Assert-That 'settings default bootsTop 0.20'   ([Math]::Abs((Get-Field $settingsType 'bootsTop' $settings) - 0.20) -lt 0.0005)
-    Assert-That 'settings default chestBottom 0.45'([Math]::Abs((Get-Field $settingsType 'chestBottom' $settings) - 0.45) -lt 0.0005)
+    Assert-That 'settings default chestBottom 0.25'([Math]::Abs((Get-Field $settingsType 'chestBottom' $settings) - 0.25) -lt 0.0005)
     Assert-That 'settings default shortenShirts off' ((Get-Field $settingsType 'shortenShirts' $settings) -eq $false)
 
     # Our copies of the stock values, against TailorMade's live fields. The
@@ -149,7 +149,7 @@ try {
 
     Assert-Band 'Bands.For(Pants) on defaults' ($For.Invoke($null, @((& $ClassOf 'Pants')))) 0.0 0.58
     Assert-Band 'Bands.For(Boots) on defaults' ($For.Invoke($null, @((& $ClassOf 'Boots')))) 0.0 0.20
-    Assert-Band 'Bands.For(Chest) on defaults' ($For.Invoke($null, @((& $ClassOf 'Chest')))) 0.45 1.0
+    Assert-Band 'Bands.For(Chest) on defaults' ($For.Invoke($null, @((& $ClassOf 'Chest')))) 0.25 1.0
 
     # --- each band follows its own slider, and only its own -------------------
     Write-Host ""
@@ -158,7 +158,7 @@ try {
     Set-Field $settingsType 'pantsTop' $settings ([float]0.40)
     Assert-Band 'pants band drops with the slider'  ($For.Invoke($null, @((& $ClassOf 'Pants')))) 0.0 0.40
     Assert-Band 'the boots band did not move'       ($For.Invoke($null, @((& $ClassOf 'Boots')))) 0.0 0.20
-    Assert-Band 'the chest band did not move'       ($For.Invoke($null, @((& $ClassOf 'Chest')))) 0.45 1.0
+    Assert-Band 'the chest band did not move'       ($For.Invoke($null, @((& $ClassOf 'Chest')))) 0.25 1.0
 
     Set-Field $settingsType 'bootsTop' $settings ([float]0.35)
     Assert-Band 'boots band follows its slider'     ($For.Invoke($null, @((& $ClassOf 'Boots')))) 0.0 0.35

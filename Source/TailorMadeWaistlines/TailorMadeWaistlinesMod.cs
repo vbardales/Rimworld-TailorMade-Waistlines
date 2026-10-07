@@ -114,8 +114,15 @@ namespace TailorMadeWaistlines
         {
             Instance = this;
             Settings = GetSettings<TailorMadeWaistlinesSettings>();
-            new Harmony("nelim.tailormade.waistlines").PatchAll(Assembly.GetExecutingAssembly());
-            LongEventHandler.ExecuteWhenFinished(Bands.SelfTest);
+            // Every Harmony patch of this mod targets a TailorMade type, and TailorMade is optional: without it the mod
+            // still draws the trousers and cuts the shirts WDI ships for each body, but has nothing to patch.
+            if (TailorMadeLink.Loaded)
+            {
+                new Harmony("nelim.tailormade.waistlines").PatchAll(Assembly.GetExecutingAssembly());
+                LongEventHandler.ExecuteWhenFinished(TailorMadeLink.SelfTestBands);
+            }
+            else
+                TailorMadeLink.SayAbsent();
             // After the game has loaded every mod's textures, which is when there is something to replace.
             LongEventHandler.ExecuteWhenFinished(TrouserArt.Apply);
             // After the trousers: the jackets are measured on their shells.
@@ -137,14 +144,23 @@ namespace TailorMadeWaistlines
             list.Label("TailorMadeWaistlines.Settings.Scope".Translate());
             list.Gap();
 
-            Slider(list, "TailorMadeWaistlines.Settings.PantsTop", "TailorMadeWaistlines.Settings.PantsTopTip",
-                ref Settings.pantsTop, TailorMadeWaistlinesSettings.PantsMin, TailorMadeWaistlinesSettings.PantsMax);
-            Slider(list, "TailorMadeWaistlines.Settings.BootsTop", "TailorMadeWaistlines.Settings.BootsTopTip",
-                ref Settings.bootsTop, TailorMadeWaistlinesSettings.BootsMin, TailorMadeWaistlinesSettings.BootsMax);
-            Slider(list, "TailorMadeWaistlines.Settings.ChestBottom", "TailorMadeWaistlines.Settings.ChestBottomTip",
-                ref Settings.chestBottom, TailorMadeWaistlinesSettings.ChestMin, TailorMadeWaistlinesSettings.ChestMax);
+            // The three bands are TailorMade's: without it there is nothing for them to move.
+            if (TailorMadeLink.Loaded)
+            {
+                Slider(list, "TailorMadeWaistlines.Settings.PantsTop", "TailorMadeWaistlines.Settings.PantsTopTip",
+                    ref Settings.pantsTop, TailorMadeWaistlinesSettings.PantsMin, TailorMadeWaistlinesSettings.PantsMax);
+                Slider(list, "TailorMadeWaistlines.Settings.BootsTop", "TailorMadeWaistlines.Settings.BootsTopTip",
+                    ref Settings.bootsTop, TailorMadeWaistlinesSettings.BootsMin, TailorMadeWaistlinesSettings.BootsMax);
+                Slider(list, "TailorMadeWaistlines.Settings.ChestBottom", "TailorMadeWaistlines.Settings.ChestBottomTip",
+                    ref Settings.chestBottom, TailorMadeWaistlinesSettings.ChestMin, TailorMadeWaistlinesSettings.ChestMax);
+                list.Gap();
+            }
+            else
+            {
+                list.Label("TailorMadeWaistlines.Settings.NoTailorMade".Translate());
+                list.Gap();
+            }
 
-            list.Gap();
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.ShortenShirts".Translate(),
                 ref Settings.shortenShirts,
                 "TailorMadeWaistlines.Settings.ShortenShirtsTip".Translate());
@@ -169,10 +185,13 @@ namespace TailorMadeWaistlines
             if (list.ButtonText("TailorMadeWaistlines.Settings.Reset".Translate()))
                 Settings.ResetToDefaults();
 
-            list.Gap();
-            list.Label(Bands.DirectPatchWorks
-                ? "TailorMadeWaistlines.Settings.PatchDirect".Translate()
-                : "TailorMadeWaistlines.Settings.PatchFallback".Translate());
+            if (TailorMadeLink.Loaded)
+            {
+                list.Gap();
+                list.Label(Bands.DirectPatchWorks
+                    ? "TailorMadeWaistlines.Settings.PatchDirect".Translate()
+                    : "TailorMadeWaistlines.Settings.PatchFallback".Translate());
+            }
 
             viewHeight = list.CurHeight + 10f;
             list.End();
@@ -192,7 +211,7 @@ namespace TailorMadeWaistlines
             // Every fitted texture was baked against the old bands, so they all
             // have to go. TailorMade does the whole sweep itself and repaints
             // the pawns already on the map.
-            TailorMade.TailorMadeCache.ClearAndRepaint();
+            if (TailorMadeLink.Loaded) TailorMadeLink.ClearAndRepaint();
         }
     }
 }

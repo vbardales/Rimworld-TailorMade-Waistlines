@@ -93,11 +93,7 @@ namespace TailorMadeWaistlines
                 }
                 if (targets.Count == 0) continue;
                 string name = "TMW_NativeShirt_" + bodyName;
-                if (DefDatabase<TailorMade.TailorPatternDef>.GetNamedSilentFail(name) != null) continue;
-                DefDatabase<TailorMade.TailorPatternDef>.Add(new TailorMade.TailorPatternDef
-                {
-                    defName = name, bodyType = body, ignore = true, targetApparelDefs = targets,
-                });
+                if (TailorMadeLink.Loaded) TailorMadeLink.LeaveAlone(name, body, targets);
             }
         }
 
