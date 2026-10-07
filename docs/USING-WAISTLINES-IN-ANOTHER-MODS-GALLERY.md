@@ -31,7 +31,7 @@ mod under test from its repo, so a foreign pass needs a line `nelim.tailormade.w
 
 ## The settings that matter (config seed `Mod_TailorMadeWaistlines_TailorMadeWaistlinesMod.xml`)
 
-Copy `Tests/Pickle/config/gallery/` into the pass's `config/`. In particular: `shortenShirts` True (cuts shirts on WDI's underwear and
+Copy `Tests/Pickle/for-acs/config/galerie-tmw/` into the pass's `config/`; when this mod is staged by `path:` its seed is named `Mod_local-<packageId>_TailorMadeWaistlinesMod.xml` (staging script, folder `local-<packageId>`), not by the repo name. In particular: `shortenShirts` True (cuts shirts on WDI's underwear and
 leaves TailorMade out of it for those bodies), `keepJacketsLong` False (jackets are drawn as they are), `detailPlainShells` True,
 `trouserDrop` 0.03, `trouserDropChild` 0.067. AB needs its own seed (`Mod_2986402536_ABsVisiblePantsMod.xml`, same folder).
 
