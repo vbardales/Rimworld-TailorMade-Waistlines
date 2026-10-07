@@ -1,0 +1,11 @@
+# ACS gallery pass "galerie" plus WDI bodies and TailorMade Waistlines (2026-10-07). Copy to ACertainSeriesCreaturesAndHairRenew/Tests/Pickle/, with config/galerie-tmw/.
+nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.clearscreen   path:PickleTools/ClearScreen/Mod
+nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
+nelim.pickletools.stagedecor   path:PickleTools/StageDecor/Mod
+tiagocc0.FemaleBodyVariants    3798082132
+tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+astryl.tailormade      3756915448
+nelim.tailormade.waistlines   path:TailorMadeWaistlines/Mod
