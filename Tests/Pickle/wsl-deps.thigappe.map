@@ -8,6 +8,7 @@ wdi.realistic.bodies   3527486510
 ab.vplrf               2986402536
 # TailorMade after the body mods (it declares loadAfter on Female Body Variants and reads the body textures it finds when the game starts).
 nalsnoir.ApparelPaperPattern 2480887589
+WRK.APPBodyTypeOverrider 2839443438
 WRK.THIGAPPE 2839518933
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
 nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
