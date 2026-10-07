@@ -180,7 +180,7 @@ a restart. Record which customisation mods were actually tried.
 ### 11. A damaged config file
 
 With the game closed, set `pantsTop` to `5` and `bootsTop` to `NaN` in
-`Config/Mod_TailorMadeWaistlines_TailorMadeWaistlinesMod.xml`. On load, the
+`Config/Mod_VenusTouchWaistlines_TailorMadeWaistlinesMod.xml`. On load, the
 sliders show 0,90 and 0,20 (0.90 and 0.20 in English), and the log has no
 error.
 

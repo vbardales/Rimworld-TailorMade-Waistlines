@@ -13,7 +13,7 @@ and sex). Written 2026-10-07, for commit `59a1bd5`. The work is not published: t
 | 4 | `WDI.Realistic.Bodies` | 3527486510 | the bodies and their own shirts and underwear |
 | 5 | `AB.VPLRF` | 2986402536 | AB's Visible Pants: the trouser shells |
 | 6 | `astryl.tailormade` | 3756915448 | TailorMade, AFTER the body mods (`last:astryl.tailormade` in the pass map) |
-| 7 | `nelim.venustouch.waistlines` | none (private) | this mod: `TailorMadeWaistlines/Mod/` (assembly `Mod/Assemblies/TailorMadeWaistlines.dll`, 40.5 KB) |
+| 7 | `nelim.venustouch.waistlines` | none (private) | this mod: `VenusTouchWaistlines/Mod/` (assembly `Mod/Assemblies/TailorMadeWaistlines.dll`, 40.5 KB) |
 
 Pass map lines (the Pickle staging understands `last:`):
 
@@ -27,7 +27,7 @@ last:astryl.tailormade
 
 Plus the Sanctuaire mods of the gallery pass (`screenshotstudio`, `colonistrace`, `camerazoom`, `stagedecor`, `clearscreen`, `clickdiagnostics`):
 see `Tests/Pickle/wsl-deps.gallery.map`, the model. To load this mod itself the pass map needs its `Mod/` folder; the staging takes the
-mod under test from its repo, so a foreign pass needs a line `nelim.venustouch.waistlines   path:TailorMadeWaistlines/Mod`.
+mod under test from its repo, so a foreign pass needs a line `nelim.venustouch.waistlines   path:VenusTouchWaistlines/Mod`.
 
 ## The settings that matter (config seed `Mod_local-nelim.venustouch.waistlines_TailorMadeWaistlinesMod.xml` when this mod is a `path:` dependency of your pass; `Mod_TailorMadeWaistlines_...` only in this repo)
 
