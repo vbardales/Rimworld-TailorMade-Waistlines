@@ -3,7 +3,7 @@
 What the Workshop page needs and the repository holds nowhere else (`PUBLISHING.md`, `AUDIT.md` step
 `tested → prepublished`). It serves twice: at the first upload, and for whoever takes the mod over.
 
-**State, 2026-09-25: incomplete, on purpose.** The item exists (`3806769245`, prepublished 0.1.0, private).
+**State, 2026-10-07: incomplete, on purpose.** Since 2026-09-25 the mod cuts shirts on WDI's underwear instead of compressing them, redraws trousers per body and sex, and lets TailorMade out of the shirts WDI draws itself (`docs/USE-CASES.md`, `docs/SHIRT-FITTING-RESEARCH.md`). The `About.xml` description was updated for that; the live Steam description still has the 0.1.0 text. Older note: **State, 2026-09-25: incomplete, on purpose.** The item exists (`3806769245`, prepublished 0.1.0, private).
 The sections below say what is decided and what is not. Nothing here is filled in to look finished.
 
 ## 1. Description
@@ -39,7 +39,7 @@ looked at yet: the pawn is about 45 px tall in a 1080p frame in every capture so
 the hover tooltip over the legs. Steam shows the first image large; it must be the most demonstrative, not the
 prettiest. To fill in once the framing is fixed and the images are opened.
 
-### Plan written 2026-10-06 (no scenario written, nothing run)
+### Plan written 2026-10-06; since then a "ten bodies, four outfits" scenario exists (`05-gallery.feature`, galleries 1 to 32, captures read one by one; the final pictures are not chosen)
 
 Rule (PUBLISHING.md, 2026-10-02 and 2026-10-06): every capture is a staged photograph, except menus and windows; the place is chosen
 from the empty photographs of every place of the Sanctuaire (`PickleTools/docs/GALERIE.md`, `SANCTUAIRE-LIEUX.md`), not from its name;
@@ -135,8 +135,9 @@ and neither has been reopened for this question. To answer with the images open.
 
 **Not written.** It is written at the moment of upload, in a tab nothing asks for until the form is open. The
 0.1.0 upload only created the item. The `1.0.0` note will say what the mod does now: the three band sliders, the
-shirt option, the trouser art from General's retexture and the drawn details, the two drop sliders, and that
-every trouser texture is read at run time and none is shipped.
+shirt option (shirts cut on WDI's underwear, trousers on the same line), the trouser art from General's retexture and the drawn
+details, the two drop sliders, per-sex trousers for Thin, Fat and Hulk, children on their trousers' line, and that every trouser
+texture is read at run time and none is shipped.
 
 ## 7. Before any `publish`
 
