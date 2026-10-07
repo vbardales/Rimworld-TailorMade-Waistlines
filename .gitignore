@@ -40,3 +40,6 @@ evidence-*/
 Evidence/
 PickleReports*/
 pickle-reports*/
+
+# Preview renderer controls, local only (PUBLISHING.md).
+Art/.render/
