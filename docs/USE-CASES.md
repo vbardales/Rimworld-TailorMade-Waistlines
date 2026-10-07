@@ -37,3 +37,13 @@ Shorts (gap between the legs left open), skirt (nothing black under it). Not in 
 TailorMade, WDI's Realistic Bodies, Female Body Variants Continued, Female Apparel Variants Continued, AB's Visible Pants, and this mod.
 Female Body Variants must load before WDI (its own `Naked_*_Female` files are copies of the base bodies and would shadow WDI's),
 TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
+
+## Clothing libraries to test (given by Virginie, read from the installed Workshop folders, not yet captured)
+
+- **ZX's Apparel for [NL] Realistic Body**, Workshop 3604442772, `zx.apparel.realisticbody`, needs `Nals.RealisticBody` ([NL] Realistic Body)
+  and Harmony. About 25 garments with art for Fat, Female, Hulk, Male and Thin in three facings (Gothicdress, Gowndress, Hoodie,
+  Maiddress...). The art is drawn for [NL]'s bodies, not WDI's: to see what the cut does on them, and whether they belong in the
+  WDI passes at all (to find).
+- **UNAGI Royalty Apparel**, Workshop 3352990362, `UNAGI.Ap.Dress`: Royalty noble dresses and clothes (about 12 apparel defs plus
+  headgear; folders `UNARoyalDress`, `UNA_Dress_sitagi`, `UNA_RoyalRobe`...). Given for Compatible Body 2, Erin's and Unagi's bodies.
+  Dresses: to capture on every body, as in "Dress" above.
