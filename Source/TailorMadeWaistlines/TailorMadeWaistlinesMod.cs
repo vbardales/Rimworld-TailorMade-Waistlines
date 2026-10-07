@@ -118,7 +118,7 @@ namespace TailorMadeWaistlines
             // still draws the trousers and cuts the shirts WDI ships for each body, but has nothing to patch.
             if (TailorMadeLink.Loaded)
             {
-                new Harmony("nelim.tailormade.waistlines").PatchAll(Assembly.GetExecutingAssembly());
+                new Harmony("nelim.venustouch.waistlines").PatchAll(Assembly.GetExecutingAssembly());
                 LongEventHandler.ExecuteWhenFinished(TailorMadeLink.SelfTestBands);
             }
             else

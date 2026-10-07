@@ -2,8 +2,8 @@
 <ModMetaData>
   <name>Venus Touch Waistlines</name>
   <author>Nelim</author>
-  <packageId>nelim.tailormade.waistlines</packageId>
-  <url>https://github.com/vbardales/Rimworld-TailorMade-Waistlines</url>
+  <packageId>nelim.venustouch.waistlines</packageId>
+  <url>https://github.com/vbardales/Rimworld-Venus-Touch-Waistlines</url>
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
@@ -45,5 +45,5 @@ Both are registered in this mod's own content, never in AB's or General's, and r
 
 [b]Adoption.[/b] If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
 
-[url=https://github.com/vbardales/Rimworld-TailorMade-Waistlines]Source code on GitHub[/url]</description>
+[url=https://github.com/vbardales/Rimworld-Venus-Touch-Waistlines]Source code on GitHub[/url]</description>
 </ModMetaData>

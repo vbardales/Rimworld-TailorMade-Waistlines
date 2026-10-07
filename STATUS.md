@@ -1,7 +1,7 @@
 ---
 mod:          TailorMade Waistlines
-packageId:    nelim.tailormade.waistlines
-repo:         https://github.com/vbardales/Rimworld-TailorMade-Waistlines
+packageId:    nelim.venustouch.waistlines
+repo:         https://github.com/vbardales/Rimworld-Venus-Touch-Waistlines
 visibility:   public
 detached:     yes
 stage:        done
@@ -35,7 +35,7 @@ remaining:
   - "decision for the owner: Art/ModIcon-signature-candidate.png appeared 2026-10-06 13:51 beside Art/ModIcon-source.png (a variant with a thread spool in the ponytail). Art/ModIcon-source.png was used as it stands; nothing was adopted from the candidate."
   - "feature/housekeeping: the evidence listed in the 2026-10-06 audit section is left for her to delete (Art/.wip was deleted by her on 2026-10-06); the deletion was refused to the session."
   - "feature/housekeeping: the Steam description and the change note for 1.0.0 are not written (see PUBLICATION.md and the CI/CD note below); CHANGELOG.md has no [1.0.0] section yet. They belong to prepublished, not to tested."
-  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched."
+  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.venustouch.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched."
   - "the open design questions of 2026-09-20 (per-body-type values through a preset module, whether to cover boots and chest, whether the compressed shirt reads acceptably) are kept in the section Earlier remaining entries below."
 updated:      2026-10-06
 ---
@@ -93,10 +93,10 @@ that's written and the workflow regenerated with `--description-markdown`; `buil
 Kept as written, replaced on 2026-10-06 by the shorter list above. Several are history (the 2026-09-20 rename, the parked routes, the body survey) and several are design notes that nothing else records.
 
   - "unverified (done -> tested), showcase: neither image has been seen in game or on a Workshop page. The icon is the mascot with a tape measure round it, cropped from the generated image: it does not show the trousers the prompt asked for, and the source carried a title plate and a glow, both cut away. Regenerate it only if she wants trousers."
-  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.tailormade.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
+  - "feature/housekeeping: ModsConfig.xml still lists the retired packageId nelim.tailoredpants beside nelim.venustouch.waistlines; RimSort shows it as a missing active mod. She chose to remove it herself; nothing was touched. The rename note further down says the line was rewritten in place, which the file does not bear out."
   - "unverified (done -> tested): the settings were verified from the sources and by automated checks, not in game. `settings_audit: complete` rests on that basis (the workflow states that in-game checks belong to done -> tested). Still to observe: defaults on a clean configuration, each slider's effect, persistence across a restart and a save, the ClearAndRepaint refresh, the Reset button, the hidden shortcut in RIMMSQOL, English and French display and clipping. Earlier note, kept: no setting has been changed in game, no settings file has been written, and the defaults, persistence, reset, clamping and the ClearAndRepaint refresh have never been exercised. Player.log (last written 2026-09-20 14:42) predates the rename and the current DLL and contains no line from this mod, so it is not evidence for the shipped build."
   - "unverified (done -> tested): all 11 scenarios of TESTING.md, FR and EN display, RIMMSQOL shortcut. The language pass counts only in developer mode: outside it a key missing from French falls back to clean English and the defect is invisible, so such a capture is no evidence for the l10n criterion. In developer mode the fallback is accented letter by letter, and clean English inside the French means a literal that never went through Translate."
-  - "renamed on 2026-09-20, before anyone had it: TailorMade Waistlines, packageId nelim.tailormade.waistlines, folder TailorMadeWaistlines, assembly TailorMadeWaistlines.dll, namespace TailorMadeWaistlines, Harmony id nelim.tailormade.waistlines. The junction at RimWorld/Mods was repointed and her ModsConfig line was rewritten in place (backup: ModsConfig.xml.before-rename). Renaming a packageId costs nothing only while the mod has never been published - that window is now closed."
+  - "renamed on 2026-09-20, before anyone had it: TailorMade Waistlines, packageId nelim.venustouch.waistlines, folder TailorMadeWaistlines, assembly TailorMadeWaistlines.dll, namespace TailorMadeWaistlines, Harmony id nelim.venustouch.waistlines. The junction at RimWorld/Mods was repointed and her ModsConfig line was rewritten in place (backup: ModsConfig.xml.before-rename). Renaming a packageId costs nothing only while the mod has never been published - that window is now closed."
   - "the plan, hers: two modules above TailorMade. This one is the engine and names no body mod. A second, TailorMade Waistlines for WDI Realistic Bodies, carries the values. For the split to be worth its cost the preset must be pure XML, so the engine has to define a def type - targetBodyMod plus a value per body type - and apply the preset whose target mod is loaded, with the sliders as the manual override."
   - "per body type is the missing piece, and it is measured: within WDI alone the navel runs from 0.46 on Fat to 0.58 on Thin, so one slider is already a compromise over nine bodies. BandFor only receives the apparel class. Graphic_TailorMade.Init calls PatternRegistry.ResolveFor(race, bodyType, layer, ...) before it calls BandFor, so a postfix on ResolveFor can hold the resolved body type for our BandFor postfix to read. TailorMade keys its texture cache on the body mask instance, so two body types cannot collide. Not written."
   - "dead end, measured 2026-09-20 by _tools/measure-waist-anchor.js: deriving the waistline from the body art at run time does not work. The geometric anchor - narrowest row of the lower silhouette - hits the search bounds on most bodies (WDI Male 0.22, Hulk 0.21, Fat 0.66) because those silhouettes never stop narrowing; and the navel detector returns nonsense on other mods (0.20 on ScrubDaddy Female). Neither repere survives a change of body mod. The values have to be authored, which is exactly what the preset module is for."
@@ -194,7 +194,7 @@ later gates each have a concrete gap.
 | Standalone Git repo, GitHub repo, remote, first push | **defect**: none of the four |
 | STATUS.md initialised | validated |
 | Visibility / licence defined and justified | **defect**: `undecided`, no LICENSE, public vs Parked/ |
-| Names: packageId, packageName, folder, assembly, namespace, Harmony id | validated, consistent (`nelim.tailormade.waistlines`); the junction in RimWorld/Mods points to `Mod/` |
+| Names: packageId, packageName, folder, assembly, namespace, Harmony id | validated, consistent (`nelim.venustouch.waistlines`); the junction in RimWorld/Mods points to `Mod/` |
 | English docs: README, ATTRIBUTION, CHANGELOG, Mod/ATTRIBUTION.md | validated (Mod/ copy byte-identical to the root one) |
 | Build (`dotnet build`, Release, output redirected to scratch) | validated: 0 warnings, 0 errors, and the DLL is **byte-identical** to the shipped one |
 | ModIcon.png, Preview.png | **defect**: absent (not generated, nothing generated by this audit) |
@@ -214,7 +214,7 @@ later gates each have a concrete gap.
 
 At her request, after she chose public visibility and MIT: standalone repository created (`git init -b main`, one commit
 `Initialise the repository with the mod folder`, 42 files) and pushed to
-https://github.com/vbardales/Rimworld-TailorMade-Waistlines (public, `main`, local and remote at the same commit);
+https://github.com/vbardales/Rimworld-Venus-Touch-Waistlines (public, `main`, local and remote at the same commit);
 LICENSE (MIT) at the root and in `Mod/`; `.gitattributes`; `Source/Directory.Build.props` sending build intermediates to
 `.build/`; `.gitignore` excluding `Parked/`, `Art/` and `scripts/*.xcf`; ATTRIBUTION.md, README.md and CHANGELOG.md
 adjusted, Mod/ATTRIBUTION.md re-copied byte-identical; `<url>` and the final `Source code on GitHub` link added to
@@ -295,14 +295,14 @@ earlier pass argued from the sources have now been run.
 
 | Check | Result |
 | --- | --- |
-| Standalone repo, GitHub remote, first push | validated: `origin` → `vbardales/Rimworld-TailorMade-Waistlines`, `main` tracked, five commits pushed. `c548d57` is local only |
-| Visibility, licence, names | validated: public, MIT, `LICENSE` at the root and in `Mod/` byte-identical; `packageId`, folder, assembly, namespace and Harmony id all `nelim.tailormade.waistlines` |
+| Standalone repo, GitHub remote, first push | validated: `origin` → `vbardales/Rimworld-Venus-Touch-Waistlines`, `main` tracked, five commits pushed. `c548d57` is local only |
+| Visibility, licence, names | validated: public, MIT, `LICENSE` at the root and in `Mod/` byte-identical; `packageId`, folder, assembly, namespace and Harmony id all `nelim.venustouch.waistlines` |
 | English docs, `Mod/ATTRIBUTION.md` copy | validated, byte-identical to the root one |
 | `.gitignore`, `.gitattributes` | validated: `.build/`, `Source/**/obj`, `bin`, `.vs`, `.idea`, `*.user`; PNG and DLL marked binary |
 | Build up to date in the published folder | validated by timestamp and by the test sets loading that DLL |
 | `ModIcon.png` | validated by direct inspection: 128×128, 28 290 B. The mascot and the tape read at 32 px |
 | `Preview.png` | validated by direct inspection: 896×504, 667 338 B (< 1 MB). Title top-left over a calm area, accent rule plainly distinct from the secondary ink, version badge, near-orthographic overhead, one figure seen from behind, no engraved count |
-| Description in English, source link | validated: ends with `[url=https://github.com/vbardales/Rimworld-TailorMade-Waistlines]Source code on GitHub[/url]`, matching `<url>` and the remote |
+| Description in English, source link | validated: ends with `[url=https://github.com/vbardales/Rimworld-Venus-Touch-Waistlines]Source code on GitHub[/url]`, matching `<url>` and the remote |
 | Settings (MOD_SETTINGS.md) | validated from the sources and the automated sets: three useful sliders with tooltips, a checkbox, reset, scroll, stated scope and application time, primary access through Mod options, `MainButtonDef` hidden by default opening the same `Dialog_ModSettings`. In-game behaviour belongs to `done -> tested` and stays unverified |
 | Localization (TRANSLATIONS.md) | validated: 13 Keyed keys in English and French, DefInjected for the shortcut, no hardcoded sentence outside the mod's own name. The new `TailorPatternDef` carries no player-facing text |
 | Dependencies | validated: Harmony and TailorMade declared with `loadAfter` for both, 1.6 only, no LoadFolders, no conditional patch. No visible-pants mod is declared, correctly: any of them will do, so none can be named |
@@ -351,7 +351,7 @@ scenario 9 of `TESTING.md`.
 
 ## The Pickle suite — run once, green, and worth nothing
 
-`Tests/Pickle`, a companion mod (`nelim.tailormade.waistlines.pickletests`) that is never
+`Tests/Pickle`, a companion mod (`nelim.venustouch.waistlines.pickletests`) that is never
 published. It holds `01-trousers-review.feature`: a colonist stripped, dressed in `Apparel_Pants`
 or `Apparel_KidPants`, framed and photographed, three times. It asserts nothing — how a garment
 banded into a body drawn without legs reads is a judgement about an image.

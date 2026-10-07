@@ -1,8 +1,8 @@
 {
   "templateStamp": "289c71f74e3b",
   "workshopId": "3806769245",
-  "packageId": "nelim.tailormade.waistlines",
-  "releaseTitle": "TailorMade Waistlines {version}",
+  "packageId": "nelim.venustouch.waistlines",
+  "releaseTitle": "Venus Touch Waistlines {version}",
   "requirePaths": [
     "Assemblies/TailorMadeWaistlines.dll"
   ],

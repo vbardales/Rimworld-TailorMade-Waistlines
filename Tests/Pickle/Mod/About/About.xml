@@ -2,7 +2,7 @@
 <ModMetaData>
   <name>TailorMade Waistlines - Pickle tests</name>
   <author>Nelim</author>
-  <packageId>nelim.tailormade.waistlines.pickletests</packageId>
+  <packageId>nelim.venustouch.waistlines.pickletests</packageId>
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
@@ -15,7 +15,7 @@ Scenarios tagged @review assert nothing: they attach screenshots for a person to
 WDI's Realistic Bodies and AB's Visible Pants are optional, and deliberately not dependencies. The mod under test works without either; it simply has nothing visible to do. The scenarios that photograph trousers on a body drawn without legs carry @requires tags and skip when those mods are absent, so the pass without optional mods stays bare and the pass that names them (Run-PickleWsl.ps1 -DepMap wsl-deps.wdi-ab.map) is the one that produces the captures. They stay in loadAfter so the order is right whenever they are present.</description>
   <modDependencies>
     <li>
-      <packageId>nelim.tailormade.waistlines</packageId>
+      <packageId>nelim.venustouch.waistlines</packageId>
       <displayName>TailorMade Waistlines</displayName>
     </li>
     <li>
@@ -30,7 +30,7 @@ WDI's Realistic Bodies and AB's Visible Pants are optional, and deliberately not
     </li>
   </modDependencies>
   <loadAfter>
-    <li>nelim.tailormade.waistlines</li>
+    <li>nelim.venustouch.waistlines</li>
     <li>astryl.tailormade</li>
     <li>rimworks.pickle</li>
     <li>wdi.realistic.bodies</li>

@@ -132,7 +132,7 @@ without it.
 
 ```
 Mod/                    everything that ships, and nothing else
-  About/About.xml       nelim.tailormade.waistlines; needs Harmony and TailorMade
+  About/About.xml       nelim.venustouch.waistlines; needs Harmony and TailorMade
   Assemblies/TailorMadeWaistlines.dll
   Defs/MainButtonDefs/  the hidden settings shortcut
   Languages/            English and French Keyed text, French DefInjected
