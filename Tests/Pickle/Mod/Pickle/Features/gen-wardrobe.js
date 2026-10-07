@@ -33,7 +33,11 @@ for (const m of mods) {
   bodies.forEach((b, i) => o.push((i === 0 ? '    When' : '    And') + ' I destroy the gear of "' + b + '"'));
   shot('bare', true);
   for (const g of m.garments) {
-    for (const b of bodies) o.push('    And I destroy the gear of "' + b + '"', '    And Nelim\'s Pickle Tools: "' + b + '" wears "' + g + '"');
+    // The two children stay bare: an adult garment is refused on a child ("M-Kid should wear ...; it wears nothing").
+    for (const b of bodies) {
+      o.push('    And I destroy the gear of "' + b + '"');
+      if (!/Kid/.test(b)) o.push('    And Nelim\'s Pickle Tools: "' + b + '" wears "' + g + '"');
+    }
     shot(g, false);
   }
   o.push('');
