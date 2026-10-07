@@ -53,3 +53,9 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
 - **Ratkin Apparel+ (unofficial)** (PPONN), Workshop 3247891238, `PPONN.RatkinApparel`, needs Humanoid Alien Races and Harmony: apparel
   for Ratkin, 70 images. A race of its own, so a body of its own: to find out whether the cut and the trousers mean anything there.
 - **Not read, not installed here:** Chibi Body 2187064189 and "abc" 3459200778. Steam answered 429 to the page fetch.
+- **UNAGI family** (Virginie: "à noter"). Installed here, read by name only: UNAGI Vanilla Apparel 3245977854 (`UNAGI.apparel.B.Zibunyou`),
+  Mini MOD SimpleSuit 3253298952 (`UNAGI.suit.SET`), Winter clothing 3266399912 (`UNAGI.huyuhuku.SET`), Japanese Assortment 3297676809
+  (`UNAGI.Wahuu.hako`), Battle Coat 3301577366 (`UNAGI.Battle.coat`), CAFE 3325530853 (`UNAGI.Cafe.gohan`), Royalty Apparel 3352990362,
+  and Apparel APP Extension 3379688555 (`InternSeraph.UNAAPPExt`, by another author: it reads as a patch for the APP/THIGAPPE pattern
+  system, to check). **"Unagi coat" 3253300748, given by Virginie, is not installed here: not read.** Coats are the cases where the
+  cut must leave the garment long; each needs a capture.
