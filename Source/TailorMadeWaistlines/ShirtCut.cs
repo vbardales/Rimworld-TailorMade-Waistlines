@@ -104,6 +104,16 @@ namespace TailorMadeWaistlines
         /// </summary>
         internal static int[] CutRows(string key, string facing, int width, int height)
         {
+            // The shirt runs under the trousers as they are drawn: the top edge of the finished trousers texture, column by column,
+            // so both have the same shape.
+            float[] drawn = TrouserTop(key, facing);
+            if (drawn != null)
+            {
+                var follow = new int[width];
+                for (int x = 0; x < width; x++)
+                    follow[x] = (int)Math.Round((drawn[Math.Min(drawn.Length - 1, (int)(x * (long)drawn.Length / width))] + UnderTrousers) * height, MidpointRounding.AwayFromZero);
+                return follow;
+            }
             float[] own = ProfileFor(key, facing);
             // The trousers of a female Thin, Fat or Hulk are cut on her own underwear too: the same curve.
             float[] pants = own ?? ProfileFor(key.EndsWith("_Female") ? key.Substring(0, key.Length - 7) : key, facing);
@@ -122,6 +132,50 @@ namespace TailorMadeWaistlines
                 rows[x] = (int)Math.Round((Math.Max(a, p) + UnderTrousers) * height, MidpointRounding.AwayFromZero);
             }
             return rows;
+        }
+
+        private static readonly System.Collections.Generic.Dictionary<string, float[]> trouserTops = new System.Collections.Generic.Dictionary<string, float[]>();
+
+        /// <summary>
+        /// The top edge of the trousers this mod drew for a body and facing, as a fraction of their height for each column
+        /// (empty columns take the nearest one's), or null when this mod drew none for it.
+        /// </summary>
+        internal static float[] TrouserTop(string key, string facing)
+        {
+            string cacheKey = key + "_" + facing;
+            if (trouserTops.TryGetValue(cacheKey, out float[] cached)) return cached;
+            float[] result = null;
+            try
+            {
+                var mine = TailorMadeWaistlinesMod.Instance.Content.GetContentHolder<Texture2D>();
+                string path = TrouserArt.PantsTexturePath(key, facing);
+                Texture2D tex = mine.contentList.ContainsKey(path) ? mine.contentList[path] : null;
+                if (tex != null)
+                {
+                    byte[] px = TrouserArt.Read(tex, out int w, out int h);
+                    var top = new float[w];
+                    for (int x = 0; x < w; x++)
+                    {
+                        top[x] = -1f;
+                        for (int y = 0; y < h; y++)
+                            if (px[(y * w + x) * TrouserDetail.Channels + 3] >= 128) { top[x] = y / (float)h; break; }
+                    }
+                    int first = Array.FindIndex(top, v => v >= 0f), last = Array.FindLastIndex(top, v => v >= 0f);
+                    if (first >= 0)
+                    {
+                        for (int x = 0; x < first; x++) top[x] = top[first];
+                        for (int x = last + 1; x < w; x++) top[x] = top[last];
+                        for (int x = first; x <= last; x++) if (top[x] < 0f) top[x] = top[x - 1];
+                        result = top;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.WarningOnce("[TailorMade Waistlines] could not read the trousers' top edge for " + cacheKey + ": " + e.Message, cacheKey.GetHashCode());
+            }
+            trouserTops[cacheKey] = result;
+            return result;
         }
 
         private static float childLine = -1f;

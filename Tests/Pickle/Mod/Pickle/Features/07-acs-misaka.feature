@@ -25,7 +25,8 @@ Feature: a student home at noon, for A Certain Series
     And Nelim's Pickle Tools: "Misaka" wears "Apparel_BasicShirt" dyed rgb (241, 231, 208)
     And Nelim's Pickle Tools: "Misaka" wears "Apparel_Pants" dyed rgb (90, 59, 40)
     And Nelim's Pickle Tools: the other colonists are out of frame
-    When Nelim's Pickle Tools: I frame the cell (188, 123) at zoom 12
+    When Nelim's Pickle Tools: I am at the sanctuary "sofa-corner"
+    And Nelim's Pickle Tools: I frame the cell (188, 123) at zoom 11
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 300 ticks
     And Nelim's Pickle Tools: an adult animal of kind "Cat" named "Mimi" is spawned at (190, 123)
