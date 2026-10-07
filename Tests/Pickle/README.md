@@ -138,7 +138,7 @@ or stale. A red result there means the pass is invalid, not that the mod is brok
 Link the companion mod into RimWorld's `Mods` folder. A junction needs no elevation:
 
 ```powershell
-New-Item -ItemType Junction -Path "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\TailorMadeWaistlinesPickleTests" -Target "C:\Users\nelim\Documents\rimworld\TailorMadeWaistlines\Tests\Pickle\Mod"
+New-Item -ItemType Junction -Path "C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\VenusTouchWaistlinesPickleTests" -Target "C:\Users\nelim\Documents\rimworld\VenusTouchWaistlines\Tests\Pickle\Mod"
 ```
 
 Then enable it below TailorMade Waistlines and Pickle.
