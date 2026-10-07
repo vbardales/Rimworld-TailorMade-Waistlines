@@ -389,7 +389,7 @@ namespace TailorMadeWaistlines
         private static byte[] Lower(byte[] rgba, int width, int height, float drop)
         {
             int rows = (int)Math.Round(drop * height, MidpointRounding.AwayFromZero);
-            return rows <= 0 ? rgba : TrouserDetail.ShiftDown(rgba, width, height, rows);
+            return rows <= 0 ? rgba : TrouserDetail.CompressTop(rgba, width, height, rows);
         }
 
         // ----------------------------------------------------- what the jackets are measured on

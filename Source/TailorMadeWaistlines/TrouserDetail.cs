@@ -131,6 +131,31 @@ namespace TailorMadeWaistlines
         /// Stretches the garment upwards so that its top edge lands on <paramref name="newTopRow"/> and its bottom stays where
         /// it is: the shell gets taller, it is neither moved nor cut. Does nothing when the row is not above the current top.
         /// </summary>
+        /// <summary>
+        /// Moves the top of the shape down by <paramref name="rows"/> and keeps its bottom where it is: the rows between are
+        /// squeezed. Shifting the whole shape down instead pushes the hem below the body, which makes the pawn taller.
+        /// </summary>
+        public static byte[] CompressTop(byte[] rgba, int width, int height, int rows)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var s = Measure(rgba, width, height);
+            if (s == null || rows <= 0 || rows >= s.Bottom - s.Top) return (byte[])rgba.Clone();
+            var outPx = (byte[])rgba.Clone();
+            int stride = width * Channels;
+            int newTop = s.Top + rows;
+            Array.Clear(outPx, s.Top * stride, rows * stride);
+            int span = s.Bottom - s.Top, newSpan = s.Bottom - newTop;
+            for (int y = newTop; y <= s.Bottom; y++)
+            {
+                int src = s.Top + (int)Math.Round((y - newTop) * (double)span / newSpan, MidpointRounding.AwayFromZero);
+                src = Math.Max(s.Top, Math.Min(s.Bottom, src));
+                Buffer.BlockCopy(rgba, src * stride, outPx, y * stride, stride);
+            }
+            return outPx;
+        }
+
         public static byte[] StretchTop(byte[] rgba, int width, int height, int newTopRow)
         {
             if (rgba == null) throw new ArgumentNullException(nameof(rgba));
