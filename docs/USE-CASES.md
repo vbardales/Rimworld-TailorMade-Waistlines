@@ -1,0 +1,39 @@
+# Use cases and backlog
+
+What the mod has to look right on, per body (Male, Female, Thin, Thin female, Fat, Fat female, Hulk, Hulk female, Child) and
+per pass. A case is done when its captures were opened and read, not when the run is green.
+
+## Covered by the gallery pass (`05-gallery.feature`, "ten bodies, four outfits")
+
+| Case | State |
+|---|---|
+| T-shirt, no trousers | cut on the underwear's top edge; read |
+| Bare torso, trousers | trousers start on the underwear's top edge; adult-content question open (PUBLICATION.md) |
+| T-shirt and trousers | shirt runs 0.03 under the trousers' top edge; Female and Thin female were showing belly skin |
+| Jacket on a bare torso | stretched to the trousers' hem; judged ugly (stair-stepped, artificially stretched); to replace by a THIGAPPE-style mask, no stretch |
+
+## Covered by the legwear pass (`06-legwear.feature`)
+
+Shorts (gap between the legs left open), skirt (nothing black under it). Not in the gallery yet.
+
+## To add
+
+- **Dress** (torso and legs in one garment): left alone by the cut; needs its own capture on every body.
+- **Long coat and robe:** must keep draping; the mask must not shorten them.
+- **Croptop** (Simple Pants and Shirts) and a short top: must never be lengthened, only cut.
+- **Stockings and tights:** a layer on the legs, under trousers and skirts. Needs a mod that adds them; to find.
+- **High heels:** change the foot and the leg line. Needs a heels mod (Workshop "high-heels" was seen on LoversLab, not checked); to find.
+- **"Realistic" clothing:** garments drawn for a realistic body (WDI's own apparel folders: Blouse, CasualTShirt, ChefsUniform,
+  Jumpsuit, MilitaryUniform, Scrubs, SheriffShirt, ShirtFleece, ShirtandTie, TankTop, Tunic, BodyStrap, CorsetRoyal, EltexShirt,
+  ShirtBasic, ShirtButton, TribalA, dress, VestRoyal). Native art is now cut as it is for shirts; each of these needs a capture.
+- **Other types found in the clothing libraries** (Smaller Shirt Textures, Simple Pants and Shirts, Useless clothes, Xeva Body Pants,
+  retextures of visible pants, female variants for fat bodies): one capture each per body once the cut works for them.
+- **Children:** no WDI underwear; the cut line is the one the child's trousers start on. Needs a child in a dress, a jacket and shorts.
+- **Later (expansion):** pregnancy belly, breasts, penises, body hair; the cut line stays replaceable
+  (`ShirtCut.CutFraction`, `ShirtCut.LineFor`).
+
+## Mods the Sanctuary needs for these passes
+
+TailorMade, WDI's Realistic Bodies, Female Body Variants Continued, Female Apparel Variants Continued, AB's Visible Pants, and this mod.
+Female Body Variants must load before WDI (its own `Naked_*_Female` files are copies of the base bodies and would shadow WDI's),
+TailorMade after the body mods (`last:astryl.tailormade` in the pass map).

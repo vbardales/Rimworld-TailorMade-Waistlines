@@ -10,6 +10,7 @@
     <bootsTop>0.2</bootsTop>
     <chestBottom>0.25</chestBottom>
     <shortenShirts>True</shortenShirts>
+    <keepJacketsLong>False</keepJacketsLong>
     <useGeneralArt>True</useGeneralArt>
     <detailPlainShells>True</detailPlainShells>
     <trouserDrop>0.03</trouserDrop>
