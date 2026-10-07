@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Seed for the "gallery-notm" pass: TailorMade switched OFF, to see what the garments look like without it. -->
+<SettingsBlock>
+  <ModSettings Class="TailorMade.TailorMadeSettings">
+    <enabled>False</enabled>
+  </ModSettings>
+</SettingsBlock>
