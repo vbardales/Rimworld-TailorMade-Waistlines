@@ -50,3 +50,6 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
 - **[IMO] Default Apparel Retexture** (Sato Imozou), Workshop 2660249018, `SatoImozou.IMOZOUapparel`: retextures vanilla apparel
   (258 images under `Things/Pawn/Humanlike/Apparel`). Given for Imozou's bodies. To capture on every body, with and without the cut.
 - **Chibi Body**, Workshop 2187064189: given by Virginie, not installed here, not read yet.
+- **Ratkin Apparel+ (unofficial)** (PPONN), Workshop 3247891238, `PPONN.RatkinApparel`, needs Humanoid Alien Races and Harmony: apparel
+  for Ratkin, 70 images. A race of its own, so a body of its own: to find out whether the cut and the trousers mean anything there.
+- **Not read, not installed here:** Chibi Body 2187064189 and "abc" 3459200778. Steam answered 429 to the page fetch.
