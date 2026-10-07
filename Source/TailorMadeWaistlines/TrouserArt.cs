@@ -340,6 +340,14 @@ namespace TailorMadeWaistlines
                     float shift = drop - TailorMadeWaistlinesSettings.DefaultTrouserDrop;
                     float highest = float.MaxValue;
                     foreach (float v in curve) if (v < highest) highest = v;
+                    // WDI's underwear is very low on the male Thin and Hulk: the trousers may start higher, towards the navel.
+                    int mode = TailorMadeWaistlinesMod.Settings.waistMode;
+                    if (mode > 0 && curveBody == null)
+                    {
+                        string bodyName = path.IndexOf("_Hulk_", StringComparison.Ordinal) >= 0 ? "Hulk" : path.IndexOf("_Thin_", StringComparison.Ordinal) >= 0 ? "Thin" : null;
+                        if (bodyName != null && BelowNavel.TryGetValue(bodyName, out float navel) && highest > navel)
+                            shift -= (highest - navel) * (mode == 1 ? 0.5f : 1f);
+                    }
                     rgba = TrouserDetail.StretchTop(rgba, width, height, (int)Math.Round((highest + shift) * height, MidpointRounding.AwayFromZero));
                     var rows = new int[width];
                     for (int x = 0; x < width; x++)

@@ -48,6 +48,10 @@ namespace TailorMadeWaistlines
         // On by default: a jacket is drawn to its own length instead of being banded to the waist.
         public bool keepJacketsLong = true;
 
+        // Where the trousers of the male Thin and Hulk start (no slider, read from the settings file): 0 on the top edge of WDI's
+        // underwear, 1 half way up to the navel, 2 on the navel. Their underwear sits very low on those bodies.
+        public int waistMode = 0;
+
         // Take General Textures Collection's trouser art where AB supplies a plain shell, and
         // draw details onto the shells that have no such art. Both read at startup.
         public bool useGeneralArt = true;
@@ -63,6 +67,7 @@ namespace TailorMadeWaistlines
             Scribe_Values.Look(ref chestBottom, "chestBottom", DefaultChestBottom);
             Scribe_Values.Look(ref shortenShirts, "shortenShirts", false);
             Scribe_Values.Look(ref keepJacketsLong, "keepJacketsLong", true);
+            Scribe_Values.Look(ref waistMode, "waistMode", 0);
             Scribe_Values.Look(ref useGeneralArt, "useGeneralArt", true);
             Scribe_Values.Look(ref detailPlainShells, "detailPlainShells", true);
             Scribe_Values.Look(ref trouserDrop, "trouserDrop", DefaultTrouserDrop);
