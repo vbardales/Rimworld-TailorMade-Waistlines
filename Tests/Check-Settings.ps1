@@ -63,7 +63,7 @@ try {
     $s = New-Settings
     Assert-That 'pantsTop starts at TailorMade''s 0.58' (Near (Get-F $s 'pantsTop') 0.58)
     Assert-That 'bootsTop starts at TailorMade''s 0.20' (Near (Get-F $s 'bootsTop') 0.20)
-    Assert-That 'chestBottom starts at TailorMade''s 0.45' (Near (Get-F $s 'chestBottom') 0.45)
+    Assert-That 'chestBottom starts at this mod''s 0.25' (Near (Get-F $s 'chestBottom') 0.25)
     Assert-That 'shortenShirts starts off' ((Get-F $s 'shortenShirts') -eq $false)
     Assert-That 'useGeneralArt starts on: it only acts where AB is active' ((Get-F $s 'useGeneralArt') -eq $true)
     Assert-That 'detailPlainShells starts on' ((Get-F $s 'detailPlainShells') -eq $true)
@@ -82,7 +82,7 @@ try {
         @{ n = 'bootsTop';    v = [float]::NaN;             want = 0.20; why = 'NaN falls back to the default' },
         @{ n = 'chestBottom'; v = 1.0;                      want = 0.80; why = 'above the slider' },
         @{ n = 'chestBottom'; v = 0.0;                      want = 0.20; why = 'below the slider' },
-        @{ n = 'chestBottom'; v = [float]::NegativeInfinity; want = 0.45; why = 'infinity falls back to the default' },
+        @{ n = 'chestBottom'; v = [float]::NegativeInfinity; want = 0.25; why = 'infinity falls back to the default' },
         @{ n = 'pantsTop';    v = 0.42;                     want = 0.42; why = 'a value inside the range is left alone' },
         @{ n = 'trouserDrop'; v = 0.5;                      want = 0.30; why = 'above the slider' },
         @{ n = 'trouserDrop'; v = -1.0;                     want = 0.0;  why = 'below the slider' },
@@ -106,7 +106,7 @@ try {
     Set-F $s 'pantsTop' ([float]0.3); Set-F $s 'bootsTop' ([float]0.5); Set-F $s 'chestBottom' ([float]0.7); Set-F $s 'shortenShirts' $true
     Set-F $s 'useGeneralArt' $false; Set-F $s 'detailPlainShells' $false; Set-F $s 'trouserDrop' ([float]0.07); Set-F $s 'trouserDropChild' ([float]0.03)
     $type.GetMethod('ResetToDefaults').Invoke($s, @()) | Out-Null
-    Assert-That 'the three bands return to TailorMade''s values' ((Near (Get-F $s 'pantsTop') 0.58) -and (Near (Get-F $s 'bootsTop') 0.20) -and (Near (Get-F $s 'chestBottom') 0.45))
+    Assert-That 'the three bands return to their defaults' ((Near (Get-F $s 'pantsTop') 0.58) -and (Near (Get-F $s 'bootsTop') 0.20) -and (Near (Get-F $s 'chestBottom') 0.25))
     Assert-That 'the shirt option returns to off' ((Get-F $s 'shortenShirts') -eq $false)
     Assert-That 'both trouser art options return to on' (((Get-F $s 'useGeneralArt') -eq $true) -and ((Get-F $s 'detailPlainShells') -eq $true))
     Assert-That 'both trouser drops return to their defaults' ((Near (Get-F $s 'trouserDrop') 0.03) -and (Near (Get-F $s 'trouserDropChild') 0.067))
