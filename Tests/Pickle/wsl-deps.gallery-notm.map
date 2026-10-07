@@ -1,4 +1,4 @@
-# The gallery pass with TailorMade switched off through its own setting (config/gallery-notm/).
+# The gallery pass with TailorMade absent altogether (config/gallery-notm/ holds no seed for it: a seed naming a mod that is not staged stops the staging).
 # The gallery pass: the Sanctuaire de Nelim fixture (PickleTools/docs/GALERIE.md) plus the legless body retexture and AB's trousers.
 # AB needs its seeded settings: config/gallery/ is a copy of config/wdi-ab/.
 #   Submit-PickleRun.ps1 -Mod TailorMadeWaistlines -DepMap wsl-deps.gallery.map -Filter "@gallery" ...

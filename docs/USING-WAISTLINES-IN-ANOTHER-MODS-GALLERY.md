@@ -29,7 +29,7 @@ Plus the Sanctuaire mods of the gallery pass (`screenshotstudio`, `colonistrace`
 see `Tests/Pickle/wsl-deps.gallery.map`, the model. To load this mod itself the pass map needs its `Mod/` folder; the staging takes the
 mod under test from its repo, so a foreign pass needs a line `nelim.tailormade.waistlines   path:TailorMadeWaistlines/Mod`.
 
-## The settings that matter (config seed `Mod_TailorMadeWaistlines_TailorMadeWaistlinesMod.xml`)
+## The settings that matter (config seed `Mod_local-nelim.tailormade.waistlines_TailorMadeWaistlinesMod.xml` when this mod is a `path:` dependency of your pass; `Mod_TailorMadeWaistlines_...` only in this repo)
 
 Copy `Tests/Pickle/for-acs/config/galerie-tmw/` into the pass's `config/`; when this mod is staged by `path:` its seed is named `Mod_local-<packageId>_TailorMadeWaistlinesMod.xml` (staging script, folder `local-<packageId>`), not by the repo name. In particular: `shortenShirts` True (cuts shirts on WDI's underwear and
 leaves TailorMade out of it for those bodies), `keepJacketsLong` False (jackets are drawn as they are), `detailPlainShells` True,
