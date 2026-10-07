@@ -148,7 +148,7 @@ Tests/Check-Settings.ps1       defaults, reset and clamping of the settings obje
 Tests/Check-Trousers.ps1       the trouser detail generator: invariants, on synthetic shells and AB's own
 Tests/Pickle/           in-game scenarios, run by Pickle — see Tests/Pickle/README.md
 scripts/*.js             measurement and generation, for the parked route
-Art/                    generated previews and contact sheets. Local only, not in this repository
+Art/                    Preview and ModIcon sources, the Preview renderer config and the generated .ico files
 ```
 
 ## The tools

@@ -21,7 +21,6 @@ Source/**/bin/
 # or paint over, art that grants no licence (General Textures Collection, WDI's Realistic
 # Bodies). See ATTRIBUTION.md. The GIMP projects under scripts/ are painted over WDI's bodies.
 Parked/
-Art/
 scripts/*.xcf
 
 # Compiled textures: a .dds is a conversion product, heavy and not readable in a diff. General
