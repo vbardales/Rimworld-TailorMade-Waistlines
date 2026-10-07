@@ -63,3 +63,5 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
   versions of vanilla apparel (Apron, Blouse, Cape, CasualTShirt, Hoodie, Overalls, PeltCoat, SheriffShirt, ShirtFleece, ShirtandTie,
   TankTop, TribalKilt, TribalPoncho, Tunic; 116 images). Given by Virginie for "compatible" bodies. To capture on the female bodies,
   with and without the cut.
+- **[SS]Maid Project** (BJInternetSupervision), Workshop 1498756997, `BBIS.MaidProject`, 1.6 supported, 437 images, no body textures
+  (apparel and buildings only). Given by Virginie as "female BB": maid outfits, dresses and aprons; to capture on the female bodies.
