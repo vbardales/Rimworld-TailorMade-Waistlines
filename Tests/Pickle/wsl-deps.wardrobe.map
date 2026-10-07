@@ -1,0 +1,24 @@
+# The wardrobe pass: the gallery pass plus the clothing libraries read in docs/USE-CASES.md. Generated features: Mod/Pickle/Features/gen-wardrobe.js.
+# AB needs its seeded settings: config/gallery/ is a copy of config/wdi-ab/.
+#   Submit-PickleRun.ps1 -Mod VenusTouchWaistlines -DepMap wsl-deps.gallery.map -Filter "@gallery" ...
+# Female Body Variants and Female Apparel Variants load BEFORE WDI (WDI declares loadAfter on both): after it, their own Naked_*_Female textures shadow WDI's.
+tiagocc0.FemaleBodyVariants    3798082132
+tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+# TailorMade after the body mods (it declares loadAfter on Female Body Variants and reads the body textures it finds when the game starts).
+UNAGI.Ap.Dress 3352990362
+UNAGI.Battle.coat 3301577366
+UNAGI.huyuhuku.SET 3266399912
+UNAGI.suit.SET 3253298952
+UNAGI.Wahuu.hako 3297676809
+UNAGI.Cafe.gohan 3325530853
+BBIS.MaidProject 1498756997
+nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
+nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor path:PickleTools/StageDecor/Mod
+nelim.pickletools.coatsteps path:PickleTools/CoatSteps/Mod
+nelim.pickletools.clearscreen path:PickleTools/ClearScreen/Mod
+nelim.pickletools   path:PickleTools/Tests/Pickle/StandaloneBase/Mod
