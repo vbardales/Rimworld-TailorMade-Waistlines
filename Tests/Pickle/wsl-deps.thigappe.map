@@ -1,0 +1,19 @@
+# The gallery pass with Apparel Paper Pattern and THIGAPPE loaded too (does Venus Touch Waistlines work beside them, and who wins on a shirt?). Compare with the gallery pass.
+# AB needs its seeded settings: config/gallery/ is a copy of config/wdi-ab/.
+#   Submit-PickleRun.ps1 -Mod VenusTouchWaistlines -DepMap wsl-deps.gallery.map -Filter "@gallery" ...
+# Female Body Variants and Female Apparel Variants load BEFORE WDI (WDI declares loadAfter on both): after it, their own Naked_*_Female textures shadow WDI's.
+tiagocc0.FemaleBodyVariants    3798082132
+tiagocc0.FemaleApparelVariants 3799726535
+wdi.realistic.bodies   3527486510
+ab.vplrf               2986402536
+# TailorMade after the body mods (it declares loadAfter on Female Body Variants and reads the body textures it finds when the game starts).
+nalsnoir.ApparelPaperPattern 2480887589
+WRK.THIGAPPE 2839518933
+nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod
+nelim.pickletools.clickdiagnostics   path:PickleTools/ClickDiagnostics/Mod
+nelim.pickletools.screenshotstudio path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor path:PickleTools/StageDecor/Mod
+nelim.pickletools.coatsteps path:PickleTools/CoatSteps/Mod
+nelim.pickletools.clearscreen path:PickleTools/ClearScreen/Mod
+nelim.pickletools   path:PickleTools/Tests/Pickle/StandaloneBase/Mod

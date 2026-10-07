@@ -65,3 +65,10 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
   with and without the cut.
 - **[SS]Maid Project** (BJInternetSupervision), Workshop 1498756997, `BBIS.MaidProject`, 1.6 supported, 437 images, no body textures
   (apparel and buildings only). Given by Virginie as "female BB": maid outfits, dresses and aprons; to capture on the female bodies.
+
+## Compatibility passes to run (Virginie, 2026-10-08)
+
+- **Venus beside THIGAPPE and Apparel Paper Pattern** (`WRK.THIGAPPE` 2839518933, `nalsnoir.ApparelPaperPattern` 2480887589): pass map
+  `Tests/Pickle/wsl-deps.thigappe.map`, same gallery feature. Declared incompatibility of THIGAPPE: `nalsnoir.APPCompatibleBody2` only.
+  Question: who cuts the shirt, and does the same garment get cut twice. Also with the ABC Body 2 patch (3611523059) and
+  APPBodyTypeOverrider, not prepared.
