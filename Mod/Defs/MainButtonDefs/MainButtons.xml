@@ -2,8 +2,8 @@
 <Defs>
   <MainButtonDef>
     <defName>TailorMadeWaistlines_Settings</defName>
-    <label>TailorMade Waistlines</label>
-    <description>Open the TailorMade Waistlines mod settings.</description>
+    <label>Venus Touch Waistlines</label>
+    <description>Open the Venus Touch Waistlines mod settings.</description>
     <workerClass>TailorMadeWaistlines.MainButtonWorker_TailorMadeWaistlines</workerClass>
     <buttonVisible>false</buttonVisible>
     <validWithoutMap>true</validWithoutMap>

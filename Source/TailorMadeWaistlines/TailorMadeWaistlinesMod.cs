@@ -130,7 +130,7 @@ namespace TailorMadeWaistlines
         }
 
         // The mod's own name, a proper noun: the one player-facing string that is not a key.
-        public override string SettingsCategory() => "TailorMade Waistlines";
+        public override string SettingsCategory() => "Venus Touch Waistlines";
 
         public override void DoSettingsWindowContents(Rect inRect)
         {

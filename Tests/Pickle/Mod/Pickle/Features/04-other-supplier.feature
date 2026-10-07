@@ -43,7 +43,7 @@ Feature: the trousers when XeoNovaDan's Visible Pants supplies them
   @requires:xeonovadan.visiblepants
   Scenario: this mod stayed out of the way
     Then no warning matching "[TailorMade Waistlines]" was logged
-    And no warnings from mod "TailorMade Waistlines"
+    And no warnings from mod "Venus Touch Waistlines"
 
   @requires:wdi.realistic.bodies @requires:xeonovadan.visiblepants
   Scenario: a colonist whose gender is male, wearing XND's trousers

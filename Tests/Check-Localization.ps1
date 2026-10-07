@@ -12,7 +12,7 @@
       - both languages carry the same {0} placeholders, and the slider labels
         that receive a value do carry {0};
       - no sentence-like string literal is left in the settings code outside
-        the keys (the mod's own name, "TailorMade Waistlines", is a proper
+        the keys (the mod's own name, "Venus Touch Waistlines", is a proper
         noun and is the one allowed exception);
       - the MainButtonDef exists, is hidden by default (buttonVisible false),
         names a worker class that exists in the shipped assembly, and every
@@ -109,7 +109,7 @@ foreach ($key in @('PantsTop', 'BootsTop', 'ChestBottom')) {
 # --- no sentence left in code -------------------------------------------------
 Write-Host ""
 Write-Host "no hardcoded sentence in the settings code"
-$allowed = @('TailorMade Waistlines')
+$allowed = @('Venus Touch Waistlines')
 foreach ($name in @('TailorMadeWaistlinesMod.cs', 'MainButtonWorker_TailorMadeWaistlines.cs')) {
     $text = Get-Content -Raw -Encoding UTF8 (Join-Path $src $name)
     $text = [regex]::Replace($text, '(?m)^\s*//.*$', '')

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>TailorMade Waistlines</name>
+  <name>Venus Touch Waistlines</name>
   <author>Nelim</author>
   <packageId>nelim.tailormade.waistlines</packageId>
   <url>https://github.com/vbardales/Rimworld-TailorMade-Waistlines</url>
@@ -20,7 +20,7 @@
     <li>ab.vplrf</li>
     <li>Kas.GeneralCollection</li>
   </loadAfter>
-  <description>Decides where garments stop on the body. An add-on to TailorMade, not affiliated with it.
+  <description>Decides where garments stop on the body. Works with TailorMade, which is optional, and is not affiliated with it.
 
 TailorMade sorts apparel into classes and fits each class into a horizontal band of the body — pants into the bottom 58%, boots into the bottom 20%, chest pieces into the top 55%. Those numbers suit a body drawn with legs. On a body retexture drawn as one legless shape, 58% of the way up from the hem lands above the navel, and trousers read as a high-waisted skirt.
 

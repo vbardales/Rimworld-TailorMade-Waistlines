@@ -127,7 +127,7 @@ Feature: how trousers read on a body drawn without legs
     When I destroy the gear of "Waistline-V"
     And I dress "Waistline-V" in "Apparel_Pants"
     And "Waistline-V" apparel covers "Legs"
-    Then no warnings from mod "TailorMade Waistlines"
+    Then no warnings from mod "Venus Touch Waistlines"
     # The step above only sees what RimLogging could attribute to this mod. A warning raised by
     # vanilla code that our patch led into is attributed to nobody, so the class that actually
     # matters here - a garment whose texture cannot be resolved - is asserted by its text instead.
