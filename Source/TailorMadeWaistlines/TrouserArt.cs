@@ -359,6 +359,7 @@ namespace TailorMadeWaistlines
                     detailed = TrouserDetail.Apply(rgba, width, height, facing, bareLegs);
                     detailed = Lower(detailed, width, height, drop);
                 }
+                detailed = TrouserDetail.SmoothAlpha(detailed, width, height);
                 return FromTopDown(detailed, width, height, "TMW_Detail_" + path.Replace('/', '_'));
             }
             catch (Exception e)

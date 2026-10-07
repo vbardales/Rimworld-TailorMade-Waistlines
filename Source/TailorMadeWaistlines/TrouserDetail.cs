@@ -156,6 +156,42 @@ namespace TailorMadeWaistlines
             return outPx;
         }
 
+        /// <summary>
+        /// Softens the stair steps of a silhouette drawn at a low resolution: the alpha channel goes through a 3 x 3 blur
+        /// (1 2 1 / 2 4 2 / 1 2 1), and a pixel the blur makes visible takes the colour of its most solid neighbour, so no
+        /// dark fringe appears. Colours of pixels that were already visible are left as they are.
+        /// </summary>
+        public static byte[] SmoothAlpha(byte[] rgba, int width, int height)
+        {
+            if (rgba == null) throw new ArgumentNullException(nameof(rgba));
+            if (width <= 0 || height <= 0 || rgba.Length != width * height * Channels)
+                throw new ArgumentException("rgba must hold width * height * 4 bytes.");
+            var outPx = (byte[])rgba.Clone();
+            int[] k = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                {
+                    int sum = 0, bestA = -1, bestI = -1, i = 0;
+                    for (int dy = -1; dy <= 1; dy++)
+                        for (int dx = -1; dx <= 1; dx++, i++)
+                        {
+                            int nx = Math.Max(0, Math.Min(width - 1, x + dx)), ny = Math.Max(0, Math.Min(height - 1, y + dy));
+                            int idx = (ny * width + nx) * Channels;
+                            int a = rgba[idx + 3];
+                            sum += a * k[i];
+                            if (a > bestA) { bestA = a; bestI = idx; }
+                        }
+                    int o = (y * width + x) * Channels;
+                    int na = sum / 16;
+                    if (rgba[o + 3] == 0 && na > 0 && bestI >= 0)
+                    {
+                        outPx[o] = rgba[bestI]; outPx[o + 1] = rgba[bestI + 1]; outPx[o + 2] = rgba[bestI + 2];
+                    }
+                    outPx[o + 3] = (byte)na;
+                }
+            return outPx;
+        }
+
         public static byte[] StretchTop(byte[] rgba, int width, int height, int newTopRow)
         {
             if (rgba == null) throw new ArgumentNullException(nameof(rgba));
