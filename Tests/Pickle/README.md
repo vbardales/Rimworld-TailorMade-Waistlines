@@ -190,3 +190,11 @@ names whoever holds the lock.
 Teardown on the Linux side is nothing to do: the staging wipes `~/rimworld/Mods` and rewrites its
 own `ModsConfig.xml` and `Prefs.xml` every time, and touches nothing on the Windows side. AUDIT.md's
 teardown rule is satisfied because nothing shared was changed, not because it stops applying.
+
+## Two families of steps (2026-10-08)
+
+The Sanctuary has its own repository, SanctuaryBacklot. Its steps start with `Nelim's Sanctuary:` (the named places: `I am at the sanctuary`,
+`the animals are removed from the sanctuary`, `I empty`, `I bare the floor`, `the roof is removed`; catalogue `SanctuaryBacklot/docs/steps.md`).
+The generic tools keep `Nelim's Pickle Tools:` (`studio presentation mode is enabled`, `the other colonists are out of frame`, body type,
+`wears ... dyed rgb`, hairstyle; catalogue `PickleTools/docs/steps.md`). The staging adds the Backlot beside Screenshot Studio, so no line is
+needed in the pass maps. Checked with `SanctuaryBacklot/Check-Steps.ps1`.

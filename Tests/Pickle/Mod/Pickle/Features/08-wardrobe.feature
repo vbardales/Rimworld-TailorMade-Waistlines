@@ -9,7 +9,7 @@ Feature: clothing libraries on the ten bodies
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Ap.Dress
   Scenario: UNAGI Royalty Apparel on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -73,7 +73,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, bare"
@@ -95,7 +95,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNARoyalDress"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNARoyalDress"
     And I destroy the gear of "M-Thin"
@@ -116,7 +116,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNA_dressR"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNA_dressR"
     And I destroy the gear of "M-Thin"
@@ -137,7 +137,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNA_gothicdress"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNA_gothicdress"
     And I destroy the gear of "M-Thin"
@@ -158,13 +158,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_MstyleShirtpants"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, UNA_MstyleShirtpants"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Battle.coat
   Scenario: UNAGI Battle Coat on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -228,7 +228,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, bare"
@@ -250,7 +250,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_MaidBattleArmor"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_MaidBattleArmor"
     And I destroy the gear of "M-Thin"
@@ -271,7 +271,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_FlakDress"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_FlakDress"
     And I destroy the gear of "M-Thin"
@@ -292,13 +292,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_PlateDress"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_PlateDress"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.huyuhuku.SET
   Scenario: UNAGI Winter clothing on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -362,7 +362,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi winter clothing, bare"
@@ -384,7 +384,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGIapaka"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi winter clothing, UNAGIapaka"
     And I destroy the gear of "M-Thin"
@@ -405,13 +405,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGImohukepu"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi winter clothing, UNAGImohukepu"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.suit.SET
   Scenario: UNAGI SimpleSuit on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -475,7 +475,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi simplesuit, bare"
@@ -497,7 +497,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGInoEshirt"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi simplesuit, UNAGInoEshirt"
     And I destroy the gear of "M-Thin"
@@ -518,13 +518,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGInoSDs"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi simplesuit, UNAGInoSDs"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Wahuu.hako
   Scenario: UNAGI Japanese Assortment on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -588,7 +588,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, bare"
@@ -610,7 +610,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAwasitagi"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, UNAwasitagi"
     And I destroy the gear of "M-Thin"
@@ -631,7 +631,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNAwahaori"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, Apparel_UNAwahaori"
     And I destroy the gear of "M-Thin"
@@ -652,13 +652,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAkariginu"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, UNAkariginu"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Cafe.gohan
   Scenario: UNAGI CAFE on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -722,7 +722,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi cafe, bare"
@@ -744,7 +744,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAcafe_wanpi"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi cafe, UNAcafe_wanpi"
     And I destroy the gear of "M-Thin"
@@ -765,13 +765,13 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNAcafe_epuron"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi cafe, Apparel_UNAcafe_epuron"
 
   @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:BBIS.MaidProject
   Scenario: Maid Project on ten bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -835,7 +835,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Fat"
     And I destroy the gear of "F-Hulk"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, bare"
@@ -857,7 +857,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "ChefMaid"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, ChefMaid"
     And I destroy the gear of "M-Thin"
@@ -878,7 +878,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "CleanerMaid"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, CleanerMaid"
     And I destroy the gear of "M-Thin"
@@ -899,7 +899,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "FightMaid"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, FightMaid"
     And I destroy the gear of "M-Thin"
@@ -920,6 +920,6 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "NurseMaid"
     And I destroy the gear of "F-Kid"
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, NurseMaid"

@@ -11,7 +11,7 @@ Feature: the fitting, for the gallery
 
   @requires:wdi.realistic.bodies @requires:ab.vplrf @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace
   Scenario: ten bodies, four outfits
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -85,7 +85,7 @@ Feature: the fitting, for the gallery
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 1 t-shirt, no trousers"
@@ -109,7 +109,7 @@ Feature: the fitting, for the gallery
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants" dyed rgb (46, 74, 120)
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 2 bare torso, trousers"
     And I destroy the gear of "M-Thin"
@@ -142,7 +142,7 @@ Feature: the fitting, for the gallery
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidShirt" dyed rgb (230, 224, 206)
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 3 t-shirt, trousers"
     And I destroy the gear of "M-Thin"
@@ -175,7 +175,7 @@ Feature: the fitting, for the gallery
     And I destroy the gear of "F-Kid"
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidParka" dyed rgb (150, 70, 40)
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "gallery, the fitting, outfit 4 jacket on a bare torso, trousers"
     Then no warning matching "Could not load UnityEngine.Texture2D" was logged

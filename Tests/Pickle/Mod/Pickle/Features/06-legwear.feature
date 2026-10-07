@@ -11,7 +11,7 @@ Feature: shorts and skirts
 
   @requires:wdi.realistic.bodies @requires:ab.vplrf @requires:VanillaExpanded.VAPPE @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace
   Scenario: shorts, then a skirt, on eight bodies
-    Given Nelim's Pickle Tools: the animals are removed from the sanctuary "calm-zone-close"
+    Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
     And a colonist "M-Thin" exists
     And "M-Thin" gender is male
@@ -77,7 +77,7 @@ Feature: shorts and skirts
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And Nelim's Pickle Tools: "F-Hulk" wears "VAE_Apparel_Shorts" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 300 ticks
     And "M-Thin" apparel covers "Legs"
@@ -113,7 +113,7 @@ Feature: shorts and skirts
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
     And Nelim's Pickle Tools: "F-Hulk" wears "VAE_Apparel_Skirt" dyed rgb (46, 74, 120)
-    And Nelim's Pickle Tools: I am at the sanctuary "calm-zone-close"
+    And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 240 ticks
     And "M-Thin" apparel covers "Legs"
     And "M-Avg" apparel covers "Legs"

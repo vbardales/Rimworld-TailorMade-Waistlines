@@ -26,7 +26,7 @@ for (const m of mods) {
   o.push('  Scenario: ' + m.name + ' on ten bodies');
   setup.forEach((l, i) => o.push(i === 0 ? l.replace(/^\s*Given/, '    Given') : l));
   const shot = (label, first) => {
-    o.push('    And Nelim\'s Pickle Tools: I am at the sanctuary "calm-zone-close"');
+    o.push('    And Nelim\'s Sanctuary: I am at the sanctuary "calm-zone-close"');
     if (first) o.push('    And Nelim\'s Pickle Tools: studio presentation mode is enabled');
     o.push('    And I wait 90 ticks', '    And I take a screenshot "wardrobe, ' + m.name.toLowerCase() + ', ' + label + '"');
   };
