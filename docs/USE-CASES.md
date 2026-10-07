@@ -47,3 +47,6 @@ TailorMade after the body mods (`last:astryl.tailormade` in the pass map).
 - **UNAGI Royalty Apparel**, Workshop 3352990362, `UNAGI.Ap.Dress`: Royalty noble dresses and clothes (about 12 apparel defs plus
   headgear; folders `UNARoyalDress`, `UNA_Dress_sitagi`, `UNA_RoyalRobe`...). Given for Compatible Body 2, Erin's and Unagi's bodies.
   Dresses: to capture on every body, as in "Dress" above.
+- **[IMO] Default Apparel Retexture** (Sato Imozou), Workshop 2660249018, `SatoImozou.IMOZOUapparel`: retextures vanilla apparel
+  (258 images under `Things/Pawn/Humanlike/Apparel`). Given for Imozou's bodies. To capture on every body, with and without the cut.
+- **Chibi Body**, Workshop 2187064189: given by Virginie, not installed here, not read yet.
