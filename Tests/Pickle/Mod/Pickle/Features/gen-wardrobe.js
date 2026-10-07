@@ -1,5 +1,6 @@
 // node gen-wardrobe.js : writes 08-wardrobe.feature from the setup of 05-gallery.feature.
 // One scenario per clothing mod: the ten bodies of the gallery, first bare, then dressed in each listed garment.
+// The two children are left bare in the dressed outfits: adult garments are refused on a child ("M-Kid should wear ...; it wears nothing").
 const fs = require('fs');
 const gallery = fs.readFileSync(__dirname + '/05-gallery.feature', 'utf8').replace(/\r\n/g, '\n').split('\n');
 const start = gallery.findIndex(l => /the animals are removed from the sanctuary/.test(l));
