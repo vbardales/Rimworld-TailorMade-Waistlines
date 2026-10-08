@@ -4,7 +4,7 @@
 //   node bust-fit-preview.js
 //
 // Body lines (docs/BUST-LINES.md, validated): armpit, nipple, under breast.
-// Dress lines: top of the bust (PROVISIONAL), neckline dip (Virginie's yellow points), bottom of the bust (PROVISIONAL).
+// Dress lines: top of the bust (PROVISIONAL), neckline dip (the lowest point of the black outline of the V, read on the pixels), bottom of the bust (PROVISIONAL).
 // The picture is warped on its rows only: above the armpit it moves as a block, between the lines each band is stretched
 // to the body's, below the bust the shift fades out over FADE rows so that the hem stays where it was drawn.
 const fs = require('fs');
@@ -18,10 +18,10 @@ const FADE = 90;
 
 // dress body, WDI female body, body lines [armpit, nipple, under], dress lines [top, dip, bottom]
 const SETS = [
-    ['Female', 'Female', [216, 277, 308], [242, 281, 295]],
-    ['Thin', 'Thin_Female', [219, 264, 289], [242, 270, 278]],
-    ['Fat', 'Fat_Female', [212, 278, 321], [226, 277, 297]],
-    ['Hulk', 'Hulk_Female', [238, 299, 339], [266, 311, 320]],
+    ['Female', 'Female', [216, 277, 308], [242, 285, 298]],
+    ['Thin', 'Thin_Female', [219, 264, 289], [242, 276, 292]],
+    ['Fat', 'Fat_Female', [212, 278, 321], [226, 283, 300]],
+    ['Hulk', 'Hulk_Female', [238, 299, 339], [266, 312, 322]],
 ];
 
 /** For each destination row, the source row it is read from (piecewise linear between the line pairs). */
