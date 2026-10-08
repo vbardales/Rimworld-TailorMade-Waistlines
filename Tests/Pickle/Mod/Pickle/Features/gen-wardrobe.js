@@ -1,6 +1,7 @@
 // node gen-wardrobe.js : writes 08-wardrobe.feature from the setup of 05-gallery.feature.
 // One scenario per clothing mod: the ten bodies of the gallery, first bare, then dressed in each listed garment.
 // The two children are left bare in the dressed outfits: adult garments are refused on a child ("M-Kid should wear ...; it wears nothing").
+// LEWD Hooman Apparel ships Male and Female textures only: on Thin, Fat and Hulk it logs "Failed to find any textures at ...TubeTop_Thin" (run f8f0), so it is worn on the two average bodies.
 const fs = require('fs');
 const gallery = fs.readFileSync(__dirname + '/05-gallery.feature', 'utf8').replace(/\r\n/g, '\n').split('\n');
 const start = gallery.findIndex(l => /the animals are removed from the sanctuary/.test(l));
@@ -15,7 +16,7 @@ const wardrobeMods = [
   { id: 'UNAGI.suit.SET', ws: '3253298952', name: 'UNAGI SimpleSuit', garments: ['UNAGInoEshirt', 'UNAGInoSDs'] },
   { id: 'UNAGI.Wahuu.hako', ws: '3297676809', name: 'UNAGI Japanese Assortment', garments: ['UNAwasitagi', 'Apparel_UNAwahaori', 'UNAkariginu'] },
   { id: 'UNAGI.Cafe.gohan', ws: '3325530853', name: 'UNAGI CAFE', garments: ['UNAcafe_wanpi', 'Apparel_UNAcafe_epuron'] },
-  { id: 'GilieART.LewdHoomanApparel', ws: '3275648920', name: 'LEWD Hooman Apparel', noKids: true, garments: ['LEWD_Apparel_MicroSkirt', 'LEWD_Apparel_TubeTop', 'LEWD_Apparel_FlakiniVest'] },
+  { id: 'GilieART.LewdHoomanApparel', ws: '3275648920', name: 'LEWD Hooman Apparel', noKids: true, only: ['M-Avg', 'F-Avg'], garments: ['LEWD_Apparel_MicroSkirt', 'LEWD_Apparel_TubeTop', 'LEWD_Apparel_FlakiniVest'] },
   { id: 'BBIS.MaidProject', ws: '1498756997', name: 'Maid Project', garments: ['ChefMaid', 'CleanerMaid', 'FightMaid', 'NurseMaid'] },
 ];
 // 'refit': vanilla garments that WDI draws nothing for, on the ten bodies; compared with and without TailorMade.
@@ -42,7 +43,7 @@ for (const m of mods) {
     for (const b of bodies) {
       o.push('    And I destroy the gear of "' + b + '"');
       // Children wear the garments through "Children Wear Anything"; never the LEWD ones (micro skirt, tube top, flakini).
-      if (!/Kid/.test(b) || !m.noKids) {
+      if ((!/Kid/.test(b) || !m.noKids) && (!m.only || m.only.includes(b))) {
         // Coats and capes hang over trousers: the legless body shows the waist otherwise.
         if (m.pants) o.push('    And Nelim\'s Pickle Tools: "' + b + '" wears "Apparel_Pants"');
         o.push('    And Nelim\'s Pickle Tools: "' + b + '" wears "' + g + '"');
