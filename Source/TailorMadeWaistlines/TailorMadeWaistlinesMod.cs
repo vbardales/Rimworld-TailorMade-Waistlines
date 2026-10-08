@@ -127,6 +127,8 @@ namespace TailorMadeWaistlines
             LongEventHandler.ExecuteWhenFinished(TrouserArt.Apply);
             // After the trousers: the jackets are measured on their shells.
             LongEventHandler.ExecuteWhenFinished(JacketArt.Apply);
+            // Dresses drawn for the body: TailorMade clips them, they need no fitting.
+            LongEventHandler.ExecuteWhenFinished(DressArt.Apply);
         }
 
         // The mod's own name, a proper noun: the one player-facing string that is not a key.
