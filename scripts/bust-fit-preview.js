@@ -130,6 +130,7 @@ function hline(ox, oy, row, rgb) {
  */
 function rebuild(dress, bodyImg, bra, top, cups, fabric) {
     const w = dress.width, out = Buffer.from(dress.data);
+    const bodyExt = extents(bodyImg);
     const tint = (img, r, x, isBra) => {
         const i = (r * w + x) * 4, a = img.data[i + 3];
         if (a < 8) return null;
@@ -140,7 +141,12 @@ function rebuild(dress, bodyImg, bra, top, cups, fabric) {
             const l = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255 * 0.18 + 0.82;
             return [Math.round(fabric[0] * l), Math.round(fabric[1] * l), Math.round(fabric[2] * l), a];
         }
-        if (dark) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
+        if (dark) {
+            // only the stroke along the edge of the body is an outline; the dark marks inside (the nipples) turn into cloth
+            const e = bodyExt[r];
+            if (e && (x - e[0] < 18 || e[1] - x < 18)) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
+            return [Math.round(fabric[0] * 0.9), Math.round(fabric[1] * 0.9), Math.round(fabric[2] * 0.9), a];
+        }
         const lum = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255;     // the shading of the drawing
         return [Math.round(fabric[0] * lum), Math.round(fabric[1] * lum), Math.round(fabric[2] * lum), a];
     };
@@ -149,7 +155,12 @@ function rebuild(dress, bodyImg, bra, top, cups, fabric) {
         for (let x = 0; x < w; x++) {
             let px = tint(bodyImg, r, x);                // under: the skin, as cloth
             const b = bra ? tint(bra, r, x, true) : null;      // over: the shape of the cups, not their lines
-            if (b) px = b;
+            if (b) {
+                const outline = px && px[0] < 60 && px[1] < 60 && px[2] < 60;
+                if (outline) { /* the black stroke of the body stays: the bra does not paint over it */ }
+                else if (!px) px = [0, 0, 0, 255];   // the bra sticks out of the body here: its edge becomes the outline
+                else px = b;
+            }
             const i = (r * w + x) * 4;
             if (!px) { out[i + 3] = 0; continue; }
             for (let k = 0; k < 4; k++) out[i + k] = Math.round(px[k] * edge + dress.data[i + k] * (1 - edge));
