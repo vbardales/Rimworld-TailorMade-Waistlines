@@ -10,7 +10,7 @@
 //   top  = where the bodice begins, the width jump under the collar;
 //   dip  = middle of the stroke at the tip of the V of the neckline (Virginie's yellow points agree to 3 rows);
 //   cups = middle of the stroke that closes the cups, under the V (Thin: two thin strokes at 257 and 274).
-// The picture is warped on its rows only: above the top it moves as a block, between the lines each band is stretched to
+// Then the bodice is widened to the width of the bra row by row (widen). The picture is warped on its rows first: above the top it moves as a block, between the lines each band is stretched to
 // the body's, below the cups the shift fades out over FADE rows so that the hem stays where it was drawn.
 const fs = require('fs');
 const path = require('path');
@@ -58,6 +58,47 @@ function warp(img, src) {
     return { width: img.width, height: img.height, data: out };
 }
 
+/** First and last opaque column of every row, or null for an empty row. */
+function extents(img) {
+    const e = [];
+    for (let r = 0; r < img.height; r++) {
+        let l = -1, rr = -1;
+        for (let x = 0; x < img.width; x++) if (img.data[(r * img.width + x) * 4 + 3] >= 128) { if (l < 0) l = x; rr = x; }
+        e.push(l < 0 ? null : [l, rr]);
+    }
+    return e;
+}
+
+/**
+ * Stretches the bodice sideways to the bra: on every row between the top of the bust and the cups, the width of the dress is
+ * brought to the width of WDI's bra for the body, about the middle of the picture; the scale fades out over TAPER rows above
+ * and below so that the collar and the skirt are not pulled.
+ */
+const TAPER = 24;
+function widen(img, bra, top, cups) {
+    const wd = extents(img), wb = extents(bra);
+    const scale = new Array(img.height).fill(1);
+    for (let r = top; r <= cups; r++) {
+        if (!wd[r] || !wb[r]) continue;
+        scale[r] = Math.max(0.8, Math.min(1.8, (wb[r][1] - wb[r][0]) / (wd[r][1] - wd[r][0])));
+    }
+    // smooth the scale over 9 rows, then fade it at both ends
+    const sm = scale.map((_, r) => { let a = 0, n = 0; for (let k = -4; k <= 4; k++) { const v = scale[r + k]; if (v !== undefined) { a += v; n++; } } return a / n; });
+    const out = Buffer.alloc(img.width * img.height * 4);
+    const mid = img.width / 2;
+    for (let r = 0; r < img.height; r++) {
+        const edge = r < top ? Math.max(0, 1 - (top - r) / TAPER) : r > cups ? Math.max(0, 1 - (r - cups) / TAPER) : 1;
+        const s = 1 + (sm[r] - 1) * edge;
+        for (let x = 0; x < img.width; x++) {
+            const sx = mid + (x - mid) / s, a = Math.floor(sx), f = sx - a;
+            if (a < 0 || a + 1 >= img.width) continue;
+            for (let k = 0; k < 4; k++)
+                out[(r * img.width + x) * 4 + k] = Math.round(img.data[(r * img.width + a) * 4 + k] * (1 - f) + img.data[(r * img.width + a + 1) * 4 + k] * f);
+        }
+    }
+    return { width: img.width, height: img.height, data: out };
+}
+
 const CELL = 340, X0 = 86, Y0 = 130;
 const W = CELL * SETS.length, H = CELL * 3;
 const canvas = Buffer.alloc(W * H * 4);
@@ -88,7 +129,8 @@ SETS.forEach(([dressName, bodyName, body, dress], c) => {
     const bodyImg = decode(`${WDI}/Things/Pawn/Humanlike/Bodies/Naked_${bodyName}_south.png`);
     const bra = read(`${WDI}/UWUnderwear/bra/bra_${bodyName}_south.png`);
     const dressImg = decode(`${UNA}/UNARoyalDress_${dressName}_south.png`);
-    const fitted = warp(dressImg, rowMap(dressImg.height, body, dress));
+    const tall = warp(dressImg, rowMap(dressImg.height, body, dress));
+    const fitted = bra ? widen(tall, bra, body[0], body[2]) : tall;
     const ox = c * CELL;
     // row 0: the bra on the body
     blend(bodyImg, ox, 0); blend(bra, ox, 0);
