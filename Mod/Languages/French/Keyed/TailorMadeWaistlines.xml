@@ -4,7 +4,7 @@
   <TailorMadeWaistlines.Settings.Scope>Réglages globaux, communs à toutes les sauvegardes. Les changements s'appliquent à la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.Scope>
 
   <TailorMadeWaistlines.Settings.PantsTop>Le pantalon monte jusqu'à : {0}</TailorMadeWaistlines.Settings.PantsTop>
-  <TailorMadeWaistlines.Settings.PantsTopTip>La hauteur de la ceinture, en fraction du corps : 0 est l'ourlet, 1 le sommet de la tête. La valeur de TailorMade est 0,58.</TailorMadeWaistlines.Settings.PantsTopTip>
+  <TailorMadeWaistlines.Settings.PantsTopTip>Hauteur de la ceinture, exprimée en proportion de la hauteur du corps : 0 correspond à l'ourlet et 1 au sommet de la tête. La valeur de TailorMade est 0,58.</TailorMadeWaistlines.Settings.PantsTopTip>
   <TailorMadeWaistlines.Settings.BootsTop>Les bottes montent jusqu'à : {0}</TailorMadeWaistlines.Settings.BootsTop>
   <TailorMadeWaistlines.Settings.BootsTopTip>Jusqu'où les chaussures sont dessinées sur le corps, en fraction de sa hauteur. La valeur de TailorMade est 0,20.</TailorMadeWaistlines.Settings.BootsTopTip>
   <TailorMadeWaistlines.Settings.ChestBottom>Les hauts commencent à : {0}</TailorMadeWaistlines.Settings.ChestBottom>
@@ -18,16 +18,16 @@
   <TailorMadeWaistlines.Settings.UseGeneralArt>Utiliser les pantalons de General Textures Collection</TailorMadeWaistlines.Settings.UseGeneralArt>
   <TailorMadeWaistlines.Settings.UseGeneralArtTip>AB's Visible Pants dessine ses pantalons comme une simple coque. General Textures Collection contient une retexture du même vêtement, avec une ceinture, des passants et une braguette, mais ne la charge que si le Visible Pants de XeoNovaDan est actif. Quand c'est AB qui est actif, cette option lit ces textures dans le dossier installé de General. Rien n'est copié. Il faut que General Textures Collection soit installé.</TailorMadeWaistlines.Settings.UseGeneralArtTip>
   <TailorMadeWaistlines.Settings.DetailShells>Dessiner des détails sur les coques de pantalon unies</TailorMadeWaistlines.Settings.DetailShells>
-  <TailorMadeWaistlines.Settings.DetailShellsTip>Lorsqu'aucune telle retexture n'est disponible — pour un enfant ou un type de corps que General ne couvre pas — le mod dessine une ceinture, une braguette et des coutures sur la coque d'AB, et sépare les jambes en bas.</TailorMadeWaistlines.Settings.DetailShellsTip>
+  <TailorMadeWaistlines.Settings.DetailShellsTip>Lorsqu'aucune telle retexture n'est disponible — pour les enfants ou pour un type de corps que General ne couvre pas — le mod dessine une ceinture, une braguette et des coutures sur la coque d'AB, et sépare les jambes en bas.</TailorMadeWaistlines.Settings.DetailShellsTip>
   <TailorMadeWaistlines.Settings.TrouserDrop>Abaisser les pantalons de : {0}</TailorMadeWaistlines.Settings.TrouserDrop>
   <TailorMadeWaistlines.Settings.TrouserDropTip>Descend le dessin du pantalon le long du corps, en fraction de sa hauteur. 0 le laisse là où il a été dessiné. Cela ne concerne que les pantalons que ce mod fournit, c'est-à-dire l'art de General Textures Collection et les détails dessinés sur les coques d'AB.</TailorMadeWaistlines.Settings.TrouserDropTip>
   <TailorMadeWaistlines.Settings.TrouserDropChild>Abaisser les pantalons d'enfant de : {0}</TailorMadeWaistlines.Settings.TrouserDropChild>
-  <TailorMadeWaistlines.Settings.TrouserDropChildTip>La même chose pour un enfant. C'est une valeur à part parce qu'un enfant est dessiné plus petit : la même fraction de l'image représente moins de pixels à l'écran.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
-  <TailorMadeWaistlines.Settings.ArtNeedsRestart>Ces trois options de pantalon s'appliquent au démarrage du jeu, pas à la fermeture de cette fenêtre. Pour les pantalons que ce mod fournit, TailorMade ne les cale pas dans une bande : le curseur des pantalons ci-dessus ne s'y applique donc pas ; avec les deux options désactivées, il s'applique.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+  <TailorMadeWaistlines.Settings.TrouserDropChildTip>Même réglage pour les enfants. Il est distinct, car les enfants sont dessinés plus petits : une même fraction de l'image représente donc moins de pixels à l'écran.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>Ces quatre options de pantalon s'appliquent au démarrage du jeu, pas à la fermeture de cette fenêtre. Pour les pantalons que ce mod fournit, TailorMade ne les cale pas dans une bande : le curseur des pantalons ci-dessus ne s'y applique donc pas ; avec les deux options désactivées, il s'applique.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
 
   <TailorMadeWaistlines.Settings.Reset>Rétablir les valeurs de TailorMade</TailorMadeWaistlines.Settings.Reset>
 
   <TailorMadeWaistlines.Settings.PatchDirect>Correctif appliqué à la source : les changements se voient dès la fermeture de cette fenêtre.</TailorMadeWaistlines.Settings.PatchDirect>
-  <TailorMadeWaistlines.Settings.PatchFallback>Correctif de repli en service : fermez le jeu et relancez-le pour qu'un changement se voie, car les textures en cache de TailorMade ont été indexées sur l'ancienne valeur.</TailorMadeWaistlines.Settings.PatchFallback>
+  <TailorMadeWaistlines.Settings.PatchFallback>Correctif de repli actif : quittez puis relancez le jeu pour que les modifications apparaissent, car les textures mises en cache par TailorMade sont associées à l'ancienne valeur.</TailorMadeWaistlines.Settings.PatchFallback>
   <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade n'est pas chargé : ses trois bandes et son redimensionnement ne sont pas là à régler. Les pantalons et les hauts coupés pour chaque corps, plus bas, fonctionnent quand même.</TailorMadeWaistlines.Settings.NoTailorMade>
 </LanguageData>

@@ -4,7 +4,7 @@
   <TailorMadeWaistlines.Settings.Scope>Global settings, shared by every save. Changes apply when this window closes.</TailorMadeWaistlines.Settings.Scope>
 
   <TailorMadeWaistlines.Settings.PantsTop>Pants reach up to: {0}</TailorMadeWaistlines.Settings.PantsTop>
-  <TailorMadeWaistlines.Settings.PantsTopTip>The height of the waistband, as a fraction of the body: 0 is the hem, 1 is the top of the head. TailorMade's value is 0.58.</TailorMadeWaistlines.Settings.PantsTopTip>
+  <TailorMadeWaistlines.Settings.PantsTopTip>The height of the waistband as a fraction of the body's height: 0 is the hem; 1 is the top of the head. TailorMade's value is 0.58.</TailorMadeWaistlines.Settings.PantsTopTip>
   <TailorMadeWaistlines.Settings.BootsTop>Boots reach up to: {0}</TailorMadeWaistlines.Settings.BootsTop>
   <TailorMadeWaistlines.Settings.BootsTopTip>How far up the body footwear is drawn, as a fraction of the body's height. TailorMade's value is 0.20.</TailorMadeWaistlines.Settings.BootsTopTip>
   <TailorMadeWaistlines.Settings.ChestBottom>Chest pieces start at: {0}</TailorMadeWaistlines.Settings.ChestBottom>
@@ -18,16 +18,16 @@
   <TailorMadeWaistlines.Settings.UseGeneralArt>Use General Textures Collection's trousers</TailorMadeWaistlines.Settings.UseGeneralArt>
   <TailorMadeWaistlines.Settings.UseGeneralArtTip>AB's Visible Pants draws its trousers as a plain shell. General Textures Collection carries a retexture of the same garment with a waistband, belt loops and a fly, but only loads it when XeoNovaDan's Visible Pants is active. With AB active instead, this reads those textures from General's installed folder. Nothing is copied. It needs General Textures Collection to be installed.</TailorMadeWaistlines.Settings.UseGeneralArtTip>
   <TailorMadeWaistlines.Settings.DetailShells>Draw details on plain trouser shells</TailorMadeWaistlines.Settings.DetailShells>
-  <TailorMadeWaistlines.Settings.DetailShellsTip>Where there is no such retexture - a child, or a body type General does not cover - draws a waistband, a fly and seams onto AB's plain shell, and parts the legs at the bottom.</TailorMadeWaistlines.Settings.DetailShellsTip>
+  <TailorMadeWaistlines.Settings.DetailShellsTip>When no such retexture is available - for a child or a body type that General does not cover - this option draws a waistband, fly, and seams onto AB's plain shell, and separates the legs at the bottom.</TailorMadeWaistlines.Settings.DetailShellsTip>
   <TailorMadeWaistlines.Settings.TrouserDrop>Lower trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDrop>
   <TailorMadeWaistlines.Settings.TrouserDropTip>Moves the trouser art down the body, as a fraction of its height. 0 leaves it where it was drawn. It only applies to the trousers this mod supplies, meaning General Textures Collection's art and the details drawn onto AB's shells.</TailorMadeWaistlines.Settings.TrouserDropTip>
   <TailorMadeWaistlines.Settings.TrouserDropChild>Lower children's trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDropChild>
   <TailorMadeWaistlines.Settings.TrouserDropChildTip>The same, for a child. It is a separate value because a child is drawn smaller, so the same fraction of the picture is fewer pixels on screen.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
-  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These three trouser options take effect when the game starts, not when this window closes. For the trousers this mod supplies, TailorMade does not fit them into a band, so the pants slider above does not apply to them; with both options off it does.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These four trouser options take effect when the game starts, not when this window closes. For the trousers this mod supplies, TailorMade does not fit them into a band, so the pants slider above does not apply to them; with both options off it does.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
 
   <TailorMadeWaistlines.Settings.Reset>Reset to TailorMade's values</TailorMadeWaistlines.Settings.Reset>
 
   <TailorMadeWaistlines.Settings.PatchDirect>Patched at the source: changes show as soon as this window closes.</TailorMadeWaistlines.Settings.PatchDirect>
-  <TailorMadeWaistlines.Settings.PatchFallback>Running on the fallback patch: close the game and start it again for a change to show, because TailorMade's cached textures were keyed on the old value.</TailorMadeWaistlines.Settings.PatchFallback>
+  <TailorMadeWaistlines.Settings.PatchFallback>Running on the fallback patch: quit and restart the game for changes to appear, because TailorMade's cached textures were keyed to the old value.</TailorMadeWaistlines.Settings.PatchFallback>
   <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade is not loaded: its three bands and its resizing are not there to adjust. The trousers and the shirts cut for each body below still work.</TailorMadeWaistlines.Settings.NoTailorMade>
 </LanguageData>
