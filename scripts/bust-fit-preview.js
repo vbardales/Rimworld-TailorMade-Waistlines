@@ -136,7 +136,7 @@ function rebuild(dress, bodyImg, bra, top, cups, fabric) {
         if (a < 8) return null;
         const dark = img.data[i] < 60 && img.data[i + 1] < 60 && img.data[i + 2] < 60;
         // the bra only gives a shape: its black lines are not drawn, they become a shade of the cloth
-        if (dark && isBra) return [Math.round(fabric[0] * 0.9), Math.round(fabric[1] * 0.9), Math.round(fabric[2] * 0.9), a];
+        if (dark && isBra) return null;   // only the inside of the cups is used: the bra's own outline is dropped
         if (isBra) {   // a gentle volume only: the cups must not read as a bra
             const l = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255 * 0.18 + 0.82;
             return [Math.round(fabric[0] * l), Math.round(fabric[1] * l), Math.round(fabric[2] * l), a];
