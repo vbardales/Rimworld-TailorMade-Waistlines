@@ -85,3 +85,13 @@ garments are the first cases to test it on.
   `1.6/Mods/RealisticBody/` for [NL]'s bodies, and pattern defs patched in by XML). Venus would be the same kind of pack for WDI's bodies:
   masks drawn from WDI's underwear curves (what `ShirtCut` already computes) and the pattern defs, so APP refits every garment of any
   mod, and Venus keeps only AB's trousers. Not started; read first: how APP reads a mask, and what a pattern def needs for a body.
+
+## Findings of 2026-10-08 on the UNAGI dresses (wardrobe-3, zoomed on Fat, Female and Hulk women)
+
+- The bust of the dresses does not follow WDI's chests. The dress is drawn for an ordinary chest: a flat corset line and a neckline at a fixed height,
+  while WDI's women have large, low chests (Fat, Hulk) that the dress ignores; on the bare body the breasts show a different outline from the dress's.
+- Fat woman: the skirt flares well beyond the body's outline and the bust line sits high; the dress reads as a separate shape put on top.
+- What fits well: the hem and the shoulders on Thin and Female.
+- To do: a refit of torso garments that have no WDI art, row by row on the body's silhouette (the technique TailorMade describes as "per row warp",
+  MIT licence), with the chest outline taken from the naked body texture. The chest is also the first element of the expansion roadmap (breasts).
+  Cases to keep: UNAGI Royalty, Battle Coat, Maid Project (Thin and Female), any dress.
