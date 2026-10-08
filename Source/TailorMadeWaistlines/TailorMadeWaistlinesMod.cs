@@ -134,6 +134,8 @@ namespace TailorMadeWaistlines
             LongEventHandler.ExecuteWhenFinished(JacketArt.Apply);
             // Dresses drawn for the body: TailorMade clips them, they need no fitting.
             LongEventHandler.ExecuteWhenFinished(DressArt.Apply);
+            // The bust of the dresses whose lines have been read, fitted to the breasts of WDI's bodies.
+            LongEventHandler.ExecuteWhenFinished(BustFit.Apply);
         }
 
         // The mod's own name, a proper noun: the one player-facing string that is not a key.
