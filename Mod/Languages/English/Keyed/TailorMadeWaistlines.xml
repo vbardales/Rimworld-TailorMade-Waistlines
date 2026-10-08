@@ -11,8 +11,8 @@
   <TailorMadeWaistlines.Settings.ChestBottomTip>Where the lower edge of a chest piece lands, as a fraction of the body's height. TailorMade's value is 0.45.</TailorMadeWaistlines.Settings.ChestBottomTip>
 
   <TailorMadeWaistlines.Settings.ShortenShirts>Shorten full-body shirts</TailorMadeWaistlines.Settings.ShortenShirts>
-  <TailorMadeWaistlines.Settings.KeepJacketsLong>Lengthen jackets to the trousers</TailorMadeWaistlines.Settings.KeepJacketsLong>
-  <TailorMadeWaistlines.Settings.KeepJacketsLongTip>A vanilla jacket is drawn for a body with legs and ends at the waist, which on a legless body leaves the trousers showing below it. With this on, garments worn on the shell layer (jackets, coats, parkas) are stretched downwards below the navel until they reach the hem of the trousers, and TailorMade no longer cuts them into the chest band. On-skin shirts are not affected. Needs AB's Visible Pants; read at startup.</TailorMadeWaistlines.Settings.KeepJacketsLongTip>
+  <TailorMadeWaistlines.Settings.KeepJacketsLong>Extend jackets down to the trousers</TailorMadeWaistlines.Settings.KeepJacketsLong>
+  <TailorMadeWaistlines.Settings.KeepJacketsLongTip>A vanilla jacket is drawn for a body with legs and ends at the waist. On a legless body, this leaves the trousers visible beneath it. When enabled, this option stretches shell-layer garments - jackets, coats, and parkas - down from below the navel to the hem of the trousers, and TailorMade no longer fits them into the chest band. On-skin shirts are unaffected. Requires AB's Visible Pants; read at startup.</TailorMadeWaistlines.Settings.KeepJacketsLongTip>
   <TailorMadeWaistlines.Settings.ShortenShirtsTip>TailorMade only bands a torso garment whose art already starts 40% of the way up, which leaves a vanilla shirt, drawn over the whole body, full length and hiding the trousers entirely. This lifts that test for on-skin garments, and the chest slider above then decides where they stop. Coats, parkas and robes are worn on the shell layer and still drape to the ankles. The shirt is compressed into the band, not cut off at it, so collars and buttons are squeezed along with it.</TailorMadeWaistlines.Settings.ShortenShirtsTip>
 
   <TailorMadeWaistlines.Settings.UseGeneralArt>Use General Textures Collection's trousers</TailorMadeWaistlines.Settings.UseGeneralArt>
@@ -23,11 +23,11 @@
   <TailorMadeWaistlines.Settings.TrouserDropTip>Moves the trouser art down the body, as a fraction of its height. 0 leaves it where it was drawn. It only applies to the trousers this mod supplies, meaning General Textures Collection's art and the details drawn onto AB's shells.</TailorMadeWaistlines.Settings.TrouserDropTip>
   <TailorMadeWaistlines.Settings.TrouserDropChild>Lower children's trousers by: {0}</TailorMadeWaistlines.Settings.TrouserDropChild>
   <TailorMadeWaistlines.Settings.TrouserDropChildTip>The same, for a child. It is a separate value because a child is drawn smaller, so the same fraction of the picture is fewer pixels on screen.</TailorMadeWaistlines.Settings.TrouserDropChildTip>
-  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These four trouser options take effect when the game starts, not when this window closes. For the trousers this mod supplies, TailorMade does not fit them into a band, so the pants slider above does not apply to them; with both options off it does.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
+  <TailorMadeWaistlines.Settings.ArtNeedsRestart>These four trouser settings take effect when the game starts, not when this window closes. When either of the first two options is enabled, TailorMade does not fit the trousers supplied by this mod into a band, so the pants slider above does not apply to them. With both options disabled, it does.</TailorMadeWaistlines.Settings.ArtNeedsRestart>
 
   <TailorMadeWaistlines.Settings.Reset>Reset to TailorMade's values</TailorMadeWaistlines.Settings.Reset>
 
   <TailorMadeWaistlines.Settings.PatchDirect>Patched at the source: changes show as soon as this window closes.</TailorMadeWaistlines.Settings.PatchDirect>
   <TailorMadeWaistlines.Settings.PatchFallback>Running on the fallback patch: quit and restart the game for changes to appear, because TailorMade's cached textures were keyed to the old value.</TailorMadeWaistlines.Settings.PatchFallback>
-  <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade is not loaded: its three bands and its resizing are not there to adjust. The trousers and the shirts cut for each body below still work.</TailorMadeWaistlines.Settings.NoTailorMade>
+  <TailorMadeWaistlines.Settings.NoTailorMade>TailorMade is not loaded, so its three bands and resizing settings are unavailable. The trousers and body-specific shirts below still work.</TailorMadeWaistlines.Settings.NoTailorMade>
 </LanguageData>
