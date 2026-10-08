@@ -7,7 +7,7 @@ Feature: clothing libraries on the ten bodies
   Background:
     Given the save "Nelims-tribe" is loaded
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:LoneKin.ChildrenWearAnything
   Scenario: Vanilla garments without WDI art on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -90,6 +90,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Jacket"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Jacket"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Jacket"
@@ -103,6 +105,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Jacket"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Jacket"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "refit, vanilla garments without wdi art, Apparel_Jacket"
@@ -119,6 +123,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Parka"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Parka"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Parka"
@@ -132,6 +138,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Parka"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Parka"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "refit, vanilla garments without wdi art, Apparel_Parka"
@@ -148,6 +156,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Duster"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Duster"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Duster"
@@ -161,6 +171,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Duster"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Duster"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "refit, vanilla garments without wdi art, Apparel_Duster"
@@ -177,6 +189,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_FlakVest"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_FlakVest"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_FlakVest"
@@ -190,6 +204,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_FlakVest"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_FlakVest"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "refit, vanilla garments without wdi art, Apparel_FlakVest"

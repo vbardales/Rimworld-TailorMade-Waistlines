@@ -6,6 +6,7 @@ tiagocc0.FemaleBodyVariants    3798082132
 tiagocc0.FemaleApparelVariants 3799726535
 wdi.realistic.bodies   3527486510
 ab.vplrf               2986402536
+LoneKin.ChildrenWearAnything 3688530033
 astryl.tailormade 3756915448
 # TailorMade after the body mods (it declares loadAfter on Female Body Variants and reads the body textures it finds when the game starts).
 nelim.pickletools.colonistrace   path:PickleTools/ColonistRace/Mod

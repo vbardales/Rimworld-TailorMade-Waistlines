@@ -15,7 +15,7 @@ const wardrobeMods = [
   { id: 'UNAGI.suit.SET', ws: '3253298952', name: 'UNAGI SimpleSuit', garments: ['UNAGInoEshirt', 'UNAGInoSDs'] },
   { id: 'UNAGI.Wahuu.hako', ws: '3297676809', name: 'UNAGI Japanese Assortment', garments: ['UNAwasitagi', 'Apparel_UNAwahaori', 'UNAkariginu'] },
   { id: 'UNAGI.Cafe.gohan', ws: '3325530853', name: 'UNAGI CAFE', garments: ['UNAcafe_wanpi', 'Apparel_UNAcafe_epuron'] },
-  { id: 'GilieART.LewdHoomanApparel', ws: '3275648920', name: 'LEWD Hooman Apparel', garments: ['LEWD_Apparel_MicroSkirt', 'LEWD_Apparel_TubeTop', 'LEWD_Apparel_FlakiniVest'] },
+  { id: 'GilieART.LewdHoomanApparel', ws: '3275648920', name: 'LEWD Hooman Apparel', noKids: true, garments: ['LEWD_Apparel_MicroSkirt', 'LEWD_Apparel_TubeTop', 'LEWD_Apparel_FlakiniVest'] },
   { id: 'BBIS.MaidProject', ws: '1498756997', name: 'Maid Project', garments: ['ChefMaid', 'CleanerMaid', 'FightMaid', 'NurseMaid'] },
 ];
 // 'refit': vanilla garments that WDI draws nothing for, on the ten bodies; compared with and without TailorMade.
@@ -27,7 +27,7 @@ o.push('# Every image is opened and read: the question is whether the garment lo
 o.push('# Pass: wsl-deps.wardrobe.map.');
 o.push((refit ? '@review @refit @timeout:300' : '@review @wardrobe @timeout:300'), 'Feature: clothing libraries on the ten bodies', '', '  Background:', '    Given the save "Nelims-tribe" is loaded', '');
 for (const m of mods) {
-  o.push('  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace' + (m.id ? ' @requires:' + m.id : ''));
+  o.push('  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace' + (m.id ? ' @requires:' + m.id : '') + (m.noKids ? '' : ' @requires:LoneKin.ChildrenWearAnything'));
   o.push('  Scenario: ' + m.name + ' on ten bodies');
   setup.forEach((l, i) => o.push(i === 0 ? l.replace(/^\s*Given/, '    Given') : l));
   const shot = (label, first) => {
@@ -41,7 +41,8 @@ for (const m of mods) {
     // The two children stay bare: an adult garment is refused on a child ("M-Kid should wear ...; it wears nothing").
     for (const b of bodies) {
       o.push('    And I destroy the gear of "' + b + '"');
-      if (!/Kid/.test(b)) {
+      // Children wear the garments through "Children Wear Anything"; never the LEWD ones (micro skirt, tube top, flakini).
+      if (!/Kid/.test(b) || !m.noKids) {
         // Coats and capes hang over trousers: the legless body shows the waist otherwise.
         if (m.pants) o.push('    And Nelim\'s Pickle Tools: "' + b + '" wears "Apparel_Pants"');
         o.push('    And Nelim\'s Pickle Tools: "' + b + '" wears "' + g + '"');

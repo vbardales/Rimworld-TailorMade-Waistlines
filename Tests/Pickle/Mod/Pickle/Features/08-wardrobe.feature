@@ -7,7 +7,7 @@ Feature: clothing libraries on the ten bodies
   Background:
     Given the save "Nelims-tribe" is loaded
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Ap.Dress
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Ap.Dress @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI Royalty Apparel on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -86,6 +86,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_UNARoyalDress"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_UNARoyalDress"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_UNARoyalDress"
     And I destroy the gear of "F-Avg"
@@ -95,6 +96,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNARoyalDress"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_UNARoyalDress"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNARoyalDress"
@@ -107,6 +109,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_UNA_dressR"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_UNA_dressR"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_UNA_dressR"
     And I destroy the gear of "F-Avg"
@@ -116,6 +119,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNA_dressR"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_UNA_dressR"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNA_dressR"
@@ -128,6 +132,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_UNA_gothicdress"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_UNA_gothicdress"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_UNA_gothicdress"
     And I destroy the gear of "F-Avg"
@@ -137,6 +142,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNA_gothicdress"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_UNA_gothicdress"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, Apparel_UNA_gothicdress"
@@ -149,6 +155,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNA_MstyleShirtpants"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNA_MstyleShirtpants"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNA_MstyleShirtpants"
     And I destroy the gear of "F-Avg"
@@ -158,11 +165,12 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_MstyleShirtpants"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNA_MstyleShirtpants"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi royalty apparel, UNA_MstyleShirtpants"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Battle.coat
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Battle.coat @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI Battle Coat on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -245,6 +253,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNA_MaidBattleArmor"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNA_MaidBattleArmor"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "UNA_MaidBattleArmor"
@@ -258,6 +268,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_MaidBattleArmor"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNA_MaidBattleArmor"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_MaidBattleArmor"
@@ -274,6 +286,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNA_FlakDress"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNA_FlakDress"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "UNA_FlakDress"
@@ -287,6 +301,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_FlakDress"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNA_FlakDress"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_FlakDress"
@@ -303,6 +319,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNA_PlateDress"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNA_PlateDress"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "UNA_PlateDress"
@@ -316,11 +334,13 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNA_PlateDress"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNA_PlateDress"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi battle coat, UNA_PlateDress"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.huyuhuku.SET
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.huyuhuku.SET @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI Winter clothing on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -403,6 +423,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAGIapaka"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAGIapaka"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAGIapaka"
@@ -416,6 +438,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGIapaka"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAGIapaka"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi winter clothing, UNAGIapaka"
@@ -432,6 +456,8 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAGImohukepu"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAGImohukepu"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAGImohukepu"
@@ -445,11 +471,13 @@ Feature: clothing libraries on the ten bodies
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_Pants"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGImohukepu"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAGImohukepu"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi winter clothing, UNAGImohukepu"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.suit.SET
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.suit.SET @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI SimpleSuit on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -528,6 +556,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAGInoEshirt"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAGInoEshirt"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAGInoEshirt"
     And I destroy the gear of "F-Avg"
@@ -537,6 +566,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGInoEshirt"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAGInoEshirt"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi simplesuit, UNAGInoEshirt"
@@ -549,6 +579,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAGInoSDs"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAGInoSDs"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAGInoSDs"
     And I destroy the gear of "F-Avg"
@@ -558,11 +589,12 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAGInoSDs"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAGInoSDs"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi simplesuit, UNAGInoSDs"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Wahuu.hako
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Wahuu.hako @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI Japanese Assortment on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -641,6 +673,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAwasitagi"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAwasitagi"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAwasitagi"
     And I destroy the gear of "F-Avg"
@@ -650,6 +683,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAwasitagi"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAwasitagi"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, UNAwasitagi"
@@ -662,6 +696,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_UNAwahaori"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_UNAwahaori"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_UNAwahaori"
     And I destroy the gear of "F-Avg"
@@ -671,6 +706,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNAwahaori"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_UNAwahaori"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, Apparel_UNAwahaori"
@@ -683,6 +719,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAkariginu"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAkariginu"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAkariginu"
     And I destroy the gear of "F-Avg"
@@ -692,11 +729,12 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAkariginu"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAkariginu"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi japanese assortment, UNAkariginu"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Cafe.gohan
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:UNAGI.Cafe.gohan @requires:LoneKin.ChildrenWearAnything
   Scenario: UNAGI CAFE on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -775,6 +813,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "UNAcafe_wanpi"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "UNAcafe_wanpi"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "UNAcafe_wanpi"
     And I destroy the gear of "F-Avg"
@@ -784,6 +823,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "UNAcafe_wanpi"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "UNAcafe_wanpi"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi cafe, UNAcafe_wanpi"
@@ -796,6 +836,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "Apparel_UNAcafe_epuron"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "Apparel_UNAcafe_epuron"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "Apparel_UNAcafe_epuron"
     And I destroy the gear of "F-Avg"
@@ -805,6 +846,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "Apparel_UNAcafe_epuron"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "Apparel_UNAcafe_epuron"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, unagi cafe, Apparel_UNAcafe_epuron"
@@ -943,7 +985,7 @@ Feature: clothing libraries on the ten bodies
     And I wait 90 ticks
     And I take a screenshot "wardrobe, lewd hooman apparel, LEWD_Apparel_FlakiniVest"
 
-  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:BBIS.MaidProject
+  @requires:wdi.realistic.bodies @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.colonistrace @requires:BBIS.MaidProject @requires:LoneKin.ChildrenWearAnything
   Scenario: Maid Project on ten bodies
     Given Nelim's Sanctuary: the animals are removed from the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: the other colonists are out of frame
@@ -1022,6 +1064,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "ChefMaid"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "ChefMaid"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "ChefMaid"
     And I destroy the gear of "F-Avg"
@@ -1031,6 +1074,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "ChefMaid"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "ChefMaid"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, ChefMaid"
@@ -1043,6 +1087,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "CleanerMaid"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "CleanerMaid"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "CleanerMaid"
     And I destroy the gear of "F-Avg"
@@ -1052,6 +1097,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "CleanerMaid"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "CleanerMaid"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, CleanerMaid"
@@ -1064,6 +1110,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "FightMaid"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "FightMaid"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "FightMaid"
     And I destroy the gear of "F-Avg"
@@ -1073,6 +1120,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "FightMaid"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "FightMaid"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, FightMaid"
@@ -1085,6 +1133,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "M-Hulk"
     And Nelim's Pickle Tools: "M-Hulk" wears "NurseMaid"
     And I destroy the gear of "M-Kid"
+    And Nelim's Pickle Tools: "M-Kid" wears "NurseMaid"
     And I destroy the gear of "F-Thin"
     And Nelim's Pickle Tools: "F-Thin" wears "NurseMaid"
     And I destroy the gear of "F-Avg"
@@ -1094,6 +1143,7 @@ Feature: clothing libraries on the ten bodies
     And I destroy the gear of "F-Hulk"
     And Nelim's Pickle Tools: "F-Hulk" wears "NurseMaid"
     And I destroy the gear of "F-Kid"
+    And Nelim's Pickle Tools: "F-Kid" wears "NurseMaid"
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
     And I take a screenshot "wardrobe, maid project, NurseMaid"
