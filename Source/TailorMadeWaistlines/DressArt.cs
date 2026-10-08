@@ -23,7 +23,7 @@ namespace TailorMadeWaistlines
         public static void Apply()
         {
             Garments = 0;
-            if (!TailorMadeLink.Loaded) return;
+            if (!TailorMadeLink.Loaded || !TailorMadeWaistlinesMod.Settings.keepDressesWhole) return;
             var mine = TailorMadeWaistlinesMod.Instance.Content.GetContentHolder<Texture2D>();
             foreach (string bodyName in Bodies)
             {

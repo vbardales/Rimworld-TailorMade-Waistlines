@@ -48,6 +48,9 @@ namespace TailorMadeWaistlines
         // On by default: a jacket is drawn to its own length instead of being banded to the waist.
         public bool keepJacketsLong = true;
 
+        // On by default: a dress, robe or long coat drawn for the body by its own mod is left as drawn. Read at startup.
+        public bool keepDressesWhole = true;
+
         // Take General Textures Collection's trouser art where AB supplies a plain shell, and
         // draw details onto the shells that have no such art. Both read at startup.
         public bool useGeneralArt = true;
@@ -63,6 +66,7 @@ namespace TailorMadeWaistlines
             Scribe_Values.Look(ref chestBottom, "chestBottom", DefaultChestBottom);
             Scribe_Values.Look(ref shortenShirts, "shortenShirts", false);
             Scribe_Values.Look(ref keepJacketsLong, "keepJacketsLong", true);
+            Scribe_Values.Look(ref keepDressesWhole, "keepDressesWhole", true);
             Scribe_Values.Look(ref useGeneralArt, "useGeneralArt", true);
             Scribe_Values.Look(ref detailPlainShells, "detailPlainShells", true);
             Scribe_Values.Look(ref trouserDrop, "trouserDrop", DefaultTrouserDrop);
@@ -89,6 +93,7 @@ namespace TailorMadeWaistlines
             chestBottom = DefaultChestBottom;
             shortenShirts = false;
             keepJacketsLong = true;
+            keepDressesWhole = true;
             useGeneralArt = true;
             detailPlainShells = true;
             trouserDrop = DefaultTrouserDrop;
@@ -169,6 +174,10 @@ namespace TailorMadeWaistlines
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.KeepJacketsLong".Translate(),
                 ref Settings.keepJacketsLong,
                 "TailorMadeWaistlines.Settings.KeepJacketsLongTip".Translate());
+            if (TailorMadeLink.Loaded)
+                list.CheckboxLabeled("TailorMadeWaistlines.Settings.KeepDressesWhole".Translate(),
+                    ref Settings.keepDressesWhole,
+                    "TailorMadeWaistlines.Settings.KeepDressesWholeTip".Translate());
 
             list.Gap();
             list.CheckboxLabeled("TailorMadeWaistlines.Settings.UseGeneralArt".Translate(),
