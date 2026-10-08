@@ -95,3 +95,7 @@ garments are the first cases to test it on.
 - To do: a refit of torso garments that have no WDI art, row by row on the body's silhouette (the technique TailorMade describes as "per row warp",
   MIT licence), with the chest outline taken from the naked body texture. The chest is also the first element of the expansion roadmap (breasts).
   Cases to keep: UNAGI Royalty, Battle Coat, Maid Project (Thin and Female), any dress.
+
+## Backlog
+
+- **Underwear covers.** A pawn wearing underwear shows less: the men's sex, the women's nipples. Look at the underwear layer of every wardrobe sheet (men: below the waist; women: chest) and compare it to the bare row. The underwear seen under coats in the refit run without TailorMade (refit-notm) has no known source yet; find it first.
