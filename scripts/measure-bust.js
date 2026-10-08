@@ -21,5 +21,6 @@ for (const body of ['Female', 'Thin_Female', 'Fat_Female', 'Hulk_Female', 'Male'
     const avg = a => a.reduce((s, v) => s + v, 0) / a.length;
     console.log(body.padEnd(12), 'rows', top, '..', bottom,
         '| nipple y', (avg(sy) / h).toFixed(3), 'L x', avg(L.map(p => p[0])).toFixed(0), 'R x', avg(R.map(p => p[0])).toFixed(0),
-        'gap', (avg(R.map(p => p[0])) - avg(L.map(p => p[0]))).toFixed(0), 'px', sx.length);
+        'gap', (avg(R.map(p => p[0])) - avg(L.map(p => p[0]))).toFixed(0), 'px', sx.length,
+        '| nipple top row', Math.min(...sy), 'bottom row', Math.max(...sy), '-> line above', Math.min(...sy) - 1, '(' + ((Math.min(...sy) - 1) / h).toFixed(3) + ')');
 }
