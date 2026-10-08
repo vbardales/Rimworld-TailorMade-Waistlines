@@ -131,6 +131,20 @@ function hline(ox, oy, row, rgb) {
 function rebuild(dress, bodyImg, bra, top, cups, fabric) {
     const w = dress.width, out = Buffer.from(dress.data);
     const bodyExt = extents(bodyImg);
+    // the outline is the unbroken run of dark pixels that starts at each edge of the body in a row; a dark mark further in
+    // (a nipple) is not part of it
+    const isDark = (r, x) => { const i = (r * w + x) * 4; return bodyImg.data[i + 3] >= 128 && bodyImg.data[i] < 60 && bodyImg.data[i + 1] < 60 && bodyImg.data[i + 2] < 60; };
+    const rawRun = bodyExt.map((e, r) => {
+        if (!e) return [0, 0];
+        let l = 0, rr = 0;
+        while (e[0] + l <= e[1] && isDark(r, e[0] + l)) l++;
+        while (e[1] - rr >= e[0] && isDark(r, e[1] - rr)) rr++;
+        return [l, rr];
+    });
+    // a nipple that touches the stroke makes the run longer than the stroke is: cap it at the median thickness around the bust
+    const around = rawRun.slice(Math.max(0, top - 30), cups + 30).flat().filter(v => v > 0).sort((p, q) => p - q);
+    const thickness = around[Math.floor(around.length / 2)] + 1;
+    const bodyRun = rawRun.map(([l, rr]) => [Math.min(l, thickness), Math.min(rr, thickness)]);
     const tint = (img, r, x, isBra) => {
         const i = (r * w + x) * 4, a = img.data[i + 3];
         if (a < 8) return null;
@@ -143,11 +157,11 @@ function rebuild(dress, bodyImg, bra, top, cups, fabric) {
         }
         if (dark) {
             // only the stroke along the edge of the body is an outline; the dark marks inside (the nipples) turn into cloth
-            const e = bodyExt[r];
-            if (e && (x - e[0] < 18 || e[1] - x < 18)) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
+            const e = bodyExt[r], run = bodyRun[r];
+            if (e && (x - e[0] < run[0] || e[1] - x < run[1])) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
             return [Math.round(fabric[0] * 0.9), Math.round(fabric[1] * 0.9), Math.round(fabric[2] * 0.9), a];
         }
-        const lum = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255;     // the shading of the drawing
+        const lum = Math.max(0.72, (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255);     // the shading of the drawing, never darker than a fold
         return [Math.round(fabric[0] * lum), Math.round(fabric[1] * lum), Math.round(fabric[2] * lum), a];
     };
     for (let r = top; r <= cups; r++) {
