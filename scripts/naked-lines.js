@@ -14,6 +14,7 @@ const { decode, encode } = require('./png');
 const WDI = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/294100/3527486510/Textures';
 const KAS = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/294100/3789119336/Mods/VisiblePants/Textures/Core/Things/Pawn/Humanlike/Apparel/Pants';
 const OUT = path.join(__dirname, '..', 'docs', 'runs');
+const WITH_UNDERWEAR = process.argv.includes('--underwear');
 const LINE = { Male: 0.711, Female: 0.686, Thin: 0.699, Thin_Female: 0.674, Fat: 0.643, Fat_Female: 0.643, Hulk: 0.799, Hulk_Female: 0.783 };
 const SETS = { men: ['Male', 'Thin', 'Fat', 'Hulk'], women: ['Female', 'Thin_Female', 'Fat_Female', 'Hulk_Female'] };
 const FACINGS = ['south', 'east', 'north'];
@@ -52,6 +53,12 @@ for (const [name, bodies] of Object.entries(SETS)) {
         // blue: the shirt cut
         const kind = body.startsWith('Male') || ['Thin', 'Fat', 'Hulk'].includes(body) ? 'boxers' : 'panties';
         const uw = read(`${WDI}/UWUnderwear/${kind}/${kind}_${body}_${facing}.png`);
+        if (WITH_UNDERWEAR && uw) for (let y = 0; y < SPAN; y++) for (let x = 0; x < SPAN; x++) {
+            const s2 = ((y + Y0) * uw.width + (x + X0)) * 4, a = uw.data[s2 + 3] / 255;
+            if (a <= 0) continue;
+            const d = ((oy + y) * W + (ox + x)) * 4;
+            for (let k = 0; k < 3; k++) canvas[d + k] = Math.round(uw.data[s2 + k] * a + canvas[d + k] * (1 - a));
+        }
         const uwTop = uw ? tops(uw) : null;
         for (let x = 0; x < SPAN; x++) {
             let y = facing === 'east' || !uwTop ? Math.round(LINE[body] * 512) : uwTop[x + X0];
@@ -69,7 +76,7 @@ for (const [name, bodies] of Object.entries(SETS)) {
             }
         }
     }));
-    const file = path.join(OUT, `naked-lines-${name}.png`);
+    const file = path.join(OUT, `naked-lines${WITH_UNDERWEAR ? '-slip' : ''}-${name}.png`);
     encode(file, { width: W, height: H, data: canvas });
     console.log(file);
 }

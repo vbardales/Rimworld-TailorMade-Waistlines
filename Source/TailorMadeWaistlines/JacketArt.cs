@@ -105,9 +105,7 @@ namespace TailorMadeWaistlines
             try
             {
                 byte[] px = TrouserArt.Read(tex, out int w, out int h);
-                byte[] cut = facing == "east"
-                    ? ShirtCut.CutBelow(px, w, h, (int)Math.Round(ShirtCut.CutFraction(key) * h, MidpointRounding.AwayFromZero))
-                    : ShirtCut.CutBelowProfile(px, w, h, ShirtCut.CutRows(key, facing, w, h));
+                byte[] cut = ShirtCut.CutBelowProfile(px, w, h, ShirtCut.CutRows(key, facing, w, h));
                 if (ReferenceEquals(cut, px)) return false;
                 mine.contentList[path] = TrouserArt.Build(cut, w, h, "TMW_NativeShirt_" + path.Replace('/', '_'));
                 NativeCut++;

@@ -104,6 +104,8 @@ namespace TailorMadeWaistlines
         /// </summary>
         internal static int[] CutRows(string key, string facing, int width, int height)
         {
+            // A child has no underwear and no side or back waistband of her own: every face takes the front's line.
+            if (key == "Child") facing = "south";
             // The shirt runs under the trousers as they are drawn: the top edge of the finished trousers texture, column by column,
             // so both have the same shape.
             float[] drawn = TrouserTop(key, facing);
@@ -214,8 +216,8 @@ namespace TailorMadeWaistlines
                 : 0f;
         }
 
-        // The shirt runs this far under the top of the trousers, so that no belly shows between them.
-        private const float UnderTrousers = 0.03f;
+        // The shirt runs this far under the top of the trousers (3 px of the 512 px picture), so that no belly shows between them.
+        private const float UnderTrousers = 3f / 512f;
 
         /// <summary>
         /// Where the cut falls: the top of the underwear, or just under the top of the trousers when that is lower, so a
@@ -272,11 +274,12 @@ namespace TailorMadeWaistlines
                 try
                 {
                     byte[] px = TrouserArt.Read(__result, out int w, out int h);
-                    // The sides have no front waistband to follow: a straight cut at the same height.
-                    string facing = rot == Rot4.North ? "north" : rot == Rot4.South ? "south" : null;
-                    byte[] cut = facing != null
-                        ? CutBelowProfile(px, w, h, CutRows(bodyKey, facing, w, h))
-                        : CutBelow(px, w, h, (int)Math.Round(CutFraction(bodyKey) * h, MidpointRounding.AwayFromZero));
+                    // Every face follows the top edge of the trousers drawn for it, 3 px under it. West is the east picture
+                    // turned round: its columns run the other way.
+                    string facing = rot == Rot4.North ? "north" : rot == Rot4.South ? "south" : "east";
+                    int[] rows = CutRows(bodyKey, facing, w, h);
+                    if (rot == Rot4.West) Array.Reverse(rows);
+                    byte[] cut = CutBelowProfile(px, w, h, rows);
                     if (ReferenceEquals(cut, px)) return;
                     __result = TrouserArt.Build(cut, w, h, "TMW_ShirtCut_" + bodyKey);
                 }
