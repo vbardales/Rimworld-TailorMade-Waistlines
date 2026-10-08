@@ -15,6 +15,7 @@ const wardrobeMods = [
   { id: 'UNAGI.suit.SET', ws: '3253298952', name: 'UNAGI SimpleSuit', garments: ['UNAGInoEshirt', 'UNAGInoSDs'] },
   { id: 'UNAGI.Wahuu.hako', ws: '3297676809', name: 'UNAGI Japanese Assortment', garments: ['UNAwasitagi', 'Apparel_UNAwahaori', 'UNAkariginu'] },
   { id: 'UNAGI.Cafe.gohan', ws: '3325530853', name: 'UNAGI CAFE', garments: ['UNAcafe_wanpi', 'Apparel_UNAcafe_epuron'] },
+  { id: 'GilieART.LewdHoomanApparel', ws: '3275648920', name: 'LEWD Hooman Apparel', garments: ['LEWD_Apparel_MicroSkirt', 'LEWD_Apparel_TubeTop', 'LEWD_Apparel_FlakiniVest'] },
   { id: 'BBIS.MaidProject', ws: '1498756997', name: 'Maid Project', garments: ['ChefMaid', 'CleanerMaid', 'FightMaid', 'NurseMaid'] },
 ];
 // 'refit': vanilla garments that WDI draws nothing for, on the ten bodies; compared with and without TailorMade.
