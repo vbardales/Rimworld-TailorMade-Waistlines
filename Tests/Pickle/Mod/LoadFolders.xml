@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<loadFolders>
+  <v1.6>
+    <li>/</li>
+    <!-- Only with Apparel BodyType Resolver: its defs name a class that does not exist without it. -->
+    <li IfModActive="gguake.apparelbodyresolver">ResolverLewd</li>
+  </v1.6>
+</loadFolders>

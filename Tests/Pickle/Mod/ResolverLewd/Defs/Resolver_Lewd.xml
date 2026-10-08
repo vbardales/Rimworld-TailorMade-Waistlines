@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For the LEWD pass: LEWD Hooman Apparel ships Male and Female textures only. On a Thin, Fat or Hulk body the game looks for
+  TubeTop_Thin (and the like) and logs "Failed to find any textures". Apparel BodyType Resolver tries the alternatives in order
+  when a garment has no texture for the body. The order is Female first: these garments are drawn for women, and a def cannot
+  tell the sex of the pawn.
+-->
+<Defs>
+  <ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+    <defName>Thin</defName>
+    <alternatives><li>Female</li><li>Male</li></alternatives>
+  </ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+  <ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+    <defName>Fat</defName>
+    <alternatives><li>Female</li><li>Male</li></alternatives>
+  </ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+  <ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+    <defName>Hulk</defName>
+    <alternatives><li>Female</li><li>Male</li></alternatives>
+  </ApparelBodyTypeResolver.PredefinedBodyTypeResolverDef>
+</Defs>
