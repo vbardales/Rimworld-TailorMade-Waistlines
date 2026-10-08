@@ -125,15 +125,21 @@ function hline(ox, oy, row, rgb) {
 }
 /**
  * The bust rebuilt from the bra: between the top of the bust and the cups, the body's silhouette is filled with the fabric of
- * the dress (the skin 'completed from below'), and WDI's bra, recoloured the same way, gives the shape of the breasts. The dress
+ * the dress (the skin 'completed from below'), and WDI's bra gives the shape of the breasts without being seen: its lines turn into a shade of the cloth, only the outline of the body stays black. The dress
  * is kept above and below those rows.
  */
 function rebuild(dress, bodyImg, bra, top, cups, fabric) {
     const w = dress.width, out = Buffer.from(dress.data);
-    const tint = (img, r, x) => {
+    const tint = (img, r, x, isBra) => {
         const i = (r * w + x) * 4, a = img.data[i + 3];
         if (a < 8) return null;
         const dark = img.data[i] < 60 && img.data[i + 1] < 60 && img.data[i + 2] < 60;
+        // the bra only gives a shape: its black lines are not drawn, they become a shade of the cloth
+        if (dark && isBra) return [Math.round(fabric[0] * 0.9), Math.round(fabric[1] * 0.9), Math.round(fabric[2] * 0.9), a];
+        if (isBra) {   // a gentle volume only: the cups must not read as a bra
+            const l = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255 * 0.18 + 0.82;
+            return [Math.round(fabric[0] * l), Math.round(fabric[1] * l), Math.round(fabric[2] * l), a];
+        }
         if (dark) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
         const lum = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255;     // the shading of the drawing
         return [Math.round(fabric[0] * lum), Math.round(fabric[1] * lum), Math.round(fabric[2] * lum), a];
@@ -142,7 +148,7 @@ function rebuild(dress, bodyImg, bra, top, cups, fabric) {
         const edge = Math.min(1, Math.min(r - top, cups - r) / 3 + 0.01);                 // 3 rows of feather at both ends
         for (let x = 0; x < w; x++) {
             let px = tint(bodyImg, r, x);                // under: the skin, as cloth
-            const b = bra ? tint(bra, r, x) : null;      // over: the cups
+            const b = bra ? tint(bra, r, x, true) : null;      // over: the shape of the cups, not their lines
             if (b) px = b;
             const i = (r * w + x) * 4;
             if (!px) { out[i + 3] = 0; continue; }
