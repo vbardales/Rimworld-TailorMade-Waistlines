@@ -10,7 +10,7 @@
 //   top  = where the bodice begins, the width jump under the collar;
 //   dip  = middle of the stroke at the tip of the V of the neckline (Virginie's yellow points agree to 3 rows);
 //   cups = middle of the stroke that closes the cups, under the V (Thin: two thin strokes at 257 and 274).
-// Then the bodice is widened to the width of the bra row by row (widen). The picture is warped on its rows first: above the top it moves as a block, between the lines each band is stretched to
+// Then the bodice is widened to the width of the body row by row (widen). The picture is warped on its rows first: above the top it moves as a block, between the lines each band is stretched to
 // the body's, below the cups the shift fades out over FADE rows so that the hem stays where it was drawn.
 const fs = require('fs');
 const path = require('path');
@@ -71,7 +71,7 @@ function extents(img) {
 
 /**
  * Stretches the bodice sideways to the bra: on every row between the top of the bust and the cups, the width of the dress is
- * brought to the width of WDI's bra for the body, about the middle of the picture; the scale fades out over TAPER rows above
+ * brought to the width of the body's silhouette (the skin, wider than the bra on the Fat), about the middle of the picture; the scale fades out over TAPER rows above
  * and below so that the collar and the skirt are not pulled.
  */
 const TAPER = 24;
@@ -123,6 +123,34 @@ function hline(ox, oy, row, rgb) {
         canvas[d] = rgb[0]; canvas[d + 1] = rgb[1]; canvas[d + 2] = rgb[2];
     }
 }
+/**
+ * The bust rebuilt from the bra: between the top of the bust and the cups, the body's silhouette is filled with the fabric of
+ * the dress (the skin 'completed from below'), and WDI's bra, recoloured the same way, gives the shape of the breasts. The dress
+ * is kept above and below those rows.
+ */
+function rebuild(dress, bodyImg, bra, top, cups, fabric) {
+    const w = dress.width, out = Buffer.from(dress.data);
+    const tint = (img, r, x) => {
+        const i = (r * w + x) * 4, a = img.data[i + 3];
+        if (a < 8) return null;
+        const dark = img.data[i] < 60 && img.data[i + 1] < 60 && img.data[i + 2] < 60;
+        if (dark) return [img.data[i], img.data[i + 1], img.data[i + 2], a];
+        const lum = (img.data[i] + img.data[i + 1] + img.data[i + 2]) / 3 / 255;     // the shading of the drawing
+        return [Math.round(fabric[0] * lum), Math.round(fabric[1] * lum), Math.round(fabric[2] * lum), a];
+    };
+    for (let r = top; r <= cups; r++) {
+        const edge = Math.min(1, Math.min(r - top, cups - r) / 3 + 0.01);                 // 3 rows of feather at both ends
+        for (let x = 0; x < w; x++) {
+            let px = tint(bodyImg, r, x);                // under: the skin, as cloth
+            const b = bra ? tint(bra, r, x) : null;      // over: the cups
+            if (b) px = b;
+            const i = (r * w + x) * 4;
+            if (!px) { out[i + 3] = 0; continue; }
+            for (let k = 0; k < 4; k++) out[i + k] = Math.round(px[k] * edge + dress.data[i + k] * (1 - edge));
+        }
+    }
+    return { width: dress.width, height: dress.height, data: out };
+}
 const read = f => fs.existsSync(f) ? decode(f) : null;
 
 SETS.forEach(([dressName, bodyName, body, dress], c) => {
@@ -130,7 +158,9 @@ SETS.forEach(([dressName, bodyName, body, dress], c) => {
     const bra = read(`${WDI}/UWUnderwear/bra/bra_${bodyName}_south.png`);
     const dressImg = decode(`${UNA}/UNARoyalDress_${dressName}_south.png`);
     const tall = warp(dressImg, rowMap(dressImg.height, body, dress));
-    const fitted = bra ? widen(tall, bra, body[0], body[2]) : tall;
+    const fabricAt = (img, r, x) => { const i = (r * img.width + x) * 4; return [img.data[i], img.data[i + 1], img.data[i + 2]]; };
+    const fabric = [236, 236, 236];                     // the royal dress is white and grey; the game dyes it
+    const fitted = rebuild(tall, bodyImg, bra, body[0], body[2], fabric);
     const ox = c * CELL;
     // row 0: the bra on the body
     blend(bodyImg, ox, 0); blend(bra, ox, 0);
