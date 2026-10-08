@@ -84,6 +84,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces East
+    And Nelim's Pickle Tools: "M-Avg" faces East
+    And Nelim's Pickle Tools: "M-Fat" faces East
+    And Nelim's Pickle Tools: "M-Hulk" faces East
+    And Nelim's Pickle Tools: "M-Kid" faces East
+    And Nelim's Pickle Tools: "F-Thin" faces East
+    And Nelim's Pickle Tools: "F-Avg" faces East
+    And Nelim's Pickle Tools: "F-Fat" faces East
+    And Nelim's Pickle Tools: "F-Hulk" faces East
+    And Nelim's Pickle Tools: "F-Kid" faces East
+    And I wait 2 ticks
     And I take a screenshot "facings, east, outfit 1 t-shirt, no trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
@@ -107,6 +118,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces East
+    And Nelim's Pickle Tools: "M-Avg" faces East
+    And Nelim's Pickle Tools: "M-Fat" faces East
+    And Nelim's Pickle Tools: "M-Hulk" faces East
+    And Nelim's Pickle Tools: "M-Kid" faces East
+    And Nelim's Pickle Tools: "F-Thin" faces East
+    And Nelim's Pickle Tools: "F-Avg" faces East
+    And Nelim's Pickle Tools: "F-Fat" faces East
+    And Nelim's Pickle Tools: "F-Hulk" faces East
+    And Nelim's Pickle Tools: "F-Kid" faces East
+    And I wait 2 ticks
     And I take a screenshot "facings, east, outfit 2 bare torso, trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
@@ -140,6 +162,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces East
+    And Nelim's Pickle Tools: "M-Avg" faces East
+    And Nelim's Pickle Tools: "M-Fat" faces East
+    And Nelim's Pickle Tools: "M-Hulk" faces East
+    And Nelim's Pickle Tools: "M-Kid" faces East
+    And Nelim's Pickle Tools: "F-Thin" faces East
+    And Nelim's Pickle Tools: "F-Avg" faces East
+    And Nelim's Pickle Tools: "F-Fat" faces East
+    And Nelim's Pickle Tools: "F-Hulk" faces East
+    And Nelim's Pickle Tools: "F-Kid" faces East
+    And I wait 2 ticks
     And I take a screenshot "facings, east, outfit 3 t-shirt, trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
@@ -173,6 +206,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces East
+    And Nelim's Pickle Tools: "M-Avg" faces East
+    And Nelim's Pickle Tools: "M-Fat" faces East
+    And Nelim's Pickle Tools: "M-Hulk" faces East
+    And Nelim's Pickle Tools: "M-Kid" faces East
+    And Nelim's Pickle Tools: "F-Thin" faces East
+    And Nelim's Pickle Tools: "F-Avg" faces East
+    And Nelim's Pickle Tools: "F-Fat" faces East
+    And Nelim's Pickle Tools: "F-Hulk" faces East
+    And Nelim's Pickle Tools: "F-Kid" faces East
+    And I wait 2 ticks
     And I take a screenshot "facings, east, outfit 4 jacket on a bare torso, trousers"
     Then no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
@@ -257,6 +301,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And Nelim's Pickle Tools: studio presentation mode is enabled
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces North
+    And Nelim's Pickle Tools: "M-Avg" faces North
+    And Nelim's Pickle Tools: "M-Fat" faces North
+    And Nelim's Pickle Tools: "M-Hulk" faces North
+    And Nelim's Pickle Tools: "M-Kid" faces North
+    And Nelim's Pickle Tools: "F-Thin" faces North
+    And Nelim's Pickle Tools: "F-Avg" faces North
+    And Nelim's Pickle Tools: "F-Fat" faces North
+    And Nelim's Pickle Tools: "F-Hulk" faces North
+    And Nelim's Pickle Tools: "F-Kid" faces North
+    And I wait 2 ticks
     And I take a screenshot "facings, north, outfit 1 t-shirt, no trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Pants" dyed rgb (46, 74, 120)
@@ -280,6 +335,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces North
+    And Nelim's Pickle Tools: "M-Avg" faces North
+    And Nelim's Pickle Tools: "M-Fat" faces North
+    And Nelim's Pickle Tools: "M-Hulk" faces North
+    And Nelim's Pickle Tools: "M-Kid" faces North
+    And Nelim's Pickle Tools: "F-Thin" faces North
+    And Nelim's Pickle Tools: "F-Avg" faces North
+    And Nelim's Pickle Tools: "F-Fat" faces North
+    And Nelim's Pickle Tools: "F-Hulk" faces North
+    And Nelim's Pickle Tools: "F-Kid" faces North
+    And I wait 2 ticks
     And I take a screenshot "facings, north, outfit 2 bare torso, trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_BasicShirt" dyed rgb (230, 224, 206)
@@ -313,6 +379,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces North
+    And Nelim's Pickle Tools: "M-Avg" faces North
+    And Nelim's Pickle Tools: "M-Fat" faces North
+    And Nelim's Pickle Tools: "M-Hulk" faces North
+    And Nelim's Pickle Tools: "M-Kid" faces North
+    And Nelim's Pickle Tools: "F-Thin" faces North
+    And Nelim's Pickle Tools: "F-Avg" faces North
+    And Nelim's Pickle Tools: "F-Fat" faces North
+    And Nelim's Pickle Tools: "F-Hulk" faces North
+    And Nelim's Pickle Tools: "F-Kid" faces North
+    And I wait 2 ticks
     And I take a screenshot "facings, north, outfit 3 t-shirt, trousers"
     And I destroy the gear of "M-Thin"
     And Nelim's Pickle Tools: "M-Thin" wears "Apparel_Jacket" dyed rgb (150, 70, 40)
@@ -346,6 +423,17 @@ Feature: the fitting, seen from the side and from behind
     And Nelim's Pickle Tools: "F-Kid" wears "Apparel_KidPants" dyed rgb (46, 74, 120)
     And Nelim's Sanctuary: I am at the sanctuary "calm-zone-close"
     And I wait 90 ticks
+    And Nelim's Pickle Tools: "M-Thin" faces North
+    And Nelim's Pickle Tools: "M-Avg" faces North
+    And Nelim's Pickle Tools: "M-Fat" faces North
+    And Nelim's Pickle Tools: "M-Hulk" faces North
+    And Nelim's Pickle Tools: "M-Kid" faces North
+    And Nelim's Pickle Tools: "F-Thin" faces North
+    And Nelim's Pickle Tools: "F-Avg" faces North
+    And Nelim's Pickle Tools: "F-Fat" faces North
+    And Nelim's Pickle Tools: "F-Hulk" faces North
+    And Nelim's Pickle Tools: "F-Kid" faces North
+    And I wait 2 ticks
     And I take a screenshot "facings, north, outfit 4 jacket on a bare torso, trousers"
     Then no warning matching "Could not load UnityEngine.Texture2D" was logged
     And no warning matching "Failed to find any textures" was logged
